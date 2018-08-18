@@ -1,0 +1,7 @@
+input .checkbox, h5{
+	display: inline-block;
+}
+
+input#cantVariation{
+	width: 30px;
+}

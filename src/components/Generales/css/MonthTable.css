@@ -1,0 +1,13 @@
+table#monthTable{
+	width:20%; 
+    margin-left:5%; 
+    margin-right:5%;
+}
+
+table, th, td {
+   border: 1px solid black;
+}
+
+td input{
+	width: 100%;
+}
