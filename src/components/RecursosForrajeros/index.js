@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import MonthTable from '../Generales/MonthTable';
+import ContentOption from '../Generales/ContentOption';
 
 class RecursosForrajeros extends Component {
 
 	render(){
 		return(
-			<h1> RecursosForrajeros </h1>
+			<div>
+				<ContentOption />
+				<MonthTable />
+			</div>
 		);
 	}
 }

@@ -1,0 +1,13 @@
+
+
+input{
+	width: 30px;
+}
+
+.title{
+	border-bottom: 2px solid black; 
+}
+
+h5, input{
+	display: inline-block;
+}
