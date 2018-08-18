@@ -1,0 +1,39 @@
+.Header {
+  text-align: center;
+  background-color: #222;
+  height: 10%;
+  width: 100%;
+  color: white;
+  display: inline-block;
+}
+
+.Logo img, .Logo2 img{
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.Logo, .Logo2{
+  display: inline-block;
+  float:left;
+  width: 15%;
+  vertical-align: middle; 
+}
+
+.Titulo{
+  display: inline-block;
+  float:center;
+  width: 70%;
+}
+
+.Logo2{
+  display: inline-block;
+  float:right;
+  width: 15%;
+}
+
