@@ -1,0 +1,29 @@
+
+
+.menu{
+	width:30%;
+	margin: 0 auto;
+}
+.menu a {
+    background-color: #eee; 
+    color: black; 
+    display: block;
+    padding: 12px; 
+    text-decoration: none; 
+    text-align: left;
+
+}
+
+.menu a:hover {
+    background-color: #ccc; 
+}
+
+.menu a.active {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+
+.filaMenu{
+	margin:0px;
+}
