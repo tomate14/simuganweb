@@ -1,7 +1,11 @@
 // Dependencies
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 //import { Row, Col } from 'react-bootstrap';
+=======
+import { Row, Col } from 'react-bootstrap'
+>>>>>>> origin/master
 
 // Assets
 import logo from './images/logo.svg';
@@ -16,6 +20,7 @@ class Header extends Component {
   render() {
     //const { title, items } = this.props;
    /* 
+<<<<<<< HEAD
           
           <div className="container">
           <Row className="show-grid">
@@ -34,6 +39,9 @@ class Header extends Component {
      */
     return (
         <div className="Header">
+=======
+    <div className="Header">
+>>>>>>> origin/master
             <div className="Logo">
                 <img src={logo}/>         
             </div>
@@ -45,6 +53,20 @@ class Header extends Component {
                 <img src={logo}/>         
             </div>
           </div>
+     */
+    return (
+            <div className="row">
+                <div className="col-sm-2">
+                    <img id="Logo" src={logo}/>
+                </div>
+                <div className="col-sm-8">
+                    <h1>Simulador Ganadero</h1>     
+                    <h2>Configuracion de simulaciones conjuntas</h2></div>
+                <div className="col-sm-2">
+                    <img id="Logo" src={logo}/>
+                </div>
+            </div>
+         
     );
   }
 }

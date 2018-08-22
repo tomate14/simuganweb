@@ -16,22 +16,32 @@ class Content extends Component {
   render() {
     
     const { body } =  this.props;
-    
-    return (
-      <div className="Content">
+    /*
+    <div className="Content">
         <div className="Contenido">
                <div className="menu">
-                {
-                  opcionesMenu && opcionesMenu.map(
-                    (item, key) => <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>
-                  )
-                }
+               
               </div>
               <div className="contenido">
                   { body }
               </div>
         </div>
-      </div>
+      </div>*/
+    return (
+          <div className="conteiner-fluid">
+            <div className="row">
+                <div className="col-sm-4 menu">
+                     {
+                      opcionesMenu && opcionesMenu.map(
+                        (item, key) => <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>
+                      )
+                    }
+                </div>
+                <div className="col-sm-8">
+                    { body }
+                </div>
+            </div>
+          </div>
     );
   }
 }
