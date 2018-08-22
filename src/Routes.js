@@ -10,6 +10,7 @@ import Invernada          from './components/Invernada'
 import Potreros           from './components/Potreros'
 import Rastrojo           from './components/Rastrojo'
 import RecursosForrajeros from './components/RecursosForrajeros'
+import Mobs				  from './components/Mobs'
 
 
 
@@ -23,6 +24,7 @@ const AppRoutes = () =>
 			<Route path="/Potreros"           component={Potreros} />
 			<Route path="/Rastrojo"           component={Rastrojo} />
 			<Route path="/RecursosForrajeros" component={RecursosForrajeros} />
+			<Route path="/mobs"				  component={Mobs} />
 
 		</Switch>
 

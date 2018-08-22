@@ -26,5 +26,9 @@ export default [
   {
     title: 'Feedlot',
     url: '/Feedlot'
+  },
+  {
+    title : 'Configuraciones por Mobs',
+    url: '/mobs'
   }
 ];
