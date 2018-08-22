@@ -1,37 +1,36 @@
 import React, { Component } from 'react';
+import {Row, Col } from 'reactstrap';
 import MonthTable from '../Generales/MonthTable';
 import ContentOption from '../Generales/ContentOption';
 import InputsVariation from '../Generales/InputsVariation';
+
 
 class RecursosForrajeros extends Component {
 	constructor(){
 		super();
 		this.state = {
-			cantidadVariaciones : 12
+			cantidadVariaciones : 12,
+			paginaActual : 1,
+			arrayDatos : []
 		}
 	}
 	render(){
-		/* <div>
-				<ContentOption state={this.state}/>
-				<MonthTable />
-				<InputsVariation state={this.state} />
-			</div>
-			*/
+		
 		return(
 			<div className="conteiner">
-				<div className="row">
-	                <div className="col-sm-12">
+				<Row>
+	                <Col xs="12">
 	                    <ContentOption state={this.state}/>
-	                </div>
-	            </div>
-	            <div className="row">
-	                <div className="col-sm-4">
+	                </Col>
+	            </Row>
+	            <Row>
+	                <Col xs="3">
 	                    <MonthTable />
-	                </div>
-	                <div className="col-sm-8">
+	                </Col>
+	                <Col xs="3">
 	                    <InputsVariation state={this.state} />
-	                </div>
-	            </div>
+	                </Col>
+	            </Row>
 	        </div>
 			
 		);

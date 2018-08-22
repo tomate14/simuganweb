@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -5,6 +6,7 @@ import PropTypes from 'prop-types';
 import Header from './global/Header';
 import Content from './global/Content.js';
 import Footer from './global/Footer.js';
+
 import './App.css';
 //import logo from './logo.svg';
 

@@ -23,9 +23,7 @@ const AppRoutes = () =>
 			<Route path="/Potreros"           component={Potreros} />
 			<Route path="/Rastrojo"           component={Rastrojo} />
 			<Route path="/RecursosForrajeros" component={RecursosForrajeros} />
-
 		</Switch>
-
 	</App>;
 
 export default AppRoutes;
