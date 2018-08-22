@@ -1,7 +1,19 @@
-input .checkbox, h5{
+/*input .checkbox, h5{
 	display: inline-block;
-}
+}*/
 
 input#cantVariation{
-	width: 30px;
+	width: 40px ;
+}
+input.form-control.checkbox{
+	width: 20px;
+	height: 20px;
+}
+
+#cantVariation{
+	margin-top: 0px;
+}
+
+#textCantidad{
+	text-align: left;
 }

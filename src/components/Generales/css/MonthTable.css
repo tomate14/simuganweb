@@ -4,10 +4,15 @@ table#monthTable{
     margin-right:5%;
 }
 
-table, th, td {
+table, td, td {
    border: 1px solid black;
+   font-size: 12px !important;
 }
 
+tr td{
+	width: 30px !important;
+	height: 20px !important;
+}
 td input{
 	width: 100%;
 }
