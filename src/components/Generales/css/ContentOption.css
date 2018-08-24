@@ -1,11 +1,11 @@
-/*input .checkbox, h5{
+input .checkbox, h5{
 	display: inline-block;
-}*/
+}
 
 input#cantVariation{
-	width: 40px ;
+	width: 50px ;
 }
-input.form-control.checkbox{
+input.checkbox{
 	width: 20px;
 	height: 20px;
 	margin-left: 10px;

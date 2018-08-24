@@ -4,6 +4,9 @@ import MonthTable from '../Generales/MonthTable';
 import ContentOption from '../Generales/ContentOption';
 import InputsVariation from '../Generales/InputsVariation';
 
+//Estilos
+
+import './css/index.css'; 
 
 class RecursosForrajeros extends Component {
 	constructor(){
@@ -11,23 +14,36 @@ class RecursosForrajeros extends Component {
 		this.state = {
 			cantidadVariaciones : 12,
 			paginaActual : 1,
-			arrayDatos : []
+			arrayDatos : this.iniciarArregloState()
 		}
+		
+	}
+	iniciarArregloState(){
+		let arrayAux = [];
+		for(let i = 0; i < 12; i++){
+			let nombre = "mes"+i.toString();
+			let valor  = 0;
+			let ObjetoMes = {}
+			ObjetoMes.valor = valor;
+			ObjetoMes.mes   = nombre;
+			arrayAux.push(ObjetoMes);
+		}
+		return arrayAux;
 	}
 	render(){
 		
 		return(
 			<div className="conteiner-fluid">
 				<Row>
-	                <Col xs="12">
+	                <Col>
 	                    <ContentOption state={this.state}/>
 	                </Col>
 	            </Row>
-	            <Row>
-	                <Col xs="4">
+	            <Row className="RowVariaciones">
+	                <Col>
 	                    <MonthTable />
 	                </Col>
-	                <Col xs="8">
+	                <Col>
 	                    <InputsVariation state={this.state} />
 	                </Col>
 	            </Row>
