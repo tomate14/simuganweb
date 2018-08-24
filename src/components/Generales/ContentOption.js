@@ -22,14 +22,14 @@ class ContentOption extends Component {
 	render(){
 		//Relleno los months de un vector de datos 
 		console.log(this.state.cantidadVariaciones);
-		return (	<div>
-						<Row xs="10">		                
+		return (	<div className="conteiner-fluid">
+						<Row sm={12} className="RowCheckbox">		                
 		                  	<input type="checkbox" className="form-control checkbox" enable={this.estaHabilitado}/>		
 		                  	<h5 className="textLabel"> Permitir el uso de este parametro para variar</h5>
 						</Row>
-						<Row xs="10">
+						<Row sm={12} className="RowCantidad">
 							<input type="number" className="checkbox" id="cantVariation" onChange={this.handleOnChangeValue} value={this.state.cantidadVariaciones}/>
-							<h5 id="cantVariacionesSpan"> Cantidad de variaciones a realizar</h5>
+							<h5 className="textLabel"> Cantidad de variaciones a realizar</h5>
 						</Row>
 					</div>
 			);

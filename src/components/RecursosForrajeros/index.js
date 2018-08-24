@@ -17,17 +17,17 @@ class RecursosForrajeros extends Component {
 	render(){
 		
 		return(
-			<div className="conteiner">
+			<div className="conteiner-fluid">
 				<Row>
 	                <Col xs="12">
 	                    <ContentOption state={this.state}/>
 	                </Col>
 	            </Row>
 	            <Row>
-	                <Col xs="3">
+	                <Col xs="4">
 	                    <MonthTable />
 	                </Col>
-	                <Col xs="3">
+	                <Col xs="8">
 	                    <InputsVariation state={this.state} />
 	                </Col>
 	            </Row>
