@@ -28,7 +28,7 @@ class InputsVariation extends Component{
 	}
 
 	handleInputValueChange(idx){
-
+		
 	}
 	handleClickUp(e){
 		this.setState({paginaActual : this.state.paginaActual + 1})
@@ -40,14 +40,12 @@ class InputsVariation extends Component{
 		let inputs = this.setInputsVariations();
 		return(
 		<div className="conteiner-fluid">
-			<Row sm={12}>
-				<Col sm={1}>
-					
-				</Col>
-				<Col sm={1} className="divFlechas">					
+			<Row >
+				
+				<Col  className="divFlechas">					
 					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
 				</Col>
-				<Col sm={3} className="divInputs">
+				<Col className="divInputs">
 					<p className="labelPagina">Pagina:{this.state.paginaActual}</p>
 					<div className="divInputsVariation">
 						{inputs.map((input, idx) => (
@@ -55,15 +53,16 @@ class InputsVariation extends Component{
 				              type="number"
 				              className="InputVariables"
 				              id = {idx}
+				              value={this.state.arrayDatos[idx].valor}
 				              onChange={this.handleInputValueChange(idx)}
 				            />
 				        ))}
 					</div>
 				</Col>
-				<Col sm={1} className="divFlechas">
+				<Col className="divFlechas">
 					<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
 				</Col>
-				<Col sm={6}>
+				<Col >
 					
 				</Col>
 			</Row>
