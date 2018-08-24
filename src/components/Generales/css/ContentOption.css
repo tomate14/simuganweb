@@ -8,12 +8,17 @@ input#cantVariation{
 input.form-control.checkbox{
 	width: 20px;
 	height: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top:auto;
+	margin-bottom: auto;
 }
 
-#cantVariation{
-	margin-top: 0px;
+.RowCheckbox, .RowCantidad{
+	margin:auto;
 }
 
-#textCantidad{
-	text-align: left;
+h5.textLabel{
+	margin-top:auto;
+	margin-bottom: auto;
 }

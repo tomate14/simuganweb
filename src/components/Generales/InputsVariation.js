@@ -1,6 +1,7 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
+import { Glyphicon} from 'react-bootstrap';
 
 //Estilos del componente
 import './css/InputsVariation.css';
@@ -38,14 +39,17 @@ class InputsVariation extends Component{
 	render(){
 		let inputs = this.setInputsVariations();
 		return(
-			<Row xs="12">
-				<Col xs="3" className="divFlechas">					
-					<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-left" onClick={this.handleClickDown}/>
+		<div className="conteiner-fluid">
+			<Row sm={12}>
+				<Col sm={1}>
+					
 				</Col>
-				<Col xs="5">
-
+				<Col sm={1} className="divFlechas">					
+					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
+				</Col>
+				<Col sm={3} className="divInputs">
 					<p className="labelPagina">Pagina:{this.state.paginaActual}</p>
-					<div className="divInputsVariations">
+					<div className="divInputsVariation">
 						{inputs.map((input, idx) => (
 				            <input
 				              type="number"
@@ -56,10 +60,14 @@ class InputsVariation extends Component{
 				        ))}
 					</div>
 				</Col>
-				<Col xs="2" className="divFlechas">
+				<Col sm={1} className="divFlechas">
 					<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
 				</Col>
+				<Col sm={6}>
+					
+				</Col>
 			</Row>
+		</div>
 		);
 	}
 }

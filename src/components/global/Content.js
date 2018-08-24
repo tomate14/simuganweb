@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Row, Col } from 'reactstrap';
 
 // Assets
 import logo from './images/logo.svg';
@@ -16,20 +17,10 @@ class Content extends Component {
   render() {
     
     const { body } =  this.props;
-    /*
-    <div className="Content">
-        <div className="Contenido">
-               <div className="menu">
-               
-              </div>
-              <div className="contenido">
-                  { body }
-              </div>
-        </div>
-      </div>*/
+
     return (
           <div className="conteiner-fluid">
-            <div className="row">
+            <Row sm={12}>
                 <div className="col-sm-4 menu">
                      {
                       opcionesMenu && opcionesMenu.map(
@@ -40,7 +31,7 @@ class Content extends Component {
                 <div className="col-sm-8">
                     { body }
                 </div>
-            </div>
+            </Row>
           </div>
     );
   }
