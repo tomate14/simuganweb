@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+// components 
+
+import ContentOption from '../Generales/ContentOption'; 
+
 class Diferido extends Component {
+
+
 
 	  constructor(props) {
     super(props);
+
+    this.state = {
+			cantidadVariaciones : 1,
+		}
 
     this.toggle = this.toggle.bind(this);
     this.generarInputs = this.generarInputs.bind(this);
@@ -30,6 +41,9 @@ class Diferido extends Component {
 	render(){
 		return(
 			<Container>
+				<Row>
+					<Col><ContentOption state = {this.state} /></Col>
+				</Row> 
 				<Row>
 					<Col> 
 					    	<Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>

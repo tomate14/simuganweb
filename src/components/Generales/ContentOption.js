@@ -9,7 +9,7 @@ import './css/ContentOption.css';
 class ContentOption extends Component {
 	constructor(props){
 		super(props);
-		this.estaHabilitado = true;
+		this.estaHabilitado = 'true';
 		this.state = props.state;
 		this.handleOnChangeValue = this.handleOnChangeValue.bind(this);
 	};
@@ -22,7 +22,7 @@ class ContentOption extends Component {
 	render(){
 		//Relleno los months de un vector de datos 
 		console.log(this.state.cantidadVariaciones);
-		return (	<div className="conteiner-fluid">
+		return (	<div className="container-fluid">
 						<Row className="RowCheckbox">
 							<Col>		                
 			                  	<input type="checkbox" className="checkbox" enable={this.estaHabilitado}/>		

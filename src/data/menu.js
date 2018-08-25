@@ -13,7 +13,7 @@ export default [
   },
   {
     title: 'Has en cada potrero',
-    url: '/Potrero'
+    url: '/Potreros'
   },
   {
     title: 'Ensilaje y masa remanente',
