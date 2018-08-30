@@ -1,7 +1,7 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
-import { Glyphicon} from 'react-bootstrap';
+import { Glyphicon} from 'reactstrap';
 
 //Estilos del componente
 import './css/InputsVariation.css';
@@ -48,13 +48,13 @@ class InputsVariation extends Component{
 				<Col className="divInputs">
 					<p className="labelPagina">Pagina:{this.state.paginaActual}</p>
 					<div className="divInputsVariation">
-						{inputs.map((input, idx) => (
+						{inputs.map((input, key) => (
 				            <input
 				              type="number"
 				              className="InputVariables"
-				              id = {idx}
-				              value={this.state.arrayDatos[idx].valor}
-				              onChange={this.handleInputValueChange(idx)}
+				              key = {key}
+				              value={this.state.arrayDatos[key].valor}
+				              onChange={this.handleInputValueChange(key)}
 				            />
 				        ))}
 					</div>

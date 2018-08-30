@@ -57,7 +57,7 @@ class MonthTable extends Component {
 			        </thead>
 			        <tbody>
 			          {this.months && this.months.map((item,key) => 
-						  	<tr>
+						  	<tr key = {key}>
 						  		<td>{item.month}</td>
 						  		<td>{item.value}</td>						  		
 						  	</tr>
