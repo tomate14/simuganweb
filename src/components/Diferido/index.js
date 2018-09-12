@@ -42,7 +42,7 @@ class Diferido extends Component {
 		return(
 			<Container>
 				<Row>
-					<Col><ContentOption state = {this.state} /></Col>
+					<Col><ContentOption state = {this.state} func2 = {this.generarInputs()}/></Col>
 				</Row> 
 				<Row>
 					<Col> 

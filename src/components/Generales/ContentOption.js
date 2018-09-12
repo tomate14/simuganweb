@@ -1,37 +1,43 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import {  Row, Col } from 'reactstrap'
+import { connect } from 'react-redux';
 
 //Estilos del componente
 import './css/ContentOption.css';
 
 
 class ContentOption extends Component {
-	constructor(props){
+	/*constructor(props){
 		super(props);
-		this.estaHabilitado = 'true';
 		this.state = props.state;
-		this.handleOnChangeValue = this.handleOnChangeValue.bind(this);
-	};
+		//this.func  = props.func1;
+		this.funcPermitir    = props.funcPermitir;
+		this.funcVariaciones = props.funcVariaciones;
+		this.handlerChangeInput = this.handlerChangeInput.bind(this);
+		
+	};*/
 
-	handleOnChangeValue(e){
-		this.setState({
-			cantidadVariaciones  :e.target.value
-		});
+	handlerChangeInput(e){
+		this.setState({cantVariaciones : parseInt(e.target.value)});
 	}
+
 	render(){
-		//Relleno los months de un vector de datos 
-		console.log(this.state.cantidadVariaciones);
+		
 		return (	<div className="container-fluid">
 						<Row className="RowCheckbox">
-							<Col>		                
-			                  	<input type="checkbox" className="checkbox" enable={this.estaHabilitado}/>		
+							<Col>
+			                  	<input type="checkbox" className="checkbox" 
+			                  	       onClick={this.props.funcPermitir} 
+			                  	       defaultChecked = {this.props.state.permitido} />		
 			                  	<h5 className="textLabel"> Permitir el uso de este parametro para variar</h5>
 			                </Col>
 						</Row>
 						<Row className="RowCantidad">
-							<Col>
-								<input type="number" className="checkbox" id="cantVariation" onChange={this.handleOnChangeValue} value={this.state.cantidadVariaciones}/>
+							<Col>								
+							    <input type="number" className="checkbox" id="cantVariation" 
+							           onBlur={this.props.funcVariaciones} 
+							           value={this.props.state.cantVariaciones}/>							    
 								<h5 className="textLabel"> Cantidad de variaciones a realizar</h5>
 							</Col>
 						</Row>
@@ -41,4 +47,4 @@ class ContentOption extends Component {
 
 }
 
-export default ContentOption;
+export default ContentOption

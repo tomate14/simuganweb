@@ -1,56 +1,69 @@
 import React, { Component } from 'react';
 import {Row, Col } from 'reactstrap';
+
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {permitirVariaciones,modificarVariaciones} from '../../actions/action-recursosforrajeros';
+
 import MonthTable from '../Generales/MonthTable';
 import ContentOption from '../Generales/ContentOption';
 import InputsVariation from '../Generales/InputsVariation';
+
+
+
+
 
 //Estilos
 
 import './css/index.css'; 
 
 class RecursosForrajeros extends Component {
-	constructor(){
-		super();
-		this.state = {
-			cantidadVariaciones : 12,
-			paginaActual : 1,
-			arrayDatos : this.iniciarArregloState()
-		}
-		
-	}
-	iniciarArregloState(){
-		let arrayAux = [];
-		for(let i = 0; i < 12; i++){
-			let nombre = "mes"+i.toString();
-			let valor  = 0;
-			let ObjetoMes = {}
-			ObjetoMes.valor = valor;
-			ObjetoMes.mes   = nombre;
-			arrayAux.push(ObjetoMes);
-		}
-		return arrayAux;
-	}
-	render(){
-		
-		return(
-			<div className="conteiner-fluid">
-				<Row>
-	                <Col>
-	                    <ContentOption state={this.state}/>
-	                </Col>
-	            </Row>
-	            <Row className="RowVariaciones">
+	generarTabla(recursos){
+		if(recursos.cantVariaciones != 0){
+			return (
+				<Row className="RowVariaciones">
 	                <Col>
 	                    <MonthTable />
 	                </Col>
 	                <Col>
-	                    <InputsVariation state={this.state} />
+	                    <InputsVariation state = {recursos}/>
 	                </Col>
 	            </Row>
+			);	
+		}
+		
+	}
+	render(){
+		const recursos = this.props.recursosforrajeros;
+		return(
+			<div className="conteiner-fluid">
+				<Row>
+	                <Col>
+	                    <ContentOption state          ={recursos} 
+	                                   funcPermitir   ={this.props.permitirVariaciones} 
+	                                   funcVariaciones={this.props.modificarVariaciones}/>
+	                </Col>
+	            </Row>
+	            {this.generarTabla(recursos)}
+	            
 	        </div>
 			
 		);
 	}
 }
 
-export default RecursosForrajeros;
+function mapStateToProps(state){
+	console.log("mapStateToProps"+state);
+    return {
+        recursosforrajeros: state.recursosforrajeros
+    };
+}
+
+function matchDispatchToProps(dispatch){
+	console.log("matchDispatchToProps"+dispatch);
+    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones: modificarVariaciones}, dispatch);
+    
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(RecursosForrajeros)
+

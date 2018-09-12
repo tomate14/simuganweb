@@ -9,10 +9,6 @@ import './css/InputsVariation.css';
 class InputsVariation extends Component{
 	constructor(props){
 		super(props);
-		/*this.state = {
-			cantidadVariaciones : 12,
-			paginaActual : 1
-		}*/
 		this.state = props.state;
 		this.handleInputValueChange = this.handleInputValueChange.bind(this);
 		this.handleClickDown = this.handleClickDown.bind(this);
@@ -21,27 +17,36 @@ class InputsVariation extends Component{
 	}
 	setInputsVariations(){
 		let inputs = [];
-		for( let i= 0; i < this.state.cantidadVariaciones; i++){
-		    inputs.push({name:'<input type="number" />'});
-		};
-		return inputs;
+		if(this.state.cantVariaciones > 0){
+			for( let i= 0; i < this.state.inputsPorVariacion; i++){
+			    inputs.push({name:'<input type="number" />'});
+			};
+			return inputs;	
+		}
+		return [];
 	}
 
 	handleInputValueChange(idx){
 		
 	}
 	handleClickUp(e){
-		this.setState({paginaActual : this.state.paginaActual + 1})
+		if(this.state.paginaActual < this.state.cantVariaciones){
+			this.setState({paginaActual : this.state.paginaActual + 1})	
+		}
+		//this.setState({paginaActual : this.state.paginaActual + 1})
 	}
 	handleClickDown(e){
-		this.setState({paginaActual : this.state.paginaActual - 1})
+		if(this.state.paginaActual > 1){
+			this.setState({paginaActual : this.state.paginaActual - 1})	
+		}
 	}
 	render(){
 		let inputs = this.setInputsVariations();
+		//Pagina 1 muestra el array[0]
+		let paginaActual = this.state.paginaActual - 1;
 		return(
 		<div className="conteiner-fluid">
-			<Row >
-				
+			<Row>				
 				<Col  className="divFlechas">					
 					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
 				</Col>
@@ -53,7 +58,7 @@ class InputsVariation extends Component{
 				              type="number"
 				              className="InputVariables"
 				              key = {key}
-				              value={this.state.arrayDatos[key].valor}
+				              value={this.state.pagvariaciones.length == 0  ? 0 : this.state.pagvariaciones[paginaActual].variaciones[key].valor}
 				              onChange={this.handleInputValueChange(key)}
 				            />
 				        ))}
