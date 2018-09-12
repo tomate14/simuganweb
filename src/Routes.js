@@ -1,6 +1,9 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
+
+
+
 //Componentes de Rutas
 import App                from './components/App'
 import Diferido           from './components/Diferido'
@@ -15,18 +18,19 @@ import Mobs				  from './components/Mobs'
 
 
 const AppRoutes = () => 
-	<App>
-		<Switch>
-			<Route path="/Diferido"           component={Diferido} />
-			<Route path="/Ensilaje"           component={Ensilaje} />
-			<Route path="/Feedlot"            component={Feedlot} />
-			<Route path="/Invernada"          component={Invernada} />
-			<Route path="/Potreros"           component={Potreros} />
-			<Route path="/Rastrojo"           component={Rastrojo} />
-			<Route path="/RecursosForrajeros" component={RecursosForrajeros} />
-			<Route path="/mobs"				        component={Mobs} />
+	
+		<App>
+			<Switch>
+				<Route path="/Diferido"           component={Diferido} />
+				<Route path="/Ensilaje"           component={Ensilaje} />
+				<Route path="/Feedlot"            component={Feedlot} />
+				<Route path="/Invernada"          component={Invernada} />
+				<Route path="/Potreros"           component={Potreros} />
+				<Route path="/Rastrojo"           component={Rastrojo} />
+				<Route path="/RecursosForrajeros" component={RecursosForrajeros} />
+				<Route path="/mobs"				  component={Mobs} />
 
-		</Switch>
-	</App>;
+			</Switch>
+		</App>;
 
 export default AppRoutes;
