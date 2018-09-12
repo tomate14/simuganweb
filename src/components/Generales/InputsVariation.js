@@ -7,9 +7,8 @@ import { Glyphicon} from 'reactstrap';
 import './css/InputsVariation.css';
 
 class InputsVariation extends Component{
-	constructor(props){
-		super(props);
-		this.state = props.state;
+	constructor(){
+		super();
 		this.handleInputValueChange = this.handleInputValueChange.bind(this);
 		this.handleClickDown = this.handleClickDown.bind(this);
 		this.handleClickUp = this.handleClickUp.bind(this);
@@ -17,8 +16,8 @@ class InputsVariation extends Component{
 	}
 	setInputsVariations(){
 		let inputs = [];
-		if(this.state.cantVariaciones > 0){
-			for( let i= 0; i < this.state.inputsPorVariacion; i++){
+		if(this.props.state.cantVariaciones > 0){
+			for( let i= 0; i < this.props.state.inputsPorVariacion; i++){
 			    inputs.push({name:'<input type="number" />'});
 			};
 			return inputs;	
@@ -29,21 +28,25 @@ class InputsVariation extends Component{
 	handleInputValueChange(idx){
 		
 	}
+	/*
+		Llamar a la accion que me setee la pagina actual
+		tanto para la subida como para la bajada
+	*/
 	handleClickUp(e){
-		if(this.state.paginaActual < this.state.cantVariaciones){
-			this.setState({paginaActual : this.state.paginaActual + 1})	
+		if(this.props.state.paginaActual < this.props.state.cantVariaciones){
+			this.setState({paginaActual : this.props.state.paginaActual + 1})	
 		}
 		//this.setState({paginaActual : this.state.paginaActual + 1})
 	}
 	handleClickDown(e){
-		if(this.state.paginaActual > 1){
-			this.setState({paginaActual : this.state.paginaActual - 1})	
+		if(this.props.state.paginaActual > 1){
+			this.props.setState({paginaActual : this.state.paginaActual - 1})	
 		}
 	}
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
-		let paginaActual = this.state.paginaActual - 1;
+		let paginaActual = this.props.state.paginaActual - 1;
 		return(
 		<div className="conteiner-fluid">
 			<Row>				
@@ -51,14 +54,14 @@ class InputsVariation extends Component{
 					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
 				</Col>
 				<Col className="divInputs">
-					<p className="labelPagina">Pagina:{this.state.paginaActual}</p>
+					<p className="labelPagina">Pagina:{this.props.state.paginaActual}</p>
 					<div className="divInputsVariation">
 						{inputs.map((input, key) => (
 				            <input
 				              type="number"
 				              className="InputVariables"
 				              key = {key}
-				              value={this.state.pagvariaciones.length == 0  ? 0 : this.state.pagvariaciones[paginaActual].variaciones[key].valor}
+				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[paginaActual].variaciones[key].valor}
 				              onChange={this.handleInputValueChange(key)}
 				            />
 				        ))}

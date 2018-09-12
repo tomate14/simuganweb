@@ -40,7 +40,7 @@ class RecursosForrajeros extends Component {
 				<Row>
 	                <Col>
 	                    <ContentOption state          ={recursos} 
-	                                   funcPermitir   ={this.props.permitirVariaciones} 
+	                                   funcPermitir   ={this.permitirVariaciones} 
 	                                   funcVariaciones={this.props.modificarVariaciones}/>
 	                </Col>
 	            </Row>

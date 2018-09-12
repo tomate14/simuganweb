@@ -31,8 +31,11 @@ function iniciarArregloState(state=initState,valor=1){
 /* 
     Generacion del estado de los recursos forrajeros
 */
-export default function (state={permitido:false,cantVariaciones:1,inputsPorVariacion:12,paginaActual:1,pagvariaciones:[]}, action) {
+export default function (state=initState, action) {
     console.log("REDUCER FORRAJERO");
+     if(state == undefined){
+        console.log(""); 
+     }
      switch (action.type){
         case("PERMITIDO"):
             console.log("Permitido"+action.payload);
