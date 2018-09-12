@@ -8,19 +8,6 @@ import './css/ContentOption.css';
 
 
 class ContentOption extends Component {
-	/*constructor(props){
-		super(props);
-		this.state = props.state;
-		//this.func  = props.func1;
-		this.funcPermitir    = props.funcPermitir;
-		this.funcVariaciones = props.funcVariaciones;
-		this.handlerChangeInput = this.handlerChangeInput.bind(this);
-		
-	};*/
-
-	handlerChangeInput(e){
-		this.setState({cantVariaciones : parseInt(e.target.value)});
-	}
 
 	render(){
 		
@@ -36,8 +23,9 @@ class ContentOption extends Component {
 						<Row className="RowCantidad">
 							<Col>								
 							    <input type="number" className="checkbox" id="cantVariation" 
-							           onBlur={this.props.funcVariaciones} 
-							           value={this.props.state.cantVariaciones}/>							    
+							           onChange={this.props.funcVariaciones}
+							           value={this.props.state.cantVariaciones} 
+							           />							    
 								<h5 className="textLabel"> Cantidad de variaciones a realizar</h5>
 							</Col>
 						</Row>
