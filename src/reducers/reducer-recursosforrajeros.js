@@ -33,9 +33,6 @@ function iniciarArregloState(state=initState,valor=1){
 */
 export default function (state=initState, action) {
     console.log("REDUCER FORRAJERO");
-     if(state == undefined){
-        console.log(""); 
-     }
      switch (action.type){
         case("PERMITIDO"):
             console.log("Permitido"+action.payload);
@@ -54,6 +51,12 @@ export default function (state=initState, action) {
                 paginaActual : 1
             };
             break;
+        case("PAGINA"):
+            let pagina = action.payload;
+            return{
+                ...state,
+                paginaActual : pagina
+            }
      }
     return state;
 }
