@@ -16,6 +16,14 @@ export function modificarVariaciones(e) {
     }    
     
 }
+export function modificarPagina(pagina) {    
+    return {
+        type: "PAGINA",
+        payload:pagina
+    }    
+    
+}
+
 
 export function permitirVariaciones(e) {
 	console.log("permitirVariaciones");

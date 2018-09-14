@@ -25,28 +25,28 @@ class InputsVariation extends Component{
 		return [];
 	}
 
-	handleInputValueChange(idx){
-		
+	handleInputValueChange(idx,pagina){
+		this.props.funcModiValorInput(idx,pagina);
 	}
 	/*
 		Llamar a la accion que me setee la pagina actual
 		tanto para la subida como para la bajada
 	*/
-	handleClickUp(e){
+	handleClickUp(){
 		if(this.props.state.paginaActual < this.props.state.cantVariaciones){
-			this.setState({paginaActual : this.props.state.paginaActual + 1})	
+			this.props.funcModiPagina(this.props.state.paginaActual+1);	
 		}
 		//this.setState({paginaActual : this.state.paginaActual + 1})
 	}
-	handleClickDown(e){
+	handleClickDown(){
 		if(this.props.state.paginaActual > 1){
-			this.props.setState({paginaActual : this.state.paginaActual - 1})	
+			this.props.funcModiPagina(this.props.state.paginaActual-1);	
 		}
 	}
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
-		let paginaActual = this.props.state.paginaActual - 1;
+		let paginaActual = this.props.state.paginaActual;
 		return(
 		<div className="conteiner-fluid">
 			<Row>				
@@ -61,8 +61,8 @@ class InputsVariation extends Component{
 				              type="number"
 				              className="InputVariables"
 				              key = {key}
-				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[paginaActual].variaciones[key].valor}
-				              onChange={this.handleInputValueChange(key)}
+				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[paginaActual-1].variaciones[key].valor}
+				              onChange={this.handleInputValueChange(key,paginaActual-1)}
 				            />
 				        ))}
 					</div>
@@ -79,3 +79,7 @@ class InputsVariation extends Component{
 	}
 }
 export default InputsVariation;
+
+
+// WEBPACK FOOTER //
+// src/components/Generales/InputsVariation.js
