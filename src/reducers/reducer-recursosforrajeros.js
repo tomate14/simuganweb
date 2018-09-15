@@ -20,10 +20,8 @@ function iniciarArregloState(state=initState,valor=1){
                 ObjetoMes.mes   = nombre;
                 arrayAux.push(ObjetoMes);
             }  
-            let ObjetoArray = {}
-            ObjetoArray.variacion   = index;
-            ObjetoArray.variaciones   = arrayAux;  
-            arrayGeneral.push(ObjetoArray);
+           
+            arrayGeneral.push(arrayAux);
         }   
     }    
     return arrayGeneral;
@@ -57,41 +55,20 @@ export default function (state=initState, action) {
                 ...state,
                 paginaActual : pagina
             }
+            break;
+        case("VALORVARIACION"):
+            
+            return{
+                ...state,
+                pagvariaciones: state.pagvariaciones.map(
+                       (content, i) => i == action.pagina ? state.pagvariaciones[action.pagina].map(
+                                                                   (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                                                                          : content
+                                                            )                             
+
+                                                          : content
+                   )
+            }
      }
     return state;
 }
-/*
-
-
-export default function (state =initState, action) {
-    console.log("cant variaciones del reducer forrajero: ");
-
-    switch (action.type) {
-        case "CANTVARIACIONES":
-            console.log("cant variaciones del reducer forrajero: "+state.pagvariaciones);
-            return {
-                ...state,
-                cantVariaciones : state.cantVariaciones,
-                pagvariaciones: iniciarArregloState(state.cantVariaciones)
-            };
-        case "PERMITIDO":
-            console.log("permitido del reducer forrajero: "+state.pagvariaciones);
-            switch(action.payload){
-                case "true":
-                    return {
-                        ...state,
-                        permitido : "true"
-                    }
-                    break;
-                case "false":
-                    return {
-                        ...state,
-                        permitido : "false"
-                    }
-                    break;
-            }
-            
-        default:
-            return state
-    }
-}*/

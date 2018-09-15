@@ -25,8 +25,11 @@ class InputsVariation extends Component{
 		return [];
 	}
 
-	handleInputValueChange(idx,pagina){
-		this.props.funcModiValorInput(idx,pagina);
+	handleInputValueChange(e){
+		let valor = parseInt(e.target.value);
+		let id = parseInt(e.target.id);
+		let pagina = this.props.state.paginaActual - 1;
+		this.props.funcModiValorInput(id,pagina,valor);
 	}
 	/*
 		Llamar a la accion que me setee la pagina actual
@@ -60,9 +63,10 @@ class InputsVariation extends Component{
 				            <input
 				              type="number"
 				              className="InputVariables"
+				              id = {key}
 				              key = {key}
-				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[paginaActual-1].variaciones[key].valor}
-				              onChange={this.handleInputValueChange(key,paginaActual-1)}
+				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[paginaActual-1][key].valor}
+				              onChange={this.handleInputValueChange}
 				            />
 				        ))}
 					</div>
