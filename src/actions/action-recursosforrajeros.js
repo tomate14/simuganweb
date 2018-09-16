@@ -16,6 +16,19 @@ export function modificarVariaciones(e) {
     }    
     
 }
+
+
+
+export function InputVariacionValor(id, pagina, valor) {    
+    return {
+        type: "VALORVARIACION",
+        posicion:id,
+        pagina:pagina,
+        valor:parseInt(valor)
+    }    
+    
+}
+
 export function modificarPagina(pagina) {    
     return {
         type: "PAGINA",
