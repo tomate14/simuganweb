@@ -30,6 +30,7 @@ class InputsVariation extends Component{
 		let id = parseInt(e.target.id);
 		let pagina = this.props.state.paginaActual - 1;
 		this.props.funcModiValorInput(id,pagina,valor);
+		
 	}
 	/*
 		Llamar a la accion que me setee la pagina actual
