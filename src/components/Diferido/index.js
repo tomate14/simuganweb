@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row} from 'reactstrap';
+import {permitirVariaciones} from '../../actions/action-diferidos';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components 
@@ -42,7 +47,8 @@ class Diferido extends Component {
 		return(
 			<Container>
 				<Row>
-					<Col><ContentOption state = {this.state} func2 = {this.generarInputs()}/></Col>
+					<Col><ContentOption state = {this.state} 
+										funcPermitir = {this.props.permitirVariaciones}/></Col>
 				</Row> 
 				<Row>
 					<Col> 
@@ -78,4 +84,17 @@ class Diferido extends Component {
 	}
 }
 
-export default Diferido;
+function mapStateToProps(state){
+	console.log("mapStateToProps"+state);
+    return {
+        diferidos: state.diferidos
+    };
+}
+
+function matchDispatchToProps(dispatch){
+	console.log("matchDispatchToProps"+dispatch);
+    return bindActionCreators({permitirVariaciones: permitirVariaciones}, dispatch);
+    
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Diferido);
