@@ -3,7 +3,8 @@ import {Row, Col } from 'reactstrap';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {permitirVariaciones,modificarVariaciones,modificarPagina} from '../../actions/action-recursosforrajeros';
+import {permitirVariaciones,modificarVariaciones,modificarPagina,InputVariacionValor} from '../../actions/action-recursosforrajeros';
+
 
 import MonthTable from '../Generales/MonthTable';
 import ContentOption from '../Generales/ContentOption';
@@ -27,7 +28,9 @@ class RecursosForrajeros extends Component {
 	                </Col>
 	                <Col>
 	                    <InputsVariation state = {recursos}
-	                                     funcModiPagina = {this.props.modificarPagina}/>
+	                                     funcModiPagina = {this.props.modificarPagina}
+                                         funcModiValorInput = {this.props.InputVariacionValor}/>
+
 	                </Col>
 	            </Row>
 			);	
@@ -62,7 +65,8 @@ function mapStateToProps(state){
 
 function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps"+dispatch);
-    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones: modificarVariaciones, modificarPagina:modificarPagina}, dispatch);
+	return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones: modificarVariaciones, modificarPagina:modificarPagina, InputVariacionValor:InputVariacionValor}, dispatch);
+    
     
 }
 
