@@ -32,14 +32,14 @@ function iniciarArregloState(state=initState,valor=1){
 export default function (state=initState, action) {
     console.log("REDUCER FORRAJERO");
      switch (action.type){
-        case("PERMITIDO"):
+        case("PERMITIDO_RECURSOSFORRAJEROS"):
             console.log("Permitido"+action.payload);
             return {
                 ...state,
                 permitido : action.payload
             };
             break;
-        case("CANTIDAD"):            
+        case("CANTIDAD_RECURSOSFORRAJEROS"):            
             let valor = parseInt(action.payload);
             //Sin redondeo de decimales, siempre parte inferior
              return {
@@ -49,14 +49,14 @@ export default function (state=initState, action) {
                 paginaActual : 1
             };
             break;
-        case("PAGINA"):
+        case("PAGINA_RECURSOSFORRAJEROS"):
             let pagina = action.payload;
             return{
                 ...state,
                 paginaActual : pagina
             }
             break;
-        case("VALORVARIACION"):
+        case("VALORVARIACION_RECURSOSFORRAJEROS"):
             
             return{
                 ...state,

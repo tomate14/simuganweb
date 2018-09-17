@@ -11,7 +11,7 @@
 
 export function modificarVariaciones(e) {    
     return {
-        type: "CANTIDAD",
+        type: "CANTIDAD_RECURSOSFORRAJEROS",
         payload:e.target.value
     }    
     
@@ -21,7 +21,7 @@ export function modificarVariaciones(e) {
 
 export function InputVariacionValor(id, pagina, valor) {    
     return {
-        type: "VALORVARIACION",
+        type: "VALORVARIACION_RECURSOSFORRAJEROS",
         posicion:id,
         pagina:pagina,
         valor:parseInt(valor)
@@ -31,7 +31,7 @@ export function InputVariacionValor(id, pagina, valor) {
 
 export function modificarPagina(pagina) {    
     return {
-        type: "PAGINA",
+        type: "PAGINA_RECURSOSFORRAJEROS",
         payload:pagina
     }    
     
@@ -41,7 +41,7 @@ export function modificarPagina(pagina) {
 export function permitirVariaciones(e) {
 	console.log("permitirVariaciones");
     return {
-        type: "PERMITIDO",
+        type: "PERMITIDO_RECURSOSFORRAJEROS",
         payload:e.target.checked
     }
 }
