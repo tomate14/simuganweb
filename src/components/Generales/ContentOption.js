@@ -1,7 +1,6 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import {  Row, Col } from 'reactstrap'
-import { connect } from 'react-redux';
 
 //Estilos del componente
 import './css/ContentOption.css';
