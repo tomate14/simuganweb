@@ -1,7 +1,0 @@
-export function permitirVariaciones(){
-	console.log("permitirVariaciones-diferido");
-	return{
-		type : "PERMITIDO",
-		payload: e.target.checked
-	}		
-}

@@ -11,6 +11,13 @@ export default function(state=initialState,action){
 				permitido : action.payload
 		}
 		break;
-		return state;
+		case "CANTIDAD" :
+			let valor = parseInt(action.payload);
+			return{...state,
+					cantVariaciones : valor
+			}
+		break;
+		
 	}
+	return state;
 } 

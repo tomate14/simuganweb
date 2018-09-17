@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row} from 'reactstrap';
-import {permitirVariaciones} from '../../actions/action-diferidos';
+import {permitirVariaciones,modificarVariaciones} from '../../actions/action-diferidos.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components 
@@ -15,19 +15,18 @@ class Diferido extends Component {
 
 
 
-	  constructor(props) {
+	constructor(props) {
     super(props);
 
     this.state = {
 			cantidadVariaciones : 1,
-		}
-
+			dropdownOpen: false
+	}
+		
     this.toggle = this.toggle.bind(this);
     this.generarInputs = this.generarInputs.bind(this);
-    this.state = {
-      dropdownOpen: false
-    };
-  }
+    this.actualizarTextDropdown = this.actualizarTextDropdown.bind(this);
+  } 
 
   toggle() {
     this.setState(prevState => ({
@@ -37,18 +36,34 @@ class Diferido extends Component {
 
   generarInputs(){
   	var rows = [];
-  	for(var i = 0; i< 5;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
+  	for(var i = 0; i< this.props.diferidos.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
 		rows.push(<input name = {i} type="number"/>); 
 	}
 	return rows;
   } 
 
+  generarPasturas(){
+  	var pasturas = ["Sorgo","pastura 2", "pastura 3"];
+  	var rows = [];
+  	for(var i = 0;i < pasturas.length;i++){
+  		rows[i] = pasturas[i];
+  	}
+  	return pasturas;
+  }
+
+  actualizarTextDropdown(){
+  	this.props.diferidos.dropdownSelected =this.children;
+  	return;
+  }
+
 	render(){
+		const diferidos = this.props.diferidos;
 		return(
 			<Container>
 				<Row>
-					<Col><ContentOption state = {this.state} 
-										funcPermitir = {this.props.permitirVariaciones}/></Col>
+					<Col><ContentOption state = {diferidos} 
+										funcPermitir = {this.props.permitirVariaciones}
+										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row> 
 				<Row>
 					<Col> 
@@ -58,11 +73,12 @@ class Diferido extends Component {
 						        </DropdownToggle>
 						        <DropdownMenu>
 						          	<DropdownItem header>Pasturas</DropdownItem>
-						          	<DropdownItem>Sorgo</DropdownItem>
-						          	<DropdownItem>pastura 2</DropdownItem>
-						          	<DropdownItem>pastura 3</DropdownItem>
+						          	{this.generarPasturas().map(function(object,i){
+						          		return <DropdownItem key = {i}>{object}</DropdownItem>;
+						          	})}
 						        </DropdownMenu>
 					      	</Dropdown>
+					      	<p>{this.props.diferidos.dropdownSelected} </p>
 				   </Col>
 				   <Col>
 				   		<p>Digestibilidad del Diferido[50-90]% </p>
@@ -92,8 +108,8 @@ function mapStateToProps(state){
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps"+dispatch);
-    return bindActionCreators({permitirVariaciones: permitirVariaciones}, dispatch);
+	console.log("matchDispatchToProps");
+    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones}, dispatch);
     
 }
 
