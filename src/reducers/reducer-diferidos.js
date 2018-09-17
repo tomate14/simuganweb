@@ -6,12 +6,12 @@ const initialState = {
 export default function(state=initialState,action){
 	console.log("REDUCER-DIFERIDO");
 	switch(action.type){
-		case "PERMITIDO" : 
+		case "PERMITIDO_DIFERIDO" : 
 		return {...state,
 				permitido : action.payload
 		}
 		break;
-		case "CANTIDAD" :
+		case "CANTIDAD_DIFERIDO" :
 			let valor = parseInt(action.payload);
 			return{...state,
 					cantVariaciones : valor
