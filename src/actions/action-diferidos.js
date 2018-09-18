@@ -13,3 +13,11 @@ export function modificarVariaciones(e){
 		payload: e.target.value
 	}
 }
+
+export function modificarDropdownSelected(e){
+	console.log("modificarDropdownSelected-diferido");
+	return{
+		type: "MODIFYDROPDOWN_DIFERIDO",
+		payload: e.target.id
+	}
+}
