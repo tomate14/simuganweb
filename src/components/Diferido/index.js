@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row} from 'reactstrap';
-import {permitirVariaciones,modificarVariaciones} from '../../actions/action-diferidos.js';
+import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected} from '../../actions/action-diferidos.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components 
@@ -25,7 +25,7 @@ class Diferido extends Component {
 		
     this.toggle = this.toggle.bind(this);
     this.generarInputs = this.generarInputs.bind(this);
-    this.actualizarTextDropdown = this.actualizarTextDropdown.bind(this);
+    //this.setDropdownSelected = this.setDropdownSelected.bind(this);
   } 
 
   toggle() {
@@ -51,10 +51,14 @@ class Diferido extends Component {
   	return pasturas;
   }
 
-  actualizarTextDropdown(){
-  	this.props.diferidos.dropdownSelected =this.children;
-  	return;
+
+  setDropdownSelected(){
+  	//este arreglo se debe cargar desde el xml parseado
+  	  	var pasturas = ['Sorgo','pastura 2', 'pastura 3'];
+ 		let aux =pasturas[this.props.diferidos.dropdownSelected] 
+  	return aux;
   }
+  
 
 	render(){
 		const diferidos = this.props.diferidos;
@@ -69,16 +73,16 @@ class Diferido extends Component {
 					<Col> 
 					    	<Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
 						        <DropdownToggle color = "success" caret>
-						        	  Seleccione una Pastura
+						        	 {this.setDropdownSelected()}
 						        </DropdownToggle>
 						        <DropdownMenu>
-						          	<DropdownItem header>Pasturas</DropdownItem>
-						          	{this.generarPasturas().map(function(object,i){
-						          		return <DropdownItem key = {i}>{object}</DropdownItem>;
+						          	<DropdownItem onClick={this.props.modificarDropdownSelected} header>Pasturas</DropdownItem>
+						          	{this.generarPasturas().map((object,i)=>{
+						          		return <DropdownItem onClick = {this.props.modificarDropdownSelected} key = {i} id = {i} >{object}</DropdownItem>;
 						          	})}
 						        </DropdownMenu>
 					      	</Dropdown>
-					      	<p>{this.props.diferidos.dropdownSelected} </p>
+					      	
 				   </Col>
 				   <Col>
 				   		<p>Digestibilidad del Diferido[50-90]% </p>
@@ -109,7 +113,7 @@ function mapStateToProps(state){
 
 function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps");
-    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones}, dispatch);
+    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected}, dispatch);
     
 }
 
