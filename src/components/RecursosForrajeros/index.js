@@ -20,21 +20,23 @@ import './css/index.css';
 
 class RecursosForrajeros extends Component {
 	generarTabla(recursos){
-		if(recursos.cantVariaciones != 0){
-			return (
-				<Row className="RowVariaciones">
-	                <Col>
-	                    <MonthTable />
-	                </Col>
-	                <Col>
-	                    <InputsVariation state = {recursos}
-	                                     funcModiPagina = {this.props.modificarPagina}
-                                         funcModiValorInput = {this.props.InputVariacionValor}/>
+		if(recursos.permitido){
+			if(recursos.cantVariaciones > 0){
+				return (
+					<Row className="RowVariaciones">
+		                <Col>
+		                    <MonthTable />
+		                </Col>
+		                <Col>
+		                    <InputsVariation state = {recursos}
+		                                     funcModiPagina = {this.props.modificarPagina}
+	                                         funcModiValorInput = {this.props.InputVariacionValor}/>
 
-	                </Col>
-	            </Row>
-			);	
-		}
+		                </Col>
+		            </Row>
+				);	
+			}
+		}		
 		
 	}
 	render(){
