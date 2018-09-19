@@ -6,6 +6,7 @@ import { Row, Col } from 'reactstrap'
 
 // Assets
 import logo from './images/logo.svg';
+import unicen from './images/unicen.jpg';
 import './css/Header.css';
 
 class Header extends Component {
@@ -19,7 +20,7 @@ class Header extends Component {
     return (
             <div className="row">
                 <div className="col-sm-2">
-                    <img id="Logo" src={logo}/>
+                    <img id="Unicen" src={unicen}/>
                 </div>
                 <div className="col-sm-8">
                     <h1>Simulador Ganadero</h1>     
