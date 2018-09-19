@@ -20,7 +20,7 @@ import './css/index.css';
 
 class RecursosForrajeros extends Component {
 	generarTabla(recursos){
-		if(recursos.cantVariaciones != 0){
+		if(recursos.cantVariaciones > 0){
 			return (
 				<Row className="RowVariaciones">
 	                <Col>
