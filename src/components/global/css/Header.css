@@ -23,7 +23,9 @@
 .Logo2{
   width: 15%;
 }*/
-
+#Unicen{
+  height: 140px;
+}
 #Logo{
   height: 80px;
   animation: App-logo-spin infinite 20s linear;

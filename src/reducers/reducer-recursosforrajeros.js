@@ -1,11 +1,12 @@
+
+
 const initState = {
-    permitido:false,
-    cantVariaciones:1,
+    permitido:true, 
+    cantVariaciones:0,
     inputsPorVariacion:12,
     paginaActual:1,
     pagvariaciones:[]
 };
-
 function iniciarArregloState(state=initState,valor=1){
     
     let arrayGeneral = [];
@@ -31,6 +32,7 @@ function iniciarArregloState(state=initState,valor=1){
 */
 export default function (state=initState, action) {
     console.log("REDUCER FORRAJERO");
+     
      switch (action.type){
         case("PERMITIDO_RECURSOSFORRAJEROS"):
             console.log("Permitido"+action.payload);
@@ -40,8 +42,11 @@ export default function (state=initState, action) {
             };
             break;
         case("CANTIDAD_RECURSOSFORRAJEROS"):            
-            let valor = parseInt(action.payload);
             //Sin redondeo de decimales, siempre parte inferior
+             let valor = parseInt(action.payload);
+             if (isNaN(valor)){
+                 valor = 0;
+             }
              return {
                 ...state,
                 cantVariaciones : valor,
@@ -57,14 +62,17 @@ export default function (state=initState, action) {
             }
             break;
         case("VALORVARIACION_RECURSOSFORRAJEROS"):
-            
-        return{
-            ...state,
-            pagvariaciones: state.pagvariaciones.map(
-             (content, i) => i == action.pagina ? state.pagvariaciones[action.pagina].map(
-                 (content,j) => j == action.posicion ? {...content, valor: action.valor}
-                 : content
-                 )                             
+
+             if (isNaN(parseInt(action.valor))){
+                 action.valor = 0;
+             }
+            return{
+                ...state,
+                pagvariaciones: state.pagvariaciones.map(
+                       (content, i) => i == action.pagina ? state.pagvariaciones[action.pagina].map(
+                                                                   (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                                                                          : content
+                                                            )
 
              : content
              )
