@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row} from 'reactstrap';
-import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected} from '../../actions/action-diferidos.js';
+import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,modificarInputValueDigestibilidad,modificarInputValueRinde} from '../../actions/action-diferidos.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components 
@@ -34,10 +34,10 @@ class Diferido extends Component {
     }));
   }
 
-  generarInputs(){
+  generarInputs(parametro,funcOnChange){
   	var rows = [];
   	for(var i = 0; i< this.props.diferidos.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
-		rows.push(<input name = {i} type="number"/>); 
+		rows.push(<input onChange = {funcOnChange} value = {parametro[this.props.diferidos.dropdownSelected][i]} id = {i} type="number"/>); 
 	}
 	return rows;
   } 
@@ -86,14 +86,14 @@ class Diferido extends Component {
 				   </Col>
 				   <Col>
 				   		<p>Digestibilidad del Diferido[50-90]% </p>
-				   		{this.generarInputs().map(function(object, i){
+				   		{this.generarInputs(this.props.diferidos.digestibilidadVariaciones,this.props.modificarInputValueDigestibilidad).map(function(object, i){
                return <p key={i}> {object} </p> ;}
                				)
 				   		}
 				   </Col>
 				   <Col>
 				   		<p>Rinde del Diferido [15-200] /ha</p>
-				   		{this.generarInputs().map(function(object, i){
+				   		{this.generarInputs(this.props.diferidos.rindeVariaciones,this.props.modificarInputValueRinde).map(function(object, i){
                return <p  key={i}> {object} </p> ;}
                				)
 				   		}
@@ -113,7 +113,7 @@ function mapStateToProps(state){
 
 function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps");
-    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected}, dispatch);
+    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected,modificarInputValueDigestibilidad:modificarInputValueDigestibilidad,modificarInputValueRinde : modificarInputValueRinde}, dispatch);
     
 }
 

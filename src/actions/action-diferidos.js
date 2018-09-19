@@ -21,3 +21,22 @@ export function modificarDropdownSelected(e){
 		payload: e.target.id
 	}
 }
+
+export function modificarInputValueDigestibilidad(e){
+	console.log("modificarInputValueDigestibilidad-diferido");
+	return{
+		type: "UPDATE-VALUE-DIGEST_DIFERIDO",
+		index: e.target.id,
+		value : e.target.value
+	}
+}
+
+
+export function modificarInputValueRinde(e){
+	console.log("modificarInputValueRinde-diferido");
+	return{
+		type: "UPDATE-VALUE-RINDE_DIFERIDO",
+		index: e.target.id,
+		value : e.target.value
+	}
+}

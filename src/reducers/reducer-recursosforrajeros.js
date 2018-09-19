@@ -10,7 +10,7 @@ const initState = {
 function iniciarArregloState(state=initState,valor=1){
     
     let arrayGeneral = [];
-    if(valor != 0){
+    if(valor > 0){
         for(let index = 0; index< valor; index++){
             let arrayAux = [];
             for(let i = 0; i < state.inputsPorVariacion; i++){
@@ -62,6 +62,7 @@ export default function (state=initState, action) {
             }
             break;
         case("VALORVARIACION_RECURSOSFORRAJEROS"):
+
              if (isNaN(parseInt(action.valor))){
                  action.valor = 0;
              }
@@ -71,11 +72,11 @@ export default function (state=initState, action) {
                        (content, i) => i == action.pagina ? state.pagvariaciones[action.pagina].map(
                                                                    (content,j) => j == action.posicion ? {...content, valor: action.valor}
                                                                                           : content
-                                                            )                             
+                                                            )
 
-                                                          : content
-                   )
-            }
-     }
+             : content
+             )
+        }
+    }
     return state;
 }
