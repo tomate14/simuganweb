@@ -19,11 +19,12 @@ export function modificarVariaciones(e) {
 
 
 
-export function InputVariacionValor(id, pagina, valor) {    
+export function InputVariacionValor(id, pagina, valor,seleccion) {    
     return {
         type: "VALORVARIACION_RECURSOSFORRAJEROS",
         posicion:id,
         pagina:pagina,
+        dropdownSeleccion:seleccion,
         valor:parseInt(valor)
     }    
     
@@ -46,4 +47,11 @@ export function permitirVariaciones(e) {
     }
 }
 
-
+export function modificarDropdownSelected(e){
+    console.log("modificarDropdownSelected-forrajero");
+    let valor = parseInt(e.target.id);
+    return{
+        type: "MODIFYDROPDOWN_RECURSOSFORRAJEROS",
+        payload: valor
+    }
+}
