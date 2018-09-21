@@ -29,7 +29,8 @@ class InputsVariation extends Component{
 		let valor = parseInt(e.target.value);
 		let id = parseInt(e.target.id);
 		let pagina = this.props.state.paginaActual - 1;
-		this.props.funcModiValorInput(id,pagina,valor);
+		let seleccion = this.props.state.dropDownSelected;
+		this.props.funcModiValorInput(id,pagina,valor,seleccion);
 		
 	}
 	/*
@@ -51,6 +52,7 @@ class InputsVariation extends Component{
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
 		let paginaActual = this.props.state.paginaActual;
+		let dropdownSelected = this.props.state.dropDownSelected;
 		return(
 		<div className="conteiner-fluid">
 			<Row>				
@@ -66,7 +68,7 @@ class InputsVariation extends Component{
 				              className="InputVariables"
 				              id = {key}
 				              key = {key}
-				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[paginaActual-1][key].valor}
+				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[dropdownSelected][paginaActual-1][key].valor}
 				              onChange={this.handleInputValueChange}
 				            />
 				        ))}

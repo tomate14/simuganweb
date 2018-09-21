@@ -1,3 +1,7 @@
 .RowVariaciones{
 	padding-top:10px;
 }
+
+button.dropdown-toggle.btn.btn-dark {
+	padding-top: 1px;
+}
