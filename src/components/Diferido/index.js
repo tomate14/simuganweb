@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import SingleInput from '../Generales/SingleInput'
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
@@ -24,7 +26,7 @@ class Diferido extends Component {
 	}
 		
     this.toggle = this.toggle.bind(this);
-    this.generarInputs = this.generarInputs.bind(this);
+    //this.generarInputs = this.generarInputs.bind(this);
     //this.setDropdownSelected = this.setDropdownSelected.bind(this);
   } 
 
@@ -33,14 +35,6 @@ class Diferido extends Component {
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
-
-  generarInputs(parametro,funcOnChange){
-  	var rows = [];
-  	for(var i = 0; i< this.props.diferidos.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
-		rows.push(<input onChange = {funcOnChange} value = {parametro[this.props.diferidos.dropdownSelected][i]} id = {i} type="number"/>); 
-	}
-	return rows;
-  } 
 
   generarPasturas(){
   	var pasturas = ["Sorgo","pastura 2", "pastura 3"];
@@ -86,17 +80,17 @@ class Diferido extends Component {
 				   </Col>
 				   <Col>
 				   		<p>Digestibilidad del Diferido[50-90]% </p>
-				   		{this.generarInputs(this.props.diferidos.digestibilidadVariaciones,this.props.modificarInputValueDigestibilidad).map(function(object, i){
-               return <p key={i}> {object} </p> ;}
-               				)
-				   		}
+				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
+				   					 arrayVariaciones = {this.props.diferidos.digestibilidadVariaciones}
+				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
+				   					 seccionElegida = {this.props.diferidos.dropdownSelected}/>
 				   </Col>
 				   <Col>
 				   		<p>Rinde del Diferido [15-200] /ha</p>
-				   		{this.generarInputs(this.props.diferidos.rindeVariaciones,this.props.modificarInputValueRinde).map(function(object, i){
-               return <p  key={i}> {object} </p> ;}
-               				)
-				   		}
+				   		<SingleInput funcModificar = {this.props.modificarInputValueRinde}
+				   					 arrayVariaciones = {this.props.diferidos.rindeVariaciones}
+				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
+				   					 seccionElegida = {this.props.diferidos.dropdownSelected}/>
 				   </Col>
 			   </Row>
 			  </Container>

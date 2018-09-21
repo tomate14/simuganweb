@@ -1,17 +1,17 @@
 const initialState = {
 	permitido : false,
-	cantVariaciones : 1,
+	cantVariaciones : 0,
 	dropdownSelected : 0,
-	digestibilidadVariaciones : iniciarArregloState(),
-	rindeVariaciones : iniciarArregloState(),
-	cantidadPasturas : 3
+	cantidadPasturas : 3,
+	digestibilidadVariaciones : [],
+	rindeVariaciones : [],
 }
 
-function iniciarArregloState(pasturas=1,valor=1){
+function iniciarArregloState(state=initialState,valor=1){
     
     let arrayGeneral = [];
     if(valor > 0){
-        for(let index = 0; index< pasturas; index++){
+        for(let index = 0; index< state.cantidadPasturas; index++){
             let arrayAux = [];
             for(let i = 0; i < valor; i++){
                 let value  = 0;
@@ -36,8 +36,8 @@ export default function(state=initialState,action){
 			let valor = parseInt(action.payload);
 			return{...state,
 					cantVariaciones : valor,
-					digestibilidadVariaciones : iniciarArregloState(state.cantidadPasturas,valor),
-					rindeVariaciones : iniciarArregloState(state.cantidadPasturas,valor)
+					digestibilidadVariaciones : iniciarArregloState(state,valor),
+					rindeVariaciones : iniciarArregloState(state,valor)
 			}
 		break;
 		case "MODIFYDROPDOWN_DIFERIDO":
