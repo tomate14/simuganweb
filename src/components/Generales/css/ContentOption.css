@@ -1,17 +1,14 @@
-input .checkbox, h5, button{
+/*input .checkbox, h5, button{
 	display: inline-block;
 }
 
 input#cantVariation{
 	width: 50px ;
 }
+
 input.checkbox{
-	width: 20px;
 	height: 20px;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top:auto;
-	margin-bottom: auto;
+	width: 20px;
 }
 
 .RowCheckbox, .RowCantidad{
@@ -21,4 +18,4 @@ input.checkbox{
 h5.textLabel{
 	margin-top:auto;
 	margin-bottom: auto;
-}
+}*/

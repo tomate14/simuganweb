@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row, Col,Dropdown, DropdownToggle,DropdownItem,DropdownMenu } from 'reactstrap';
+import {Row, Col,Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container, FormGroup, Form, Input, Label } from 'reactstrap';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -24,16 +24,9 @@ class RecursosForrajeros extends Component {
 	    super(props);
 
 	} 
-	
-	generarTabla(recursos){
-		if(recursos.permitido){
-			if(recursos.cantVariaciones > 0){
-				return (
-					<div>
-						<Row>
-							<br/>
-						</Row>
-						<Row className="RowDropdown">
+
+	/*
+	<Row xs={12} className="RowDropdown">
 							<Col xs={4}>
 								<Picker opciones         = {recursos.nombrePasturas}
 								        dropDownSelected = {recursos.dropDownSelected}
@@ -43,9 +36,33 @@ class RecursosForrajeros extends Component {
 						    <Col xs={5}>
 						    	<h5><b>Selección:</b> {recursos.nombrePasturas[recursos.dropDownSelected]}</h5>
 						    </Col>
-						    <Col xs={4}>
+						    <Col xs={3}>
 						    </Col>
 						</Row>
+	*/
+	
+	generarTabla(recursos){
+		if(recursos.permitido){
+			if(recursos.cantVariaciones > 0){
+				return (
+					<Container>
+						<Row>
+							<br/>
+						</Row>
+							<Form>
+						        <FormGroup row>
+						        	
+						          	<Col sm="4">
+							          	<Picker 
+											id="Pasturas"
+							                opciones         = {recursos.nombrePasturas}
+									        dropDownSelected = {recursos.dropDownSelected}
+									        funcSelected     = {this.props.modificarDropdownSelected}/>
+									</Col>
+									<Label for="Pasturas" sm={4}> Selección: {recursos.nombrePasturas[recursos.dropDownSelected]} </Label>
+						          
+						        </FormGroup>
+						    </Form>
 						<Row className="RowVariaciones">
 			                <Col>
 			                    <MonthTable state = {recursos.valoresMeses}/>
@@ -57,7 +74,7 @@ class RecursosForrajeros extends Component {
 
 			                </Col>
 			            </Row>
-			        </div>
+			        </Container>
 				);	
 			}
 		}		

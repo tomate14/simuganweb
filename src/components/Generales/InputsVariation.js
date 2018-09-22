@@ -55,11 +55,11 @@ class InputsVariation extends Component{
 		let dropdownSelected = this.props.state.dropDownSelected;
 		return(
 		<div className="conteiner-fluid">
-			<Row>				
-				<Col  className="divFlechas">					
+			<Row xs={12}>				
+				<Col xs={2} className="divFlechas">					
 					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
 				</Col>
-				<Col className="divInputs">
+				<Col xs={4} className="divInputs">
 					<p className="labelPagina">Pagina:{this.props.state.paginaActual}</p>
 					<div className="divInputsVariation">
 						{inputs.map((input, key) => (
@@ -74,7 +74,7 @@ class InputsVariation extends Component{
 				        ))}
 					</div>
 				</Col>
-				<Col className="divFlechas">
+				<Col xs={2}className="divFlechas">
 					<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
 				</Col>
 				<Col >
