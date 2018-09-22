@@ -9,6 +9,7 @@ import {permitirVariaciones,modificarVariaciones,modificarPagina,InputVariacionV
 import MonthTable from '../Generales/MonthTable';
 import ContentOption from '../Generales/ContentOption';
 import InputsVariation from '../Generales/InputsVariation';
+import Picker from '../Generales/Picker';
 
 
 
@@ -21,23 +22,9 @@ import './css/index.css';
 class RecursosForrajeros extends Component {
 	constructor(props) {
 	    super(props);
-	    this.state = {
-				dropdownOpen: false
-		}			
-	    this.toggle = this.toggle.bind(this);
-	} 
-	toggle() {
-		this.setState(prevState => ({
-		  dropdownOpen: !prevState.dropdownOpen
-		}));
-	}	
-	setDropdownSelected(recursos){
-	  	//este arreglo se debe cargar desde el xml parseado
-	  	  	
-	 	let aux =recursos.nombrePasturas[recursos.dropDownSelected];
-	  	return aux;
-	}
 
+	} 
+	
 	generarTabla(recursos){
 		if(recursos.permitido){
 			if(recursos.cantVariaciones > 0){
@@ -48,17 +35,10 @@ class RecursosForrajeros extends Component {
 						</Row>
 						<Row className="RowDropdown">
 							<Col xs={4}>
-								<Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-							        <DropdownToggle color = "dark" caret>
-							        	 {this.setDropdownSelected(recursos)}
-							        </DropdownToggle>
-							        <DropdownMenu>
-							          	<DropdownItem onClick={this.props.modificarDropdownSelected} header>Pasturas</DropdownItem>
-							          	{recursos.nombrePasturas.map((object,i)=>{
-							          		return <DropdownItem onClick = {this.props.modificarDropdownSelected} key = {i} id = {i} >{object}</DropdownItem>;
-							          	})}
-							        </DropdownMenu>
-						      	</Dropdown>
+								<Picker nombres          = {recursos.nombrePasturas}
+								        dropDownSelected = {recursos.dropDownSelected}
+								        funcSelected     = {this.props.modificarDropdownSelected}/>
+								
 						    </Col>
 						    <Col xs={5}>
 						    	<h5><b>Selección:</b> {recursos.nombrePasturas[recursos.dropDownSelected]}</h5>
