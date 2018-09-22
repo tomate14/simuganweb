@@ -1,6 +1,6 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
-import {  Row, Col } from 'reactstrap'
+import {  Row, Col,InputGroup, InputGroupAddon, InputGroupText, Input,FormGroup,Label, Form,Container } from 'reactstrap'
 
 //Estilos del componente
 import './css/ContentOption.css';
@@ -13,27 +13,36 @@ class ContentOption extends Component {
 		}else
 			return numero
 	}
+
 	render(){
 		
-		return (	<div className="container-fluid">
-						<Row className="RowCheckbox">
-							<Col>
-			                  	<input type="checkbox" className="checkbox" 
-			                  	       onClick={this.props.funcPermitir} 
-			                  	       defaultChecked = {this.props.state.permitido} />		
-			                  	<h5 className="textLabel"> Permitir el uso de este parametro para variar</h5>
-			                </Col>
-						</Row>
-						<Row className="RowCantidad">
-							<Col>								
-							    <input type="number" className="checkbox" id="cantVariation" 
-							           onChange={this.props.funcVariaciones}
-							           value={ this.ponerValor(this.props.state.cantVariaciones)} 
-							           />							    
-								<h5 className="textLabel"> Cantidad de variaciones a realizar</h5>
-							</Col>
-						</Row>
-					</div>
+		return (	<Container>
+						 <Form >
+					        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+					        	<Input type="checkbox" 
+					        			   id="cantVariaciones"
+							        	   onClick={this.props.funcPermitir} 
+			                  	           defaultChecked = {this.props.state.permitido}/>
+					            <Label for="cantVariaciones" >Generar Variaciones</Label>
+					          
+					        </FormGroup>
+					        <FormGroup >
+					        	<Row>
+					        		<Col sm={4}>
+					        		</Col>
+					          		<Col sm={4}>
+							          	<Input   placeholder="Cantidad Variaciones"
+									           id="cantVariation" 
+									           type="number"
+									           onChange={this.props.funcVariaciones}
+									           value={ this.ponerValor(this.props.state.cantVariaciones)}  />
+									</Col>
+									<Col sm={4}>
+					        		</Col>
+								</Row>
+					        </FormGroup>
+					      </Form>				
+					</Container>
 			);
 	}
 
