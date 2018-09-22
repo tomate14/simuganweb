@@ -1,6 +1,72 @@
 import Simulacion from '../data/simulacioninicial.js';
+/*
+  Obtengo el mes en base al numero de mes, para buscarlo en Simulacion 
+  y obtener el valor de dicho mes
+*/
+function getMonth(numeroMes){
+  switch(numeroMes){
+    case 0:
+        return "January";
+        break;
+    case 1:
+        return "February";
+        break;
+    case 2:
+        return "March";
+        break;
+    case 3:
+        return "April";
+        break;
+    case 4:
+        return "May";
+        break;
+    case 5:
+        return "June";
+        break;
+    case 6:
+        return "July";
+        break;
+    case 7:
+        return "August";
+        break;
+    case 8:
+        return "September";
+        break;
+    case 9:
+        return "October";
+        break;
+    case 10:
+        return "November";
+        break;
+    case 11:
+        return "December";
+        break;
+  }
+}
+/*
+  Genero los valores de la pastura seleccionada para mostrarlo en la tabla de meses(MonthTable)
+*/
+function generarValoresPasturaSeleccionada(dropdownSelected){
+    let arrayValores = [];    
+    for(let i = 0; i<12;i++){
+      let ObjetoMes = {};
+      let month = getMonth(i);
+      ObjetoMes.month = month;
+      let valorMes = parseInt(Simulacion.escenario.pastureType[0].pasture[dropdownSelected].pastureAccumRateMean[0].$[month]);
+      ObjetoMes.value = valorMes;
+      arrayValores.push(ObjetoMes);
+    }
+    return arrayValores;
+}
 
-function iniciarArregloState(valor = 1,cantInputs=12){
+/*
+  Controla y genera la cantidad de variaciones por pastura.
+  -- Si el usuario ingresa una cantidad menor a la ingresada previamente, se eliminan las
+     variaciones que sobren
+  -- Si el usuario ingresa una cantidad mayor a la ingresada previamente, se genera el arreglo nuevamente
+     y se eliminan todos los valores que se hayan ingresado
+*/
+function iniciarArregloState(state,valor = 1,cantInputs=12){
     
     let arrayGeneral = [];
     if(valor > 0){
@@ -10,7 +76,13 @@ function iniciarArregloState(valor = 1,cantInputs=12){
                 let nombre = "mes"+i.toString();
                 let value  = 0;
                 let ObjetoMes = {}
-                ObjetoMes.valor = value;
+                if(state==null){
+                  ObjetoMes.valor = value;  
+                }else{
+                  let month = getMonth(i);
+                  ObjetoMes.valor = parseInt(Simulacion.escenario.pastureType[0].pasture[state.dropDownSelected].pastureAccumRateMean[0].$[month]); 
+                }               
+                
                 ObjetoMes.mes   = nombre;
                 arrayAux.push(ObjetoMes);
             }  
@@ -21,6 +93,32 @@ function iniciarArregloState(valor = 1,cantInputs=12){
     return arrayGeneral;
 };
 
+function ModificarArreglo(state,valor){
+  let arrayAux = [];
+  if(valor <= state.cantVariaciones){
+    /*
+      Si la cantidad es menor a la que tengo, elimino las variaciones sobrantes
+      Para cada una de las pasturas, saco las variaciones sobrantes
+    */
+     for(let i = 0; i < state.pagvariaciones.length;i++){
+        for(let j=valor; j<state.pagvariaciones[i].length;j){
+            state.pagvariaciones[i].splice(j,1);
+        }
+     }
+  }else{
+    /*
+      Si la cantidad es mayor a la que tengo, se reinician todos los valores
+      Por cada pastura que tengo, genero las variaciones que requiera el usuario
+    */
+    for(let i = 0; i < state.nombrePasturas.length;i++){
+        let array = [];
+        state.pagvariaciones[i] = iniciarArregloState(state,valor);        
+    }
+    
+  }
+  return state.pagvariaciones;
+
+}
 function getEstado(state=null,valor=1){
   let arrayPasturas = [];
   if(state==null){
@@ -33,10 +131,15 @@ function getEstado(state=null,valor=1){
       estado.dropDownSelected=0;
       estado.pagvariaciones = [];
       estado.nombrePasturas = [];
+      /* 
+        Valores de la pastura seleccionada del dropDown para cargar la tabla de meses
+      */
+
+      estado.valoresMeses = generarValoresPasturaSeleccionada(estado.dropDownSelected);
       let cantPasturas = pasturas.length;      
       let arrayNombrePastura = [];
       for(let i = 0; i<cantPasturas; i++){
-          arrayPasturas.push(iniciarArregloState());
+          arrayPasturas.push(iniciarArregloState(state));
           let nombrePastura = pasturas[i].$.desc + " - "+pasturas[i].$.name
           arrayNombrePastura.push(nombrePastura);
       }
@@ -47,10 +150,11 @@ function getEstado(state=null,valor=1){
       /*
         Si tengo un estado, solo genero el vector nuevamente
       */
-      for(let i = 0; i<state.nombrePasturas.length; i++){
+      /*for(let i = 0; i<state.nombrePasturas.length; i++){
           arrayPasturas.push(iniciarArregloState(valor));
       }
-      return arrayPasturas;
+      return arrayPasturas;*/
+      return ModificarArreglo(state,valor);
   }
 
 }
@@ -126,7 +230,9 @@ export default function (state=getEstado(), action) {
         case("MODIFYDROPDOWN_RECURSOSFORRAJEROS"):
           return{
                 ...state,
-                dropDownSelected : action.payload
+                dropDownSelected : action.payload,
+                valoresMeses : generarValoresPasturaSeleccionada(action.payload),
+                pagvariaciones : getEstado(state,state.cantVariaciones)
           }
           break;
     }
