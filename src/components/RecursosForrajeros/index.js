@@ -35,7 +35,7 @@ class RecursosForrajeros extends Component {
 						</Row>
 						<Row className="RowDropdown">
 							<Col xs={4}>
-								<Picker nombres          = {recursos.nombrePasturas}
+								<Picker opciones         = {recursos.nombrePasturas}
 								        dropDownSelected = {recursos.dropDownSelected}
 								        funcSelected     = {this.props.modificarDropdownSelected}/>
 								

@@ -19,7 +19,7 @@ class Picker extends Component {
 	setDropdownSelected(){
 	  	//este arreglo se debe cargar desde el xml parseado
 	  	  	
-	 	let aux =this.props.nombres[this.props.dropDownSelected];
+	 	let aux =this.props.opciones[this.props.dropDownSelected];
 	  	return aux;
 	}
 
@@ -32,7 +32,7 @@ class Picker extends Component {
 		        <DropdownMenu>
 		          	<DropdownItem onClick={this.props.funcSelected} header>Pasturas</DropdownItem>
 		          	{
-		          		this.props.nombres.map((object,i)=>{
+		          		this.props.opciones.map((object,i)=>{
 		          												return <DropdownItem 
 		          												                onClick = {this.props.funcSelected} 
 		          												                key = {i} 
