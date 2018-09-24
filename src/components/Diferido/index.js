@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 
-import SingleInput from '../Generales/SingleInput'
+//componentes genericos
+import SingleInput from '../Generales/SingleInput';
+import Picker from '../Generales/Picker';
 
+//redux 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
-import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row} from 'reactstrap';
 import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,modificarInputValueDigestibilidad,modificarInputValueRinde} from '../../actions/action-diferidos.js';
+
+
+//bootstrap
+import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// components 
 
 import ContentOption from '../Generales/ContentOption'; 
 
@@ -63,21 +67,40 @@ class Diferido extends Component {
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row> 
+				
+					<Form>
+						        <FormGroup row>
+						        	
+						          	<Col sm="4">
+							          	<Picker 
+											id="Pasturas"
+							                opciones         = {this.props.diferidos.nombrePasturas}
+									        dropDownSelected = {this.props.diferidos.dropdownSelected}
+									        funcSelected     = {this.props.modificarDropdownSelected}/>
+									</Col>
+									<Label for="Pasturas" sm={4}> Selección: {this.props.diferidos.nombrePasturas[this.props.diferidos.dropdownSelected]} </Label>
+						        </FormGroup>
+						    </Form>
 				<Row>
-					<Col> 
-					    	<Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-						        <DropdownToggle color = "success" caret>
-						        	 {this.setDropdownSelected()}
-						        </DropdownToggle>
-						        <DropdownMenu>
-						          	<DropdownItem onClick={this.props.modificarDropdownSelected} header>Pasturas</DropdownItem>
-						          	{this.generarPasturas().map((object,i)=>{
-						          		return <DropdownItem onClick = {this.props.modificarDropdownSelected} key = {i} id = {i} >{object}</DropdownItem>;
-						          	})}
-						        </DropdownMenu>
-					      	</Dropdown>
-					      	
-				   </Col>
+					 <Table>
+					 	<thead>
+				          <tr>
+				            <th colSpan = "2" scope = "colgroup">Valores de Simulación</th>
+				          </tr>
+				          <tr>
+				            <th>Digestibilidad</th>
+				            <th>Rendimiento</th>
+				          </tr>
+				        </thead>
+				        <tbody>
+				          <tr>
+				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}</td>
+				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}</td>
+				          </tr>
+				        </tbody>
+				      </Table>
+				</Row>
+				<Row>
 				   <Col>
 				   		<p>Digestibilidad del Diferido[50-90]% </p>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}

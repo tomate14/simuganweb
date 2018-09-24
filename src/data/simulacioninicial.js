@@ -65,7 +65,7 @@ let xml =' <escenario id="temp" userId="0" name="Vaq TREINTA Y SEIS" private="fa
 ' </insumos> '+
 ' <labores/> '+
 ' </stockPilled> '+
-' <stockPilled stockPilledBProtein="10" stockPilledDRProtein="8" stockPilledDigest="56" enableDay="1" enableMonth="3" yield="75" name="Sorgo2" rot_id="11" id="1"> '+
+' <stockPilled stockPilledBProtein="10" stockPilledDRProtein="8" stockPilledDigest="57" enableDay="1" enableMonth="3" yield="76" name="Sorgo2" rot_id="11" id="1"> '+
 ' <insumos> '+
 ' <insumo repit="false" amount="1" days_after_seed="60" activity="110" type="semilla" id="2"/> '+
 ' </insumos> '+
