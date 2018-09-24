@@ -27,19 +27,18 @@ class Content extends Component {
     const { body } =  this.props;
 
     return (
-                    <div className="conteiner-fluid">
+                    <div className="container-fluid">
                         <Row sm={12}>
-                            <div className="col-sm-4 menu">
-                                 {
+                            <Col sm={4} className="menu">
+                              {
                                   opcionesMenu && opcionesMenu.map(
                                     (item, key) => <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>
                                   )
                                 }
-                            </div>
-                            <div className="col-sm-8">
-                                  { body }
-
-                            </div>
+                            </Col>
+                            <Col sm = {8}>
+                                { body }
+                            </Col>
                         </Row>
                     </div>
 

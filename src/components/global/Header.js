@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Row, Col } from 'reactstrap'
+import { Row, Col,Container } from 'reactstrap'
 
 // Assets
 import logo from './images/logo.svg';
@@ -18,18 +18,20 @@ class Header extends Component {
   render() {
     //const { title, items } = this.props;
     return (
-            <div className="row">
-                <div className="col-sm-2">
+        <Container>
+            <Row sm={12}>
+                <Col sm={2}>
                     <img id="Unicen" src={unicen}/>
-                </div>
-                <div className="col-sm-8">
+                </Col>
+                <Col sm={8}>
                     <h1>Simulador Ganadero</h1>     
-                    <h2>Configuracion de simulaciones conjuntas</h2></div>
-                <div className="col-sm-2">
+                    <h2>Configuracion de simulaciones conjuntas</h2>
+                </Col>
+                <Col sm={2}>
                     <img id="Logo" src={logo}/>
-                </div>
-            </div>
-         
+                </Col>
+            </Row>
+        </Container>
     );
   }
 }
