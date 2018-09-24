@@ -5,3 +5,9 @@
 button.dropdown-toggle.btn.btn-dark {
 	padding-top: 1px;
 }
+
+#contentoption{
+    border: solid 1px;
+    border-color: gainsboro;
+    border-radius: 25px;
+}
