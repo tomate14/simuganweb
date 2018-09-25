@@ -52,7 +52,7 @@ class RecursosForrajeros extends Component {
 							<Form>
 						        <FormGroup row>
 						        	
-						          	<Col sm="4">
+						          	<Col sm={4}>
 							          	<Picker 
 											id="Pasturas"
 							                opciones         = {recursos.nombrePasturas}

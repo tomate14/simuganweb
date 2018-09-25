@@ -32,13 +32,21 @@ class Potreros extends Component {
 				</Row> 
 				
 			    <Row>
-					 <Tabla 
+			    	<Col sm={4}>
+				   		
+				    </Col>
+				    <Col sm={4}>
+				   		<Tabla 
 					 			texto1 = {"Digestibilidad"}
 					 			texto2 = {"Rendimiento"}					 			
 					 			valor1 = {this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].digestValue}
 					 			valor2 = {this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].yieldValue}
-					 />
+					 />	
+				    </Col>
 					 
+					 <Col sm={4}>
+				   		
+				    </Col>
 				</Row>
 
 				<Form>
@@ -57,21 +65,20 @@ class Potreros extends Component {
 			    </Form>
 			    
 				<Row>
-					
-				   <Col>
+					<Col sm={4}>
+				   		
+				    </Col>
+				    <Col sm={4}>
 				   		<p>Digestibilidad del Diferido[50-90]% </p>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 				   					 arrayVariaciones = {this.props.potreros.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.potreros.cantVariaciones} 
 				   					 seccionElegida = {this.props.potreros.dropDownSelected}/>
-				   </Col>
-				   <Col>
-				   		<p>Rinde del Diferido [15-200] /ha</p>
-				   		<SingleInput funcModificar = {this.props.modificarInputValueRinde}
-				   					 arrayVariaciones = {this.props.potreros.rindeVariaciones}
-				   					 cantVariaciones = {this.props.potreros.cantVariaciones} 
-				   					 seccionElegida = {this.props.potreros.dropDownSelected}/>
-				   </Col>
+				    </Col>
+				    <Col sm={4}>
+				   		
+				    </Col>
+
 			   </Row>
 			  </Container>
 		);
