@@ -5,30 +5,27 @@ const initialState = {
 	cantVariaciones : 0,
 	dropDownSelected : 0,
 	digestibilidadVariaciones : [],
-	rindeVariaciones : [],
+	//rindeVariaciones : [],
 	nombrePotreros : iniciarPasturas(),
 	valoresSimulacion : iniciarValoresSimulacion()
 }
 
 function iniciarPasturas(){
-	let pasturas = ["Vaca", "Caballo", "Cerdo"];//Simulacion.escenario.stockPilledType[0].stockPilled;
-	let arrayNombrePastura = [];
-	for(let i = 0 ; i< pasturas.length; i++){
-		let nombre = pasturas[i];//.$.name;
-          arrayNombrePastura.push(nombre);
+	let pasturas = [];
+	//let aux =  Simulacion.escenario.paddocks[0];
+	for(let i = 0; i < Simulacion.escenario.paddocks[0].paddock.length; i++){
+		pasturas.push(Simulacion.escenario.paddocks[0].paddock[i].$.name);
 	}
-	return arrayNombrePastura;
+	return pasturas;
 }
 
 function iniciarValoresSimulacion(){
-	let pasturas = Simulacion.escenario.paddocks[0].paddock;
+	//let pasturas = Simulacion.escenario.paddocks[0].paddock[i];
 	let arrayValoresPastura = [];
-	for(let i = 0 ; i< pasturas.length; i++){
-		let digestValue = 20//pasturas[i].$.stockPilledDigest;
-		let yieldValue = 15//pasturas[i].$.yield;
+	for(let i = 0 ; i < Simulacion.escenario.paddocks[0].paddock.length; i++){
+		let digestValue = parseInt(Simulacion.escenario.paddocks[0].paddock[i].$.paddockHA);
 		let objectValue = {
-			digestValue : digestValue,
-			yieldValue : yieldValue
+			digestValue : digestValue
 			}
           arrayValoresPastura.push(objectValue);
 		}
@@ -102,8 +99,8 @@ export default function(state=initialState,action){
            }
 			return{...state,
 					cantVariaciones : valor,
-					digestibilidadVariaciones : ModificarArreglo(state,valor,state.digestibilidadVariaciones),
-					rindeVariaciones : ModificarArreglo(state,valor,state.rindeVariaciones)
+					digestibilidadVariaciones : ModificarArreglo(state,valor,state.digestibilidadVariaciones)/*,
+					rindeVariaciones : ModificarArreglo(state,valor,state.rindeVariaciones)*/
 			}
 		break;
 		break;
@@ -130,7 +127,7 @@ export default function(state=initialState,action){
 	               	)
 				}
 			break;
-		case "UPDATE-VALUE-RINDE_POTREROS":
+		/*case "UPDATE-VALUE-RINDE_POTREROS":
 			valor = parseInt(action.value);
              if (isNaN(valor)){
                  valor = 0;
@@ -147,7 +144,7 @@ export default function(state=initialState,action){
                : content
                )
 			}
-		break;
+		break;*/
 	}
 	return state;
 } 
