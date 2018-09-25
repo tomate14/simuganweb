@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 //componentes genericos
 import SingleInput from '../Generales/SingleInput';
 import Picker from '../Generales/Picker';
+import Tabla from '../Generales/Tabla';
 
 //redux 
 import {bindActionCreators} from 'redux';
@@ -57,7 +58,25 @@ class Diferido extends Component {
   	return aux;
   }
   
-
+  	/*
+		<Table>
+					 	<thead>
+				          <tr>
+				            <th colSpan = "2" scope = "colgroup">Valores de Simulación</th>
+				          </tr>
+				          <tr>
+				            <th>Digestibilidad</th>
+				            <th>Rendimiento</th>
+				          </tr>
+				        </thead>
+				        <tbody>
+				          <tr>
+				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}</td>
+				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}</td>
+				          </tr>
+				        </tbody>
+				      </Table>
+  	*/
 	render(){
 		const diferidos = this.props.diferidos;
 		return(
@@ -82,23 +101,13 @@ class Diferido extends Component {
 						        </FormGroup>
 						    </Form>
 				<Row>
-					 <Table>
-					 	<thead>
-				          <tr>
-				            <th colSpan = "2" scope = "colgroup">Valores de Simulación</th>
-				          </tr>
-				          <tr>
-				            <th>Digestibilidad</th>
-				            <th>Rendimiento</th>
-				          </tr>
-				        </thead>
-				        <tbody>
-				          <tr>
-				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}</td>
-				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}</td>
-				          </tr>
-				        </tbody>
-				      </Table>
+					 <Tabla 
+					 			texto1 = {"Digestibilidad"}
+					 			texto2 = {"Rendimiento"}					 			
+					 			valor1 = {this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}
+					 			valor2 = {this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}
+					 />
+					 
 				</Row>
 				<Row>
 				   <Col>
