@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SingleInput from '../Generales/SingleInput'
 import ContentOption from '../Generales/ContentOption'
 import Picker from '../Generales/Picker'
+import Tabla from '../Generales/Tabla'
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -29,6 +30,17 @@ class Potreros extends Component {
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row> 
+				
+			    <Row>
+					 <Tabla 
+					 			texto1 = {"Digestibilidad"}
+					 			texto2 = {"Rendimiento"}					 			
+					 			valor1 = {this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].digestValue}
+					 			valor2 = {this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].yieldValue}
+					 />
+					 
+				</Row>
+
 				<Form>
 			        <FormGroup row>
 			        	
@@ -43,6 +55,7 @@ class Potreros extends Component {
 			          
 			        </FormGroup>
 			    </Form>
+			    
 				<Row>
 					
 				   <Col>
