@@ -21,7 +21,7 @@ function iniciarPasturas(){
 }
 
 function iniciarValoresSimulacion(){
-	let pasturas = ["Vaca", "Caballo", "Cerdo"];//Simulacion.escenario.stockPilledType[0].stockPilled;
+	let pasturas = Simulacion.escenario.paddocks[0].paddock;
 	let arrayValoresPastura = [];
 	for(let i = 0 ; i< pasturas.length; i++){
 		let digestValue = 20//pasturas[i].$.stockPilledDigest;
