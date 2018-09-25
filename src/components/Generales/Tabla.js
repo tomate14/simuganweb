@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import {Table} from 'reactstrap';
 
 class Tabla extends Component{
-
-		render(){
-			return(
+		generarTabla(){
+			if(this.props.valor2 != null){
+				return (
 					<Table>
 						 <thead>
 			          		<tr>
@@ -23,6 +23,31 @@ class Tabla extends Component{
 			          		</tr>
 		        		</tbody>
 					</Table>	
+				);
+			}else {
+				return (
+					<Table>
+							 <thead>
+				          		<tr>
+				            		<th>Valores de Simulación</th>
+				          		</tr>
+				          		<tr>
+				            		<th>{this.props.texto1}</th>
+				          		</tr>
+				       		</thead>
+				       		<tbody>
+				          		<tr>
+				            		<td>{this.props.valor1}</td>
+				          		</tr>
+			        		</tbody>
+						</Table>	
+				);
+			}
+			
+		}
+		render(){
+			return(
+					this.generarTabla()
 				);
 			
 		}

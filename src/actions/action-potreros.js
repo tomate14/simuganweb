@@ -25,7 +25,7 @@ export function modificarDropdownSelected(e){
 export function modificarInputValueDigestibilidad(e){
     console.log("modificarInputValueDigestibilidad-diferido");
     return{
-        type: "UPDATE-VALUE-DIGEST_POTREROS",
+        type: "UPDATE-VALUE-POTREROS",
         index: e.target.id,
         value : e.target.value
     }
