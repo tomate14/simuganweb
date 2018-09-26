@@ -12,6 +12,10 @@ import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, F
 import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,modificarInputValueDigestibilidad,modificarInputValueRinde} from '../../actions/action-potreros.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+//Estilos
+import './css/index.css'; 
+
 class Potreros extends Component {
 
 	constructor(props){
@@ -20,68 +24,80 @@ class Potreros extends Component {
 			cantidadVariaciones : 1
 		}
 	}
+	/*
+	<Row>
+					    	<Col sm={3}>
+						   		
+						    </Col>
+						    <Col sm={6}>
+						   		<Tabla 
+							 			texto1 = {"Dias desde la siempre antes de realizar el primer pastoreo"}							 								 			
+							 			valor1 = {this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].digestValue}
+							 />	
+						    </Col>
+							 
+							 <Col sm={3}>
+						   		
+						    </Col>
+						</Row>
+	*/
+	generarContenido(potreros){
+		if(potreros.permitido){
+			if(potreros.cantVariaciones > 0){
+				return (
+					<div>					
+						<Row>
+							<br/>
+						</Row>
+						<Form>
+					        <FormGroup row>					        	
+					          	<Col sm="4" id="divPicker">
+						          	<Picker 
+										id="Pasturas"
+						                opciones         = {potreros.nombrePotreros}
+								        dropDownSelected = {potreros.dropDownSelected}
+								        funcSelected     = {this.props.modificarDropdownSelected}/>
+								</Col>
+								<Label for="Pasturas" sm={4}> <font size="5"><b>Selección:</b> {potreros.nombrePotreros[potreros.dropDownSelected]}</font> </Label>
+					          
+					        </FormGroup>
+					    </Form>
+					    
+						<Row>
+						    <Col sm={12}>
+						   		<h5>Dias desde la siembra antes de realizar el primer pastoreo[60-100] </h5>
+						   		<h5><b>Carga simulacin inicial: [{this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].digestValue}]</b></h5>
+						   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
+						   					 arrayVariaciones = {this.props.potreros.digestibilidadVariaciones}
+						   					 cantVariaciones = {this.props.potreros.cantVariaciones} 
+						   					 seccionElegida = {this.props.potreros.dropDownSelected}/>
+						    </Col>
+						    
 
+					   </Row>
+					</div>
+			);
+			}
+		}
+		
+	}
 	render(){
 		const potreros = this.props.potreros;
+	
 		return(
+
 			<Container>
-				<Row>
+				<Row id="contentoption">
 					<Col><ContentOption state = {potreros} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row> 
 				
-			    <Row>
-			    	<Col sm={4}>
-				   		
-				    </Col>
-				    <Col sm={4}>
-				   		<Tabla 
-					 			texto1 = {"Digestibilidad"}
-					 			texto2 = {"Rendimiento"}					 			
-					 			valor1 = {this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].digestValue}
-					 			valor2 = {this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].yieldValue}
-					 />	
-				    </Col>
-					 
-					 <Col sm={4}>
-				   		
-				    </Col>
-				</Row>
-
-				<Form>
-			        <FormGroup row>
-			        	
-			          	<Col sm="4">
-				          	<Picker 
-								id="Pasturas"
-				                opciones         = {potreros.nombrePotreros}
-						        dropDownSelected = {potreros.dropDownSelected}
-						        funcSelected     = {this.props.modificarDropdownSelected}/>
-						</Col>
-						<Label for="Pasturas" sm={4}> Selección: {potreros.nombrePotreros[potreros.dropDownSelected]} </Label>
-			          
-			        </FormGroup>
-			    </Form>
-			    
-				<Row>
-					<Col sm={4}>
-				   		
-				    </Col>
-				    <Col sm={4}>
-				   		<p>Digestibilidad del Diferido[50-90]% </p>
-				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
-				   					 arrayVariaciones = {this.props.potreros.digestibilidadVariaciones}
-				   					 cantVariaciones = {this.props.potreros.cantVariaciones} 
-				   					 seccionElegida = {this.props.potreros.dropDownSelected}/>
-				    </Col>
-				    <Col sm={4}>
-				   		
-				    </Col>
-
-			   </Row>
+			    {this.generarContenido(potreros)}
 			  </Container>
 		);
+		
+		
 	}
 }
 

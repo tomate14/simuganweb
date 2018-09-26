@@ -100,25 +100,21 @@ class Diferido extends Component {
 									<Label for="Pasturas" sm={4}> Selección: {this.props.diferidos.nombrePasturas[this.props.diferidos.dropdownSelected]} </Label>
 						        </FormGroup>
 						    </Form>
-				<Row>
-					 <Tabla 
-					 			texto1 = {"Digestibilidad"}
-					 			texto2 = {"Rendimiento"}					 			
-					 			valor1 = {this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}
-					 			valor2 = {this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}
-					 />
-					 
-				</Row>
+
 				<Row>
 				   <Col>
-				   		<p>Digestibilidad del Diferido[50-90]% </p>
+				   		
+				   		<h5>Digestibilidad del Diferido[50-90]% </h5>
+				   		<h5><b>Carga simulacin inicial: [{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}]</b></h5>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 				   					 arrayVariaciones = {this.props.diferidos.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
 				   					 seccionElegida = {this.props.diferidos.dropdownSelected}/>
 				   </Col>
 				   <Col>
-				   		<p>Rinde del Diferido [15-200] /ha</p>
+				   		
+				   		<h5>Rinde del Diferido [15-200] /ha</h5>
+				   		<h5><b>Carga simulacin inicial: [{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}]</b></h5>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueRinde}
 				   					 arrayVariaciones = {this.props.diferidos.rindeVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 

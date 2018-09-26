@@ -25,21 +25,6 @@ class RecursosForrajeros extends Component {
 
 	} 
 
-	/*
-	<Row xs={12} className="RowDropdown">
-							<Col xs={4}>
-								<Picker opciones         = {recursos.nombrePasturas}
-								        dropDownSelected = {recursos.dropDownSelected}
-								        funcSelected     = {this.props.modificarDropdownSelected}/>
-								
-						    </Col>
-						    <Col xs={5}>
-						    	<h5><b>Selección:</b> {recursos.nombrePasturas[recursos.dropDownSelected]}</h5>
-						    </Col>
-						    <Col xs={3}>
-						    </Col>
-						</Row>
-	*/
 	
 	generarTabla(recursos){
 		if(recursos.permitido){
@@ -52,15 +37,15 @@ class RecursosForrajeros extends Component {
 							<Form>
 						        <FormGroup row>
 						        	
-						          	<Col sm={4}>
+						          	<Col sm={4} id="divPicker">
 							          	<Picker 
 											id="Pasturas"
 							                opciones         = {recursos.nombrePasturas}
 									        dropDownSelected = {recursos.dropDownSelected}
 									        funcSelected     = {this.props.modificarDropdownSelected}/>
 									</Col>
-									<Label for="Pasturas" sm={4}> Selección: {recursos.nombrePasturas[recursos.dropDownSelected]} </Label>
-						          
+									<Label for="Pasturas" sm={6}> <font size="5"><b>Selección: </b> {recursos.nombrePasturas[recursos.dropDownSelected]}</font> </Label>
+						          	
 						        </FormGroup>
 						    </Form>
 						<Row className="RowVariaciones">
