@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 
 
-class SingleInput extends Component {
+class SingleInputArray extends Component {
 
 	constructor(props){
 		super(props);
@@ -21,14 +21,13 @@ class SingleInput extends Component {
 		funcModificar : PropTypes.func.isRequired,
 		arrayVariaciones: PropTypes.array.isRequired,
 		cantVariaciones : PropTypes.number.isRequired,
-		seccionElegida : PropTypes.number.isRequired
 	}
 
 
   	generarInputs(parametro,funcOnChange){
 	  	var rows = [];
 	  	for(var i = 0; i< this.props.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
-			rows.push(<input onChange = {funcOnChange} value = {this.ponerValor(parametro[this.props.seccionElegida][i])} id = {i} type="number"/>); 
+			rows.push(<input onChange = {funcOnChange} value = {this.ponerValor(parametro[i])} id = {i} type="number"/>); 
 		}
 		return rows;
 	} 
@@ -40,4 +39,4 @@ class SingleInput extends Component {
 	}
 }
 
-export default SingleInput;
+export default SingleInputArray;

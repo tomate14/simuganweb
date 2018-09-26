@@ -58,25 +58,6 @@ class Diferido extends Component {
   	return aux;
   }
   
-  	/*
-		<Table>
-					 	<thead>
-				          <tr>
-				            <th colSpan = "2" scope = "colgroup">Valores de Simulación</th>
-				          </tr>
-				          <tr>
-				            <th>Digestibilidad</th>
-				            <th>Rendimiento</th>
-				          </tr>
-				        </thead>
-				        <tbody>
-				          <tr>
-				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}</td>
-				            <td>{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}</td>
-				          </tr>
-				        </tbody>
-				      </Table>
-  	*/
 	render(){
 		const diferidos = this.props.diferidos;
 		return(
