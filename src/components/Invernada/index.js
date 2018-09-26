@@ -1,28 +1,79 @@
 import React, { Component } from 'react';
-import {Container, Col, Row} from 'reactstrap';
 
-//components
-import ContentOption from '../Generales/ContentOption';
+//componentes genericos
+import SingleInput from '../Generales/SingleInput';
+import Picker from '../Generales/Picker';
+import Tabla from '../Generales/Tabla';
+
+//redux 
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,modificarInputValueVacasEngorde,modificarInputValueVaquillona} from '../../actions/action-invernada.js';
+
+
+//bootstrap
+import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import ContentOption from '../Generales/ContentOption'; 
 
 class Invernada extends Component {
 
-	constructor(props){
-		super(props);
-		this.state = {
-			cantidadVariaciones : 1
-		}
+	generarVariaciones(invernada){
+		if(invernada.permitido){
+			if(invernada.cantVariaciones > 0){
+				return(
+					<Row>
+					   <Col>
+					   		
+					   		<h5>Valor peso de venta Vaquillona [150-650] kg</h5>
+					   		<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].vaquillonaValue}]</b></h5>
+					   		<SingleInput funcModificar = {this.props.modificarInputValueVaquillona}
+					   					 arrayVariaciones = {this.props.invernada.VaquillonaVariaciones}
+					   					 cantVariaciones = {this.props.invernada.cantVariaciones} 
+					   					 seccionElegida = {this.props.invernada.dropdownSelected}/>
+					   </Col>
+					   <Col>				   		
+					   		<h5>Valor peso de venta Nobillo[150-650]% </h5>
+					   		<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].nobilloValue}]</b></h5>
+					   		<SingleInput funcModificar = {this.props.modificarInputValueVacasEngorde}
+					   					 arrayVariaciones = {this.props.invernada.nobillosVariaciones}
+					   					 cantVariaciones = {this.props.invernada.cantVariaciones} 
+					   					 seccionElegida = {this.props.invernada.dropdownSelected}/>
+					   </Col>
+				   </Row>
+				);
+			}
+		};
 	}
-
 	render(){
+		const invernada = this.props.invernada;
 		return(
 			<Container>
-			<Row>
-			<Col><ContentOption state = {this.state} /></Col>
-			</Row>
-			<Row><h1>Invernada</h1></Row>
-			 </Container>
+					<Row id="contentoption">
+						<Col><ContentOption state = {invernada} 
+											funcPermitir = {this.props.permitirVariaciones}
+											funcVariaciones = {this.props.modificarVariaciones}/></Col>
+					</Row> 
+					{this.generarVariaciones(invernada)}
+		    </Container>
+
 		);
 	}
 }
 
-export default Invernada;
+function mapStateToProps(state){
+	console.log("mapStateToProps"+state);
+    return {
+        invernada: state.invernada
+    };
+}
+
+function matchDispatchToProps(dispatch){
+	console.log("matchDispatchToProps");
+    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected,modificarInputValueVacasEngorde:modificarInputValueVacasEngorde,modificarInputValueVaquillona : modificarInputValueVaquillona}, dispatch);
+    
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Invernada);
