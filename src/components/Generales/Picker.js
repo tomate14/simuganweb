@@ -26,7 +26,7 @@ class Picker extends Component {
 	render(){
 		return (
 			<Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-		        <DropdownToggle color = "dark" caret>
+		        <DropdownToggle color = "dark" caret className = "btn-block" block={true}>
 		        	 {this.setDropdownSelected()}
 		        </DropdownToggle>
 		        <DropdownMenu>

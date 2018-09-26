@@ -9,7 +9,7 @@ class Tabla extends Component{
 					<Table>
 						 <thead>
 			          		<tr>
-			            		<th colSpan = "2" scope = "colgroup">Valores de Simulación</th>
+			            		<h3 colSpan = "2" scope = "colgroup">Valores de Simulación</h3>
 			          		</tr>
 			          		<tr>
 			            		<th>{this.props.texto1}</th>
@@ -29,7 +29,7 @@ class Tabla extends Component{
 					<Table>
 							 <thead>
 				          		<tr>
-				            		<th>Valores de Simulación</th>
+				            		<h4 colSpan = "2" scope = "colgroup">Valores de Simulación</h4>
 				          		</tr>
 				          		<tr>
 				            		<th>{this.props.texto1}</th>
