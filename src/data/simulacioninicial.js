@@ -327,9 +327,9 @@ let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
         ' < /cash_crop> '+
     ' < /cash_crops> '+
     ' <crop_stubbles> '+
-        ' <crop_stubble id="1" rot_id="6" name="Rastrojo" tipocultivo="Trigo" yield="21" crop_stubbleDigest="70" crop_stubbleDRProtein="8" crop_stubbleBProtein="12" /> '+
-            ' <crop_stubble id="2" rot_id="7" name="Rastrojo" tipocultivo="Soja" yield="20" crop_stubbleDigest="50" crop_stubbleDRProtein="7" crop_stubbleBProtein="11" /> '+
-            ' <crop_stubble id="2" rot_id="8" name="Rastrojo" tipocultivo="Girasol" yield="22" crop_stubbleDigest="60" crop_stubbleDRProtein="9" crop_stubbleBProtein="13" /> '+
+        ' <crop_stubble id="1" rot_id="6" name="Rastrojo 1" tipocultivo="Trigo" yield="21" crop_stubbleDigest="70" crop_stubbleDRProtein="8" crop_stubbleBProtein="12" /> '+
+            ' <crop_stubble id="2" rot_id="7" name="Rastrojo 2" tipocultivo="Soja" yield="20" crop_stubbleDigest="50" crop_stubbleDRProtein="7" crop_stubbleBProtein="11" /> '+
+            ' <crop_stubble id="2" rot_id="8" name="Rastrojo 3" tipocultivo="Girasol" yield="22" crop_stubbleDigest="60" crop_stubbleDRProtein="9" crop_stubbleBProtein="13" /> '+
     ' </crop_stubbles> '+
     ' < pastureType> '+
         ' < pasture taza="normal" pastureDigestStem="75" pastureBProteinDead="3" pastureBProteinLeaf="22" pastureDRProteinStem="17" pastureDRProteinLeaf="20" pastureDRProteinDead="1" pastureBProteinStem="19" pastureDigestLeaf="85" pastureDigestDead="50" desc="pbase" name="Verd inv" rot_id="1" id="2"> '+
