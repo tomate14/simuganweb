@@ -54,7 +54,7 @@ class InputsVariation extends Component{
 		let paginaActual = this.props.state.paginaActual;
 		let dropdownSelected = this.props.state.dropDownSelected;
 		return(
-		<div className="conteiner-fluid">
+		<div className="container-fluid">
 			<Row xs={12}>				
 				<Col xs={2} className="divFlechas">					
 					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
