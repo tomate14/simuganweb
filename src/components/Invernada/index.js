@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 //componentes genericos
 import SingleInput from '../Generales/SingleInput';
+import SingleInputArray from '../Generales/SingleInputArray';
 import Picker from '../Generales/Picker';
 import Tabla from '../Generales/Tabla';
 
@@ -29,18 +30,16 @@ class Invernada extends Component {
 					   		
 					   		<h5>Valor peso de venta Vaquillona [150-650] kg</h5>
 					   		<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].vaquillonaValue}]</b></h5>
-					   		<SingleInput funcModificar = {this.props.modificarInputValueVaquillona}
-					   					 arrayVariaciones = {this.props.invernada.VaquillonaVariaciones}
-					   					 cantVariaciones = {this.props.invernada.cantVariaciones} 
-					   					 seccionElegida = {this.props.invernada.dropdownSelected}/>
+					   		<SingleInputArray funcModificar = {this.props.modificarInputValueVaquillona}
+					   					      arrayVariaciones = {this.props.invernada.VaquillonaVariaciones}
+					   					      cantVariaciones = {this.props.invernada.cantVariaciones}/>
 					   </Col>
 					   <Col>				   		
 					   		<h5>Valor peso de venta Nobillo[150-650]% </h5>
 					   		<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].nobilloValue}]</b></h5>
-					   		<SingleInput funcModificar = {this.props.modificarInputValueVacasEngorde}
-					   					 arrayVariaciones = {this.props.invernada.nobillosVariaciones}
-					   					 cantVariaciones = {this.props.invernada.cantVariaciones} 
-					   					 seccionElegida = {this.props.invernada.dropdownSelected}/>
+					   		<SingleInputArray funcModificar = {this.props.modificarInputValueVacasEngorde}
+					   					      arrayVariaciones = {this.props.invernada.nobillosVariaciones}
+					   					      cantVariaciones = {this.props.invernada.cantVariaciones}/>
 					   </Col>
 				   </Row>
 				);
