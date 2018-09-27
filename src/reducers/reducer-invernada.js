@@ -30,7 +30,7 @@ function iniciarValoresSimulacion(){
 	
 
 
-function ModificarArreglo(state,valor,arreglo){
+function ModificarArreglo(state,valor,arreglo,tipo){
   let arrayAux = [];
   if(valor <= state.cantVariaciones){
     /*
@@ -48,7 +48,7 @@ function ModificarArreglo(state,valor,arreglo){
       Si la cantidad es mayor a la que tengo, se reinician todos los valores
       Por cada pastura que tengo, genero las variaciones que requiera el usuario
     */
-    arrayAux = iniciarArregloState(state,valor);
+    arrayAux = iniciarArregloState(state,valor,tipo);
     for(let i = 0; i < arreglo.length;i++){
         for(let j=0; j<arreglo[i].length;j++){
             arrayAux[i][j]= arreglo[i][j];
@@ -59,15 +59,25 @@ function ModificarArreglo(state,valor,arreglo){
   }
   
 
-function iniciarArregloState(state=initialState,valor=1){
+function iniciarArregloState(state=initialState,valor=1,tipo=""){
     
     let arrayGeneral = [];
+    let value  = 0;
+    switch(tipo){
+      case "NOBILLO":
+        value =  state.valoresSimulacion[0].nobilloValue
+        break;
+      case "VAQUILLONA":
+        value = state.valoresSimulacion[0].vaquillonaValue
+        break;
+    }
+
     if(valor > 0){
         for(let index = 0; index< state.nombrePasturas.length; index++){
             let arrayAux = [];
-            for(let i = 0; i < valor; i++){
-                let value  = 0;
-                arrayAux.push(value);
+            for(let i = 0; i < valor; i++){     
+
+                arrayAux.push(parseInt(value));
             }  
             arrayGeneral.push(arrayAux);
         }   
@@ -95,8 +105,8 @@ export default function(state=initialState,action){
              }
 			return{...state,
 					cantVariaciones : valor,
-					nobillosVariaciones : ModificarArreglo(state,valor,state.nobillosVariaciones),
-					VaquillonaVariaciones : ModificarArreglo(state,valor,state.VaquillonaVariaciones)
+					nobillosVariaciones : ModificarArreglo(state,valor,state.nobillosVariaciones,"NOBILLO"),
+					VaquillonaVariaciones : ModificarArreglo(state,valor,state.VaquillonaVariaciones,"VAQUILLONA")
 			}
 		break;
 		case "MODIFYDROPDOWN_INVERNADA":
