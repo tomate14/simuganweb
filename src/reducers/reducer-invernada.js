@@ -61,7 +61,7 @@ function ModificarArreglo(state,valor,arreglo,tipo){
 
 function iniciarArregloState(state=initialState,valor=1,tipo=""){
     
-    let arrayGeneral = [];
+    //let arrayGeneral = [];
     let value  = 0;
     switch(tipo){
       case "NOBILLO":
@@ -71,18 +71,24 @@ function iniciarArregloState(state=initialState,valor=1,tipo=""){
         value = state.valoresSimulacion[0].vaquillonaValue
         break;
     }
-
+    let arrayAux = [];
     if(valor > 0){
+        /*
+          No tengo pasturas, por lo que siempre se hace una sola vez el for
+          pero queda preparado por las dudas
+
+        */
+
         for(let index = 0; index< state.nombrePasturas.length; index++){
-            let arrayAux = [];
+            
             for(let i = 0; i < valor; i++){     
 
                 arrayAux.push(parseInt(value));
             }  
-            arrayGeneral.push(arrayAux);
+            //arrayGeneral.push(arrayAux);
         }   
     }    
-    return arrayGeneral;
+    return arrayAux;
 }
 
 
@@ -122,14 +128,11 @@ export default function(state=initialState,action){
             
 			return{
 			...state,
-			nobillosVariaciones : state.nobillosVariaciones.map(
-               (content, i) => i == state.dropdownSelected ? state.nobillosVariaciones[state.dropdownSelected].map(
+			nobillosVariaciones : state.nobillosVariaciones.map(               
                    (content,j) => j == action.index ? parseInt(valor)
                    : content
                    )                             
 
-               : content
-               )
 			}
 		break;
 		case "UPDATE-VALUE-VAQUILLONA_INVERNADA":
@@ -140,14 +143,10 @@ export default function(state=initialState,action){
 
 			return{
 			...state,
-			VaquillonaVariaciones : state.VaquillonaVariaciones.map(
-               (content, i) => i == state.dropdownSelected ? state.VaquillonaVariaciones[state.dropdownSelected].map(
+			VaquillonaVariaciones : state.VaquillonaVariaciones.map(               
                    (content,j) => j == action.index ? parseInt(action.value)
                    : content
                    )                             
-
-               : content
-               )
 			}
 		break;
 	}
