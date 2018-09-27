@@ -27,7 +27,7 @@ class SingleInputArray extends Component {
   	generarInputs(parametro,funcOnChange){
 	  	var rows = [];
 	  	for(var i = 0; i< this.props.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
-			rows.push(<input onChange = {funcOnChange} value = {this.ponerValor(parametro[0][i])} id = {i} type="number"/>); 
+			rows.push(<input onChange = {funcOnChange} value = {this.ponerValor(parametro[i])} id = {i} type="number"/>); 
 		}
 		return rows;
 	} 
