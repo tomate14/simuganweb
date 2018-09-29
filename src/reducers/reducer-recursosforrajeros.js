@@ -216,14 +216,7 @@ export default function (state=getEstado(), action) {
                                   )
                       : content
                 )
-                /*pagvariaciones: state.pagvariaciones.map(
-                       (content, i) => i == action.pagina ? state.pagvariaciones[action.pagina].map(
-                                                                   (content,j) => j == action.posicion ? {...content, valor: action.valor}
-                                                                                          : content
-                                                            )
-
-             : content
-             )*/
+               
 
         }
         break;
