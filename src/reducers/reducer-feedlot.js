@@ -56,12 +56,10 @@ function ModificarArreglo(state,valor,arreglo,tipo){
       Si la cantidad es mayor a la que tengo, se reinician todos los valores
       Por cada pastura que tengo, genero las variaciones que requiera el usuario
     */
-    arrayAux = iniciarArregloState(state,valor,tipo);
-    for(let i = 0; i < arreglo.length;i++){
-        for(let j=0; j<arreglo[i].length;j++){
-            arrayAux[i][j]= arreglo[i][j];
-        }
-     }
+      arrayAux = iniciarArregloState(state,valor,tipo);
+      for(let i = 0; i < arreglo.length;i++){
+              arrayAux[i]= arreglo[i];
+       }
     }
     return arrayAux;
   }
@@ -110,7 +108,12 @@ function iniciarArregloState(state,valor=1,tipo=""){
     }    
     return arrayGeneral;
 }
+function modificarObjeto(action, objeto){
+    let Objeto = objeto;
+    Objeto[action.atributo] = parseInt(action.valor);
+    return Objeto;
 
+}
 /* 
     Generacion del estado de los recursos forrajeros
 */
@@ -148,6 +151,33 @@ export default function (state=getEstado(), action) {
                 paginaActual : pagina
             }
             break;
+        case("VALORSALIDA_FEEDLOT"):
+            
+            return{
+                ...state,
+                pagvariaciones: state.pagvariaciones.map(
+                        (content, i) => i == action.pagina ?
+                                   {...content, 
+                                    Completion : modificarObjeto(action, content.Completion)
+                                 }                                   
+                      : content
+                )
+            }
+            break;
+        case("VALORENGORDE_FEEDLOT"):
+            
+            return{
+                ...state,
+                pagvariaciones: state.pagvariaciones.map(
+                        (content, i) => i == action.pagina ?
+                                   {...content, 
+                                    Fattening : modificarObjeto(action, content.Fattening)
+                                 }                                   
+                      : content
+                )
+            }
+            break;
+            
     }
     return state;
 }

@@ -7,17 +7,29 @@ export function modificarVariaciones(e) {
 }
 
 
-
-/*export function InputVariacionValor(id, pagina, valor,seleccion) {    
+/*
+    A que atributo del objeto de Fattening la voy a modificar el valor
+*/
+export function InputVariacionEngorde(pagina, atributo, valor) {    
     return {
-        type: "VALORVARIACION_FEEDLOT",
-        posicion:id,
+        type: "VALORENGORDE_FEEDLOT",
         pagina:pagina,
-        dropdownSeleccion:seleccion,
+        atributo:atributo,
         valor:parseInt(valor)
     }    
-    
-}*/
+}
+
+/*
+    A que atributo del objeto de Completion la voy a modificar el valor
+*/
+export function InputVariacionSalida(pagina, atributo, valor) {    
+    return {
+        type: "VALORSALIDA_FEEDLOT",
+        pagina:pagina,
+        atributo:atributo,
+        valor:parseInt(valor)
+    }    
+}
 
 export function modificarPagina(pagina) {    
     return {

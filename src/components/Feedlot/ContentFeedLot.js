@@ -12,11 +12,16 @@ class ContentFeedLot extends Component{
 			<Row>
 				<Col md={6}>
 					<ChildFeedLot vector={this.props.state.pagvariaciones[this.props.state.paginaActual-1].Completion} 
+					              funcInput = {this.props.funcSalida}
+					              pagina    = {this.props.pagina}
 					              titulo="Salida/Venta"/>
 				</Col>
 				<Col md={6}>
 					<ChildFeedLot vector={this.props.state.pagvariaciones[this.props.state.paginaActual-1].Fattening} 
-					              titulo="Engordador"/>
+					              titulo="Engordador"
+					              pagina    = {this.props.pagina}
+					              funcInput = {this.props.funcEngorde}
+					              />
 				</Col>
 			</Row>
 		);

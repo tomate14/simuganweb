@@ -8,7 +8,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {Container,Col, Row, Form, FormGroup, Label, Button} from 'reactstrap';
-import {permitirVariaciones,modificarVariaciones,modificarPagina} from '../../actions/action-feedlot.js';
+import {permitirVariaciones,modificarVariaciones,modificarPagina,InputVariacionSalida,InputVariacionEngorde} from '../../actions/action-feedlot.js';
 
 
 
@@ -69,7 +69,10 @@ class Feedlot extends Component {
 						</Row>
 							
 						<Row md={12}>
-							<ContentFeedLot state={feedlot} />
+							<ContentFeedLot state={feedlot} 
+							                funcSalida  = {this.props.InputVariacionSalida}
+							                pagina      = {feedlot.paginaActual - 1}
+							                funcEngorde = {this.props.InputVariacionEngorde}/>
 						</Row>
 
 					</div>
@@ -103,7 +106,7 @@ function mapStateToProps(state){
 
 function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps");
-    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarPagina:modificarPagina}, dispatch);
+    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarPagina:modificarPagina, InputVariacionSalida:InputVariacionSalida, InputVariacionEngorde:InputVariacionEngorde}, dispatch);
     
 }
 
