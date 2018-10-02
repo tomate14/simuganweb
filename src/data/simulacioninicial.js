@@ -284,7 +284,9 @@ parseString(xml, function (err, result) {
 });*/
 
 let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
-    ' < earlyWeaning enable="false" suministro="5"/> '+
+    ' <earlyWeaning enable="false" suministro="5"> '+
+        ' <earlyWeaningMob calfDestiny="beef_finishing" calfDietBProtein="10" calfDietIntake="2" calfDietDigest="85" calfDietDRProtein="8" umbralBcs="4" enable="false" mobId="1"/> '+
+    ' </earlyWeaning> '+
     ' < otherOportunityToEmptyCows enable="false"/> '+
     ' < recetas> '+
         ' < receta id="2" name="RG-MZ" years="4"> '+
