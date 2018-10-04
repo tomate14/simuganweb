@@ -11,7 +11,7 @@ class SingleInput extends Component {
 	}
 
 	ponerValor(numero){
-		if(numero == 0){
+		if(numero === 0){
 			return "";
 		}else
 			return numero

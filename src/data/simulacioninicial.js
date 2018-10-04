@@ -630,7 +630,7 @@ let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
                 ' < paddock id="14"/> '+
             ' < /paddockAssigned> '+
         ' < /mob> '+
-        ' < mob enableCrop_stubble="false" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="false" endday="30" endmonth="11" startday="30" startmonth="08" service="15" minInServiceWeight="260" bullUtilLife="7" bullPercent="10" storeHeiferCalf="0" storeSteerCalf="0" pregnantRepositionUsed="false" cowWithoutCalf="false" repositionPercent="0" name="RC" mobUse="beef_finishing" id="6"> '+
+        ' < mob enableCrop_stubble="false" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="false" endday="30" endmonth="11" startday="30" startmonth="08" service="15" minInServiceWeight="260" bullUtilLife="7" bullPercent="10" storeHeiferCalf="0" storeSteerCalf="0" pregnantRepositionUsed="false" cowWithoutCalf="false" repositionPercent="1" name="RC" mobUse="beef_finishing" id="6"> '+
             ' < pastureAllow December="5" November="5" October="5" September="5" August="5" July="5" June="5" May="5" April="5" March="5" February="5" January="5"/> '+
             ' < silageAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/> '+
             ' < grainAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/> '+

@@ -43,7 +43,7 @@ class Rastrojo extends Component {
 		const rastrojos = this.props.rastrojos;
 		return(
 			<Container>
-				<Row>
+				<Row id="contentoption">
 					<Col><ContentOption state = {rastrojos} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
@@ -52,35 +52,34 @@ class Rastrojo extends Component {
 					<Form>
 						        <FormGroup row>
 						        	
-						          	<Col sm="4">
+						          	<Col id = "divPicker" sm="4">
 							          	<Picker 
 											id="Pasturas"
 							                opciones         = {this.props.rastrojos.nombreRastrojos}
 									        dropDownSelected = {this.props.rastrojos.dropdownSelected}
 									        funcSelected     = {this.props.modificarDropdownSelected}/>
 									</Col>
-									<Label for="Pasturas" sm={4}> Selección: {this.props.rastrojos.nombreRastrojos[this.props.rastrojos.dropdownSelected]} </Label>
+									<Label for="Pasturas" sm={4}><font size = "5"><b> Selección: </b> {this.props.rastrojos.nombreRastrojos[this.props.rastrojos.dropdownSelected]}</font> </Label>
 						        </FormGroup>
 						    </Form>
 				<Row>
-					 <Tabla 
-					 			texto1 = {"Digestibilidad"}
-					 			texto2 = {"Rendimiento"}					 			
-					 			valor1 = {this.props.rastrojos.valoresSimulacion[this.props.rastrojos.dropdownSelected].digestValue}
-					 			valor2 = {this.props.rastrojos.valoresSimulacion[this.props.rastrojos.dropdownSelected].yieldValue}
-					 />
-					 
+					 <Col id = "simulationValues">
+					 	<h5>Digestibilidad del Rastrojo[50-90]% </h5>
+						<h5><b>Carga simulación inicial: [{this.props.rastrojos.valoresSimulacion[this.props.rastrojos.dropdownSelected].digestValue}]</b></h5>
+					 </Col>
+					 <Col id = "simulationValues">
+					 	<h5>Rinde del Rastrojo[0-90] /Ha </h5>
+						<h5><b>Carga simulación inicial: [{this.props.rastrojos.valoresSimulacion[this.props.rastrojos.dropdownSelected].yieldValue}]</b></h5>
+					 </Col>
 				</Row>
 				<Row>
 				   <Col>
-				   		<p>Digestibilidad del Diferido[50-90]% </p>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 				   					 arrayVariaciones = {this.props.rastrojos.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.rastrojos.cantVariaciones} 
 				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}/>
 				   </Col>
 				   <Col>
-				   		<p>Rinde del Diferido [15-200] /ha</p>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueRinde}
 				   					 arrayVariaciones = {this.props.rastrojos.rindeVariaciones}
 				   					 cantVariaciones = {this.props.rastrojos.cantVariaciones} 

@@ -4,36 +4,28 @@ const initialState = {
 	permitido : false,
 	cantVariaciones : 0,
 	dropdownSelected : 0,
-	digestibilidadVariaciones : [],
-	rindeVariaciones : [],
-	nombrePasturas : iniciarPasturas(),
-	valoresSimulacion : iniciarValoresSimulacion()
+	mobsNombre  : initMobs(),
+  valoresSimulacion : cargarMobs(),
+  arrayDestete :  [],
+  arrayServicio : [],
+  arrayPesoServicio : []
 }
 
-function iniciarPasturas(){
-	let pasturas = Simulacion.escenario.stockPilledType[0].stockPilled;
-	let arrayNombrePastura = [];
-	for(let i = 0 ; i< pasturas.length; i++){
-		let nombre = pasturas[i].$.name;
-          arrayNombrePastura.push(nombre);
-	}
-	return arrayNombrePastura;
+
+function cargarMobs(){
+  let mobs = Simulacion.escenario.mobs[0].mob;
+  console.log(mobs);
+  return mobs;
 }
 
-function iniciarValoresSimulacion(){
-	let pasturas = Simulacion.escenario.stockPilledType[0].stockPilled;
-	let arrayValoresPastura = [];
-	for(let i = 0 ; i< pasturas.length; i++){
-		let digestValue = pasturas[i].$.stockPilledDigest;
-		let yieldValue = pasturas[i].$.yield;
-		let objectValue = {
-			digestValue : digestValue,
-			yieldValue : yieldValue
-			}
-          arrayValoresPastura.push(objectValue);
-		}
-	return arrayValoresPastura;
-	}
+function initMobs(){
+ let mobs = [];
+ for(let i = 0; i< Simulacion.escenario.mobs[0].mob.length;i++){
+  mobs[i] = "Mob " + (i + 1);
+ }
+ return mobs;
+}
+
 	
 
 
@@ -68,9 +60,10 @@ function ModificarArreglo(state,valor,arreglo){
 
 function iniciarArregloState(state=initialState,valor=1){
     
+    
     let arrayGeneral = [];
     if(valor > 0){
-        for(let index = 0; index< state.nombrePasturas.length; index++){
+        for(let index = 0; index< state.mobsNombre.length; index++){
             let arrayAux = [];
             for(let i = 0; i < valor; i++){
                 let value  = 0;
@@ -82,16 +75,15 @@ function iniciarArregloState(state=initialState,valor=1){
     return arrayGeneral;
 }
 
-
 export default function(state=initialState,action){
 	let valor = 0;
 	switch(action.type){
-		case "PERMITIDO_DIFERIDO" : 
+		case "PERMITIDO_MOBS" : 
 		return {...state,
 				permitido : action.payload
 			}
 		break;
-		case "CANTIDAD_DIFERIDO" :
+		case "CANTIDAD_MOBS" :
 			valor = parseInt(action.payload);
              if (isNaN(valor)){
                  valor = state.cantVariaciones;
@@ -101,51 +93,69 @@ export default function(state=initialState,action){
              }
 			return{...state,
 					cantVariaciones : valor,
-					digestibilidadVariaciones : ModificarArreglo(state,valor,state.digestibilidadVariaciones),
-					rindeVariaciones : ModificarArreglo(state,valor,state.rindeVariaciones)
-			}
+          arrayDestete : iniciarArregloState(state,valor),
+          arrayServicio : iniciarArregloState(state,valor),
+          arrayPesoServicio : iniciarArregloState(state,valor)
+        }
 		break;
-		case "MODIFYDROPDOWN_DIFERIDO":
+		case "MODIFYDROPDOWN_MOBS":
 		return{...state,
 			dropdownSelected : parseInt(action.payload)
 			}
 		break;
-		case "UPDATE-VALUE-DIGEST_DIFERIDO":
-			 valor = parseInt(action.value);
+    case "UPDATE-VALUE-DESTETE_MOBS" : 
+    valor = parseInt(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
             
-			return{
-			...state,
-			digestibilidadVariaciones : state.digestibilidadVariaciones.map(
-               (content, i) => i == state.dropdownSelected ? state.digestibilidadVariaciones[state.dropdownSelected].map(
+      return{
+      ...state,
+      arrayDestete : state.arrayDestete.map(
+               (content, i) => i == state.dropdownSelected ? state.arrayDestete[state.dropdownSelected].map(
                    (content,j) => j == action.index ? parseInt(valor)
                    : content
                    )                             
 
                : content
                )
-			}
-		break;
-		case "UPDATE-VALUE-RINDE_DIFERIDO":
-			valor = parseInt(action.value);
+		    }
+    case "UPDATE-VALUE-SERVICIO_MOBS" : 
+    valor = parseInt(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
-
-			return{
-			...state,
-			rindeVariaciones : state.rindeVariaciones.map(
-               (content, i) => i == state.dropdownSelected ? state.rindeVariaciones[state.dropdownSelected].map(
-                   (content,j) => j == action.index ? parseInt(action.value)
+            
+      return{
+      ...state,
+      arrayServicio : state.arrayServicio.map(
+               (content, i) => i == state.dropdownSelected ? state.arrayServicio[state.dropdownSelected].map(
+                   (content,j) => j == action.index ? parseInt(valor)
                    : content
                    )                             
 
                : content
                )
-			}
-		break;
+        }
+
+    case "UPDATE-VALUE-PESOSERVICIO_MOBS" : 
+    valor = parseInt(action.value);
+             if (isNaN(valor)){
+                 valor = 0;
+             }
+            
+      return{
+      ...state,
+      arrayPesoServicio : state.arrayPesoServicio.map(
+               (content, i) => i == state.dropdownSelected ? state.arrayPesoServicio[state.dropdownSelected].map(
+                   (content,j) => j == action.index ? parseInt(valor)
+                   : content
+                   )                             
+
+               : content
+               )
+        }
+
 	}
 	return state;
 } 

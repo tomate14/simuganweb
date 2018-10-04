@@ -30,7 +30,7 @@ class Picker extends Component {
 		        	 {this.setDropdownSelected()}
 		        </DropdownToggle>
 		        <DropdownMenu>
-		          	<DropdownItem onClick={this.props.funcSelected} header>Pasturas</DropdownItem>
+		          	<DropdownItem onClick={this.props.funcSelected} header>{this.props.id}</DropdownItem>
 		          	{
 		          		this.props.opciones.map((object,i)=>{
 		          												return <DropdownItem 
