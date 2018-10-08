@@ -31,6 +31,8 @@ function getEstado(state=null,valor=1){
       estado.cantVariaciones=0;
       estado.paginaActual=1;
       estado.pagvariaciones = [];
+      estado.textoSalida  = ["Peso Minimo de ingreso", "Peso Maximo de venta", "Peso vivo de venta", "Proteina Bruta", "Digestibilidad de la dieta", "Consumo diario", "Proteina degradable"];
+      estado.textoEngorde = ["Peso Minimo de ingreso", "Peso Maximo de venta", "Peso vivo de venta", "Proteina Bruta", "Digestibilidad de la dieta", "Consumo diario", "Proteina degradable"];
       return estado;
   }else{
       return ModificarArreglo(state,valor,state.pagvariaciones);
@@ -79,24 +81,11 @@ function iniciarArregloState(state,valor=1,tipo=""){
 
         for(let index = 0; index< valor; index++){
 
-            let ObjetoCompletion = {              
-                        min       : 0,
-                        max       : 100,
-                        value     : 10,
-                        DRProtein : 40,
-                        Digest    : 40,
-                        Intake    : 40,
-                        BProtein  : 40
-            }
-            let ObjetoFattening  = {
-                        min       : 0,
-                        max       : 40,
-                        value       : 100,
-                        DRProtein : 40,
-                        Digest    : 40,
-                        Intake    : 40,
-                        BProtein  : 40  
-            }
+            //ObjetoCompletion [min, max, value, DRProtein, Digest, Intake, BProtein]
+            let ObjetoCompletion = [0,100,10,40,40,40,40]              
+            
+            // ObjetoFattening [min, max, value, DRProtein, Digest, Intake, BProtein]         
+            let ObjetoFattening  = [0,100,10,40,40,40,40];
 
             let ChildFeedLot = {
                 Completion : ObjetoCompletion,
