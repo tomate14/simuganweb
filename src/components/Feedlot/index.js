@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //components
 import ContentOption from '../Generales/ContentOption';
-import ContentFeedLot from './ContentFeedLot';
+import ContentInputSpam from '../Generales/ContentInputSpam';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -69,7 +69,7 @@ class Feedlot extends Component {
 						</Row>
 							
 						<Row md={12}>
-							<ContentFeedLot state={feedlot} 
+							<ContentInputSpam state={feedlot} 
 							                funcSalida  = {this.props.InputVariacionSalida}
 							                pagina      = {feedlot.paginaActual - 1}
 							                funcEngorde = {this.props.InputVariacionEngorde}/>
