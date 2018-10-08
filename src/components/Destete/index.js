@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 
+//Componentes Generales
 import SingleInput from '../Generales/SingleInput'
 import ContentOption from '../Generales/ContentOption'
 import Picker from '../Generales/Picker'
+import ChildDestete from  './ChildDestete'
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup, Label} from 'reactstrap';
+import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup, Label, Button} from 'reactstrap';
 import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected} from '../../actions/action-destete.js';
+
+//Estilos
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+//Imagenes
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 
 //Estilos
@@ -45,7 +52,37 @@ class Destete extends Component {
 					          
 					        </FormGroup>
 					    </Form>
-					    
+					    <Row xs={12}>
+							<Col md={4}/>
+							<Col xs={1} className="divFlechas">					
+								<Button outline color="secondary" onClick={this.handleClickDown}>
+									<FaAngleLeft />
+								</Button>{' '}
+								
+							</Col>
+							<Col xs={2}>
+								<p className="labelPagina"><b><i><font size="3">Pagina: {destete.paginaActual}</font></i></b></p>
+							</Col>
+							<Col xs={1}className="divFlechas">
+								<Button outline color="secondary" onClick={this.handleClickUp}>
+									<FaAngleRight />
+								</Button>{' '}
+								
+							</Col>
+							<Col md={4}/>
+						</Row>
+							
+						<Row md={12}>
+						    <Col md={2}/>
+						    <Col md={8}>
+						    	<ChildDestete vector={destete.pagvariaciones[destete.dropDownSelected][destete.paginaActual-1].Completion} 
+					                textos = {destete.textos} 
+					                pagina    = {destete.paginaActual}
+					                titulo="Salida/Venta"/>
+						    </Col>
+						
+					        <Col md={2}/>
+						</Row>
 					</div>
 			);
 			}
