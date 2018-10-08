@@ -5,9 +5,12 @@ const initialState = {
 	cantVariaciones : 0,
 	dropDownSelected : 0,
 	Variaciones : [],
+	pagvariaciones:[],
+	paginaActual:1,
 	//rindeVariaciones : [],
 	nombreMobs : iniciarMobs(),
-	valoresSimulacion : iniciarValoresSimulacion()
+	valoresSimulacion : iniciarValoresSimulacion(),
+	textos: ["Umbral","Habilitar regla según el peso del ternero","calfDestiny","calfDietBProtein","calfDietIntake", "calfDietDigest", "calfDietDRProtein","umbralBcs","Habilitar regla según CC de la vaca"]
 }
 
 function iniciarMobs(){
@@ -24,16 +27,17 @@ function iniciarValoresSimulacion(){
 	let arrayValoresDestete = [];
 	for(let i = 0 ; i < Simulacion.escenario.earlyWeaning[0].earlyWeaningMob.length; i++){
 		let desteteValue = Simulacion.escenario.earlyWeaning[0].earlyWeaningMob[i];
-		let objectValue = {
-			calfDestiny      : desteteValue.$.calfDestiny,
-			calfDietBProtein : desteteValue.$.calfDietBProtein,
-			calfDietDRProtein: desteteValue.$.calfDietDRProtein,
-			calfDietDigest   : desteteValue.$.calfDietDigest,
-			calfDietIntake   : desteteValue.$.calfDietIntake,
-			enable           : desteteValue.$.enable,
-			mobId            : desteteValue.$.mobId,
-			umbralBcs        : desteteValue.$.umbralBcs
-		}
+		let objectValue = [desteteValue.$.calfUmbralLw,
+		                   desteteValue.$.enableCalf,
+		                   desteteValue.$.calfDestiny,
+		                   desteteValue.$.calfDietBProtein,
+		                   desteteValue.$.calfDietIntake,
+		                   desteteValue.$.calfDietDigest,
+		                   desteteValue.$.calfDietDRProtein,
+		                   desteteValue.$.umbralBcs,
+		                   desteteValue.$.enable
+		                   ]; 
+		
         arrayValoresDestete.push(objectValue);
 	}
 	return arrayValoresDestete;
@@ -77,16 +81,29 @@ function iniciarArregloState(state=initialState,valor=1){
         for(let index = 0; index< state.nombreMobs.length; index++){
             let arrayAux = [];
             for(let i = 0; i < valor; i++){
-                let objectValue = {
-					calfDestiny      : state.valoresSimulacion[index].calfDestiny,
-					calfDietBProtein : parseInt(state.valoresSimulacion[index].calfDietBProtein),
-					calfDietDRProtein: parseInt(state.valoresSimulacion[index].calfDietDRProtein),
-					calfDietDigest   : parseInt(state.valoresSimulacion[index].calfDietDigest),
-					calfDietIntake   : parseInt(state.valoresSimulacion[index].calfDietIntake),
-					enable           : state.valoresSimulacion[index].enable,
-					mobId            : parseInt(state.valoresSimulacion[index].mobId),
-					umbralBcs        : parseInt(state.valoresSimulacion[index].umbralBcs)
-				}
+
+
+            	let calfUmbralLw      = parseInt(state.valoresSimulacion[index][0]);
+
+            	let isTrueSet         = (state.valoresSimulacion[index][1] == 'true');
+				let enable            = isTrueSet;
+
+				let enableCalf        = enable;
+				let calfDestiny       = state.valoresSimulacion[index][2];
+				let calfDietBProtein  = parseInt(state.valoresSimulacion[index][3]);
+				let calfDietIntake    = parseInt(state.valoresSimulacion[index][4]);
+				let calfDietDigest    = parseInt(state.valoresSimulacion[index][5]);
+				let calfDietDRProtein = parseInt(state.valoresSimulacion[index][6]);
+				let umbralBcs         = parseInt(state.valoresSimulacion[index][7]);
+
+				isTrueSet             = (state.valoresSimulacion[index][8] == 'true');
+				enable                = isTrueSet;
+				let enableProp        = enable;
+
+				
+                let objectValue       = {Completion : [calfUmbralLw,enableCalf,calfDestiny,calfDietBProtein,calfDietIntake,calfDietDigest,calfDietDRProtein,umbralBcs,enableProp ] };
+					
+				
                 arrayAux.push(objectValue);
             }  
             arrayGeneral.push(arrayAux);
@@ -115,7 +132,7 @@ export default function(state=initialState,action){
            }
 			return{...state,
 					cantVariaciones : valor,
-					Variaciones : ModificarArreglo(state,valor,state.Variaciones)
+					pagvariaciones : ModificarArreglo(state,valor,state.pagvariaciones)
 			}
 		break;
 		break;
@@ -132,8 +149,8 @@ export default function(state=initialState,action){
             
 			return{
 					...state,
-					Variaciones : state.Variaciones.map(
-	               	(content, i) => i == state.dropDownSelected ? state.Variaciones[state.dropDownSelected].map(
+					pagvariaciones : state.pagvariaciones.map(
+	               	(content, i) => i == state.dropDownSelected ? state.pagvariaciones[state.dropDownSelected].map(
 	                  	(content,j) => j == action.index ? parseInt(valor)
 	                   	: content
 	                   	)		                             
