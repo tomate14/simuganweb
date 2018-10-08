@@ -285,9 +285,9 @@ parseString(xml, function (err, result) {
 
 let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
     ' <earlyWeaning enable="false" suministro="5"> '+
-        ' <earlyWeaningMob calfDestiny="beef_finishing" calfDietBProtein="10" calfDietIntake="2" calfDietDigest="85" calfDietDRProtein="8" umbralBcs="4" enable="false" mobId="1"/> '+
-        ' <earlyWeaningMob calfDestiny="beef_finishing" calfDietBProtein="12" calfDietIntake="5" calfDietDigest="90" calfDietDRProtein="4" umbralBcs="6" enable="true" mobId="2"/> '+
-        ' <earlyWeaningMob calfDestiny="beef_finishing" calfDietBProtein="13" calfDietIntake="4" calfDietDigest="80" calfDietDRProtein="2" umbralBcs="9" enable="false" mobId="3"/> '+
+        '<earlyWeaningMob calfUmbralLw="60" enableCalf="false" calfDestiny="beef_finishing" calfDietBProtein="10" calfDietIntake="2" calfDietDigest="85" calfDietDRProtein="8" umbralBcs="4" enable="false" mobId="1"/>'+
+        '<earlyWeaningMob calfUmbralLw="60" enableCalf="false" calfDestiny="beef_finishing" calfDietBProtein="10" calfDietIntake="2" calfDietDigest="85" calfDietDRProtein="8" umbralBcs="4" enable="false" mobId="2"/>'+
+        '<earlyWeaningMob calfUmbralLw="60" enableCalf="false" calfDestiny="beef_finishing" calfDietBProtein="10" calfDietIntake="2" calfDietDigest="85" calfDietDRProtein="8" umbralBcs="4" enable="false" mobId="3"/>'+
     ' </earlyWeaning> '+
     ' < otherOportunityToEmptyCows enable="false"/> '+
     ' < recetas> '+
