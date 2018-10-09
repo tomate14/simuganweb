@@ -10,7 +10,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup, Label, Button} from 'reactstrap';
-import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected} from '../../actions/action-destete.js';
+import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected, modificarPagina,modificarInputValueDestete,modificarRadioSeleccion,modificarDropdownInput} from '../../actions/action-destete.js';
 
 //Estilos
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,6 +28,20 @@ class Destete extends Component {
 		super(props);
 		this.state = {
 			cantidadVariaciones : 1
+		}
+		this.handleClickDown = this.handleClickDown.bind(this);
+		this.handleClickUp = this.handleClickUp.bind(this);
+	}
+
+	handleClickUp(){
+		if(this.props.destete.paginaActual < this.props.destete.cantVariaciones){
+			this.props.modificarPagina(this.props.destete.paginaActual+1);	
+		}
+		//this.setState({paginaActual : this.state.paginaActual + 1})
+	}
+	handleClickDown(){
+		if(this.props.destete.paginaActual > 1){
+			this.props.modificarPagina(this.props.destete.paginaActual-1);	
 		}
 	}
 
@@ -75,10 +89,15 @@ class Destete extends Component {
 						<Row md={12}>
 						    <Col md={2}/>
 						    <Col md={8}>
-						    	<ChildDestete vector={destete.pagvariaciones[destete.dropDownSelected][destete.paginaActual-1].Completion} 
-					                textos = {destete.textos} 
-					                pagina    = {destete.paginaActual}
-					                titulo="Salida/Venta"/>
+						    	<ChildDestete vector={destete.pagvariaciones[destete.dropDownSelected][destete.paginaActual-1].Destete} 
+					                textos          = {destete.textos}
+					                opciones        = {destete.nombresPicker}
+					                seleccionDrop   = {destete.pagvariaciones[destete.dropDownSelected][destete.paginaActual-1].Destete[2]}
+					                funcDropSelect  = {this.props.modificarDropdownInput}
+					                funcInput       = {this.props.modificarInputValueDestete}
+					                funcRadio       = {this.props.modificarRadioSeleccion}
+					                pagina          = {destete.paginaActual}
+					                titulo          = " "/>
 						    </Col>
 						
 					        <Col md={2}/>
@@ -118,7 +137,13 @@ function mapStateToProps(state){
 
 function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps");
-    return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected}, dispatch);
+    return bindActionCreators({permitirVariaciones        : permitirVariaciones,
+    	                       modificarVariaciones       : modificarVariaciones,
+    	                       modificarDropdownSelected  : modificarDropdownSelected,
+    	                       modificarPagina            : modificarPagina,
+    	                       modificarInputValueDestete : modificarInputValueDestete,
+    	                       modificarRadioSeleccion    : modificarRadioSeleccion,
+    	                       modificarDropdownInput     : modificarDropdownInput}, dispatch);
     
 }
 
