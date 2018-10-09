@@ -22,12 +22,39 @@ export function modificarDropdownSelected(e){
     }
 }
 
-export function modificarInputValueDigestibilidad(e){
+export function modificarDropdownInput(e){
+    console.log("modificarDropdownSelected-diferido");
+    return{
+        type: "MODIFYDROPDOWNINPUT_DESTETE",
+        payload: e.target.id
+    }
+}
+
+export function modificarInputValueDestete(e){
     console.log("modificarInputValueDigestibilidad-diferido");
     return{
         type: "UPDATE-VALUE-DESTETE",
-        index: e.target.id,
-        value : e.target.value
+        //Lugar del arreglo a modificar
+        index: parseInt(e.target.id),
+        value : parseInt(e.target.value)
     }
+}
+
+export function modificarPagina(pagina) {    
+    return {
+        type: "PAGINA_DESTETE",
+        payload:pagina
+    }    
+    
+}
+
+export function modificarRadioSeleccion(idRadioTrue,idRadioFalse ) {    
+    return {
+        type: "RADIO_DESTETE",
+        indextrue:idRadioTrue,
+        indexfalse:idRadioFalse
+
+    }    
+    
 }
 
