@@ -73,11 +73,13 @@ class ChildDestete extends Component{
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[2]}</InputGroupAddon>
-					    <Picker className="pickerInput"
-								id="Mobs"
-				                opciones         = {this.props.opciones}
-						        dropDownSelected = {this.props.seleccionDrop}
-						        funcSelected     = {this.props.funcDropSelect} />  
+					    <Col className="DropInput">
+						    <Picker className="pickerInput"
+									id="Mobs"
+					                opciones         = {this.props.opciones}
+							        dropDownSelected = {this.props.seleccionDrop}
+							        funcSelected     = {this.props.funcDropSelect} />  
+						</Col>
 					</InputGroup>
 
 					<InputGroup>

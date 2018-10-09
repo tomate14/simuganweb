@@ -15,3 +15,7 @@ h5{
 .rowRadio{
 	margin-bottom: 10px;
 }
+
+.DropInput.col{
+    padding: 0px;
+}
