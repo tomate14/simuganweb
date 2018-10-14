@@ -49,8 +49,8 @@ class Destete extends Component {
 		if(destete.permitido){
 			if(destete.cantVariaciones > 0){
 				return (
-					<div>					
-						<Row>
+					<Container>					
+						<Row xs={12}>
 							<br/>
 						</Row>
 						<Form>
@@ -102,7 +102,7 @@ class Destete extends Component {
 						
 					        <Col md={2}/>
 						</Row>
-					</div>
+					</Container>
 			);
 			}
 		}
@@ -114,12 +114,12 @@ class Destete extends Component {
 		return(
 
 			<Container>
-				<Row id="contentoption">
-					<Col><ContentOption state = {destete} 
+					<div>
+						 <ContentOption state = {destete} 
 										funcPermitir = {this.props.permitirVariaciones}
-										funcVariaciones = {this.props.modificarVariaciones}/></Col>
-				</Row> 
-				
+										funcVariaciones = {this.props.modificarVariaciones}/>
+						</div>
+	 
 			    {this.generarContenido(destete)}
 			  </Container>
 		);

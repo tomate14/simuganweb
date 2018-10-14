@@ -18,40 +18,46 @@ const initialState = {
 function iniciarMobs(){
 	let Mobs = [];
 	//let aux =  Simulacion.escenario.paddocks[0];
-	//let NombresMobs = Simulacion.escenario.mobs;
-	for(let i = 0; i < Simulacion.escenario.earlyWeaning[0].earlyWeaningMob.length; i++){
-		Mobs.push(Simulacion.escenario.earlyWeaning[0].earlyWeaningMob[i].$.mobId);
+	let aux = Simulacion.escenario.earlyWeaning;
+	if(aux != ""){
+		for(let i = 0; i < Simulacion.escenario.earlyWeaning[0].earlyWeaningMob.length; i++){
+			Mobs.push(Simulacion.escenario.earlyWeaning[0].earlyWeaningMob[i].$.mobId);
+		}
 	}
+	
 	return Mobs;
 }
 
 function iniciarValoresSimulacion(){
 	//let pasturas = Simulacion.escenario.paddocks[0].paddock[i];
 	let arrayValoresDestete = [];
-	for(let i = 0 ; i < Simulacion.escenario.earlyWeaning[0].earlyWeaningMob.length; i++){
-		let desteteValue = Simulacion.escenario.earlyWeaning[0].earlyWeaningMob[i];
-		let valor = 0;
-		switch(desteteValue.$.calfDestiny){
-			case "beef_finishing":
-				valor = 0;
-				break;
-			case "cow_calf":
-				valor = 1;
-				break;
-		}
+	let aux = Simulacion.escenario.earlyWeaning;
+	if(aux != ""){
+		for(let i = 0 ; i < Simulacion.escenario.earlyWeaning[0].earlyWeaningMob.length; i++){
+			let desteteValue = Simulacion.escenario.earlyWeaning[0].earlyWeaningMob[i];
+			let valor = 0;
+			switch(desteteValue.$.calfDestiny){
+				case "beef_finishing":
+					valor = 0;
+					break;
+				case "cow_calf":
+					valor = 1;
+					break;
+			}
 
-		let objectValue = [desteteValue.$.calfUmbralLw,
-		                   desteteValue.$.enableCalf,
-		                   valor,
-		                   desteteValue.$.calfDietBProtein,
-		                   desteteValue.$.calfDietIntake,
-		                   desteteValue.$.calfDietDigest,
-		                   desteteValue.$.calfDietDRProtein,
-		                   desteteValue.$.umbralBcs,
-		                   desteteValue.$.enable
-		                   ]; 
-		
-        arrayValoresDestete.push(objectValue);
+			let objectValue = [desteteValue.$.calfUmbralLw,
+							   desteteValue.$.enableCalf,
+							   valor,
+							   desteteValue.$.calfDietBProtein,
+							   desteteValue.$.calfDietIntake,
+							   desteteValue.$.calfDietDigest,
+							   desteteValue.$.calfDietDRProtein,
+							   desteteValue.$.umbralBcs,
+							   desteteValue.$.enable
+							   ]; 
+
+			arrayValoresDestete.push(objectValue);
+		}
 	}
 	return arrayValoresDestete;
 }
