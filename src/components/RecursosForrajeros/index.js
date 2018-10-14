@@ -68,8 +68,8 @@ class RecursosForrajeros extends Component {
 	render(){
 		const recursos = this.props.recursosforrajeros;
 		return(
-			<div className="conteiner-fluid">
-                <Row id="contentoption">
+			<div className="container-fluid">
+                <Row>
 	                <Col>
 	                    <ContentOption state          ={recursos} 
 	                                   funcPermitir   ={this.props.permitirVariaciones} 

@@ -29,6 +29,14 @@ export default [
   },
   {
     title : 'Configuraciones por Mobs',
-    url: '/mobs'
+    url: '/Mobs'
+  }  ,
+  {
+    title : 'Compra de Animales',
+    url: '/BuyRule'
+  },
+  {
+    title : 'Destete Precoz',
+    url: '/Destete'
   }
 ];

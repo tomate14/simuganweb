@@ -1,21 +1,5 @@
-/*input .checkbox, h5, button{
-	display: inline-block;
+#contentoption{
+    border: solid 1px;
+    border-color: gainsboro;
+    border-radius: 25px;
 }
-
-input#cantVariation{
-	width: 50px ;
-}
-
-input.checkbox{
-	height: 20px;
-	width: 20px;
-}
-
-.RowCheckbox, .RowCantidad{
-	margin:auto;
-}
-
-h5.textLabel{
-	margin-top:auto;
-	margin-bottom: auto;
-}*/

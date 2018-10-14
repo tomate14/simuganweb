@@ -14,6 +14,8 @@ import Potreros           from './components/Potreros'
 import Rastrojo           from './components/Rastrojo'
 import RecursosForrajeros from './components/RecursosForrajeros'
 import Mobs				  from './components/Mobs'
+//import BuyRule			  from './components/BuyRule'
+import Destete			  from './components/Destete'
 
 
 
@@ -28,8 +30,8 @@ const AppRoutes = () =>
 				<Route path="/Potreros"           component={Potreros} />
 				<Route path="/Rastrojo"           component={Rastrojo} />
 				<Route path="/RecursosForrajeros" component={RecursosForrajeros} />
-				<Route path="/mobs"				  component={Mobs} />
-
+				<Route path="/mobs"				  component={Mobs} />				
+				<Route path="/Destete"			  component={Destete} />
 			</Switch>
 		</App>;
 
