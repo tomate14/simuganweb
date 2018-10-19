@@ -4,7 +4,11 @@ const initialState = {
 	permitido : false,
 	cantVariaciones : 0,
   tipoEngorde : Simulacion.escenario.fattening[0].$.fattMethod,
-  paginaActual: 1,
+  paginaActualPasture: 1,
+  paginaActualGrain: 1,
+  paginaActualSilage: 1,
+  paginaActualRastrojo: 1,
+  paginaActualDiferidos: 1,
   cropStubbleEnable : (Simulacion.escenario.fattening[0].$.enableCrop_stubble === 'true'),
   stockPilledEnable : (Simulacion.escenario.fattening[0].$.enableStockPilled === 'true'),
   arrayPastures : [],
@@ -21,10 +25,15 @@ const initialState = {
   arrayIntake : [],
   arrayDigest : [],
   arrayDRProtein : [],
+  arrayPesoVivo : [],
+  arrayCC : [],
   corralValues : {protein : Simulacion.escenario.fattening[0].diet[0].$.feedlotBProtein,
                   intake : Simulacion.escenario.fattening[0].diet[0].$.feedlotIntake, 
                   digest : Simulacion.escenario.fattening[0].diet[0].$.feedlotDigest,
-                  proteinDR : Simulacion.escenario.fattening[0].diet[0].$.feedlotDRProtein, }
+                  proteinDR : Simulacion.escenario.fattening[0].diet[0].$.feedlotDRProtein,
+                  cc : Simulacion.escenario.fattening[0].csf[0].$.bcsValue,
+                  pesoVivo : Simulacion.escenario.fattening[0].csf[0].$.lwValue,
+                  medida : Simulacion.escenario.fattening[0].csf[0].$.type }
 
 	}
 
@@ -113,6 +122,7 @@ function iniciarArregloSimpleState(valor=1){
 
 export default function(state=initialState,action){
 	let valor = 0;
+  let pagina = 0;
 	switch(action.type){
 		case "PERMITIDO_ENGORDE" : 
 		return {...state,
@@ -137,14 +147,44 @@ export default function(state=initialState,action){
           arrayProtein : iniciarArregloSimpleState(valor),
           arrayIntake : iniciarArregloSimpleState(valor),
           arrayDigest : iniciarArregloSimpleState(valor),
-          arrayDRProtein : iniciarArregloSimpleState(valor)
+          arrayDRProtein : iniciarArregloSimpleState(valor),
+          arrayPesoVivo : iniciarArregloSimpleState(valor),
+          arrayCC : iniciarArregloSimpleState(valor)
 					}
 		break;
-    case("PAGINA_ENGORDE"):
+    case("PAGINA-PASTURE_ENGORDE"):
           let pagina = action.payload;
           return{
               ...state,
-              paginaActual : pagina
+              paginaActualPasture : pagina
+          }
+            break;
+    case("PAGINA-GRAIN_ENGORDE"):
+          pagina = action.payload;
+          return{
+              ...state,
+              paginaActualGrain : pagina
+          }
+            break;
+    case("PAGINA-SILAGE_ENGORDE"):
+          pagina = action.payload;
+          return{
+              ...state,
+              paginaActualSilage : pagina
+          }
+            break;
+    case("PAGINA-RASTROJO_ENGORDE"):
+          pagina = action.payload;
+          return{
+              ...state,
+              paginaActualRastrojo : pagina
+          }
+            break;
+    case("PAGINA-DIFERIDOS_ENGORDE"):
+          pagina = action.payload;
+          return{
+              ...state,
+              paginaActualDiferidos : pagina
           }
             break;
     case "VALORVARIACION_PASTURE_ENGORDE":
@@ -258,6 +298,34 @@ export default function(state=initialState,action){
           ...state,
           arrayDRProtein : state.arrayDRProtein.map(
                    (content, i) => i == action.index ? parseInt(valor)                             
+                   : content
+                   )
+          }
+        break;
+               case "UPDATE-VALUE-TRIGGER-PESOVIVO_ENGORDE":
+           valor = parseInt(action.value);
+                 if (isNaN(valor)){
+                     valor = 0;
+                 }
+                
+          return{
+          ...state,
+          arrayPesoVivo : state.arrayPesoVivo.map(
+                   (content, i) => i == action.index ? parseInt(valor)                             
+                   : content
+                   )
+          }
+        break;
+               case "UPDATE-VALUE-TRIGGER-CC_ENGORDE":
+           valor = parseFloat(action.value);
+                 if (isNaN(valor)){
+                     valor = 0;
+                 }
+                
+          return{
+          ...state,
+          arrayCC : state.arrayCC.map(
+                   (content, i) => i == action.index ? parseFloat(valor)                             
                    : content
                    )
           }
