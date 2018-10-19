@@ -741,6 +741,19 @@ let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
             ' < /mobs> '+
         ' < /fattening> '+
     ' < /feedlot> '+
+    '<fattening fattMethod="corral" enableCrop_stubble="true" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="true" cuts="true" empties="true" enable="false">'+
+        '<pastureAllow December="5" November="5" October="5" September="5" August="5" July="5" June="5" May="5" April="5" March="5" February="5" January="5"/>'+
+        '<silageAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/>'+
+        '<grainAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/>'+
+        '<stockPilledAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/>'+
+        '<crop_stubbleAllow January="0" February="0" March="0" April="0" May="0" June="0" July="0" August="0" September="0" October="0" November="0" December="0"/>'+
+        '<csf type="lw" bcsValue="5" lwValue="435"/>'+
+        '<diet feedlotBProtein="10" feedlotIntake="2.8" feedlotDigest="70" feedlotDRProtein="8"/>'+
+        '<paddockAssigned>'+
+            '<paddock id="5"/>'+
+        '</paddockAssigned>'+
+    '</fattening>'+
+
     ' < patrimonio> '+
         ' < pasivo banco="0" proveedores="0" impositivo="0"/> '+
         ' < activo caja="1000" banco="5000" porcobrar="0" landvalue="1120000" buildingvalue="200000"> '+

@@ -50,7 +50,8 @@ class RecursosForrajeros extends Component {
 						    </Form>
 						<Row className="RowVariaciones">
 			                <Col>
-			                    <MonthTable state = {recursos.valoresMeses}/>
+			                    <MonthTable state = {recursos.valoresMeses}
+			                    			columna = "Crecimiento"/>
 			                </Col>
 			                <Col>
 			                    <InputsVariation state = {recursos}

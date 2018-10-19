@@ -7,6 +7,7 @@ import rastrojos from './reducer-rastrojos';
 import ensilaje from './reducer-ensilaje';
 import feedlot from './reducer-feedlot';
 import mobs from './reducer-mobs';
+import engorde from './reducer-engorde';
 
 
 
@@ -19,7 +20,9 @@ const allReducers = combineReducers({
     rastrojos          : rastrojos, 
     ensilaje           : ensilaje,
     feedlot            : feedlot,
-    mobs               : mobs
+    mobs               : mobs,
+    engorde 		   : engorde
+
 });
 
 export default allReducers;

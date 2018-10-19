@@ -15,32 +15,34 @@ class TabMenu extends React.Component {
 
 
 
-  generarNav(parametros){
+  generarNav(){
+    console.log(this.props.navTexts);
      let navs = [];
-     for(let i = 0; i< parametros.length ; i++){
+     for(let i = 0; i< this.props.navTexts.length ; i++){
         navs.push( <NavItem key = {i+1}>
                       <NavLink
                               className={classnames({ active: this.state.activeTab === (i+1).toString() })}
                               onClick={() => { this.toggle((i+1).toString()); }}
                             >
-                        {parametros[i]}
+                        {this.props.navTexts[i]}
                       </NavLink>
                     </NavItem>);
      }
      return navs;
   }
 
-  generarPanels(parametros){ // this.props.opcion leera de un arreglo que contendra los 
+  generarPanels(){ // this.props.opcion leera de un arreglo que contendra los 
     let navs = [];           // componentes de cada parametro.
-     for(let i = 0; i< parametros.length ; i++){
+     for(let i = 0; i< this.props.panels.length ; i++){
         navs.push(<TabPane key = {i+1} tabId= {(i+1).toString()}>
             <Row>
               <Col sm="12">
-                {this.props.opcion} 
+                {this.props.panels[i]
+                } 
               </Col>
             </Row>
           </TabPane>);
-      } 
+        } 
      return navs;  
    }
 
@@ -54,17 +56,16 @@ class TabMenu extends React.Component {
   }
 
   render() {
-      var arreglo = ["Destete y Primer Servicio", "Parámetro 2", "Parámetro 3", "Parámetro 4"];
       return (
       <div>
         <Nav tabs>
-              {this.generarNav(arreglo).map((object,i)=>{
+              {this.generarNav().map((object,i)=>{
                                       return object;
                                     }
                               )}
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
-            {this.generarPanels(arreglo).map((object,i)=>{
+            {this.generarPanels().map((object,i)=>{
                                       return object;
                                     }
                               )}
