@@ -34,20 +34,19 @@ class RecursosForrajeros extends Component {
 						<Row>
 							<br/>
 						</Row>
-							<Form>
-						        <FormGroup row>
-						        	
-						          	<Col sm={4} id="divPicker">
-							          	<Picker 
-											id="Pasturas"
-							                opciones         = {recursos.nombrePasturas}
-									        dropDownSelected = {recursos.dropDownSelected}
-									        funcSelected     = {this.props.modificarDropdownSelected}/>
-									</Col>
-									<Label for="Pasturas" sm={6}> <font size="5"><b>Selección: </b> {recursos.nombrePasturas[recursos.dropDownSelected]}</font> </Label>
-						          	
-						        </FormGroup>
-						    </Form>
+						<Form>
+					        <FormGroup row>					        	
+					          	<Col sm={3} id="divPicker">
+						          	<Picker 
+										id="Pasturas"
+						                opciones         = {recursos.nombrePasturas}
+								        dropDownSelected = {recursos.dropDownSelected}
+								        funcSelected     = {this.props.modificarDropdownSelected}/>
+								</Col>
+								<Label for="Pasturas" sm={6}> <font size="5"><b>Selección: </b> {recursos.nombrePasturas[recursos.dropDownSelected]}</font> </Label>
+					          	
+					        </FormGroup>
+					    </Form>
 						<Row className="RowVariaciones">
 			                <Col>
 			                    <MonthTable state = {recursos.valoresMeses}
