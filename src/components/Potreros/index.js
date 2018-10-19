@@ -62,11 +62,14 @@ class Potreros extends Component {
 					          
 					        </FormGroup>
 					    </Form>
-					    
+					    <Row id = "simulationValues">
+					    	<Col>
+					    		<h5>Días desde la siembra antes de realizar el primer pastoreo [60-100] </h5>
+						   		<h5><b>Carga simulación inicial: [{this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].digestValue}]</b></h5>
+						   	</Col>
+					    </Row>
 						<Row>
 						    <Col sm={12}>
-						   		<h5>Dias desde la siembra antes de realizar el primer pastoreo[60-100] </h5>
-						   		<h5><b>Carga simulacin inicial: [{this.props.potreros.valoresSimulacion[this.props.potreros.dropDownSelected].digestValue}]</b></h5>
 						   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 						   					 arrayVariaciones = {this.props.potreros.digestibilidadVariaciones}
 						   					 cantVariaciones = {this.props.potreros.cantVariaciones} 
