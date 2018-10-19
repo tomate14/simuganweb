@@ -90,7 +90,7 @@ class Potreros extends Component {
 		return(
 
 			<Container>
-				<Row id="contentoption">
+				<Row>
 					<Col><ContentOption state = {potreros} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>

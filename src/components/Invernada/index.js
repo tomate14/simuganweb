@@ -57,7 +57,7 @@ class Invernada extends Component {
 		const invernada = this.props.invernada;
 		return(
 			<Container>
-					<Row id="contentoption">
+					<Row>
 						<Col><ContentOption state = {invernada} 
 											funcPermitir = {this.props.permitirVariaciones}
 											funcVariaciones = {this.props.modificarVariaciones}/></Col>

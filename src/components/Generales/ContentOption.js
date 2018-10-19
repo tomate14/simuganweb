@@ -16,7 +16,7 @@ class ContentOption extends Component {
 
 	render(){
 		
-		return (	<Container>
+		return (	<Container id = "contentoption">
 						 <Form >
 					        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
 					        	<Input type="checkbox" 
