@@ -16,7 +16,6 @@ class TabMenu extends React.Component {
 
 
   generarNav(){
-    console.log(this.props.navTexts);
      let navs = [];
      for(let i = 0; i< this.props.navTexts.length ; i++){
         navs.push( <NavItem key = {i+1}>

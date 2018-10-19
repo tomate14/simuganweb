@@ -61,12 +61,43 @@ export function InputVariacionDiferidosValor(id, pagina, valor) {
     }    
 }
 
-export function ModificarPagina(pagina) {    
+export function ModificarPaginaPasture(pagina) {    
     return {
-        type: "PAGINA_ENGORDE",
+        type: "PAGINA-PASTURE_ENGORDE",
         payload:pagina
     }    
-    
+}
+
+
+export function ModificarPaginaGrain(pagina) {    
+    return {
+        type: "PAGINA-GRAIN_ENGORDE",
+        payload:pagina
+    }    
+}
+
+
+export function ModificarPaginaSilage(pagina) {    
+    return {
+        type: "PAGINA-SILAGE_ENGORDE",
+        payload:pagina
+    }    
+}
+
+
+export function ModificarPaginaRastrojo(pagina) {    
+    return {
+        type: "PAGINA-RASTROJO_ENGORDE",
+        payload:pagina
+    }    
+}
+
+
+export function ModificarPaginaDiferidos(pagina) {    
+    return {
+        type: "PAGINA-DIFERIDOS_ENGORDE",
+        payload:pagina
+    }    
 }
 
 export function ModificarInputValueTriggerProtein(e){
@@ -94,6 +125,22 @@ export function ModificarInputValueTriggerDigest(e){
 export function ModificarInputValueTriggerDRProtein(e){
 	return{
 		type: "UPDATE-VALUE-TRIGGER-DRPROTEIN_ENGORDE",
+		index: e.target.id,
+		value : e.target.value
+	}
+}
+
+export function ModificarInputValueTriggerPesoVivo(e){
+	return{
+		type: "UPDATE-VALUE-TRIGGER-PESOVIVO_ENGORDE",
+		index: e.target.id,
+		value : e.target.value
+	}
+}
+
+export function ModificarInputValueTriggerCC(e){
+	return{
+		type: "UPDATE-VALUE-TRIGGER-CC_ENGORDE",
 		index: e.target.id,
 		value : e.target.value
 	}

@@ -8,7 +8,9 @@ import Tabla from '../Generales/Tabla';
 //redux 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {permitirVariaciones,modificarVariaciones,InputVariacionPastureValor,InputVariacionGrainValor,InputVariacionSilageValor,InputVariacionRastrojoValor,InputVariacionDiferidosValor,ModificarPagina,ModificarInputValueTriggerProtein, ModificarInputValueTriggerIntake,ModificarInputValueTriggerDigest,ModificarInputValueTriggerDRProtein} from '../../actions/action-engorde.js';
+import {permitirVariaciones,modificarVariaciones,InputVariacionPastureValor,InputVariacionGrainValor,InputVariacionSilageValor,InputVariacionRastrojoValor,InputVariacionDiferidosValor,
+	ModificarPaginaPasture, ModificarPaginaGrain, ModificarPaginaSilage, ModificarPaginaRastrojo, ModificarPaginaDiferidos,
+	ModificarInputValueTriggerProtein, ModificarInputValueTriggerIntake,ModificarInputValueTriggerDigest,ModificarInputValueTriggerDRProtein,ModificarInputValueTriggerPesoVivo,ModificarInputValueTriggerCC} from '../../actions/action-engorde.js';
 
 //bootstrap
 import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
@@ -19,6 +21,7 @@ import ContentOption from '../Generales/ContentOption';
 import TabMenu from '../Generales/TabMenu';
 import PasturePane from './PasturePane';
 import FeedlotPane from './FeedlotPane';
+import PesoVivoPane from './PesoVivoPane';
 
 class Engorde extends Component {
 
@@ -36,50 +39,59 @@ class Engorde extends Component {
 		let array = [];
 		if(engorde.tipoEngorde == "pasto"){
 			array = 		[<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActual}
+											paginaActual = {engorde.paginaActualPasture}
 											arregloValores = {engorde.arrayPastures}
 											arregloSimulacion  = {engorde.pastureValues}
 											funcModifVariacion = {this.props.inputVariacionPastureValor}
-											funcModifPagina = {this.props.modificarPagina} />,
+											funcModifPagina = {this.props.modificarPaginaPasture} />,
 
 							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActual}
+											paginaActual = {engorde.paginaActualGrain}
 											arregloValores = {engorde.arrayGrain}
 											arregloSimulacion  = {engorde.grainValues}
 											funcModifVariacion = {this.props.inputVariacionGrainValor}
-											funcModifPagina = {this.props.modificarPagina} />,
+											funcModifPagina = {this.props.modificarPaginaGrain} />,
 
 							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActual}
+											paginaActual = {engorde.paginaActualSilage}
 											arregloValores = {engorde.arraySilage}
 											arregloSimulacion  = {engorde.silageValues}
 											funcModifVariacion = {this.props.inputVariacionSilageValor}
-											funcModifPagina = {this.props.modificarPagina} /> ];
+											funcModifPagina = {this.props.modificarPaginaSilage} /> ];
 			if(engorde.cropStubbleEnable){
 				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActual}
+											paginaActual = {engorde.paginaActualRastrojo}
 											arregloValores = {engorde.arrayCropStubble}
 											arregloSimulacion  = {engorde.cropStubbleValues}
 											funcModifVariacion = {this.props.inputVariacionRastrojoValor}
-											funcModifPagina = {this.props.modificarPagina} /> );
+											funcModifPagina = {this.props.modificarPaginaRastrojo} /> );
 			}
 			if(engorde.stockPilledEnable){
 				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActual}
+											paginaActual = {engorde.paginaActualDiferidos}
 											arregloValores = {engorde.arrayStockPilled}
 											arregloSimulacion  = {engorde.stockPilledValues}
 											funcModifVariacion = {this.props.inputVariacionDiferidosValor}
-											funcModifPagina = {this.props.modificarPagina} /> );
+											funcModifPagina = {this.props.modificarPaginaDiferidos} /> );
 			}
 		}
 		else {
-			  array = [		<FeedlotPane	simulationValue = {engorde.corralValues.protein}
+			  array = [		
+			  				<PesoVivoPane	medida = "cc" // engorde.corralValues.medida
+			  								simulationValueCC = {engorde.corralValues.cc}
+			  								simulationValuePeso = {engorde.corralValues.pesoVivo}
+			  								funcModificarPeso = {this.props.ModificarInputValueTriggerPesoVivo}
+			  								funcModificarCC = {this.props.ModificarInputValueTriggerCC}
+			  								arrayVariacionesPeso = {engorde.arrayPesoVivo}
+			  								arrayVariacionesCC = {engorde.arrayCC}
+			  								cantVariaciones = {engorde.cantVariaciones}/>,
+			  				<FeedlotPane	simulationValue = {engorde.corralValues.protein}
 			  								descripcion = "Proteina Bruta(PB) [10,20]% "
 			  								funcModificar = {this.props.ModificarInputValueTriggerProtein}
 			  								arrayVariaciones = {engorde.arrayProtein}
 			  								cantVariaciones = {engorde.cantVariaciones} />,
 			  				<FeedlotPane	simulationValue = {engorde.corralValues.intake}
-			  								descripcion = { "Consumo diario de los animales [1 ,2.8]% del peso vivo " }
+			  								descripcion = { "Consumo diario de los animales [1, 2.8]% del peso vivo " }
 			  								funcModificar = {this.props.ModificarInputValueTriggerIntake}
 			  								arrayVariaciones = {engorde.arrayIntake}
 			  								cantVariaciones = {engorde.cantVariaciones} />,
@@ -88,7 +100,7 @@ class Engorde extends Component {
 			  								funcModificar = {this.props.ModificarInputValueTriggerDigest}
 			  								arrayVariaciones = {engorde.arrayDigest}
 			  								cantVariaciones = {engorde.cantVariaciones} />,
-			  				<FeedlotPane	simulationValue = {engorde.corralValues.protein}
+			  				<FeedlotPane	simulationValue = {engorde.corralValues.proteinDR}
 			  								descripcion = " Proteina de la dieta no degradable en rumen [2,12]%"
 			  								funcModificar = {this.props.ModificarInputValueTriggerDRProtein}
 			  								arrayVariaciones = {engorde.arrayDRProtein}
@@ -110,7 +122,7 @@ class Engorde extends Component {
 			}
 		}
 		else {
-			  array = ["Proteina bruta","Consumo Diario" ,"Digestibilidad", "Proteina no degradable"];
+			  array = ["Condición Corporal/ Peso vivo","Proteina bruta","Consumo Diario" ,"Digestibilidad", "Proteina no degradable"];
 		}
 		return array;
 	}
@@ -153,7 +165,14 @@ function matchDispatchToProps(dispatch){
     							ModificarInputValueTriggerIntake : ModificarInputValueTriggerIntake,
     							ModificarInputValueTriggerDigest : ModificarInputValueTriggerDigest,
     							ModificarInputValueTriggerDRProtein : ModificarInputValueTriggerDRProtein,
-    							modificarPagina : ModificarPagina}, dispatch);
+    							ModificarInputValueTriggerPesoVivo : ModificarInputValueTriggerPesoVivo,
+    							ModificarInputValueTriggerCC :ModificarInputValueTriggerCC,
+    							modificarPaginaPasture : ModificarPaginaPasture,
+    							modificarPaginaGrain : ModificarPaginaGrain,
+    							modificarPaginaSilage : ModificarPaginaSilage,
+    							modificarPaginaRastrojo : ModificarPaginaRastrojo,
+    							modificarPaginaDiferidos : ModificarPaginaDiferidos,
+    						}, dispatch);
     
 }
 
