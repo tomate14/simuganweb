@@ -19,9 +19,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //components
 import ContentOption from '../Generales/ContentOption'; 
 import TabMenu from '../Generales/TabMenu';
-import PasturePane from './PasturePane';
-import FeedlotPane from './FeedlotPane';
-import PesoVivoPane from './PesoVivoPane';
+import PasturePane from '../Generales/PasturePane';
+import FeedlotPane from '../Generales/FeedlotPane';
+import PesoVivoPane from '../Generales/PesoVivoPane';
 
 class Engorde extends Component {
 
@@ -135,9 +135,11 @@ class Engorde extends Component {
 			<Container>
 				
 				<Row>
-					<Col id="contentoption" ><ContentOption state = {engorde} 
+					<Col>
+						<ContentOption  state = {engorde} 
 										funcPermitir = {this.props.permitirVariaciones}
-										funcVariaciones = {this.props.modificarVariaciones}/></Col>
+										funcVariaciones = {this.props.modificarVariaciones}/>
+					</Col>
 				</Row> 
 				<TabMenu panels = { TabPanes }
 						 navTexts = {navTexts} />

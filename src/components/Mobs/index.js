@@ -92,8 +92,7 @@ class Mobs extends Component {
 							<Col xs={1} className="divFlechas">					
 								<Button outline color="secondary" onClick={this.handleClickDown}>
 									<FaAngleLeft />
-								</Button>{' '}
-								
+								</Button>{' '}								
 							</Col>
 							<Col xs={2}>
 								<p className="labelPagina"><b><i><font size="3">Pagina: {mobs.arrayMobs[mobs.dropDownSelected].pagActual}</font></i></b></p>
@@ -101,11 +100,12 @@ class Mobs extends Component {
 							<Col xs={1}className="divFlechas">
 								<Button outline color="secondary" onClick={this.handleClickUp}>
 									<FaAngleRight />
-								</Button>{' '}
-								
+								</Button>{' '}								
 							</Col>
 							<Col md={4}/>
 						</Row>
+
+
 		    		</Container>
 		    	);
 		    }
