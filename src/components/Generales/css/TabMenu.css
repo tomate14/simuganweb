@@ -1,0 +1,15 @@
+.claPrincipal{
+	background-color: red;
+}
+
+.claSecundaria{
+	background-color: yellow;
+}
+
+.claSubMobs{
+	background-color: green;
+}
+
+a.nav-link {
+    font-size: 0.8em;
+}

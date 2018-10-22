@@ -50,7 +50,7 @@ class InputsMonths extends Component{
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
-		let paginaActual = this.props.paginaActual;;
+		let paginaActual = this.props.paginaActual;
 		return(
 		<div className="container-fluid">
 			<Row xs={12}>				
@@ -60,7 +60,8 @@ class InputsMonths extends Component{
 				<Col xs={4} className="divInputs">
 					<p className="labelPagina">Pagina:{this.props.paginaActual}</p>
 					<div id = "divInputs" className="divInputsVariation">
-						{inputs.map((input, key) => (
+						{ 
+						  inputs.map((input, key) => (
 				            <input
 				              type="number"
 				              className="InputVariables"

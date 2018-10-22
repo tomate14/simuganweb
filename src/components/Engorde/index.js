@@ -142,7 +142,8 @@ class Engorde extends Component {
 					</Col>
 				</Row> 
 				<TabMenu panels = { TabPanes }
-						 navTexts = {navTexts} />
+						 navTexts = {navTexts} 
+						 clase    = {"claDefecto"}/>
 		  </Container>
 		);
 	}

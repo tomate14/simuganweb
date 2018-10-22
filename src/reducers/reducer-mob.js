@@ -55,6 +55,7 @@ function getMonth(numeroMes){
 }
 
 function cargarMobs(){
+
   let mobs = Simulacion.escenario.mobs[0].mob;
   console.log(mobs);
   return mobs;
@@ -98,109 +99,153 @@ function ModificarArreglo(state,valor,arreglo){
             arrayAux[i][j]= arreglo[i][j];
         }
      }
-    }
+    }   
+     
     return arrayAux;
   }
 
-  function iniciarArregloState(state=initialState,valor=1){
-    
-    let arrayGeneral = [];
+function CrearObjetoMob(state,SubMobArray,index){
+    //Todo lo que contiene una variacion de Mob
+    let ObjetoMobs = {}
+    ObjetoMobs.paramGenerales = []; 
+    ObjetoMobs.pastureAllow   = [];
+    ObjetoMobs.silageAllow    = [];
+    ObjetoMobs.grainAllow     = [];
+    ObjetoMobs.cropAllow      = [];
+    ObjetoMobs.stockAllow     = [];
+    ObjetoMobs.submobs        = [];
+    ObjetoMobs.weaningMobs    = {};
+    ObjetoMobs.submobs        = SubMobArray;
+
+    let servicio   =  parseFloat(Simulacion.escenario.mobs[0].mob[index].$.service);
+    let reposicion =  parseFloat(Simulacion.escenario.mobs[0].mob[index].$.repositionPercent);
+    let pesoMinimo =  parseFloat(Simulacion.escenario.mobs[0].mob[index].$.minInServiceWeight);
+
+    ObjetoMobs.paramGenerales = [servicio,reposicion,pesoMinimo];
+
+    for(let y = 0; y < 12; y++){
+      //Obtengo el mes en string que corresponde
+      let month = getMonth(y);
+
+      let ObjetoMesPastureAllow = {};
+
+      ObjetoMesPastureAllow.valor = parseFloat(state.valoresSimulacion[index].pastureAllow[0].$[month]); 
+      ObjetoMesPastureAllow.mes   = month;
+      ObjetoMobs.pastureAllow.push(ObjetoMesPastureAllow);
+
+      let ObjetoMesSilageAllow = {};
+      ObjetoMesSilageAllow.valor = parseFloat(state.valoresSimulacion[index].silageAllow[0].$[month]); 
+      ObjetoMesSilageAllow.mes   = month;
+      ObjetoMobs.silageAllow.push(ObjetoMesSilageAllow);
+
+      let ObjetoMesGrainAllow = {};
+      ObjetoMesGrainAllow.valor = parseFloat(state.valoresSimulacion[index].grainAllow[0].$[month]); 
+      ObjetoMesGrainAllow.mes   = month;
+      ObjetoMobs.grainAllow.push(ObjetoMesGrainAllow);
+
+      let ObjetoMesCropAllow = {};
+      ObjetoMesCropAllow.valor = parseFloat(state.valoresSimulacion[index].crop_stubbleAllow[0].$[month]); 
+      ObjetoMesCropAllow.mes   = month;
+      ObjetoMobs.cropAllow.push(ObjetoMesCropAllow);
+
+      let ObjetoMesStockAllow = {};
+      ObjetoMesStockAllow.valor = parseFloat(state.valoresSimulacion[index].stockPilledAllow[0].$[month]); 
+      ObjetoMesStockAllow.mes   = month;
+      ObjetoMobs.stockAllow.push(ObjetoMesStockAllow);
+
+    }
+
+    //Genero una dimension mas para poder reutilizar el componente de los meses
+    //Ej: [0].pastureAllow[12]
+    let ArrayAux = [];
+    ArrayAux.push(ObjetoMobs.pastureAllow);
+    ObjetoMobs.pastureAllow = ArrayAux;
+
+    ArrayAux = [];
+    ArrayAux.push(ObjetoMobs.silageAllow);
+    ObjetoMobs.silageAllow = ArrayAux;
+
+    ArrayAux = [];
+    ArrayAux.push(ObjetoMobs.grainAllow);
+    ObjetoMobs.grainAllow = ArrayAux;
+
+    ArrayAux = [];
+    ArrayAux.push(ObjetoMobs.cropAllow);
+    ObjetoMobs.cropAllow = ArrayAux;
+
+    ArrayAux = [];
+    ArrayAux.push(ObjetoMobs.stockAllow);
+    ObjetoMobs.stockAllow = ArrayAux;
+
+    let ObjetoVariacionWeaning = {}
+    if(Simulacion.escenario.mobs[0].mob[index].weaning_mob != " "){
+      //let aux8 = Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$;
+      ObjetoVariacionWeaning.cropStubbleEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableCrop_stubble === "true");
+      ObjetoVariacionWeaning.stockPilledEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableStockPilled === "true");
+      ObjetoVariacionWeaning.pastureAllow = ObjetoMobs.pastureAllow;
+      ObjetoVariacionWeaning.silageAllow  = ObjetoMobs.silageAllow;
+      ObjetoVariacionWeaning.grainAllow   = ObjetoMobs.grainAllow;
+      ObjetoVariacionWeaning.cropAllow    = ObjetoMobs.cropAllow;
+      ObjetoVariacionWeaning.stockAllow   = ObjetoMobs.stockAllow;
+      ObjetoVariacionWeaning.paddocks     = [];
+      ObjetoMobs.weaningMobs         = ObjetoVariacionWeaning;
+
+    }else{
+      ObjetoMobs.weaningMobs         = null;
+    }
+
+    ObjetoMobs.paddocks            = [];
+
+    return ObjetoMobs;
+}
+
+function iniciarArregloState(state=initialState,valor=1){
+  
+  let arrayGeneral = [];
 
 
-    if(valor > 0){
-        for(let index = 0; index< state.mobsNombre.length; index++){
-            
-            let arrayVariacion = [];
-            let SubMobArray = [];
-            let ObjetoSubMob = {};
-            let Objeto = {
-    					pagvariaciones : [],
-    					pagActual: 1
-    				}
+  if(valor > 0){
+      for(let index = 0; index< state.mobsNombre.length; index++){
+          let arrayVariacion = [];
+          let SubMobArray = [];
+          let ObjetoSubMob = {};
+          let aux7 = Simulacion.escenario.mobs[0].mob[index].$;
+          let Objeto = {
+  					pagvariaciones : [],
+  					pagActual: 1,              
+            cropStubbleEnable : (Simulacion.escenario.mobs[0].mob[index].$.enableCrop_stubble == "true"),
+            stockPilledEnable : (Simulacion.escenario.mobs[0].mob[index].$.enableStockPilled == "true"),
+  				}
 
-            //Genero los valores de los submobs
-            for(let indexSubMobs = 0; indexSubMobs < state.valoresSimulacion[index].submobs[0].submob.length; indexSubMobs++){
-              ObjetoSubMob = {};
-              ObjetoSubMob.variables = ["weaning","startCountAnimals","submobSwMax","submobSwMean","submobSwMin","vaquillona1ano","vaquillona2ano"]; 
-              ObjetoSubMob.valores   = [ 
-                                          parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
-                                          parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
-                                          parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
-                                          parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
-                                          parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
-                                          parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
-                                          parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
-                                        ]
+          //Genero los valores de los submobs
+          for(let indexSubMobs = 0; indexSubMobs < state.valoresSimulacion[index].submobs[0].submob.length; indexSubMobs++){
+            ObjetoSubMob = {};
+            ObjetoSubMob.nombre = state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobName;
+            ObjetoSubMob.variables = ["weaning","startCountAnimals","submobSwMax","submobSwMean","submobSwMin","vaquillona1ano","vaquillona2ano"]; 
+            ObjetoSubMob.valores   = [ 
+                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
+                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
+                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
+                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
+                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
+                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
+                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
+                                      ]
 
-              SubMobArray.push(ObjetoSubMob);              
-            }
-        		
-            for(let i = 0; i < valor; i++){	
+            SubMobArray.push(ObjetoSubMob);              
+          }
+      		let ObjetoMob = {};
+          for(let i = 0; i < valor; i++){	
+            ObjetoMob = {};
+            ObjetoMob = CrearObjetoMob(state,SubMobArray,index);
+            arrayVariacion.push(ObjetoMob);                
+          }  
 
-                //Todo lo que contiene una variacion de Mob
-        				let ObjetoMobs = {}
-                ObjetoMobs.pastureAllow = [];
-                ObjetoMobs.silageAllow  = [];
-                ObjetoMobs.grainAllow   = [];
-                ObjetoMobs.cropAllow    = [];
-                ObjetoMobs.stockAllow   = [];
-                ObjetoMobs.submobs      = [];
-                ObjetoMobs.weaningMobs  = {};
-                ObjetoMobs.submobs      = SubMobArray;
-
-                //Genero los valores por defecto de los meses de cada Mobs
-        				for(let y = 0; y < 12; y++){
-                  //Obtengo el mes en string que corresponde
-                  let month = getMonth(y);
-
-                  let ObjetoMesPastureAllow = {};
-        					ObjetoMesPastureAllow.valor = parseFloat(state.valoresSimulacion[index].pastureAllow[0].$[month]); 
-                  ObjetoMesPastureAllow.mes   = month;
-                  ObjetoMobs.pastureAllow.push(ObjetoMesPastureAllow);
-
-                  let ObjetoMesSilageAllow = {};
-                  ObjetoMesSilageAllow.valor = parseFloat(state.valoresSimulacion[index].silageAllow[0].$[month]); 
-                  ObjetoMesSilageAllow.mes   = month;
-        					ObjetoMobs.silageAllow.push(ObjetoMesSilageAllow);
-
-                  let ObjetoMesGrainAllow = {};
-                  ObjetoMesGrainAllow.valor = parseFloat(state.valoresSimulacion[index].grainAllow[0].$[month]); 
-                  ObjetoMesGrainAllow.mes   = month;
-        					ObjetoMobs.grainAllow.push(ObjetoMesGrainAllow);
-
-                  let ObjetoMesCropAllow = {};
-                  ObjetoMesCropAllow.valor = parseFloat(state.valoresSimulacion[index].crop_stubbleAllow[0].$[month]); 
-                  ObjetoMesCropAllow.mes   = month;
-        					ObjetoMobs.cropAllow.push(ObjetoMesCropAllow);
-
-                  let ObjetoMesStockAllow = {};
-                  ObjetoMesStockAllow.valor = parseFloat(state.valoresSimulacion[index].stockPilledAllow[0].$[month]); 
-                  ObjetoMesStockAllow.mes   = month;
-        					ObjetoMobs.stockAllow.push(ObjetoMesStockAllow);
-
-        				}
-
-        			  let ObjetoVariacionWeaning = {}
-
-        				ObjetoVariacionWeaning.pastureAllow = ObjetoMobs.pastureAllow;
-        				ObjetoVariacionWeaning.silageAllow  = ObjetoMobs.silageAllow;
-        				ObjetoVariacionWeaning.grainAllow   = ObjetoMobs.grainAllow;
-        				ObjetoVariacionWeaning.cropAllow    = ObjetoMobs.cropAllow;
-        				ObjetoVariacionWeaning.stockAllow   = ObjetoMobs.stockAllow;
-                ObjetoVariacionWeaning.paddocks     = [];
-        				ObjetoMobs.weaningMobs         = ObjetoVariacionWeaning;
-        				ObjetoMobs.paddocks            = [];
-        				
-        				
-                arrayVariacion.push(ObjetoMobs);
-                
-            }  
-
-            Objeto.pagvariaciones = arrayVariacion;
-            arrayGeneral.push(Objeto);
-        }   
-    }    
-    return arrayGeneral;
+          Objeto.pagvariaciones = arrayVariacion;
+          arrayGeneral.push(Objeto);
+      }   
+  }    
+  return arrayGeneral;
 }
 
 export default function(state=initialState,action){
