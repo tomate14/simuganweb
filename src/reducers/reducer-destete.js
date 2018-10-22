@@ -1,3 +1,4 @@
+
 import Simulacion from '../data/simulacioninicial.js';
 
 const initialState = {
@@ -249,4 +250,5 @@ export default function(state=initialState,action){
 
 	}
 	return state;
+
 } 

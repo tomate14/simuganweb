@@ -28,6 +28,10 @@ export default [
     url: '/Feedlot'
   },
   {
+    title: 'Reglas de Engorde',
+    url : '/Engorde'
+  },
+  {
     title : 'Configuraciones por Mobs',
     url: '/Mobs'
   }  ,

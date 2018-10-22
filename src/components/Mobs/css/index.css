@@ -1,0 +1,14 @@
+#contentoption{
+    border: solid 1px;
+    border-color: gainsboro;
+    border-radius: 25px;
+}
+
+div#divPicker{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+div#divInputs {
+	margin-top : 24px;
+}

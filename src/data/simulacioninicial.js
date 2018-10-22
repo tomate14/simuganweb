@@ -425,7 +425,8 @@ let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
                     ' < cutSubMob calfAge="60" calfBCS="5" calfSwMin="28" calfSwMean="120" calfSwMax="220" calfPresence="true" pregnancyDaysMax="254" pregnancyDaysMean="234" pregnancyDaysMin="164" startPregnant="true" bcs="5" swMin="460" swMean="480" swMax="500" amount="63" startWithCutSubMob="false"/> '+
                 ' < /submob> '+
             ' < /submobs> '+
-            ' < weaning_mob enableCrop_stubble="false" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="false"> '+
+            '< weaning_mob /> '+
+            /*' < weaning_mob enableCrop_stubble="false" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="false"> '+
                 ' < pastureAllow December="5" November="5" October="5" September="5" August="5" July="5" June="5" May="5" April="5" March="5" February="5" January="5"/> '+
                 ' < silageAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/> '+
                 ' < grainAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/> '+
@@ -434,7 +435,7 @@ let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
                 ' < paddockAssigned> '+
                     ' < paddock id="1"/> '+
                 ' < /paddockAssigned> '+
-            ' < /weaning_mob> '+
+            ' < /weaning_mob> '+*/
             ' < paddockAssigned> '+
                 ' < paddock id="2"/> '+
                 ' < paddock id="1"/> '+
@@ -634,7 +635,7 @@ let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
                 ' < paddock id="14"/> '+
             ' < /paddockAssigned> '+
         ' < /mob> '+
-        ' < mob enableCrop_stubble="false" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="false" endday="30" endmonth="11" startday="30" startmonth="08" service="15" minInServiceWeight="260" bullUtilLife="7" bullPercent="10" storeHeiferCalf="0" storeSteerCalf="0" pregnantRepositionUsed="false" cowWithoutCalf="false" repositionPercent="0" name="RC" mobUse="beef_finishing" id="6"> '+
+        ' < mob enableCrop_stubble="false" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="false" endday="30" endmonth="11" startday="30" startmonth="08" service="15" minInServiceWeight="260" bullUtilLife="7" bullPercent="10" storeHeiferCalf="0" storeSteerCalf="0" pregnantRepositionUsed="false" cowWithoutCalf="false" repositionPercent="1" name="RC" mobUse="beef_finishing" id="6"> '+
             ' < pastureAllow December="5" November="5" October="5" September="5" August="5" July="5" June="5" May="5" April="5" March="5" February="5" January="5"/> '+
             ' < silageAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/> '+
             ' < grainAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/> '+
@@ -745,6 +746,19 @@ let xml = ' < escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
             ' < /mobs> '+
         ' < /fattening> '+
     ' < /feedlot> '+
+    '<fattening fattMethod="pasto" enableCrop_stubble="true" crop_stubblePriority="3" stockPilledPriority="3" enableStockPilled="true" cuts="true" empties="true" enable="false">'+
+        '<pastureAllow December="5" November="5" October="5" September="5" August="5" July="5" June="5" May="5" April="5" March="5" February="5" January="5"/>'+
+        '<silageAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/>'+
+        '<grainAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/>'+
+        '<stockPilledAllow December="0" November="0" October="0" September="0" August="0" July="0" June="0" May="0" April="0" March="0" February="0" January="0"/>'+
+        '<crop_stubbleAllow January="0" February="0" March="0" April="0" May="0" June="0" July="0" August="0" September="0" October="0" November="0" December="0"/>'+
+        '<csf type="lw" bcsValue="5" lwValue="435"/>'+
+        '<diet feedlotBProtein="10" feedlotIntake="2.8" feedlotDigest="70" feedlotDRProtein="8"/>'+
+        '<paddockAssigned>'+
+            '<paddock id="5"/>'+
+        '</paddockAssigned>'+
+    '</fattening>'+
+
     ' < patrimonio> '+
         ' < pasivo banco="0" proveedores="0" impositivo="0"/> '+
         ' < activo caja="1000" banco="5000" porcobrar="0" landvalue="1120000" buildingvalue="200000"> '+

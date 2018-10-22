@@ -89,6 +89,12 @@ class Content extends Component {
                                               }
                                             break;
 
+                                            case "/Engorde":                                              
+                                              if(Simulacion.escenario.fattening[0] != ""){
+                                                  return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                              }
+                                            break;
+
                                             case "/Feedlot":
                                               //let aux6 = Simulacion.escenario.pastureType[0];
                                               return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;

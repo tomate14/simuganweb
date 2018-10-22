@@ -15,6 +15,8 @@ import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,modif
 import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//estilos
+import './css/index.css'; 
 
 import ContentOption from '../Generales/ContentOption'; 
 
@@ -63,7 +65,7 @@ class Diferido extends Component {
 		return(
 			<Container>
 				<Row>
-					<Col><ContentOption state = {diferidos} 
+					<Col id="contentoption" ><ContentOption state = {diferidos} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row> 
@@ -71,22 +73,30 @@ class Diferido extends Component {
 					<Form>
 						        <FormGroup row>
 						        	
-						          	<Col sm="4">
+						          	<Col id= "divPicker" sm="4">
 							          	<Picker 
 											id="Pasturas"
 							                opciones         = {this.props.diferidos.nombrePasturas}
 									        dropDownSelected = {this.props.diferidos.dropdownSelected}
 									        funcSelected     = {this.props.modificarDropdownSelected}/>
 									</Col>
-									<Label for="Pasturas" sm={4}> Selección: {this.props.diferidos.nombrePasturas[this.props.diferidos.dropdownSelected]} </Label>
+									<Label for="Pasturas" sm={4}><font size = "5"><b> Selección: </b> {this.props.diferidos.nombrePasturas[this.props.diferidos.dropdownSelected]}</font> </Label>
 						        </FormGroup>
 						    </Form>
 
 				<Row>
+					<Col id="simulationValues">
+						<h5>Digestibilidad del Diferido[50-90]% </h5>
+				   		<h5><b>Carga simulación inicial: [{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}]</b></h5>
+					</Col>
+					<Col id = "simulationValues">
+						<h5>Rinde del Diferido [15-200] /ha</h5>
+				   		<h5><b>Carga simulación inicial: [{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}]</b></h5>
+					</Col>
+				</Row>
+				<Row>
 				   <Col>
 				   		
-				   		<h5>Digestibilidad del Diferido[50-90]% </h5>
-				   		<h5><b>Carga simulacin inicial: [{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].digestValue}]</b></h5>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 				   					 arrayVariaciones = {this.props.diferidos.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
@@ -94,8 +104,6 @@ class Diferido extends Component {
 				   </Col>
 				   <Col>
 				   		
-				   		<h5>Rinde del Diferido [15-200] /ha</h5>
-				   		<h5><b>Carga simulacin inicial: [{this.props.diferidos.valoresSimulacion[this.props.diferidos.dropdownSelected].yieldValue}]</b></h5>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueRinde}
 				   					 arrayVariaciones = {this.props.diferidos.rindeVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 

@@ -6,6 +6,8 @@ import invernada from './reducer-invernada';
 import rastrojos from './reducer-rastrojos';
 import ensilaje from './reducer-ensilaje';
 import feedlot from './reducer-feedlot';
+import mobs from './reducer-mob';
+import engorde from './reducer-engorde';
 import destete from './reducer-destete';
 
 
@@ -19,6 +21,8 @@ const allReducers = combineReducers({
     rastrojos          : rastrojos, 
     ensilaje           : ensilaje,
     feedlot            : feedlot,
+    mobs               : mobs,
+    engorde 		   : engorde,
     destete            : destete
 });
 

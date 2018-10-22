@@ -12,6 +12,7 @@ class MonthTable extends Component {
 		super(props);
 		//Arreglo de informacion a mostrar
 		this.months = props.state;
+		console.log(this.months);
 	}
 
 	render(){
@@ -21,7 +22,7 @@ class MonthTable extends Component {
 			        <thead>
 			          <tr>
 			            <th>Mes</th>
-					    <th>Crecimiento</th>
+					    <th>{this.props.columna}</th>
 			          </tr>
 			        </thead>
 			        <tbody>

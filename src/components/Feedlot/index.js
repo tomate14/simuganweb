@@ -7,7 +7,7 @@ import ContentInputSpam from '../Generales/ContentInputSpam';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Container,Col, Row, Form, FormGroup, Label, Button} from 'reactstrap';
+import {Container,Col, Row, Button} from 'reactstrap';
 import {permitirVariaciones,modificarVariaciones,modificarPagina,InputVariacionSalida,InputVariacionEngorde} from '../../actions/action-feedlot.js';
 
 

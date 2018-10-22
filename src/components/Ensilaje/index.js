@@ -43,29 +43,29 @@ class Ensilaje extends Component {
 		return(
 			<Container>
 				<Row>
-					<Col><ContentOption state = {ensilaje} 
+					<Col id="contentoption"><ContentOption state = {ensilaje} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row> 
 				<Row>
-					 <Tabla 
-					 			texto1 = {"Valor de masa de los Potreros a partir de la cual se dispara el ensilaje"}
-					 			texto2 = {"Valor de masa remanente de los Potreros luego de realizar la ensilada"}					 			
-					 			valor1 = {this.props.ensilaje.valoresSimulacion.digestValue}
-					 			valor2 = {this.props.ensilaje.valoresSimulacion.yieldValue}
-					 />
-					 
+					<Col id = "simulationValues">
+						<h5> (MPPE)  Valor de masa de los Potreros a partir de la cual se dispara el ensilaje</h5>
+						<h5> [700,...] </h5>
+						<h5><b>Carga simulación inicial: [ {this.props.ensilaje.valoresSimulacion.digestValue} ] kg MS/Ha</b> </h5>
+					</Col>
+					<Col id = "simulationValues">
+						<h5>Valor de masa remanente de los Potreros luego de realizar la ensilada [400,valor(MPPE)]</h5>
+						<h5><b>Carga simulación inicial: [ {this.props.ensilaje.valoresSimulacion.yieldValue} ] kg MS/Ha</b> </h5>					
+					</Col>
 				</Row>
 				<Row>
 				   <Col>
-				   		<p> (MPPE) Valor de masa de los Potreros a partir de la cual se dispara el ensilaje[700,...] kg MS/Ha</p>
 				   		<SingleInputArray funcModificar = {this.props.modificarInputValueTrigger}
 				   					 arrayVariaciones = {this.props.ensilaje.triggerVariaciones}
 				   					 cantVariaciones = {this.props.ensilaje.cantVariaciones} 
 				   					 />
 				   </Col>
 				   <Col>
-				   		<p>"Valor de masa remanente de los Potreros luego de realizar la ensilada [400,valor(MPPE)] kg MS/Ha</p>
 				   		<SingleInputArray funcModificar = {this.props.modificarInputValueLeftover}
 				   					 arrayVariaciones = {this.props.ensilaje.leftoverVariaciones}
 				   					 cantVariaciones = {this.props.ensilaje.cantVariaciones}/>

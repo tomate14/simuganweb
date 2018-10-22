@@ -25,23 +25,30 @@ class Invernada extends Component {
 		if(invernada.permitido){
 			if(invernada.cantVariaciones > 0){
 				return(
+					<Container>
 					<Row>
-					   <Col>
-					   		
-					   		<h5>Valor peso de venta Vaquillona [150-650] kg</h5>
-					   		<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].vaquillonaValue}]</b></h5>
+					<Col id = "simulationValues">
+						<h5>Valor peso de venta Vaquillona [150-650] kg</h5>
+					   	<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].vaquillonaValue}]</b></h5>	
+					</Col>
+					<Col id = "simulationValues">
+						<h5>Valor peso de venta Nobillo[150-650]% </h5>
+					   	<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].nobilloValue}]</b></h5>
+					</Col>
+					</Row>
+					<Row>
+					   <Col>	
 					   		<SingleInputArray funcModificar = {this.props.modificarInputValueVaquillona}
 					   					      arrayVariaciones = {this.props.invernada.VaquillonaVariaciones}
 					   					      cantVariaciones = {this.props.invernada.cantVariaciones}/>
 					   </Col>
 					   <Col>				   		
-					   		<h5>Valor peso de venta Nobillo[150-650]% </h5>
-					   		<h5><b>Carga simulacin inicial: [{this.props.invernada.valoresSimulacion[0].nobilloValue}]</b></h5>
 					   		<SingleInputArray funcModificar = {this.props.modificarInputValueVacasEngorde}
 					   					      arrayVariaciones = {this.props.invernada.nobillosVariaciones}
 					   					      cantVariaciones = {this.props.invernada.cantVariaciones}/>
 					   </Col>
 				   </Row>
+				   </Container>
 				);
 			}
 		};

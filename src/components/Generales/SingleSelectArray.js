@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 
 
-class SingleInputArray extends Component {
+class SingleSelectArray extends Component {
 
 	constructor(props){
 		super(props);
@@ -27,7 +27,12 @@ class SingleInputArray extends Component {
   	generarInputs(parametro,funcOnChange){
 	  	var rows = [];
 	  	for(var i = 0; i< this.props.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
-			rows.push(<input onChange = {funcOnChange} value = {this.ponerValor(parametro[i])} id = {i} type="number"/>); 
+			rows.push(<select id = {i} value = {this.props.arrayVariaciones[i]} onChange = {this.props.funcModificar}>
+				{this.props.selectValues.map((object,index) => {
+					return <option key ={index} value = {object} id = {index}> {object}</option>}
+				)}
+				
+					  </select>); 
 		}
 		return rows;
 	} 
@@ -39,4 +44,4 @@ class SingleInputArray extends Component {
 	}
 }
 
-export default SingleInputArray;
+export default SingleSelectArray;
