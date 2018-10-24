@@ -18,7 +18,7 @@ import MobsInputVariations from './MobsInputVariations';
 //redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected, modificarPagina} from '../../actions/action-mob.js';
+import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected, modificarPagina,modificarConfGenerales} from '../../actions/action-mob.js';
 
 
 
@@ -208,6 +208,7 @@ class Mobs extends Component {
 		array.push( <MobsInputVariations 
 							array  = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].paramGenerales}
 							textos = {["Servicio a Vaquillona [meses]","Reposicion de Vientres","Peso Minimo de Ingreso"]}
+							funcion = {this.props.modificarConfGenerales}
 			         />);
 
 		let TabPanesSubMobs = this.loadTabsSubMobs(mobs,pagina);
@@ -370,7 +371,8 @@ function mapStateToProps(state){
 function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones, 
-    	                       modificarDropdownSelected:modificarDropdownSelected, modificarPagina:modificarPagina }, dispatch);
+    	                       modificarDropdownSelected:modificarDropdownSelected, modificarPagina:modificarPagina,
+    	                       modificarConfGenerales:modificarConfGenerales }, dispatch);
     
 }
 

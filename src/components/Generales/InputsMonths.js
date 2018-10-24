@@ -47,6 +47,27 @@ class InputsMonths extends Component{
 			this.props.funcModiPagina(this.props.paginaActual-1);	
 		}
 	}
+
+	mostrarFlechaArriba(){
+		if(this.props.cantVariaciones > 1){
+			return (
+					<Col xs={2} className="divFlechas">					
+						<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
+					</Col>
+				);	
+		}
+	}
+
+	mostrarFlechaAbajo(){
+		if(this.props.cantVariaciones > 1){
+			return (
+					<Col xs={2}className="divFlechas">
+						<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
+					</Col>
+				);	
+		}
+	}
+
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
@@ -54,9 +75,7 @@ class InputsMonths extends Component{
 		return(
 		<div className="container-fluid">
 			<Row xs={12}>				
-				<Col xs={2} className="divFlechas">					
-					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
-				</Col>
+				{this.mostrarFlechaAbajo()}
 				<Col xs={4} className="divInputs">
 					<p className="labelPagina">Pagina:{this.props.paginaActual}</p>
 					<div id = "divInputs" className="divInputsVariation">
@@ -73,9 +92,7 @@ class InputsMonths extends Component{
 				        ))}
 					</div>
 				</Col>
-				<Col xs={2}className="divFlechas">
-					<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
-				</Col>
+				{this.mostrarFlechaArriba()}
 				<Col >
 					
 				</Col>

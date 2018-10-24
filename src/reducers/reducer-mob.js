@@ -182,11 +182,72 @@ function CrearObjetoMob(state,SubMobArray,index){
       //let aux8 = Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$;
       ObjetoVariacionWeaning.cropStubbleEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableCrop_stubble === "true");
       ObjetoVariacionWeaning.stockPilledEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableStockPilled === "true");
-      ObjetoVariacionWeaning.pastureAllow = ObjetoMobs.pastureAllow;
+      ObjetoVariacionWeaning.pastureAllow   = [];
+      ObjetoVariacionWeaning.silageAllow    = [];
+      ObjetoVariacionWeaning.grainAllow     = [];
+      ObjetoVariacionWeaning.cropAllow      = [];
+      ObjetoVariacionWeaning.stockAllow     = [];
+
+      let aux11 = Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].pastureAllow[0].$;
+
+      for(let y = 0; y < 12; y++){
+        //Obtengo el mes en string que corresponde
+        let monthWeaning = getMonth(y);
+
+        let ObjetoMesPastureAllowWeaning = {};
+
+        ObjetoMesPastureAllowWeaning.valor = parseFloat(state.valoresSimulacion[index].weaning_mob[0].pastureAllow[0].$[monthWeaning]); 
+        ObjetoMesPastureAllowWeaning.mes   = monthWeaning;
+        ObjetoVariacionWeaning.pastureAllow.push(ObjetoMesPastureAllowWeaning);
+
+        let ObjetoMesSilageAllowWeaning = {};
+        ObjetoMesSilageAllowWeaning.valor = parseFloat(state.valoresSimulacion[index].weaning_mob[0].silageAllow[0].$[monthWeaning]); 
+        ObjetoMesSilageAllowWeaning.mes   = monthWeaning;
+        ObjetoVariacionWeaning.silageAllow.push(ObjetoMesSilageAllowWeaning);
+
+        let ObjetoMesGrainAllowWeaning = {};
+        ObjetoMesGrainAllowWeaning.valor = parseFloat(state.valoresSimulacion[index].weaning_mob[0].grainAllow[0].$[monthWeaning]); 
+        ObjetoMesGrainAllowWeaning.mes   = monthWeaning;
+        ObjetoVariacionWeaning.grainAllow.push(ObjetoMesGrainAllowWeaning);
+
+        let ObjetoMesCropAllowWeaning = {};
+        ObjetoMesCropAllowWeaning.valor = parseFloat(state.valoresSimulacion[index].weaning_mob[0].crop_stubbleAllow[0].$[monthWeaning]); 
+        ObjetoMesCropAllowWeaning.mes   = monthWeaning;
+        ObjetoVariacionWeaning.cropAllow.push(ObjetoMesCropAllowWeaning);
+
+        let ObjetoMesStockAllowWeaning = {};
+        ObjetoMesStockAllowWeaning.valor = parseFloat(state.valoresSimulacion[index].weaning_mob[0].stockPilledAllow[0].$[monthWeaning]); 
+        ObjetoMesStockAllowWeaning.mes   = monthWeaning;
+        ObjetoVariacionWeaning.stockAllow.push(ObjetoMesStockAllowWeaning);
+
+
+      } 
+
+      ArrayAux = [];
+      ArrayAux.push(ObjetoVariacionWeaning.pastureAllow);
+      ObjetoVariacionWeaning.pastureAllow = ArrayAux;
+
+      ArrayAux = [];
+      ArrayAux.push(ObjetoVariacionWeaning.silageAllow);
+      ObjetoVariacionWeaning.silageAllow = ArrayAux;
+
+      ArrayAux = [];
+      ArrayAux.push(ObjetoVariacionWeaning.grainAllow);
+      ObjetoVariacionWeaning.grainAllow = ArrayAux;
+
+      ArrayAux = [];
+      ArrayAux.push(ObjetoVariacionWeaning.cropAllow);
+      ObjetoVariacionWeaning.cropAllow = ArrayAux;
+
+      ArrayAux = [];
+      ArrayAux.push(ObjetoVariacionWeaning.stockAllow);
+      ObjetoVariacionWeaning.stockAllow = ArrayAux;
+
+      /*ObjetoVariacionWeaning.pastureAllow = ObjetoMobs.pastureAllow;
       ObjetoVariacionWeaning.silageAllow  = ObjetoMobs.silageAllow;
       ObjetoVariacionWeaning.grainAllow   = ObjetoMobs.grainAllow;
       ObjetoVariacionWeaning.cropAllow    = ObjetoMobs.cropAllow;
-      ObjetoVariacionWeaning.stockAllow   = ObjetoMobs.stockAllow;
+      ObjetoVariacionWeaning.stockAllow   = ObjetoMobs.stockAllow;*/
       ObjetoVariacionWeaning.paddocks     = [];
       ObjetoMobs.weaningMobs         = ObjetoVariacionWeaning;
 
@@ -199,6 +260,20 @@ function CrearObjetoMob(state,SubMobArray,index){
     return ObjetoMobs;
 }
 
+function modificarArreglo(action, mob,pagina){
+    let array = [];
+    let variaciones = mob;
+    for (let i = 0; i< variaciones.pagvariaciones[pagina].paramGenerales.length; i++){
+      if(i == action.index){
+        array.push(action.valor);
+      }else{
+        array.push(variaciones.pagvariaciones[pagina].paramGenerales[i]);
+      }
+    }
+    variaciones.pagvariaciones[pagina].paramGenerales = array;
+    return variaciones;
+
+}
 function iniciarArregloState(state=initialState,valor=1){
   
   let arrayGeneral = [];
@@ -273,10 +348,22 @@ export default function(state=initialState,action){
 		break;
 
     case "MODIFYDROPDOWN_MOB":
-    return{...state,
-      dropDownSelected : parseInt(action.payload)
-      }
-    break;
+      return{...state,
+        dropDownSelected : parseInt(action.payload)
+        }
+      break;
+
+    case "CONF-GENERALES_MOB":
+      /*return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones : modificarArreglo(action,state.arrayMobs[i],state.arrayMobs[i].pagActual-1)
+                               }                        
+                        : content
+                )
+        }*/
+      break;
 
     case("PAGINA_MOB"):
             let pagina = action.payload;

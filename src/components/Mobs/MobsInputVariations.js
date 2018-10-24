@@ -17,15 +17,16 @@ class MobsInputVariations extends Component {
 		return(
 			<Container>
 				<Row>
-					<Col sm={4}> </Col>
-					<Col sm={4}>
+					<Col md={4}> </Col>
+					<Col md={4}>
 						{
 							this.props.array.map((input, key) => (
 								<InputGroup>
 								    <InputGroupAddon addonType="append">{this.props.textos[key] }</InputGroupAddon>
-								    <Input type="number" name="0" 
+								    <Input type="number" name={key} 
 									    id    = {this.props.array[key]} 
 									    key = {key}
+									    onChange = {this.props.funcion}
 									    value =  {this.props.array[key]}     />				    
 								</InputGroup>
 					            
@@ -33,7 +34,7 @@ class MobsInputVariations extends Component {
 						}						
 						
 					</Col>
-					<Col sm={4}> </Col>
+					<Col md={4}> </Col>
 				</Row>
 			</Container>
 		);

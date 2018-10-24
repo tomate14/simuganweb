@@ -29,3 +29,14 @@ export function modificarPagina(pagina) {
     }    
     
 }
+
+export function modificarConfGenerales(e){
+    let index    = parseInt(e.target.name);
+    let valor = parseInt(e.target.value);
+    return {
+        type:"CONF-GENERALES_MOB",
+        index: index,
+        valor: valor
+
+    }
+}
