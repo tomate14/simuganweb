@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 //bootstrap
-import {Container,Col, Row, Form, FormGroup, Label, Button} from 'reactstrap';
+import {Container,Col, Row, Form, FormGroup, Label, Button,InputGroup,InputGroupAddon,Input} from 'reactstrap';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,13 +11,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import MobContent from './mobContent';
 import ContentOption from '../Generales/ContentOption';
 import Picker from '../Generales/Picker';
-//import TabMenu from '../Generales/TabMenu';
-//import ServicioDestete from './ServicioDestete';
+import TabMenu from '../Generales/TabMenu';
+import PasturePane from '../Generales/PasturePane';
+import MobsInputVariations from './MobsInputVariations';
 
 //redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected, modificarPagina} from '../../actions/action-mob.js';
+import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,
+        modificarPagina,modificarConfGenerales, 
+        modificarPasturaGeneral,
+        modificarGranoGeneral,
+        modificarEnsilajeGeneral,
+        modificarRastrojoGeneral,
+    	modificarDiferidoGeneral,
+    	modificarWeaningPastura,
+        modificarWeaningGrano,
+        modificarWeaningEnsilaje,
+        modificarWeaningRastrojo,
+    	modificarWeaningDiferido,
+    	modificarSubMobs} from '../../actions/action-mob.js';
+
+
 
 //estilos
 import './css/index.css'; 
@@ -29,30 +44,9 @@ class Mobs extends Component {
 		//this.handleInputValueChange = this.handleInputValueChange.bind(this);
 		this.handleClickDown = this.handleClickDown.bind(this);
 		this.handleClickUp = this.handleClickUp.bind(this);
-		
+	  	this.loadTabs = this.loadTabs.bind(this);
+   		this.loadTitles = this.loadTitles.bind(this);
 	}
-	/*static propTypes = {
-      selectOptions: PropTypes.array.isrequired
-  };*/
-
-
-    /*
-    <Row>
-					<Col id="divPicker" sm = {"3"}>
-				<Picker 
-											id="Mobs"
-							                opciones         = {mobs.mobsNombre}
-									        dropDownSelected = {this.props.mobs.dropdownSelected}
-									        funcSelected     = {this.props.modificarDropdownSelected}/>
-					</Col>
-				</Row>
-				<Row id="divTabs">
-				
-				</Row>
-	<TabMenu opcion = {<ServicioDestete arrayDestete = {this.props.mobs.arrayDestete}
-													arrayServicio = {this.props.mobs.arrayServicio}
-													arrayPesoServicio = {this.props.mobs.arrayPesoServicio}/>}/>
-    */
  
 
 	handleClickUp(){
@@ -69,9 +63,254 @@ class Mobs extends Component {
 		}
 	}
 
+	getMonth(numeroMes){
+		  switch(numeroMes){
+		    case 0:
+		        return "January";
+		        break;
+		    case 1:
+		        return "February";
+		        break;
+		    case 2:
+		        return "March";
+		        break;
+		    case 3:
+		        return "April";
+		        break;
+		    case 4:
+		        return "May";
+		        break;
+		    case 5:
+		        return "June";
+		        break;
+		    case 6:
+		        return "July";
+		        break;
+		    case 7:
+		        return "August";
+		        break;
+		    case 8:
+		        return "September";
+		        break;
+		    case 9:
+		        return "October";
+		        break;
+		    case 10:
+		        return "November";
+		        break;
+		    case 11:
+		        return "December";
+		        break;
+		  }
+	}
+
+    generarArraySimulacion(ObjetoInicial){
+    	let array   = [];
+    	for(let y = 0; y<12; y++){
+    		let month = this.getMonth(y);
+            let ObjetoMes = {};
+    		ObjetoMes.value = parseFloat(ObjetoInicial[month]); 
+            ObjetoMes.month   = month;
+            array.push(ObjetoMes);
+    	}
+
+    	return array;
+        
+        
+    }
+
+    loadTabsWeaning(){
+		const mobs = this.props.mobs;
+		const pagina = mobs.arrayMobs[mobs.dropDownSelected].pagActual -1;
+		const arrayValoresPastura     = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].pastureAllow[0].$);
+		const arrayValoresSilageAllow = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].silageAllow[0].$);
+		const arrayValoresGrainAllow  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].grainAllow[0].$);
+
+		let array = [];
+		array = 		[<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.pastureAllow}
+										arregloSimulacion  = {arrayValoresPastura}
+										funcModifVariacion = {this.props.modificarWeaningPastura}
+										//funcModifPagina    = {this.props.modificarPaginaPasture} 
+										/>,
+
+						<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.silageAllow}
+										arregloSimulacion  = {arrayValoresSilageAllow}
+										funcModifVariacion = {this.props.modificarWeaningEnsilaje}
+										/*funcModifPagina    = {this.props.modificarPaginaGrain} */
+										/>,
+
+						<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.grainAllow}
+										arregloSimulacion  = {arrayValoresGrainAllow}
+										funcModifVariacion = {this.props.modificarWeaningGrano}
+										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
+										/> ];
+		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropStubbleEnable){
+			const arrayValoresCropStubble  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].crop_stubbleAllow[0].$);		
+			array.push(<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropAllow}
+										arregloSimulacion  = {arrayValoresCropStubble}
+										funcModifVariacion = {this.props.modificarWeaningRastrojo}
+										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
+		}
+		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockPilledEnable){
+			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].stockPilledAllow[0].$);
+			array.push(<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockAllow}
+										arregloSimulacion  = {arrayValoresStockPilled}
+										funcModifVariacion = {this.props.modificarWeaningDiferido}
+										/*funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
+		}
+		
+		return array;
+	}
+
+	loadTitlesWeaning(pagina){
+			const mobs = this.props.mobs;
+			let array = ["Configuracion de Pastura", "Configuracion de Grano","Configuracion de Ensilaje"];	
+			if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropStubbleEnable){
+				array.push("Configuracion de Rastrojo");
+			}
+			if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockPilledEnable){
+				array.push("Configuracion de Diferidos");
+			}
+
+		return array;
+	}
+	loadTabsSubMobs(mobs,pagina){
+			let array = [];
+			let SubMobs = mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].submobs;
+			for(let i = 0; i < SubMobs.length; i++){
+				console.log("Objeto array de valores submob "+SubMobs[i].valores);
+				array.push(
+							<MobsInputVariations 
+										atributo = {i}
+										array  = {SubMobs[i].valores}
+										textos = {SubMobs[i].variables}
+										funcion = {this.props.modificarSubMobs}
+					         />
+
+					);
+			}
+			return array;
+	}
+	loadTitlesSubMobs(mobs,pagina){
+			let array = [];	
+			let SubMobs = mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].submobs;
+			for(let i = 0; i < SubMobs.length; i++){
+				array.push(SubMobs[i].nombre);
+			}
+			
+
+		return array;
+	}
+	loadTabs(){
+		const mobs = this.props.mobs;
+		const pagina = mobs.arrayMobs[mobs.dropDownSelected].pagActual -1;
+		const arrayValoresPastura     = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].pastureAllow[0].$);
+		const arrayValoresSilageAllow = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].silageAllow[0].$);
+		const arrayValoresGrainAllow  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].grainAllow[0].$);
+
+		let array = [];
+		//Se agrega un submob por defecto que no se va a usar para esta tab
+		array.push( <MobsInputVariations 
+							array  = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].paramGenerales}
+							textos = {["Servicio a Vaquillona [meses]","Reposicion de Vientres","Peso Minimo de Ingreso"]}
+							atributo ={"ConfGenerales"}
+							funcion = {this.props.modificarConfGenerales}
+			         />);
+
+		let TabPanesSubMobs = this.loadTabsSubMobs(mobs,pagina);
+		let navTextsSubMobs = this.loadTitlesSubMobs(mobs,pagina);
+
+		array.push(<TabMenu panels = { TabPanesSubMobs }
+						 		 navTexts = {navTextsSubMobs}
+						 		 clase    = "claSubMobs"
+					   />);
+		
+		array.push(<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].pastureAllow}
+										arregloSimulacion  = {arrayValoresPastura}
+										funcModifVariacion = {this.props.modificarPasturaGeneral}
+										//funcModifPagina    = {this.props.modificarPaginaPasture} 
+										/>);
+
+		array.push(<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].silageAllow}
+										arregloSimulacion  = {arrayValoresSilageAllow}
+										funcModifVariacion = {this.props.modificarEnsilajeGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaGrain} */
+										/>);
+		array.push(<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].grainAllow}
+										arregloSimulacion  = {arrayValoresGrainAllow}
+										funcModifVariacion = {this.props.modificarGranoGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
+										/>);
+
+		if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
+			const arrayValoresCropStubble  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].crop_stubbleAllow[0].$);		
+			array.push(<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].cropAllow}
+										arregloSimulacion  = {arrayValoresCropStubble}
+										funcModifVariacion = {this.props.modificarRastrojoGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
+		}
+		if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
+			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].stockPilledAllow[0].$);
+			array.push(<PasturePane 	cantVariaciones    = {1}
+										paginaActual       = {1}
+										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].stockAllow}
+										arregloSimulacion  = {arrayValoresStockPilled}
+										funcModifVariacion = {this.props.modificarDiferidoGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
+		}
+		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs != " "){
+
+
+			let TabPanes2 = this.loadTabsWeaning();
+			let navTexts2 = this.loadTitlesWeaning(pagina);
+			array.push(<TabMenu panels = { TabPanes2 }
+						 		 navTexts = {navTexts2}
+						 		 clase    = "claSecundaria"
+					   />);
+		}
+		return array;
+	}
+
+	loadTitles(){
+			let mobs = this.props.mobs;
+			let pagina = mobs.arrayMobs[mobs.dropDownSelected].pagActual-1;
+			let array = ["Configuracion General","SubMobs","Configuracion de Pastura", "Configuracion de Ensilaje","Configuracion de Grano"];	
+			if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
+				array.push("Configuracion de Rastrojo");
+			}
+			if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
+				array.push("Configuracion de Diferidos");
+			}
+			if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs != " "){
+				array.push("Weaning");
+			}
+
+		return array;
+	}
+
     generarTabs(mobs){
     	if(mobs.permitido){
 			if(mobs.cantVariaciones > 0){
+				let TabPanes = this.loadTabs();
+				let navTexts = this.loadTitles();
 		    	return(
 		    		<Container>
 		    			<Form>
@@ -104,6 +343,10 @@ class Mobs extends Component {
 							</Col>
 							<Col md={4}/>
 						</Row>
+						<TabMenu panels = { TabPanes }
+						 		 navTexts = {navTexts}
+						 		 clase    = "claPrincipal"
+						/>
 
 
 		    		</Container>
@@ -111,9 +354,12 @@ class Mobs extends Component {
 		    }
 		}
     }
+
+
 	render(){
 
-        var mobs = this.props.mobs;
+        let mobs = this.props.mobs;
+        
 		return(
 			<Container>
 				<Row>
@@ -141,7 +387,19 @@ function mapStateToProps(state){
 function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones, 
-    	                       modificarDropdownSelected:modificarDropdownSelected, modificarPagina:modificarPagina }, dispatch);
+    	                       modificarDropdownSelected:modificarDropdownSelected, modificarPagina:modificarPagina,
+    	                       modificarConfGenerales:modificarConfGenerales,
+    	                       modificarPasturaGeneral:modificarPasturaGeneral,
+    	                       modificarGranoGeneral:modificarGranoGeneral,
+    	                       modificarEnsilajeGeneral:modificarEnsilajeGeneral,
+    	                       modificarRastrojoGeneral:modificarRastrojoGeneral,
+    	                       modificarDiferidoGeneral:modificarDiferidoGeneral,
+    	                       modificarWeaningPastura:modificarWeaningPastura,
+    	                       modificarWeaningGrano:modificarWeaningGrano,
+    	                       modificarWeaningEnsilaje:modificarWeaningEnsilaje,
+    	                       modificarWeaningRastrojo:modificarWeaningRastrojo,
+    	                       modificarWeaningDiferido:modificarWeaningDiferido,
+    	                       modificarSubMobs:modificarSubMobs }, dispatch);
     
 }
 
