@@ -9,23 +9,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class MobsInputVariations extends Component {
 
-	constructor(props){
-		super(props);
-	}
 
 	render(){
 		return(
 			<Container>
-				<Row>
-					<Col md={4}> </Col>
-					<Col md={4}>
+				<Row md={12}>
+					<Col md={3}> </Col>
+					<Col md={6}>
 						{
 							this.props.array.map((input, key) => (
 								<InputGroup>
 								    <InputGroupAddon addonType="append">{this.props.textos[key] }</InputGroupAddon>
 								    <Input type="number" name={key} 
-									    id    = {this.props.array[key]} 
-									    key = {key}
+									    id    = {this.props.atributo} 
 									    onChange = {this.props.funcion}
 									    value =  {this.props.array[key]}     />				    
 								</InputGroup>
@@ -34,7 +30,7 @@ class MobsInputVariations extends Component {
 						}						
 						
 					</Col>
-					<Col md={4}> </Col>
+					<Col md={3}> </Col>
 				</Row>
 			</Container>
 		);

@@ -18,7 +18,19 @@ import MobsInputVariations from './MobsInputVariations';
 //redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected, modificarPagina,modificarConfGenerales} from '../../actions/action-mob.js';
+import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,
+        modificarPagina,modificarConfGenerales, 
+        modificarPasturaGeneral,
+        modificarGranoGeneral,
+        modificarEnsilajeGeneral,
+        modificarRastrojoGeneral,
+    	modificarDiferidoGeneral,
+    	modificarWeaningPastura,
+        modificarWeaningGrano,
+        modificarWeaningEnsilaje,
+        modificarWeaningRastrojo,
+    	modificarWeaningDiferido,
+    	modificarSubMobs} from '../../actions/action-mob.js';
 
 
 
@@ -119,7 +131,7 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.pastureAllow}
 										arregloSimulacion  = {arrayValoresPastura}
-										//funcModifVariacion = {this.props.inputVariacionPastureValor}
+										funcModifVariacion = {this.props.modificarWeaningPastura}
 										//funcModifPagina    = {this.props.modificarPaginaPasture} 
 										/>,
 
@@ -127,16 +139,16 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.silageAllow}
 										arregloSimulacion  = {arrayValoresSilageAllow}
-										/*funcModifVariacion = {this.props.inputVariacionGrainValor}
-										funcModifPagina    = {this.props.modificarPaginaGrain} */
+										funcModifVariacion = {this.props.modificarWeaningEnsilaje}
+										/*funcModifPagina    = {this.props.modificarPaginaGrain} */
 										/>,
 
 						<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.grainAllow}
 										arregloSimulacion  = {arrayValoresGrainAllow}
-										/*funcModifVariacion = {this.props.inputVariacionSilageValor}
-										funcModifPagina    = {this.props.modificarPaginaSilage} */
+										funcModifVariacion = {this.props.modificarWeaningGrano}
+										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
 										/> ];
 		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropStubbleEnable){
 			const arrayValoresCropStubble  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].crop_stubbleAllow[0].$);		
@@ -144,8 +156,8 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropAllow}
 										arregloSimulacion  = {arrayValoresCropStubble}
-										/*funcModifVariacion = {this.props.inputVariacionRastrojoValor}
-										funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
+										funcModifVariacion = {this.props.modificarWeaningRastrojo}
+										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
 		}
 		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockPilledEnable){
 			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].stockPilledAllow[0].$);
@@ -153,8 +165,8 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockAllow}
 										arregloSimulacion  = {arrayValoresStockPilled}
-										/*funcModifVariacion = {this.props.inputVariacionDiferidosValor}
-										funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
+										funcModifVariacion = {this.props.modificarWeaningDiferido}
+										/*funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
 		}
 		
 		return array;
@@ -176,11 +188,13 @@ class Mobs extends Component {
 			let array = [];
 			let SubMobs = mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].submobs;
 			for(let i = 0; i < SubMobs.length; i++){
+				console.log("Objeto array de valores submob "+SubMobs[i].valores);
 				array.push(
 							<MobsInputVariations 
-										subMob = {i}
+										atributo = {i}
 										array  = {SubMobs[i].valores}
 										textos = {SubMobs[i].variables}
+										funcion = {this.props.modificarSubMobs}
 					         />
 
 					);
@@ -205,9 +219,11 @@ class Mobs extends Component {
 		const arrayValoresGrainAllow  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].grainAllow[0].$);
 
 		let array = [];
+		//Se agrega un submob por defecto que no se va a usar para esta tab
 		array.push( <MobsInputVariations 
 							array  = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].paramGenerales}
 							textos = {["Servicio a Vaquillona [meses]","Reposicion de Vientres","Peso Minimo de Ingreso"]}
+							atributo ={"ConfGenerales"}
 							funcion = {this.props.modificarConfGenerales}
 			         />);
 
@@ -223,7 +239,7 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].pastureAllow}
 										arregloSimulacion  = {arrayValoresPastura}
-										//funcModifVariacion = {this.props.inputVariacionPastureValor}
+										funcModifVariacion = {this.props.modificarPasturaGeneral}
 										//funcModifPagina    = {this.props.modificarPaginaPasture} 
 										/>);
 
@@ -231,15 +247,15 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].silageAllow}
 										arregloSimulacion  = {arrayValoresSilageAllow}
-										/*funcModifVariacion = {this.props.inputVariacionGrainValor}
-										funcModifPagina    = {this.props.modificarPaginaGrain} */
+										funcModifVariacion = {this.props.modificarEnsilajeGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaGrain} */
 										/>);
 		array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].grainAllow}
 										arregloSimulacion  = {arrayValoresGrainAllow}
-										/*funcModifVariacion = {this.props.inputVariacionSilageValor}
-										funcModifPagina    = {this.props.modificarPaginaSilage} */
+										funcModifVariacion = {this.props.modificarGranoGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
 										/>);
 
 		if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
@@ -248,8 +264,8 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].cropAllow}
 										arregloSimulacion  = {arrayValoresCropStubble}
-										/*funcModifVariacion = {this.props.inputVariacionRastrojoValor}
-										funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
+										funcModifVariacion = {this.props.modificarRastrojoGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
 		}
 		if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
 			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].stockPilledAllow[0].$);
@@ -257,8 +273,8 @@ class Mobs extends Component {
 										paginaActual       = {1}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].stockAllow}
 										arregloSimulacion  = {arrayValoresStockPilled}
-										/*funcModifVariacion = {this.props.inputVariacionDiferidosValor}
-										funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
+										funcModifVariacion = {this.props.modificarDiferidoGeneral}
+										/*funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
 		}
 		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs != " "){
 
@@ -276,7 +292,7 @@ class Mobs extends Component {
 	loadTitles(){
 			let mobs = this.props.mobs;
 			let pagina = mobs.arrayMobs[mobs.dropDownSelected].pagActual-1;
-			let array = ["Configuracion General","SubMobs","Configuracion de Pastura", "Configuracion de Grano","Configuracion de Ensilaje"];	
+			let array = ["Configuracion General","SubMobs","Configuracion de Pastura", "Configuracion de Ensilaje","Configuracion de Grano"];	
 			if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
 				array.push("Configuracion de Rastrojo");
 			}
@@ -372,7 +388,18 @@ function matchDispatchToProps(dispatch){
 	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones, 
     	                       modificarDropdownSelected:modificarDropdownSelected, modificarPagina:modificarPagina,
-    	                       modificarConfGenerales:modificarConfGenerales }, dispatch);
+    	                       modificarConfGenerales:modificarConfGenerales,
+    	                       modificarPasturaGeneral:modificarPasturaGeneral,
+    	                       modificarGranoGeneral:modificarGranoGeneral,
+    	                       modificarEnsilajeGeneral:modificarEnsilajeGeneral,
+    	                       modificarRastrojoGeneral:modificarRastrojoGeneral,
+    	                       modificarDiferidoGeneral:modificarDiferidoGeneral,
+    	                       modificarWeaningPastura:modificarWeaningPastura,
+    	                       modificarWeaningGrano:modificarWeaningGrano,
+    	                       modificarWeaningEnsilaje:modificarWeaningEnsilaje,
+    	                       modificarWeaningRastrojo:modificarWeaningRastrojo,
+    	                       modificarWeaningDiferido:modificarWeaningDiferido,
+    	                       modificarSubMobs:modificarSubMobs }, dispatch);
     
 }
 

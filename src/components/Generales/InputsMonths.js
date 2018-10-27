@@ -67,6 +67,13 @@ class InputsMonths extends Component{
 				);	
 		}
 	}
+	mostrarTitulo(){
+		if(this.props.cantVariaciones > 1){
+			return (
+					<p className="labelPagina">Pagina:{this.props.paginaActual}</p>
+				);	
+		}
+	}
 
 	render(){
 		let inputs = this.setInputsVariations();
@@ -77,7 +84,7 @@ class InputsMonths extends Component{
 			<Row xs={12}>				
 				{this.mostrarFlechaAbajo()}
 				<Col xs={4} className="divInputs">
-					<p className="labelPagina">Pagina:{this.props.paginaActual}</p>
+					{this.mostrarTitulo()}
 					<div id = "divInputs" className="divInputsVariation">
 						{ 
 						  inputs.map((input, key) => (

@@ -1,7 +1,7 @@
 import Simulacion from '../data/simulacioninicial.js';
 
 const initialState = {
-  permitido : false,
+  permitido : true,
   cantVariaciones : 0,
   dropDownSelected : 0,
   //Configuracion que se va a cargar
@@ -71,9 +71,6 @@ function initMobs(){
 }
 
 
-function modificarObjeto(action, content){
-  let aux2 = 2;
-}
 
 function ModificarArreglo(state,valor,arreglo){
   let arrayAux = [];
@@ -179,7 +176,6 @@ function CrearObjetoMob(state,SubMobArray,index){
 
     let ObjetoVariacionWeaning = {}
     if(Simulacion.escenario.mobs[0].mob[index].weaning_mob != " "){
-      //let aux8 = Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$;
       ObjetoVariacionWeaning.cropStubbleEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableCrop_stubble === "true");
       ObjetoVariacionWeaning.stockPilledEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableStockPilled === "true");
       ObjetoVariacionWeaning.pastureAllow   = [];
@@ -188,8 +184,7 @@ function CrearObjetoMob(state,SubMobArray,index){
       ObjetoVariacionWeaning.cropAllow      = [];
       ObjetoVariacionWeaning.stockAllow     = [];
 
-      let aux11 = Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].pastureAllow[0].$;
-
+      //Genero los objetos para las pasturas que van a estar dentro de weaning mob
       for(let y = 0; y < 12; y++){
         //Obtengo el mes en string que corresponde
         let monthWeaning = getMonth(y);
@@ -248,43 +243,48 @@ function CrearObjetoMob(state,SubMobArray,index){
       ObjetoVariacionWeaning.grainAllow   = ObjetoMobs.grainAllow;
       ObjetoVariacionWeaning.cropAllow    = ObjetoMobs.cropAllow;
       ObjetoVariacionWeaning.stockAllow   = ObjetoMobs.stockAllow;*/
-      ObjetoVariacionWeaning.paddocks     = [];
+      //ObjetoVariacionWeaning.paddocks     = [];
       ObjetoMobs.weaningMobs         = ObjetoVariacionWeaning;
 
     }else{
       ObjetoMobs.weaningMobs         = null;
     }
 
-    ObjetoMobs.paddocks            = [];
 
     return ObjetoMobs;
 }
 
-function modificarArreglo(action, mob,pagina){
-    let array = [];
-    let variaciones = mob;
-    for (let i = 0; i< variaciones.pagvariaciones[pagina].paramGenerales.length; i++){
-      if(i == action.index){
-        array.push(action.valor);
-      }else{
-        array.push(variaciones.pagvariaciones[pagina].paramGenerales[i]);
-      }
-    }
-    variaciones.pagvariaciones[pagina].paramGenerales = array;
-    return variaciones;
+function generarSubMobs(state,index){
 
+  let SubMobArray = [];
+  let ObjetoSubMob = {};
+  //Genero los valores de los submobs
+  for(let indexSubMobs = 0; indexSubMobs < state.valoresSimulacion[index].submobs[0].submob.length; indexSubMobs++){
+    ObjetoSubMob = {};
+    ObjetoSubMob.nombre = state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobName;
+    ObjetoSubMob.variables = ["weaning","startCountAnimals","submobSwMax","submobSwMean","submobSwMin","vaquillona1ano","vaquillona2ano"]; 
+    ObjetoSubMob.valores   = [ 
+                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
+                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
+                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
+                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
+                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
+                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
+                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
+                              ]
+
+    SubMobArray.push(ObjetoSubMob);              
+  }
+  return SubMobArray;
 }
+
+
 function iniciarArregloState(state=initialState,valor=1){
   
   let arrayGeneral = [];
-
-
   if(valor > 0){
       for(let index = 0; index< state.mobsNombre.length; index++){
           let arrayVariacion = [];
-          let SubMobArray = [];
-          let ObjetoSubMob = {};
-          let aux7 = Simulacion.escenario.mobs[0].mob[index].$;
           let Objeto = {
   					pagvariaciones : [],
   					pagActual: 1,              
@@ -292,27 +292,10 @@ function iniciarArregloState(state=initialState,valor=1){
             stockPilledEnable : (Simulacion.escenario.mobs[0].mob[index].$.enableStockPilled == "true"),
   				}
 
-          //Genero los valores de los submobs
-          for(let indexSubMobs = 0; indexSubMobs < state.valoresSimulacion[index].submobs[0].submob.length; indexSubMobs++){
-            ObjetoSubMob = {};
-            ObjetoSubMob.nombre = state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobName;
-            ObjetoSubMob.variables = ["weaning","startCountAnimals","submobSwMax","submobSwMean","submobSwMin","vaquillona1ano","vaquillona2ano"]; 
-            ObjetoSubMob.valores   = [ 
-                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
-                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
-                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
-                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
-                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
-                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
-                                        parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
-                                      ]
-
-            SubMobArray.push(ObjetoSubMob);              
-          }
-      		let ObjetoMob = {};
-          for(let i = 0; i < valor; i++){	
+          let ObjetoMob = {};
+          for(let i = 0; i < valor; i++){ 
             ObjetoMob = {};
-            ObjetoMob = CrearObjetoMob(state,SubMobArray,index);
+            ObjetoMob = CrearObjetoMob(state,generarSubMobs(state,index),index);
             arrayVariacion.push(ObjetoMob);                
           }  
 
@@ -321,6 +304,70 @@ function iniciarArregloState(state=initialState,valor=1){
       }   
   }    
   return arrayGeneral;
+}
+
+function modificarArreglo(action, mob,pagina){
+    let array = [];
+    let variaciones = mob;
+    let ObjetoMes = {}
+    switch(action.payload){
+        //Modificar el objeto de la primera tab de mobs
+        case "ConfGenerales":
+            for (let i = 0; i< variaciones.pagvariaciones[pagina].paramGenerales.length; i++){
+                if(i == action.index){
+                  array.push(action.valor);
+                }else{
+                  array.push(variaciones.pagvariaciones[pagina].paramGenerales[i]);
+                }
+            }
+          variaciones.pagvariaciones[pagina].paramGenerales = array;
+          return variaciones.pagvariaciones;
+          break;
+
+        //Modificar los objetos pasture, crop, stock, grain y silage de las tabs principales  
+        case "MesesGenerales":
+            console.log("Modificando el objeto "+action.objeto+" de la pagina ["+pagina+"] ");
+            ObjetoMes = {}
+            for (let i = 0; i< variaciones.pagvariaciones[pagina][action.objeto][0].length; i++){
+                if(i == action.index){
+                  ObjetoMes.valor = action.valor;
+                  ObjetoMes.mes   = getMonth(i);
+                  array.push(ObjetoMes);
+                }else{
+                  array.push(variaciones.pagvariaciones[pagina][action.objeto][0][i]);
+                }
+            }
+            variaciones.pagvariaciones[pagina][action.objeto][0] = array;
+            return variaciones.pagvariaciones;
+          break;
+        case "MesesWeaning":
+            ObjetoMes = {}
+            for (let i = 0; i< variaciones.pagvariaciones[pagina].weaningMobs[action.objeto][0].length; i++){
+                if(i == action.index){
+                  ObjetoMes.valor = action.valor;
+                  ObjetoMes.mes   = getMonth(i);
+                  array.push(ObjetoMes);
+                }else{
+                  array.push(variaciones.pagvariaciones[pagina].weaningMobs[action.objeto][0][i]);
+                }
+            }
+            variaciones.pagvariaciones[pagina].weaningMobs[action.objeto][0] = array;
+            return variaciones.pagvariaciones;
+          break;
+        case "SubMobs":
+            for (let i = 0; i< variaciones.pagvariaciones[pagina][action.objeto][action.indexSubMob].valores.length; i++){
+                if(i == action.index){
+                  array.push(action.valor);
+                }else{
+                  array.push(variaciones.pagvariaciones[pagina][action.objeto][action.indexSubMob].valores[i]);
+                }
+            }
+            variaciones.pagvariaciones[pagina][action.objeto][action.indexSubMob].valores = array;
+            return variaciones.pagvariaciones;
+          break;
+    }
+    
+
 }
 
 export default function(state=initialState,action){
@@ -354,17 +401,151 @@ export default function(state=initialState,action){
       break;
 
     case "CONF-GENERALES_MOB":
-      /*return{...state,
+      return{...state,
         arrayMobs : state.arrayMobs.map(
                         (content, i) => state.dropDownSelected == i ?                  
                                {...content, 
-                                  pagvariaciones : modificarArreglo(action,state.arrayMobs[i],state.arrayMobs[i].pagActual-1)
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
                                }                        
                         : content
                 )
-        }*/
+        }
       break;
-
+    case "PASTURAS-GENERALES_MOB":     
+      action.objeto  = "pastureAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "GRANOS-GENERALES_MOB":      
+      action.objeto  = "grainAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "ENSILAJE-GENERALES_MOB":
+      action.objeto  = "silageAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "RASTROJO-GENERALES_MOB":
+      action.objeto  = "cropAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "DIFERIDO-GENERALES_MOB":
+      action.objeto  = "stockAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    /*
+      FUNCIONES DE WEANING
+    */
+    case "PASTURAS-WEANING_MOB":     
+      action.objeto  = "pastureAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "GRANOS-WEANING_MOB":      
+      action.objeto  = "grainAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "ENSILAJE-WEANING_MOB":
+      action.objeto  = "silageAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "RASTROJO-WEANING_MOB":
+      action.objeto  = "cropAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "DIFERIDO-WEANING_MOB":
+      action.objeto  = "stockAllow";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
+    case "SUBMOBS_MOB":
+      action.objeto  = "submobs";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+      break;
     case("PAGINA_MOB"):
             let pagina = action.payload;
             return{
