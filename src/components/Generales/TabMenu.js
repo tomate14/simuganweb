@@ -1,6 +1,9 @@
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+//Estilos del componente
+import './css/TabMenu.css';
+
 
 class TabMenu extends React.Component {
   constructor(props) {
@@ -15,10 +18,10 @@ class TabMenu extends React.Component {
 
 
 
-  generarNav(){
+  generarNav(propiedades){
      let navs = [];
      for(let i = 0; i< this.props.navTexts.length ; i++){
-        navs.push( <NavItem key = {i+1}>
+        navs.push( <NavItem className={propiedades.clase} key = {i+1}>
                       <NavLink
                               className={classnames({ active: this.state.activeTab === (i+1).toString() })}
                               onClick={() => { this.toggle((i+1).toString()); }}
@@ -55,10 +58,11 @@ class TabMenu extends React.Component {
   }
 
   render() {
+      let propiedades = this.props;
       return (
       <div>
         <Nav tabs>
-              {this.generarNav().map((object,i)=>{
+              {this.generarNav(propiedades).map((object,i)=>{
                                       return object;
                                     }
                               )}

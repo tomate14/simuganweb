@@ -51,6 +51,26 @@ class InputsVariation extends Component{
 		}
 	}
 
+	mostrarFlechaArriba(){
+		if(this.props.state.cantVariaciones > 1){
+			return (
+					<Col xs={2} className="divFlechas">					
+						<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
+					</Col>
+				);	
+		}
+	}
+
+	mostrarFlechaAbajo(){
+		if(this.props.state.cantVariaciones > 1){
+			return (
+					<Col xs={2}className="divFlechas">
+						<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
+					</Col>
+				);	
+		}
+	}
+
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
@@ -59,9 +79,7 @@ class InputsVariation extends Component{
 		return(
 		<div className="container-fluid">
 			<Row xs={12}>				
-				<Col xs={2} className="divFlechas">					
-					<Button outline color="secondary" onClick={this.handleClickDown}><FaAngleLeft/></Button>
-				</Col>
+				{this.mostrarFlechaAbajo()}
 				<Col xs={4} className="divInputs">
 					<p className="labelPagina">Pagina:{this.props.state.paginaActual}</p>
 					<div id ="divInputs" className="divInputsVariation">
@@ -78,9 +96,7 @@ class InputsVariation extends Component{
 				        ))}
 					</div>
 				</Col>
-				<Col xs={2}className="divFlechas">
-					<Button outline color="secondary" onClick={this.handleClickUp}><FaAngleRight/></Button>
-				</Col>
+				{this.mostrarFlechaArriba()}
 				<Col >
 					
 				</Col>
