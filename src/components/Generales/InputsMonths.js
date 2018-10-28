@@ -1,7 +1,9 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
-import { Glyphicon} from 'reactstrap';
+import { Glyphicon,Button} from 'reactstrap';
+
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 //Estilos del componente
 import './css/InputsVariation.css';
@@ -18,7 +20,15 @@ class InputsMonths extends Component{
 		let inputs = [];
 		if(this.props.cantVariaciones > 0){
 			for( let i= 0; i < 12; i++){
-			    inputs.push({name:'<input type="number" />'});
+			    inputs.push(<input
+				              type="number"
+				              className="InputVariables"
+				              min = "0"
+				              id = {i}
+				              key = {i}
+				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i]}
+				              onChange={this.handleInputValueChange}
+				            />);
 			};
 			return inputs;	
 		}
@@ -50,30 +60,24 @@ class InputsMonths extends Component{
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
-		let paginaActual = this.props.paginaActual;;
+		let paginaActual = this.props.paginaActual;
 		return(
 		<div className="container-fluid">
 			<Row xs={12}>				
 				<Col xs={2} className="divFlechas">					
-					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
+					<Button outline color="secondary" onClick={this.handleClickDown}><FaAngleLeft/></Button>
 				</Col>
 				<Col xs={4} className="divInputs">
 					<p className="labelPagina">Pagina:{this.props.paginaActual}</p>
 					<div id = "divInputs" className="divInputsVariation">
-						{inputs.map((input, key) => (
-				            <input
-				              type="number"
-				              className="InputVariables"
-				              id = {key}
-				              key = {key}
-				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[paginaActual-1][key].valor}
-				              onChange={this.handleInputValueChange}
-				            />
-				        ))}
+						{this.setInputsVariations().map((input, key) => {
+				            return(input);
+						}
+				        )}
 					</div>
 				</Col>
 				<Col xs={2}className="divFlechas">
-					<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
+					<Button outline color="secondary" onClick={this.handleClickUp}><FaAngleRight/></Button>
 				</Col>
 				<Col >
 					

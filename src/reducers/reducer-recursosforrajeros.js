@@ -164,11 +164,9 @@ function getEstado(state=null,valor=1){
     Generacion del estado de los recursos forrajeros
 */
 export default function (state=getEstado(), action) {
-    console.log("REDUCER FORRAJERO");
      
      switch (action.type){
         case("PERMITIDO_RECURSOSFORRAJEROS"):
-            console.log("Permitido"+action.payload);
             return {
                 ...state,
                 permitido : action.payload

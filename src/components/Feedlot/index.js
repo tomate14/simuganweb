@@ -98,14 +98,12 @@ class Feedlot extends Component {
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         feedlot: state.feedlot
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarPagina:modificarPagina, InputVariacionSalida:InputVariacionSalida, InputVariacionEngorde:InputVariacionEngorde}, dispatch);
     
 }

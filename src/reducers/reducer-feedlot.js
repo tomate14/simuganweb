@@ -107,8 +107,7 @@ function modificarObjeto(action, objeto){
     Generacion del estado de los recursos forrajeros
 */
 export default function (state=getEstado(), action) {
-    console.log("REDUCER FORRAJERO");
-     
+  
      switch (action.type){
         case("PERMITIDO_FEEDLOT"):
             console.log("Permitido"+action.payload);

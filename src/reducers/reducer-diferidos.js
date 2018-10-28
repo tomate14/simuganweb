@@ -115,7 +115,6 @@ export default function(state=initialState,action){
              if (isNaN(valor)){
                  valor = 0;
              }
-            
 			return{
 			...state,
 			digestibilidadVariaciones : state.digestibilidadVariaciones.map(

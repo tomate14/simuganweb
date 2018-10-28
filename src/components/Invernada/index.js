@@ -70,14 +70,12 @@ class Invernada extends Component {
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         invernada: state.invernada
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected,modificarInputValueVacasEngorde:modificarInputValueVacasEngorde,modificarInputValueVaquillona : modificarInputValueVaquillona}, dispatch);
     
 }

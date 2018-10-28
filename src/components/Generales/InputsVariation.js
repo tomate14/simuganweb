@@ -1,7 +1,9 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
-import { Glyphicon} from 'reactstrap';
+import { Glyphicon,Button} from 'reactstrap';
+
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 //Estilos del componente
 import './css/InputsVariation.css';
@@ -48,6 +50,7 @@ class InputsVariation extends Component{
 			this.props.funcModiPagina(this.props.state.paginaActual-1);	
 		}
 	}
+
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
@@ -57,7 +60,7 @@ class InputsVariation extends Component{
 		<div className="container-fluid">
 			<Row xs={12}>				
 				<Col xs={2} className="divFlechas">					
-					<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
+					<Button outline color="secondary" onClick={this.handleClickDown}><FaAngleLeft/></Button>
 				</Col>
 				<Col xs={4} className="divInputs">
 					<p className="labelPagina">Pagina:{this.props.state.paginaActual}</p>
@@ -66,6 +69,7 @@ class InputsVariation extends Component{
 				            <input
 				              type="number"
 				              className="InputVariables"
+				              min = "0"
 				              id = {key}
 				              key = {key}
 				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[dropdownSelected][paginaActual-1][key].valor}
@@ -75,7 +79,7 @@ class InputsVariation extends Component{
 					</div>
 				</Col>
 				<Col xs={2}className="divFlechas">
-					<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
+					<Button outline color="secondary" onClick={this.handleClickUp}><FaAngleRight/></Button>
 				</Col>
 				<Col >
 					

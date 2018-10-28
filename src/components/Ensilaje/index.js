@@ -37,16 +37,10 @@ class Ensilaje extends Component {
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
-  
-	render(){
-		const ensilaje = this.props.ensilaje;
-		return(
-			<Container>
-				<Row>
-					<Col id="contentoption"><ContentOption state = {ensilaje} 
-										funcPermitir = {this.props.permitirVariaciones}
-										funcVariaciones = {this.props.modificarVariaciones}/></Col>
-				</Row> 
+
+  generarPantalla(ensilaje){
+  	if((ensilaje.permitido)&&(ensilaje.cantVariaciones> 0)){
+  		return(<Container>
 				<Row>
 					<Col id = "simulationValues">
 						<h5> (MPPE)  Valor de masa de los Potreros a partir de la cual se dispara el ensilaje</h5>
@@ -71,20 +65,33 @@ class Ensilaje extends Component {
 				   					 cantVariaciones = {this.props.ensilaje.cantVariaciones}/>
 				   </Col>
 			   </Row>
-			  </Container>
+			  </Container>);
+  	}
+  }
+  
+	render(){
+		const ensilaje = this.props.ensilaje;
+		return(
+			<div className = "container-fluid">
+				<Row>
+					<Col id="contentoption"><ContentOption state = {ensilaje} 
+										funcPermitir = {this.props.permitirVariaciones}
+										funcVariaciones = {this.props.modificarVariaciones}/></Col>
+				</Row>
+				{this.generarPantalla(ensilaje)}
+			</div>
+			
 		);
 	}
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         ensilaje: state.ensilaje
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarInputValueTrigger:modificarInputValueTrigger,modificarInputValueLeftover : modificarInputValueLeftover}, dispatch);
     
 }

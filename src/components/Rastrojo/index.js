@@ -38,17 +38,10 @@ class Rastrojo extends Component {
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
-  
-	render(){
-		const rastrojos = this.props.rastrojos;
-		return(
-			<Container>
-				<Row id="contentoption">
-					<Col><ContentOption state = {rastrojos} 
-										funcPermitir = {this.props.permitirVariaciones}
-										funcVariaciones = {this.props.modificarVariaciones}/></Col>
-				</Row> 
-				
+
+  generarPantalla(rastrojos){
+  	if((rastrojos.permitido)&&(rastrojos.cantVariaciones>0)){
+  		return(<Container>
 					<Form>
 						        <FormGroup row>
 						        	
@@ -86,20 +79,33 @@ class Rastrojo extends Component {
 				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}/>
 				   </Col>
 			   </Row>
-			  </Container>
+			  </Container>);
+  	}
+  }
+  
+	render(){
+		const rastrojos = this.props.rastrojos;
+		return(
+			<div className = "container-fluid">
+				<Row id="contentoption">
+					<Col><ContentOption state = {rastrojos} 
+										funcPermitir = {this.props.permitirVariaciones}
+										funcVariaciones = {this.props.modificarVariaciones}/></Col>
+				</Row> 
+			{this.generarPantalla(rastrojos)}
+			</div>
+			
 		);
 	}
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         rastrojos: state.rastrojos
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected,modificarInputValueDigestibilidad:modificarInputValueDigestibilidad,modificarInputValueRinde : modificarInputValueRinde}, dispatch);
     
 }

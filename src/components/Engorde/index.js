@@ -126,37 +126,42 @@ class Engorde extends Component {
 		}
 		return array;
 	}
+
+	generarPantalla(engorde,tabPanes,navTexts){
+		if((engorde.permitido)&&(engorde.cantVariaciones>0)){
+			return(<Container>
+						<TabMenu panels = { tabPanes }
+						 		 navTexts = {navTexts} />
+		 	 	   </Container>);
+		}
+	}
   
 	render(){
 			const engorde = this.props.engorde;
-			var TabPanes = this.loadTabs();
+			var tabPanes = this.loadTabs();
 			var navTexts = this.loadTitles();
 		return(
-			<Container>
-				
+			<div className = "container-fluid">
 				<Row>
 					<Col>
 						<ContentOption  state = {engorde} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/>
 					</Col>
-				</Row> 
-				<TabMenu panels = { TabPanes }
-						 navTexts = {navTexts} />
-		  </Container>
+				</Row>
+				{this.generarPantalla(engorde,tabPanes,navTexts)}
+			</div>
 		);
 	}
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         engorde: state.engorde
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,
     							inputVariacionPastureValor:InputVariacionPastureValor,
     							inputVariacionGrainValor:InputVariacionGrainValor,

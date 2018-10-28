@@ -24,6 +24,7 @@ export function modificarDropdownSelected(e){
 
 export function modificarInputValueDigestibilidad(e){
 	console.log("modificarInputValueDigestibilidad-diferido");
+	//let index = e.target.id.split("-");
 	return{
 		type: "UPDATE-VALUE-DIGEST_DIFERIDO",
 		index: e.target.id,

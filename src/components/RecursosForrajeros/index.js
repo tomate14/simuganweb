@@ -88,14 +88,12 @@ class RecursosForrajeros extends Component {
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         recursosforrajeros: state.recursosforrajeros
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps"+dispatch);
 	return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones: modificarVariaciones, modificarPagina:modificarPagina, InputVariacionValor:InputVariacionValor,modificarDropdownSelected:modificarDropdownSelected}, dispatch);
     
     
