@@ -12,7 +12,7 @@ import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,modif
 
 
 //bootstrap
-import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
+import {Button,Popover,PopoverHeader,PopoverBody,Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //estilos
@@ -29,19 +29,14 @@ class Diferido extends Component {
 
     this.state = {
 			cantidadVariaciones : 1,
-			dropdownOpen: false
+			dropdownOpen: false,
+			popoverOpen : false
 	}
 		
-    this.toggle = this.toggle.bind(this);
     //this.generarInputs = this.generarInputs.bind(this);
     //this.setDropdownSelected = this.setDropdownSelected.bind(this);
   } 
 
-  toggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
-  }
 
   generarPasturas(){
   	var pasturas = ["Sorgo","pastura 2", "pastura 3"];
@@ -53,23 +48,17 @@ class Diferido extends Component {
   }
 
 
+
   setDropdownSelected(){
   	//este arreglo se debe cargar desde el xml parseado
   	  	var pasturas = ['Sorgo','pastura 2', 'pastura 3'];
  		let aux =pasturas[this.props.diferidos.dropdownSelected] 
   	return aux;
   }
-  
-	render(){
-		const diferidos = this.props.diferidos;
-		return(
-			<Container>
-				<Row>
-					<Col id="contentoption" ><ContentOption state = {diferidos} 
-										funcPermitir = {this.props.permitirVariaciones}
-										funcVariaciones = {this.props.modificarVariaciones}/></Col>
-				</Row> 
-				
+
+  generarPantalla(diferidos){
+  	if((diferidos.permitido)&&(diferidos.cantVariaciones>0)){
+  		return(<Container>
 					<Form>
 						        <FormGroup row>
 						        	
@@ -110,20 +99,32 @@ class Diferido extends Component {
 				   					 seccionElegida = {this.props.diferidos.dropdownSelected}/>
 				   </Col>
 			   </Row>
-			  </Container>
+			  </Container>);
+  		}
+	}
+  
+	render(){
+		const diferidos = this.props.diferidos;
+		return(
+			<div className = "container-fluid">
+				<Row>
+					<Col id="contentoption" ><ContentOption state = {diferidos} 
+										funcPermitir = {this.props.permitirVariaciones}
+										funcVariaciones = {this.props.modificarVariaciones}/></Col>
+				</Row> 
+				{this.generarPantalla(diferidos)}
+			</div>
 		);
 	}
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         diferidos: state.diferidos
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected,modificarInputValueDigestibilidad:modificarInputValueDigestibilidad,modificarInputValueRinde : modificarInputValueRinde}, dispatch);
     
 }

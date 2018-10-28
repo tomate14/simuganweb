@@ -1,7 +1,9 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
-import { Glyphicon} from 'reactstrap';
+import { Glyphicon,Button} from 'reactstrap';
+
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 //Estilos del componente
 import './css/InputsVariation.css';
@@ -18,7 +20,15 @@ class InputsMonths extends Component{
 		let inputs = [];
 		if(this.props.cantVariaciones > 0){
 			for( let i= 0; i < 12; i++){
-			    inputs.push({name:'<input type="number" />'});
+			    inputs.push(<input
+				              type="number"
+				              className="InputVariables"
+				              min = "0"
+				              id = {i}
+				              key = {i}
+				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i]}
+				              onChange={this.handleInputValueChange}
+				            />);
 			};
 			return inputs;	
 		}
@@ -86,22 +96,12 @@ class InputsMonths extends Component{
 				<Col xs={4} className="divInputs">
 					{this.mostrarTitulo()}
 					<div id = "divInputs" className="divInputsVariation">
-						{ 
-						  inputs.map((input, key) => (
-				            <input
-				              type="number"
-				              className="InputVariables"
-				              id = {key}
-				              key = {key}
-				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[paginaActual-1][key].valor}
-				              onChange={this.handleInputValueChange}
-				            />
-				        ))}
+						{this.setInputsVariations().map((input, key) => {
+				            return(input);
+						}
+				        )}        
 					</div>
-				</Col>
-				{this.mostrarFlechaArriba()}
-				<Col >
-					
+				{this.mostrarFlechaArriba()}					
 				</Col>
 			</Row>
 		</div>

@@ -105,14 +105,12 @@ class Potreros extends Component {
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         potreros: state.potreros
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,modificarDropdownSelected : modificarDropdownSelected,modificarInputValueDigestibilidad:modificarInputValueDigestibilidad,modificarInputValueRinde : modificarInputValueRinde}, dispatch);
     
 }

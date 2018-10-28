@@ -57,7 +57,6 @@ function getMonth(numeroMes){
 function cargarMobs(){
 
   let mobs = Simulacion.escenario.mobs[0].mob;
-  console.log(mobs);
   return mobs;
 }
 
@@ -371,7 +370,6 @@ function modificarArreglo(action, mob,pagina){
 }
 
 export default function(state=initialState,action){
-	console.log("REDUCER-MOB");
   let valor = 0;
   switch(action.type){
 		case "PERMITIDO_MOB" : 

@@ -54,7 +54,6 @@ function iniciarArregloState(state=initialState,valor=1){
 
 
 export default function(state=initialState,action){
-	console.log("ENSILAJE");
 	let valor = 0;
 	switch(action.type){
 		case "PERMITIDO_ENSILAJE" : 

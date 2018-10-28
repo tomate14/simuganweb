@@ -155,7 +155,6 @@ function modificarDropInput(action, objeto){
 }
 
 export default function(state=initialState,action){
-	console.log("REDUCER-DESTETE");
 	let valor = 0;
 	switch(action.type){
 

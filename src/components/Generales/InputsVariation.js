@@ -1,7 +1,9 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
-import { Glyphicon} from 'reactstrap';
+import { Glyphicon,Button} from 'reactstrap';
+
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 //Estilos del componente
 import './css/InputsVariation.css';
@@ -68,7 +70,7 @@ class InputsVariation extends Component{
 				);	
 		}
 	}
-	
+
 	render(){
 		let inputs = this.setInputsVariations();
 		//Pagina 1 muestra el array[0]
@@ -85,6 +87,7 @@ class InputsVariation extends Component{
 				            <input
 				              type="number"
 				              className="InputVariables"
+				              min = "0"
 				              id = {key}
 				              key = {key}
 				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[dropdownSelected][paginaActual-1][key].valor}

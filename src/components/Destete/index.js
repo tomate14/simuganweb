@@ -129,14 +129,12 @@ class Destete extends Component {
 }
 
 function mapStateToProps(state){
-	console.log("mapStateToProps"+state);
     return {
         destete: state.destete
     };
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones        : permitirVariaciones,
     	                       modificarVariaciones       : modificarVariaciones,
     	                       modificarDropdownSelected  : modificarDropdownSelected,

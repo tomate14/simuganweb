@@ -385,7 +385,6 @@ function mapStateToProps(state){
 }
 
 function matchDispatchToProps(dispatch){
-	console.log("matchDispatchToProps");
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones, 
     	                       modificarDropdownSelected:modificarDropdownSelected, modificarPagina:modificarPagina,
     	                       modificarConfGenerales:modificarConfGenerales,

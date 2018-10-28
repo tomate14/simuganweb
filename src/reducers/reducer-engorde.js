@@ -92,6 +92,40 @@ function inicializarArregloSimulacion(arreglo){
     return arrayValores;
 }
 
+function modificarArreglo(state,valor,arreglo){
+  let arrayAux = [];
+  if(valor <= state.cantVariaciones){
+    /*
+      Si la cantidad es menor a la que tengo, elimino las variaciones sobrantes
+      Para cada una de las pasturas, saco las variaciones sobrantes
+    */
+     for(let i = 0; i < arreglo.length;i++){
+        for(let j=valor; j<arreglo[i].length;j){
+            arreglo[i].splice(j,1);
+        }
+     }/*     for(let i = 0; i < valor; i++){
+        arrayAux.push([]);
+      for(let j = 0; j< 12; j++){
+        arrayAux[i].push(arreglo[i][j]);
+      }
+     } */
+     arrayAux = arreglo;
+  }else{
+    /*
+      Si la cantidad es mayor a la que tengo, se reinician todos los valores
+      Por cada pastura que tengo, genero las variaciones que requiera el usuario
+    */
+    arrayAux = iniciarArregloState(state,valor);
+    for(let i = 0; i < arreglo.length;i++){
+        for(let j=0; j<arreglo[i].length;j++){
+            arrayAux[i][j]= arreglo[i][j];
+        }
+     }
+    }
+    return arrayAux;
+  }
+  
+
 function iniciarArregloState(state=initialState,valor=1){
     
     let arrayGeneral = [];
@@ -107,6 +141,31 @@ function iniciarArregloState(state=initialState,valor=1){
     }    
     return arrayGeneral;
 }
+
+function modificarArregloSimple(state,valor,arreglo){
+  let arrayAux = [];
+  if(valor <= state.cantVariaciones){
+    /*
+      Si la cantidad es menor a la que tengo, elimino las variaciones sobrantes
+      Para cada una de las pasturas, saco las variaciones sobrantes
+    */
+          for(let j=valor; j<arreglo.length;j){
+            arreglo.splice(j,1);
+      }
+     arrayAux = arreglo;
+  }else{
+    /*
+      Si la cantidad es mayor a la que tengo, se reinician todos los valores
+      Por cada pastura que tengo, genero las variaciones que requiera el usuario
+    */
+    arrayAux = iniciarArregloSimpleState(valor);
+    for(let i = 0; i < arreglo.length;i++){
+            arrayAux[i]= arreglo[i];
+        }
+    }
+    return arrayAux;
+  }
+
 
 function iniciarArregloSimpleState(valor=1){
   let arrayGeneral = [];
@@ -139,17 +198,17 @@ export default function(state=initialState,action){
              }
 			return{...state,
 					cantVariaciones : valor,
-          arrayPastures : iniciarArregloState(state,valor),
-          arrayGrain : iniciarArregloState(state,valor),
-          arraySilage : iniciarArregloState(state, valor),
-          arrayCropStubble : iniciarArregloState(state,valor),
-          arrayStockPilled : iniciarArregloState(state,valor),
-          arrayProtein : iniciarArregloSimpleState(valor),
-          arrayIntake : iniciarArregloSimpleState(valor),
-          arrayDigest : iniciarArregloSimpleState(valor),
-          arrayDRProtein : iniciarArregloSimpleState(valor),
-          arrayPesoVivo : iniciarArregloSimpleState(valor),
-          arrayCC : iniciarArregloSimpleState(valor)
+          arrayPastures : modificarArreglo(state,valor,state.arrayPastures),
+          arrayGrain : modificarArreglo(state,valor,state.arrayGrain),
+          arraySilage : modificarArreglo(state,valor,state.arraySilage),
+          arrayCropStubble : modificarArreglo(state,valor,state.arrayCropStubble),
+          arrayStockPilled : modificarArreglo(state,valor,state.arrayStockPilled),
+          arrayProtein : modificarArregloSimple(state,valor,state.arrayProtein),
+          arrayIntake : modificarArregloSimple(state,valor,state.arrayIntake),
+          arrayDigest : modificarArregloSimple(state,valor,state.arrayDigest),
+          arrayDRProtein : modificarArregloSimple(state,valor,state.arrayDRProtein),
+          arrayPesoVivo : modificarArregloSimple(state,valor,state.arrayPesoVivo),
+          arrayCC : modificarArregloSimple(state,valor,state.arrayCC)
 					}
 		break;
     case("PAGINA-PASTURE_ENGORDE"):
@@ -192,7 +251,7 @@ export default function(state=initialState,action){
     arrayPastures: state.arrayPastures.map(
                                     (content, i) => i == action.pagina ?
                                         state.arrayPastures[action.pagina].map(
-                                          (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                          (content,j) => j == action.posicion ? action.valor
                                                     : content
                                           )
                                   : content
@@ -204,7 +263,7 @@ export default function(state=initialState,action){
         arrayGrain: state.arrayGrain.map(
                                         (content, i) => i == action.pagina ?
                                             state.arrayGrain[action.pagina].map(
-                                              (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                              (content,j) => j == action.posicion ? action.valor
                                                         : content
                                               )
                                       : content
@@ -216,7 +275,7 @@ export default function(state=initialState,action){
         arraySilage: state.arraySilage.map(
                                         (content, i) => i == action.pagina ?
                                             state.arraySilage[action.pagina].map(
-                                              (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                              (content,j) => j == action.posicion ? action.valor
                                                         : content
                                               )
                                       : content
@@ -227,7 +286,7 @@ export default function(state=initialState,action){
         arrayCropStubble: state.arrayCropStubble.map(
                                         (content, i) => i == action.pagina ?
                                             state.arrayCropStubble[action.pagina].map(
-                                              (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                              (content,j) => j == action.posicion ? action.valor
                                                         : content
                                               )
                                       : content
@@ -239,7 +298,7 @@ export default function(state=initialState,action){
         arrayStockPilled: state.arrayStockPilled.map(
                                         (content, i) => i == action.pagina ?
                                             state.arrayStockPilled[action.pagina].map(
-                                              (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                              (content,j) => j == action.posicion ? action.valor
                                                         : content
                                               )
                                       : content
