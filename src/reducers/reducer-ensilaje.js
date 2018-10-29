@@ -20,7 +20,7 @@ function iniciarValoresSimulacion(){
 	
 
 
-function ModificarArreglo(state,valor,arreglo){
+function ModificarArreglo(state,valor,arreglo,tipo){
   let arrayAux = [];
   if(valor <= state.cantVariaciones){
   
@@ -30,7 +30,7 @@ function ModificarArreglo(state,valor,arreglo){
      arrayAux = arreglo;
   }else{
 
-    arrayAux = iniciarArregloState(state,valor);
+    arrayAux = iniciarArregloState(state,valor,tipo);
     for(let i = 0; i < arreglo.length;i++){
             arrayAux[i]= arreglo[i];
     }
@@ -40,12 +40,18 @@ function ModificarArreglo(state,valor,arreglo){
 }
   
 
-function iniciarArregloState(state=initialState,valor=1){
+function iniciarArregloState(state=initialState,valor=1,tipo=""){
     
     let arrayGeneral = [];
     if(valor > 0){  
       for(let i = 0; i < valor; i++){
         let value  = 0;
+        switch(tipo){
+	        case "rinde":
+	            value  = state.valoresSimulacion.yieldValue;
+	        case "digestibilidad":
+	            value  = state.valoresSimulacion.digestValue;
+	      }
         arrayGeneral.push(value);
       }  
     }    
@@ -71,8 +77,8 @@ export default function(state=initialState,action){
              }
 			return{...state,
 					cantVariaciones : valor,
-					triggerVariaciones : ModificarArreglo(state,valor,state.triggerVariaciones),
-					leftoverVariaciones : ModificarArreglo(state,valor,state.leftoverVariaciones)
+					triggerVariaciones : ModificarArreglo(state,valor,state.triggerVariaciones,"digestibilidad"),
+					leftoverVariaciones : ModificarArreglo(state,valor,state.leftoverVariaciones,"rinde")
 			}
 		break;
 		case "UPDATE-VALUE-TRIGGER_ENSILAJE":
