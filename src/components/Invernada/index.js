@@ -58,6 +58,9 @@ class Invernada extends Component {
 		return(
 			<Container>
 					<Row>
+						<h1 className="titulo">Venta de Invernada </h1>
+					</Row>
+					<Row>
 						<Col><ContentOption state = {invernada} 
 											funcPermitir = {this.props.permitirVariaciones}
 											funcVariaciones = {this.props.modificarVariaciones}/></Col>

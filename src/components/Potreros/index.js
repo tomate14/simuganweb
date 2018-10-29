@@ -91,6 +91,9 @@ class Potreros extends Component {
 
 			<Container>
 				<Row>
+					<h1 className="titulo">Has de cada potrero </h1>
+				</Row>
+				<Row>
 					<Col><ContentOption state = {potreros} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>

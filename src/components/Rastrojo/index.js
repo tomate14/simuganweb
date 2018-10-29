@@ -18,6 +18,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ContentOption from '../Generales/ContentOption'; 
 
+
+
 class Rastrojo extends Component {
 
 
@@ -87,6 +89,9 @@ class Rastrojo extends Component {
 		const rastrojos = this.props.rastrojos;
 		return(
 			<div className = "container-fluid">
+			    <Row>
+					<h1 className="titulo">Digestibilidad y Rinde de cada Rastrojo</h1>
+				</Row>
 				<Row>
 					<Col><ContentOption state = {rastrojos} 
 										funcPermitir = {this.props.permitirVariaciones}

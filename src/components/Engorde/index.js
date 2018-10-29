@@ -143,6 +143,9 @@ class Engorde extends Component {
 		return(
 			<div className = "container-fluid">
 				<Row>
+					<h1 className="titulo">Configuracion de reglas de engorde</h1>
+				</Row>
+				<Row>
 					<Col>
 						<ContentOption  state = {engorde} 
 										funcPermitir = {this.props.permitirVariaciones}
