@@ -74,6 +74,9 @@ class Ensilaje extends Component {
 		return(
 			<div className = "container-fluid">
 				<Row>
+					<h1 className="titulo">Ensilaje y masa remanente </h1>
+				</Row>
+				<Row>
 					<Col><ContentOption state = {ensilaje} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>

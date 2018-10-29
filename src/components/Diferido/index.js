@@ -108,6 +108,9 @@ class Diferido extends Component {
 		return(
 			<div className = "container-fluid">
 				<Row>
+					<h1 className="titulo">Digestibilidad y Rinde de cada Diferido</h1>
+				</Row>
+				<Row>
 					<Col><ContentOption state = {diferidos} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>

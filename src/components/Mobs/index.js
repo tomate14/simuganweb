@@ -363,9 +363,9 @@ class Mobs extends Component {
 		return(
 			<Container>
 				<Row>
-				<h1>Configuraciones de los mobs </h1>
+					<h1 className="titulo">Configuraciones de los Mobs </h1>
 				</Row>
-				<Row id="contentoption">
+				<Row>
 				<ContentOption state = {mobs} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/>

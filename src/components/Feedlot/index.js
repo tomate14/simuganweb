@@ -86,6 +86,9 @@ class Feedlot extends Component {
 		return(
 			<Container>
 				<Row>
+					<h1 className="titulo">Configuraciones de Feedlot </h1>
+				</Row>
+				<Row>
 					<Col><ContentOption state = {feedlot} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>

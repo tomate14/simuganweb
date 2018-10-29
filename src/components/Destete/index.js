@@ -115,10 +115,15 @@ class Destete extends Component {
 
 			<Container>
 					<div>
-						 <ContentOption state = {destete} 
-										funcPermitir = {this.props.permitirVariaciones}
-										funcVariaciones = {this.props.modificarVariaciones}/>
-						</div>
+						<Row>
+							<h1 className="titulo">Configuracion de destete precoz </h1>
+						</Row>
+						<Row>
+							 <ContentOption state = {destete} 
+											funcPermitir = {this.props.permitirVariaciones}
+											funcVariaciones = {this.props.modificarVariaciones}/>
+						</Row>
+					</div>
 	 
 			    {this.generarContenido(destete)}
 			  </Container>
