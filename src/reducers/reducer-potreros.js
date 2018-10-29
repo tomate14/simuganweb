@@ -70,7 +70,7 @@ function iniciarArregloState(state=initialState,valor=1){
         for(let index = 0; index< state.nombrePotreros.length; index++){
             let arrayAux = [];
             for(let i = 0; i < valor; i++){
-                let value  = 0;
+                let value  = state.valoresSimulacion[index].digestValue;
                 arrayAux.push(value);
             }  
             arrayGeneral.push(arrayAux);

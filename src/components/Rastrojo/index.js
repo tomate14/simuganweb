@@ -87,7 +87,7 @@ class Rastrojo extends Component {
 		const rastrojos = this.props.rastrojos;
 		return(
 			<div className = "container-fluid">
-				<Row id="contentoption">
+				<Row>
 					<Col><ContentOption state = {rastrojos} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>

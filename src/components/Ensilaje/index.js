@@ -74,7 +74,7 @@ class Ensilaje extends Component {
 		return(
 			<div className = "container-fluid">
 				<Row>
-					<Col id="contentoption"><ContentOption state = {ensilaje} 
+					<Col><ContentOption state = {ensilaje} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row>
