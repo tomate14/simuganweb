@@ -100,8 +100,8 @@ function modificarArreglo(state,valor,arreglo){
       Para cada una de las pasturas, saco las variaciones sobrantes
     */
      for(let i = 0; i < arreglo.length;i++){
-        for(let j=valor; j<arreglo[i].length;j){
-            arreglo[i].splice(j,1);
+        for(let j=valor; j<arreglo.length;j){
+            arreglo.splice(j,1);
         }
      }/*     for(let i = 0; i < valor; i++){
         arrayAux.push([]);
@@ -208,7 +208,13 @@ export default function(state=initialState,action){
           arrayDigest : modificarArregloSimple(state,valor,state.arrayDigest),
           arrayDRProtein : modificarArregloSimple(state,valor,state.arrayDRProtein),
           arrayPesoVivo : modificarArregloSimple(state,valor,state.arrayPesoVivo),
-          arrayCC : modificarArregloSimple(state,valor,state.arrayCC)
+          arrayCC : modificarArregloSimple(state,valor,state.arrayCC),
+          paginaActualPasture: 1,
+          paginaActualGrain: 1,
+          paginaActualSilage: 1,
+          paginaActualRastrojo: 1,
+          paginaActualDiferidos: 1
+
 					}
 		break;
     case("PAGINA-PASTURE_ENGORDE"):
