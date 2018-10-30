@@ -151,6 +151,7 @@ class Engorde extends Component {
 				</Row>
 				{this.generarPantalla(engorde,tabPanes,navTexts)}
 			</div>
+
 		);
 	}
 }
