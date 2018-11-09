@@ -25,3 +25,5 @@ render(
 			<AppRoutes />
 	   </Router>
 	</Provider>, document.getElementById('root')); 
+
+export default store;

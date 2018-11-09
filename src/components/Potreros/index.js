@@ -8,8 +8,10 @@ import Tabla from '../Generales/Tabla'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup, Label} from 'reactstrap';
+
+import {Button,Dropdown, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup, Label} from 'reactstrap';
 import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,modificarInputValueDigestibilidad,modificarInputValueRinde} from '../../actions/action-potreros.js';
+import {generarSalidaRest} from '../../finalizar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -100,6 +102,8 @@ class Potreros extends Component {
 				</Row> 
 				
 			    {this.generarContenido(potreros)}
+
+			    <Button color="primary" onClick={generarSalidaRest}>Finalizar</Button>
 			  </Container>
 		);
 		
