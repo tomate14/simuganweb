@@ -1,9 +1,10 @@
+
 export function permitirVariaciones(e){
-	console.log("permitirVariaciones-rastrojos");
-	return{
-		type : "PERMITIDO_RASTROJOS",
-		payload: e.target.checked
-	}		
+    console.log("permitirVariaciones-rastrojo");
+    return{
+        type : "PERMITIDO_RASTROJOS",
+        payload: e.target.checked
+    }       
 }
 
 export function modificarVariaciones(e){

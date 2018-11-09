@@ -1,7 +1,7 @@
 import Simulacion from '../data/simulacioninicial.js';
 
 const initialState = {
-	permitido : false,
+	permitido : true,
 	cantVariaciones : 0,
   tipoEngorde : Simulacion.escenario.fattening[0].$.fattMethod,
   paginaActualPasture: 1,

@@ -1,7 +1,7 @@
 import Simulacion from '../data/simulacioninicial.js';
 
 const initialState = {
-	permitido : false,
+	permitido : true,
 	cantVariaciones : 0,
 	dropDownSelected : 0,
 	digestibilidadVariaciones : [],
