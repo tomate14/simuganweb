@@ -17,8 +17,41 @@ function validarCargaDatos(states){
 export function generarSalidaRest(){
 	let states = store.getState();
 	if(validarCargaDatos(states)){
-		let jsonString= JSON.stringify(states.ensilaje);
-		console.log("Generacion exitosa");
+		let VariacionesReact = {}
+
+		VariacionesReact.ensilaje = states.ensilaje;
+		let jsonString= JSON.stringify(VariacionesReact.ensilaje);
+
+		VariacionesReact.recursosforrajeros = states.recursosforrajeros;
+		 jsonString= JSON.stringify(VariacionesReact.recursosforrajeros);
+
+		VariacionesReact.potreros = states.potreros;
+		 jsonString= JSON.stringify(VariacionesReact);
+
+		VariacionesReact.rastrojos = states.rastrojos;
+		 jsonString= JSON.stringify(VariacionesReact.rastrojos);
+
+		VariacionesReact.mobs = states.mobs;
+		 jsonString= JSON.stringify(VariacionesReact.mobs);
+
+		VariacionesReact.invernada = states.invernada;
+		 jsonString= JSON.stringify(VariacionesReact.invernada);
+
+		VariacionesReact.feedlot = states.feedlot;
+		 jsonString= JSON.stringify(VariacionesReact.feedlot);
+
+		VariacionesReact.engorde = states.engorde;
+		 jsonString= JSON.stringify(VariacionesReact.engorde);
+
+		VariacionesReact.diferidos = states.diferidos;
+		 jsonString= JSON.stringify(VariacionesReact.diferidos);
+
+		VariacionesReact.destete = states.destete;
+		 jsonString= JSON.stringify(VariacionesReact.destete);
+
+		 jsonString= JSON.stringify(VariacionesReact);
+
+		console.log("Generacion exitosa "+jsonString);
 	}else{
 		console.log("Error de validacion de datos, verifique");
 	}
