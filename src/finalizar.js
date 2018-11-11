@@ -17,28 +17,38 @@ function validarCargaDatos(states){
 export function generarSalidaRest(){
 	let states = store.getState();
 	if(validarCargaDatos(states)){
-		let VariacionesReact = {}
+		let VariacionesReact = {};
+		VariacionesReact.ensilaje = {};
+		VariacionesReact.recursosforrajeros={};
+		VariacionesReact.potreros={};
+		VariacionesReact.rastrojos={};
+		VariacionesReact.invernada={};
+		VariacionesReact.feedlot={};
 
-		VariacionesReact.ensilaje = states.ensilaje;
+		VariacionesReact.ensilaje.leftoverVariaciones = states.ensilaje.leftoverVariaciones;
+		VariacionesReact.ensilaje.triggerVariaciones = states.ensilaje.triggerVariaciones;
+
 		let jsonString= JSON.stringify(VariacionesReact.ensilaje);
 
-		VariacionesReact.recursosforrajeros = states.recursosforrajeros;
-		 jsonString= JSON.stringify(VariacionesReact.recursosforrajeros);
+		VariacionesReact.recursosforrajeros.PagVariaciones = states.recursosforrajeros.pagvariaciones;
+		jsonString= JSON.stringify(VariacionesReact.recursosforrajeros);
 
-		VariacionesReact.potreros = states.potreros;
-		 jsonString= JSON.stringify(VariacionesReact);
+		VariacionesReact.potreros.digestibilidadVariaciones = states.potreros.digestibilidadVariaciones;
+		jsonString= JSON.stringify(VariacionesReact);
 
-		VariacionesReact.rastrojos = states.rastrojos;
-		 jsonString= JSON.stringify(VariacionesReact.rastrojos);
+		VariacionesReact.rastrojos.digestibilidadVariaciones = states.rastrojos.digestibilidadVariaciones;
+		VariacionesReact.rastrojos.rindeVariaciones = states.rastrojos.rindeVariaciones;
+		
 
-		VariacionesReact.mobs = states.mobs;
-		 jsonString= JSON.stringify(VariacionesReact.mobs);
 
-		VariacionesReact.invernada = states.invernada;
+		//VariacionesReact.invernada = states.invernada;
+		VariacionesReact.invernada.VaquillonaVariaciones = states.invernada.VaquillonaVariaciones;
+		VariacionesReact.invernada.nobillosVariaciones  = states.invernada.nobillosVariaciones;
 		 jsonString= JSON.stringify(VariacionesReact.invernada);
 
-		VariacionesReact.feedlot = states.feedlot;
-		 jsonString= JSON.stringify(VariacionesReact.feedlot);
+		VariacionesReact.feedlot.VariacionFeedLot = states.feedlot.pagvariaciones;
+		jsonString= JSON.stringify(VariacionesReact.feedlot);
+		jsonString= JSON.stringify(VariacionesReact);
 
 		VariacionesReact.engorde = states.engorde;
 		 jsonString= JSON.stringify(VariacionesReact.engorde);
@@ -50,6 +60,11 @@ export function generarSalidaRest(){
 		 jsonString= JSON.stringify(VariacionesReact.destete);
 
 		 jsonString= JSON.stringify(VariacionesReact);
+
+		 VariacionesReact.mobs = states.mobs;
+		VariacionesReact.mobs.valoresSimulacion = [];
+		jsonString= JSON.stringify(VariacionesReact.mobs);
+		console.log(jsonString);
 
 		console.log("Generacion exitosa "+jsonString);
 	}else{
