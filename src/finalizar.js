@@ -31,12 +31,36 @@ export function generarSalidaRest(){
 		           GENERO ENSILAJE 
 		*/
 
-		VariacionesReact.ensilaje.leftoverVariaciones = states.ensilaje.leftoverVariaciones;
-		VariacionesReact.ensilaje.triggerVariaciones = states.ensilaje.triggerVariaciones;
+		VariacionesReact.ensilaje.leftoverMass = states.ensilaje.leftoverVariaciones;
+		VariacionesReact.ensilaje.triggerMass = states.ensilaje.triggerVariaciones;
 		let jsonString= JSON.stringify(VariacionesReact.ensilaje);
 
-		VariacionesReact.recursosforrajeros.PagVariaciones = states.recursosforrajeros.pagvariaciones;
+		//VariacionesReact.recursosforrajeros.PasturaForrajeros = states.recursosforrajeros.pagvariaciones;
+		//jsonString= JSON.stringify(VariacionesReact.recursosforrajeros)
+;		
+		VariacionesReact.recursosforrajeros.ForrajeroVariaciones = states.recursosforrajeros.pagvariaciones;
+		let ForrajeroPastura = {};
+		let ForrajeroVariacion = {};
+		for(let i = 0; i < VariacionesReact.recursosforrajeros.ForrajeroVariaciones.length; i++){
+			ForrajeroPastura = {};
+			ForrajeroPastura.ForrajeroPastura = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i];
+			VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i] = ForrajeroPastura;
+			
+			for(let j = 0; j < VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura.length; j++){
+				ForrajeroVariacion = {}
+				ForrajeroVariacion.ForrajeroVariacion = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j];
+				VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j] = ForrajeroVariacion;
+				let ValorMes = {}
+				for(let k = 0; k < 12; k++){
+					ValorMes = {};
+					ValorMes.ValorMes = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j].ForrajeroVariacion[k];
+					VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j].ForrajeroVariacion[k] = ValorMes;
+				}
+			}
+		}
 		jsonString= JSON.stringify(VariacionesReact.recursosforrajeros);
+		
+		
 
 		/* 
 		           GENERO LOS POTREROS 
