@@ -24,8 +24,8 @@ function iniciarValoresSimulacion(){
 	let pasturas = Simulacion.escenario.stockPilledType[0].stockPilled;
 	let arrayValoresPastura = [];
 	for(let i = 0 ; i< pasturas.length; i++){
-		let digestValue = pasturas[i].$.stockPilledDigest;
-		let yieldValue = pasturas[i].$.yield;
+		let digestValue = parseInt(pasturas[i].$.stockPilledDigest);
+		let yieldValue = parseInt(pasturas[i].$.yield);
 		let objectValue = {
 			digestValue : digestValue,
 			yieldValue : yieldValue
