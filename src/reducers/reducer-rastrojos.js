@@ -24,11 +24,11 @@ function iniciarValoresSimulacion(){
 	let rastrojos = Simulacion.escenario.crop_stubbles[0].crop_stubble;
 	let arrayValoresRastrojos = [];
 	for(let i = 0 ; i< rastrojos.length; i++){
-		let digestValue = rastrojos[i].$.crop_stubbleDigest;
-		let yieldValue = rastrojos[i].$.yield;
+		let digestValue = parseInt(rastrojos[i].$.crop_stubbleDigest);
+		let yieldValue  = parseInt(rastrojos[i].$.yield);
 		let objectValue = {
 			digestValue : digestValue,
-			yieldValue : yieldValue
+			yieldValue  : yieldValue
 			}
           arrayValoresRastrojos.push(objectValue);
 		}

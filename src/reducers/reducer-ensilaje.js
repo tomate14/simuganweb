@@ -12,8 +12,8 @@ const initialState = {
 function iniciarValoresSimulacion(){
 	let ensilaje = Simulacion.escenario.makeSilage[0];
 	let objectValue = {
-			digestValue : ensilaje.$.triggerMass,
-			yieldValue : ensilaje.$.leftoverMass
+			digestValue : parseInt(ensilaje.$.triggerMass),
+			yieldValue  : parseInt(ensilaje.$.leftoverMass)
 	}
 	return objectValue;
 	}

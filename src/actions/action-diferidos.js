@@ -28,7 +28,7 @@ export function modificarInputValueDigestibilidad(e){
 	return{
 		type: "UPDATE-VALUE-DIGEST_DIFERIDO",
 		index: e.target.id,
-		value : e.target.value
+		value : parseInt(e.target.value)
 	}
 }
 
@@ -38,6 +38,6 @@ export function modificarInputValueRinde(e){
 	return{
 		type: "UPDATE-VALUE-RINDE_DIFERIDO",
 		index: e.target.id,
-		value : e.target.value
+		value : parseInt(e.target.value)
 	}
 }
