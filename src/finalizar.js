@@ -26,6 +26,7 @@ export function generarSalidaRest(){
 		VariacionesReact.feedlot={};
 		VariacionesReact.diferidos = {};
 		VariacionesReact.destete = {};
+		VariacionesReact.mobs = {};
 
 		/* 
 		           GENERO ENSILAJE 
@@ -35,28 +36,27 @@ export function generarSalidaRest(){
 		VariacionesReact.ensilaje.triggerMass = states.ensilaje.triggerVariaciones;
 		let jsonString= JSON.stringify(VariacionesReact.ensilaje);
 
-		//VariacionesReact.recursosforrajeros.PasturaForrajeros = states.recursosforrajeros.pagvariaciones;
-		//jsonString= JSON.stringify(VariacionesReact.recursosforrajeros)
-;		
+		/* 
+		           GENERO RECURSOSFORRAJEROS 
+		*/
+	
 		VariacionesReact.recursosforrajeros.ForrajeroVariaciones = states.recursosforrajeros.pagvariaciones;
 		let ForrajeroPastura = {};
 		let ForrajeroVariacion = {};
 		for(let i = 0; i < VariacionesReact.recursosforrajeros.ForrajeroVariaciones.length; i++){
 			ForrajeroPastura = {};
 			ForrajeroPastura.ForrajeroPastura = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i];
-			VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i] = ForrajeroPastura;
+			VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i] = ForrajeroPastura;		
 			
-			for(let j = 0; j < VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura.length; j++){
-				ForrajeroVariacion = {}
-				ForrajeroVariacion.ForrajeroVariacion = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j];
-				VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j] = ForrajeroVariacion;
-				let ValorMes = {}
-				for(let k = 0; k < 12; k++){
-					ValorMes = {};
-					ValorMes.ValorMes = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j].ForrajeroVariacion[k];
-					VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[j].ForrajeroVariacion[k] = ValorMes;
-				}
+			let ValorMes = {}
+			let ArrayForrajero = []
+			for(let k = 0; k < 12; k++){
+				ValorMes = {};
+				ValorMes = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[0][k];
+				ArrayForrajero.push(ValorMes);					
 			}
+			VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura = ArrayForrajero;
+			
 		}
 		jsonString= JSON.stringify(VariacionesReact.recursosforrajeros);
 		
@@ -65,6 +65,7 @@ export function generarSalidaRest(){
 		/* 
 		           GENERO LOS POTREROS 
 		*/
+
 		VariacionesReact.potreros.pasturas = states.potreros.digestibilidadVariaciones;
 		let ObjetoPastura = {};
 		for(let i = 0; i< VariacionesReact.potreros.pasturas.length; i++ ){
@@ -77,6 +78,7 @@ export function generarSalidaRest(){
 		/* 
 		           GENERO LOS RASTROJOS 
 		*/
+
 		VariacionesReact.rastrojos.digestibilidadVariaciones = states.rastrojos.digestibilidadVariaciones;
 		VariacionesReact.rastrojos.rindeVariaciones          = states.rastrojos.rindeVariaciones;
 		for(let i = 0; i< VariacionesReact.rastrojos.digestibilidadVariaciones.length; i++ ){
@@ -103,11 +105,16 @@ export function generarSalidaRest(){
 
 		jsonString= JSON.stringify(VariacionesReact.diferidos);
 
-		//VariacionesReact.invernada = states.invernada;
+		/*
+			GENERO INVERNADA
+		*/
 		VariacionesReact.invernada.VaquillonaVariaciones = states.invernada.VaquillonaVariaciones;
 		VariacionesReact.invernada.nobillosVariaciones  = states.invernada.nobillosVariaciones;
 		jsonString= JSON.stringify(VariacionesReact.invernada);
 
+		/*
+			GENERO LOS FEEDLOT
+		*/
 		VariacionesReact.feedlot.VariacionFeedLot = states.feedlot.pagvariaciones;
 
 		let ObjetoCompletion = {};
@@ -135,8 +142,84 @@ export function generarSalidaRest(){
 
 		}
 
-		jsonString= JSON.stringify(VariacionesReact.feedlot);
-		jsonString= JSON.stringify(VariacionesReact);
+		/*jsonString= JSON.stringify(VariacionesReact.feedlot);
+		jsonString= JSON.stringify(VariacionesReact);*/
+
+		/*
+			GENERACION DE MOBS
+		*/
+		VariacionesReact.mobs.Variaciones = states.mobs.arrayMobs;
+		let ObjetoVariacion = {};
+		for(let i = 0; i < VariacionesReact.mobs.Variaciones.length; i++){
+			ObjetoVariacion = {};
+			ObjetoVariacion.Variacion = VariacionesReact.mobs.Variaciones[i].pagvariaciones;
+			VariacionesReact.mobs.Variaciones[i] = ObjetoVariacion;
+
+			for(let j = 0; j < VariacionesReact.mobs.Variaciones[i].Variacion.length; j++){
+
+				let arrayObjeto1 = []; let arrayObjeto2 = []; let arrayObjeto3 = []; let arrayObjeto4 = []; let arrayObjeto5 = [];
+				let arrayWeaningObjeto1 = []; let arrayWeaningObjeto2 = []; let arrayWeaningObjeto3 = []; let arrayWeaningObjeto4 = []; let arrayWeaningObjeto5 = [];
+
+				for(let k = 0; k < 12; k++){
+					let ObjetoMeses1 = {}; let ObjetoMeses2 = {}; let ObjetoMeses3 = {}; let ObjetoMeses4 = {};	let ObjetoMeses5 = {};
+
+					let ObjetoWeaningMeses1 = {}; let ObjetoWeaningMeses2 = {};	let ObjetoWeaningMeses3 = {}; let ObjetoWeaningMeses4 = {};	let ObjetoWeaningMeses5 = {};
+
+					ObjetoMeses1 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].cropAllow[0][k];
+					arrayObjeto1.push(ObjetoMeses1);
+
+					ObjetoMeses2 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].grainAllow[0][k];
+					arrayObjeto2.push(ObjetoMeses2);
+
+					ObjetoMeses3 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].pastureAllow[0][k];
+					arrayObjeto3.push(ObjetoMeses3);
+
+					ObjetoMeses4 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].silageAllow[0][k];
+					arrayObjeto4.push(ObjetoMeses4);
+
+					ObjetoMeses5 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].stockAllow[0][k];
+					arrayObjeto5.push(ObjetoMeses5);
+
+					/*
+						PREPARO WEANING
+					*/
+
+					ObjetoWeaningMeses1 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.cropAllow[0][k];
+					arrayWeaningObjeto1.push(ObjetoWeaningMeses1);
+
+					ObjetoWeaningMeses2 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.grainAllow[0][k];
+					arrayWeaningObjeto2.push(ObjetoWeaningMeses2);
+
+					ObjetoWeaningMeses3 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.pastureAllow[0][k];
+					arrayWeaningObjeto3.push(ObjetoWeaningMeses3);
+
+					ObjetoWeaningMeses4 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.silageAllow[0][k];
+					arrayWeaningObjeto4.push(ObjetoWeaningMeses4);
+
+					ObjetoWeaningMeses5 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.stockAllow[0][k];
+					arrayWeaningObjeto5.push(ObjetoWeaningMeses5);
+				}
+
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].cropAllow    = arrayObjeto1;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].grainAllow   = arrayObjeto2;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].pastureAllow = arrayObjeto3;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].silageAllow  = arrayObjeto4;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].stockAllow   = arrayObjeto5;
+
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.cropAllow    = arrayWeaningObjeto1;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.grainAllow   = arrayWeaningObjeto2;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.pastureAllow = arrayWeaningObjeto3;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.silageAllow  = arrayWeaningObjeto4;
+				VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.stockAllow   = arrayWeaningObjeto5;
+				//Elimino los atributos de habilitar opcion de carga de weaning
+				delete VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.cropStubbleEnable;
+				delete VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.stockPilledEnable;
+
+
+			}
+		}
+		jsonString= JSON.stringify(VariacionesReact.mobs);
+		console.log(JSON.stringify(VariacionesReact.mobs));
 
 
 		jsonString= JSON.stringify(VariacionesReact);
@@ -166,11 +249,9 @@ export function generarSalidaRest(){
 		}
 		 jsonString= JSON.stringify(VariacionesReact.destete);*/
 
-		 jsonString= JSON.stringify(VariacionesReact);
+		jsonString= JSON.stringify(VariacionesReact);
 
-		 VariacionesReact.mobs = states.mobs;
-		VariacionesReact.mobs.valoresSimulacion = [];
-		jsonString= JSON.stringify(VariacionesReact.mobs);
+		
 		console.log(jsonString);
 
 		console.log("Generacion exitosa "+jsonString);
