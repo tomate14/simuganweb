@@ -132,6 +132,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.pastureAllow}
 										arregloSimulacion  = {arrayValoresPastura}
 										funcModifVariacion = {this.props.modificarWeaningPastura}
+										min = {0}
+										max = {25}
 										//funcModifPagina    = {this.props.modificarPaginaPasture} 
 										/>,
 
@@ -140,6 +142,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.silageAllow}
 										arregloSimulacion  = {arrayValoresSilageAllow}
 										funcModifVariacion = {this.props.modificarWeaningEnsilaje}
+										min = {0}
+										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaGrain} */
 										/>,
 
@@ -148,6 +152,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.grainAllow}
 										arregloSimulacion  = {arrayValoresGrainAllow}
 										funcModifVariacion = {this.props.modificarWeaningGrano}
+										min = {0}
+										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
 										/> ];
 		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropStubbleEnable){
@@ -157,6 +163,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropAllow}
 										arregloSimulacion  = {arrayValoresCropStubble}
 										funcModifVariacion = {this.props.modificarWeaningRastrojo}
+										min = {0}
+										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
 		}
 		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockPilledEnable){
@@ -166,6 +174,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockAllow}
 										arregloSimulacion  = {arrayValoresStockPilled}
 										funcModifVariacion = {this.props.modificarWeaningDiferido}
+										min = {0}
+										max = {3}
 										/*funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
 		}
 		
@@ -195,6 +205,8 @@ class Mobs extends Component {
 										array  = {SubMobs[i].valores}
 										textos = {SubMobs[i].variables}
 										funcion = {this.props.modificarSubMobs}
+										minArray = {[2,1,0,0,0,0,0]}
+										maxArray = {[10,1500,-1,-1,-1,-1,-1]}
 					         />
 
 					);
@@ -225,6 +237,8 @@ class Mobs extends Component {
 							textos = {["Servicio a Vaquillona [meses]","Reposicion de Vientres","Peso Minimo de Ingreso"]}
 							atributo ={"ConfGenerales"}
 							funcion = {this.props.modificarConfGenerales}
+							minArray = {[0,0,220]}
+							maxArray = {[-1,100,400]} 
 			         />);
 
 		let TabPanesSubMobs = this.loadTabsSubMobs(mobs,pagina);
@@ -240,6 +254,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].pastureAllow}
 										arregloSimulacion  = {arrayValoresPastura}
 										funcModifVariacion = {this.props.modificarPasturaGeneral}
+										min = {0}
+										max = {25}
 										//funcModifPagina    = {this.props.modificarPaginaPasture} 
 										/>);
 
@@ -248,6 +264,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].silageAllow}
 										arregloSimulacion  = {arrayValoresSilageAllow}
 										funcModifVariacion = {this.props.modificarEnsilajeGeneral}
+										min = {0}
+										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaGrain} */
 										/>);
 		array.push(<PasturePane 	cantVariaciones    = {1}
@@ -255,6 +273,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].grainAllow}
 										arregloSimulacion  = {arrayValoresGrainAllow}
 										funcModifVariacion = {this.props.modificarGranoGeneral}
+										min = {0}
+										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
 										/>);
 
@@ -265,6 +285,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].cropAllow}
 										arregloSimulacion  = {arrayValoresCropStubble}
 										funcModifVariacion = {this.props.modificarRastrojoGeneral}
+										min = {0}
+										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
 		}
 		if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
@@ -274,6 +296,8 @@ class Mobs extends Component {
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].stockAllow}
 										arregloSimulacion  = {arrayValoresStockPilled}
 										funcModifVariacion = {this.props.modificarDiferidoGeneral}
+										min = {0}
+										max = {3}
 										/*funcModifPagina    = {this.props.modificarPaginaDiferidos} *//> );
 		}
 		if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs != " "){

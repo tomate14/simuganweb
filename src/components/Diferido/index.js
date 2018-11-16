@@ -89,14 +89,20 @@ class Diferido extends Component {
 				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 				   					 arrayVariaciones = {this.props.diferidos.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
-				   					 seccionElegida = {this.props.diferidos.dropdownSelected}/>
+				   					 seccionElegida = {this.props.diferidos.dropdownSelected}
+				   					 min = {50}
+				   					 max = {90}
+				   					 />
 				   </Col>
 				   <Col>
 				   		
 				   		<SingleInput funcModificar = {this.props.modificarInputValueRinde}
 				   					 arrayVariaciones = {this.props.diferidos.rindeVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
-				   					 seccionElegida = {this.props.diferidos.dropdownSelected}/>
+				   					 seccionElegida = {this.props.diferidos.dropdownSelected}
+				   					 min = {15}
+				   					 max = {200}
+				   					 />
 				   </Col>
 			   </Row>
 			  </Container>);

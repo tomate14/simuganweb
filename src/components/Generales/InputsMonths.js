@@ -14,8 +14,17 @@ class InputsMonths extends Component{
 		this.handleInputValueChange = this.handleInputValueChange.bind(this);
 		this.handleClickDown = this.handleClickDown.bind(this);
 		this.handleClickUp = this.handleClickUp.bind(this);
-		
+		this.chequearRango = this.chequearRango.bind(this);
 	}
+
+	chequearRango(e){
+		let valor = parseInt(e.target.value);
+		if(valor < this.props.min || valor > this.props.max){
+			e.target.value = 0;
+			this.handleInputValueChange(e);
+		}
+	}
+
 	setInputsVariations(){
 		let inputs = [];
 		if(this.props.cantVariaciones > 0){
@@ -26,8 +35,9 @@ class InputsMonths extends Component{
 				              min = "0"
 				              id = {i}
 				              key = {i}
-				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i]}
+				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i].valor}
 				              onChange={this.handleInputValueChange}
+				              onBlur ={this.chequearRango}
 				            />);
 			};
 			return inputs;	

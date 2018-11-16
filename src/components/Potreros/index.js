@@ -75,7 +75,10 @@ class Potreros extends Component {
 						   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 						   					 arrayVariaciones = {this.props.potreros.digestibilidadVariaciones}
 						   					 cantVariaciones = {this.props.potreros.cantVariaciones} 
-						   					 seccionElegida = {this.props.potreros.dropDownSelected}/>
+						   					 seccionElegida = {this.props.potreros.dropDownSelected}
+						   					 min = {60}
+						   					 max = {100}
+						   					 />
 						    </Col>
 						    
 

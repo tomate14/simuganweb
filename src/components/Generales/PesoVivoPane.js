@@ -51,7 +51,9 @@ class PesoVivoPane extends Component {
 						<Col>
 							<SingleInputArray funcModificar = {this.props.funcModificarPeso}
 					   					 	  arrayVariaciones = {this.props.arrayVariacionesPeso}
-					   					      cantVariaciones = {this.props.cantVariaciones} 
+					   					      cantVariaciones = {this.props.cantVariaciones}
+					   					      min = {300}
+					   					      max = {650} 
 					   		/>
 						</Col>
 						{extraInputs[1]}

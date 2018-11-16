@@ -45,6 +45,8 @@ class Destete extends Component {
 		}
 	}
 
+
+
 	generarContenido(destete){
 		if(destete.permitido){
 			if(destete.cantVariaciones > 0){
