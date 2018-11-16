@@ -12,6 +12,7 @@ import InputsMonths from '../Generales/InputsMonths';
 
 class PasturePane extends Component {
 
+
 	render(){
 		return(<Row id= "divPicker">
 				<Col>
@@ -24,7 +25,9 @@ class PasturePane extends Component {
 								 pagvariaciones = {this.props.arregloValores}
 								 paginaActual = {this.props.paginaActual}
 			                     funcModiPagina = {this.props.funcModifPagina}
-		                         funcModiValorInput = {this.props.funcModifVariacion}/>
+		                         funcModiValorInput = {this.props.funcModifVariacion}
+		                         min = {this.props.min}
+		                         max = {this.props.max}/>
 		        </Col>
 				</Row>
 			);

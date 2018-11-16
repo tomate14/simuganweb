@@ -72,13 +72,19 @@ class Rastrojo extends Component {
 				   		<SingleInput funcModificar = {this.props.modificarInputValueDigestibilidad}
 				   					 arrayVariaciones = {this.props.rastrojos.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.rastrojos.cantVariaciones} 
-				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}/>
+				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}
+				   					 min = {50}
+				   					 max = {90}
+				   					 />
 				   </Col>
 				   <Col>
 				   		<SingleInput funcModificar = {this.props.modificarInputValueRinde}
 				   					 arrayVariaciones = {this.props.rastrojos.rindeVariaciones}
 				   					 cantVariaciones = {this.props.rastrojos.cantVariaciones} 
-				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}/>
+				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}
+				   					 min = {0}
+				   					 max = {90}
+				   					 />
 				   </Col>
 			   </Row>
 			  </Container>);

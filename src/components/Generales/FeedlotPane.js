@@ -24,7 +24,9 @@ class FeedlotPane extends Component {
 						<Col>
 							<SingleInputArray funcModificar = {this.props.funcModificar}
 					   					 	  arrayVariaciones = {this.props.arrayVariaciones}
-					   					      cantVariaciones = {this.props.cantVariaciones} 
+					   					      cantVariaciones = {this.props.cantVariaciones}
+					   					      min = {this.props.min}
+					   					      max = {this.props.max} 
 					   		/>
 						</Col>
 					</Row>

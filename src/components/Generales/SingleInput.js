@@ -11,7 +11,7 @@ class SingleInput extends Component {
 		this.generarInputs = this.generarInputs.bind(this);
 		this.ponerValor = this.ponerValor.bind(this);
 		//this.initPopover = this.initPopover.bind(this);
-		//this.chequearRango = this.chequearRango.bind(this);
+		this.chequearRango = this.chequearRango.bind(this);
 		// this.toggle = this.toggle.bind(this);
 		// this.state = {
   //     popoverOpen: this.initPopover()
@@ -37,30 +37,27 @@ class SingleInput extends Component {
 		funcModificar : PropTypes.func.isRequired,
 		arrayVariaciones: PropTypes.array.isRequired,
 		cantVariaciones : PropTypes.number.isRequired,
-		seccionElegida : PropTypes.number.isRequired
+		seccionElegida : PropTypes.number.isRequired,
+		min : PropTypes.number.isRequired,
+		max : PropTypes.number.isRequired
 	}
 
 
-	// toggle(e){
-	// 	let valor = parseInt(e.target.value);
-	// 	if(valor < 50 || valor > 90){
-	// 		e.target.value = 0;
-	// 		let index = e.target.id.split("-");
-	// 		console.log(index);
-	// 		this.state.popoverOpen[parseInt(index[1])] = true;
-	// 		console.log("popOver "+ this.state.popoverOpen);
-	// 		this.props.funcModificar(e);
-	// 	}
-	// 	else
-	// 		this.state.popoverOpen = false;
-	// }
+	chequearRango(e){
+		let valor = parseInt(e.target.value);
+		if(valor < this.props.min || valor > this.props.max){
+			e.target.value = 0;
+			this.props.funcModificar(e);
+		}
+	}
 
 
   	generarInputs(parametro,funcOnChange){
 	  	var rows = [];
 	  	for(var i = 0; i< this.props.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
 			rows.push(<input 
-						onChange = {funcOnChange} 
+						onChange = {funcOnChange}
+						onBlur = {this.chequearRango}
 						value = {this.ponerValor(parametro[this.props.seccionElegida][i])}
 						id = {i}
 						type="number"/>); 

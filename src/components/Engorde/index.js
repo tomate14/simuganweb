@@ -43,28 +43,36 @@ class Engorde extends Component {
 											arregloValores = {engorde.arrayPastures}
 											arregloSimulacion  = {engorde.pastureValues}
 											funcModifVariacion = {this.props.inputVariacionPastureValor}
-											funcModifPagina = {this.props.modificarPaginaPasture} />,
+											funcModifPagina = {this.props.modificarPaginaPasture} 
+											min = {0}
+											max = {25}/>,
 
 							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualGrain}
 											arregloValores = {engorde.arrayGrain}
 											arregloSimulacion  = {engorde.grainValues}
 											funcModifVariacion = {this.props.inputVariacionGrainValor}
-											funcModifPagina = {this.props.modificarPaginaGrain} />,
+											funcModifPagina = {this.props.modificarPaginaGrain} 
+											min = {0}
+											max = {2.5}/>,
 
 							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualSilage}
 											arregloValores = {engorde.arraySilage}
 											arregloSimulacion  = {engorde.silageValues}
 											funcModifVariacion = {this.props.inputVariacionSilageValor}
-											funcModifPagina = {this.props.modificarPaginaSilage} /> ];
+											funcModifPagina = {this.props.modificarPaginaSilage}
+											min = {0}
+											max = {2.5} /> ];
 			if(engorde.cropStubbleEnable){
 				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualRastrojo}
 											arregloValores = {engorde.arrayCropStubble}
 											arregloSimulacion  = {engorde.cropStubbleValues}
 											funcModifVariacion = {this.props.inputVariacionRastrojoValor}
-											funcModifPagina = {this.props.modificarPaginaRastrojo} /> );
+											funcModifPagina = {this.props.modificarPaginaRastrojo}
+											min = {0}
+											max = {2.5} /> );
 			}
 			if(engorde.stockPilledEnable){
 				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
@@ -72,7 +80,9 @@ class Engorde extends Component {
 											arregloValores = {engorde.arrayStockPilled}
 											arregloSimulacion  = {engorde.stockPilledValues}
 											funcModifVariacion = {this.props.inputVariacionDiferidosValor}
-											funcModifPagina = {this.props.modificarPaginaDiferidos} /> );
+											funcModifPagina = {this.props.modificarPaginaDiferidos} 
+											min = {0}
+											max = {3}/> );
 			}
 		}
 		else {
@@ -89,22 +99,30 @@ class Engorde extends Component {
 			  								descripcion = "Proteina Bruta(PB) [10,20]% "
 			  								funcModificar = {this.props.ModificarInputValueTriggerProtein}
 			  								arrayVariaciones = {engorde.arrayProtein}
-			  								cantVariaciones = {engorde.cantVariaciones} />,
+			  								cantVariaciones = {engorde.cantVariaciones}
+			  								min = {10}
+			  								max = {20} />,
 			  				<FeedlotPane	simulationValue = {engorde.corralValues.intake}
 			  								descripcion = { "Consumo diario de los animales [1, 2.8]% del peso vivo " }
 			  								funcModificar = {this.props.ModificarInputValueTriggerIntake}
 			  								arrayVariaciones = {engorde.arrayIntake}
-			  								cantVariaciones = {engorde.cantVariaciones} />,
+			  								cantVariaciones = {engorde.cantVariaciones}
+			  								min= {1}
+			  								max = {2.8} />,
 			  				<FeedlotPane	simulationValue = {engorde.corralValues.digest}
 			  								descripcion = "Digestibilidad de la dieta [60,90]%"
 			  								funcModificar = {this.props.ModificarInputValueTriggerDigest}
 			  								arrayVariaciones = {engorde.arrayDigest}
-			  								cantVariaciones = {engorde.cantVariaciones} />,
+			  								cantVariaciones = {engorde.cantVariaciones}
+			  								min = {60}
+			  								max = {90} />,
 			  				<FeedlotPane	simulationValue = {engorde.corralValues.proteinDR}
 			  								descripcion = " Proteina de la dieta no degradable en rumen [2,12]%"
 			  								funcModificar = {this.props.ModificarInputValueTriggerDRProtein}
 			  								arrayVariaciones = {engorde.arrayDRProtein}
-			  								cantVariaciones = {engorde.cantVariaciones}/>];
+			  								cantVariaciones = {engorde.cantVariaciones}
+			  								min = {2}
+			  								max = {12}/>];
 		}
 		return array;
 	}
