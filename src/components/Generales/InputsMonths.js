@@ -18,10 +18,15 @@ class InputsMonths extends Component{
 	}
 
 	chequearRango(e){
-		let valor = parseInt(e.target.value);
+		let valor = parseFloat(e.target.value);
 		if(valor < this.props.min || valor > this.props.max){
-			e.target.value = 0;
-			this.handleInputValueChange(e);
+			if(valor < this.props.min){
+				e.target.value = this.props.min;
+				this.handleInputValueChange(e);
+			}else{
+				e.target.value = this.props.max;
+				this.handleInputValueChange(e);
+			}
 		}
 	}
 
@@ -36,6 +41,26 @@ class InputsMonths extends Component{
 				              id = {i}
 				              key = {i}
 				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i].valor}
+				              onChange={this.handleInputValueChange}
+				              onBlur ={this.chequearRango}
+				            />);
+			};
+			return inputs;	
+		}
+		return [];
+	}
+
+	setInputsVariationsEngorde(){
+		let inputs = [];
+		if(this.props.cantVariaciones > 0){
+			for( let i= 0; i < 12; i++){
+			    inputs.push(<input
+				              type="number"
+				              className="InputVariables"
+				              min = "0"
+				              id = {i}
+				              key = {i}
+				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i]}
 				              onChange={this.handleInputValueChange}
 				              onBlur ={this.chequearRango}
 				            />);
@@ -96,26 +121,49 @@ class InputsMonths extends Component{
 	}
 
 	render(){
-		let inputs = this.setInputsVariations();
+		let input = null;
 		//Pagina 1 muestra el array[0]
 		let paginaActual = this.props.paginaActual;
-		return(
-		<div className="container-fluid">
-			<Row xs={12}>				
-				{this.mostrarFlechaAbajo()}
-				<Col xs={4} className="divInputs">
-					{this.mostrarTitulo()}
-					<div id = "divInputs" className="divInputsVariation">
-						{this.setInputsVariations().map((input, key) => {
-				            return(input);
-						}
-				        )}        
-					</div>
-				{this.mostrarFlechaArriba()}					
-				</Col>
-			</Row>
-		</div>
-		);
+		if(this.props.esEngorde){
+			input = this.setInputsVariationsEngorde();
+			return(
+			<div className="container-fluid">
+				<Row xs={12}>				
+					{this.mostrarFlechaAbajo()}
+					<Col xs={4} className="divInputs">
+						{this.mostrarTitulo()}
+						<div id = "divInputs" className="divInputsVariation">
+							{this.setInputsVariationsEngorde().map((input, key) => {
+					            return(input);
+							}
+					        )}        
+						</div>
+					{this.mostrarFlechaArriba()}					
+					</Col>
+				</Row>
+			</div>
+			);
+		}else{
+			input = this.setInputsVariations();
+			return(
+			<div className="container-fluid">
+				<Row xs={12}>				
+					{this.mostrarFlechaAbajo()}
+					<Col xs={4} className="divInputs">
+						{this.mostrarTitulo()}
+						<div id = "divInputs" className="divInputsVariation">
+							{this.setInputsVariations().map((input, key) => {
+					            return(input);
+							}
+					        )}        
+						</div>
+					{this.mostrarFlechaArriba()}					
+					</Col>
+				</Row>
+			</div>
+			);
+		}
+
 	}
 }
 export default InputsMonths;
