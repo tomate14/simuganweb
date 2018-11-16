@@ -40,6 +40,7 @@ class Engorde extends Component {
 		if(engorde.tipoEngorde == "pasto"){
 			array = 		[<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualPasture}
+											esEngorde    = {true}
 											arregloValores = {engorde.arrayPastures}
 											arregloSimulacion  = {engorde.pastureValues}
 											funcModifVariacion = {this.props.inputVariacionPastureValor}
@@ -49,6 +50,7 @@ class Engorde extends Component {
 
 							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualGrain}
+											esEngorde    = {true}
 											arregloValores = {engorde.arrayGrain}
 											arregloSimulacion  = {engorde.grainValues}
 											funcModifVariacion = {this.props.inputVariacionGrainValor}
@@ -58,6 +60,7 @@ class Engorde extends Component {
 
 							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualSilage}
+											esEngorde    = {true}
 											arregloValores = {engorde.arraySilage}
 											arregloSimulacion  = {engorde.silageValues}
 											funcModifVariacion = {this.props.inputVariacionSilageValor}
@@ -67,6 +70,7 @@ class Engorde extends Component {
 			if(engorde.cropStubbleEnable){
 				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualRastrojo}
+											esEngorde    = {true}
 											arregloValores = {engorde.arrayCropStubble}
 											arregloSimulacion  = {engorde.cropStubbleValues}
 											funcModifVariacion = {this.props.inputVariacionRastrojoValor}
@@ -77,6 +81,7 @@ class Engorde extends Component {
 			if(engorde.stockPilledEnable){
 				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
 											paginaActual = {engorde.paginaActualDiferidos}
+											esEngorde    = {true}
 											arregloValores = {engorde.arrayStockPilled}
 											arregloSimulacion  = {engorde.stockPilledValues}
 											funcModifVariacion = {this.props.inputVariacionDiferidosValor}

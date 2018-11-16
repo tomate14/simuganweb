@@ -129,6 +129,7 @@ class Mobs extends Component {
 		let array = [];
 		array = 		[<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.pastureAllow}
 										arregloSimulacion  = {arrayValoresPastura}
 										funcModifVariacion = {this.props.modificarWeaningPastura}
@@ -139,6 +140,7 @@ class Mobs extends Component {
 
 						<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.silageAllow}
 										arregloSimulacion  = {arrayValoresSilageAllow}
 										funcModifVariacion = {this.props.modificarWeaningEnsilaje}
@@ -149,6 +151,7 @@ class Mobs extends Component {
 
 						<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.grainAllow}
 										arregloSimulacion  = {arrayValoresGrainAllow}
 										funcModifVariacion = {this.props.modificarWeaningGrano}
@@ -160,6 +163,7 @@ class Mobs extends Component {
 			const arrayValoresCropStubble  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].crop_stubbleAllow[0].$);		
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.cropAllow}
 										arregloSimulacion  = {arrayValoresCropStubble}
 										funcModifVariacion = {this.props.modificarWeaningRastrojo}
@@ -171,6 +175,7 @@ class Mobs extends Component {
 			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].weaning_mob[0].stockPilledAllow[0].$);
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs.stockAllow}
 										arregloSimulacion  = {arrayValoresStockPilled}
 										funcModifVariacion = {this.props.modificarWeaningDiferido}
@@ -251,6 +256,7 @@ class Mobs extends Component {
 		
 		array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].pastureAllow}
 										arregloSimulacion  = {arrayValoresPastura}
 										funcModifVariacion = {this.props.modificarPasturaGeneral}
@@ -261,6 +267,7 @@ class Mobs extends Component {
 
 		array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].silageAllow}
 										arregloSimulacion  = {arrayValoresSilageAllow}
 										funcModifVariacion = {this.props.modificarEnsilajeGeneral}
@@ -270,6 +277,7 @@ class Mobs extends Component {
 										/>);
 		array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].grainAllow}
 										arregloSimulacion  = {arrayValoresGrainAllow}
 										funcModifVariacion = {this.props.modificarGranoGeneral}
@@ -282,6 +290,7 @@ class Mobs extends Component {
 			const arrayValoresCropStubble  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].crop_stubbleAllow[0].$);		
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].cropAllow}
 										arregloSimulacion  = {arrayValoresCropStubble}
 										funcModifVariacion = {this.props.modificarRastrojoGeneral}
@@ -293,6 +302,7 @@ class Mobs extends Component {
 			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].stockPilledAllow[0].$);
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
+										esEngorde    = {false}
 										arregloValores     = {mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].stockAllow}
 										arregloSimulacion  = {arrayValoresStockPilled}
 										funcModifVariacion = {this.props.modificarDiferidoGeneral}

@@ -23,6 +23,7 @@ class PasturePane extends Component {
 				<InputsMonths 	 
 								 cantVariaciones = {this.props.cantVariaciones}
 								 pagvariaciones = {this.props.arregloValores}
+								 esEngorde    = {this.props.esEngorde}
 								 paginaActual = {this.props.paginaActual}
 			                     funcModiPagina = {this.props.funcModifPagina}
 		                         funcModiValorInput = {this.props.funcModifVariacion}
