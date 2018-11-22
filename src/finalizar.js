@@ -2,6 +2,47 @@ import store from './index.js';
 
 //Config Store
 
+function getMonth(numeroMes){
+  switch(numeroMes){
+    case 0:
+        return "January";
+        break;
+    case 1:
+        return "February";
+        break;
+    case 2:
+        return "March";
+        break;
+    case 3:
+        return "April";
+        break;
+    case 4:
+        return "May";
+        break;
+    case 5:
+        return "June";
+        break;
+    case 6:
+        return "July";
+        break;
+    case 7:
+        return "August";
+        break;
+    case 8:
+        return "September";
+        break;
+    case 9:
+        return "October";
+        break;
+    case 10:
+        return "November";
+        break;
+    case 11:
+        return "December";
+        break;
+  }
+}
+
 function validarCargaDatos(states){
 	for (let prop in states) {
         // skip loop if the property is from prototype
@@ -17,7 +58,9 @@ function validarCargaDatos(states){
 export function generarSalidaRest(){
 	let states = store.getState();
 	if(validarCargaDatos(states)){
+		let jsonString = null;
 		let VariacionesReact = {};
+		let ObjetoPastura = {};
 		VariacionesReact.ensilaje = {};
 		VariacionesReact.recursosforrajeros={};
 		VariacionesReact.potreros={};
@@ -54,6 +97,7 @@ export function generarSalidaRest(){
 				for(let k = 0; k < 12; k++){
 					ValorMes = {};
 					ValorMes = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[0][k];
+					delete ValorMes.mes;
 					ArrayForrajero.push(ValorMes);					
 				}
 				VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura = ArrayForrajero;
@@ -68,7 +112,7 @@ export function generarSalidaRest(){
 		*/
 		if(states.potreros.permitido){
 			VariacionesReact.potreros.pasturas = states.potreros.digestibilidadVariaciones;
-			let ObjetoPastura = {};
+			
 			for(let i = 0; i< VariacionesReact.potreros.pasturas.length; i++ ){
 				ObjetoPastura = {}
 				ObjetoPastura.pastura = VariacionesReact.potreros.pasturas[i];
@@ -175,18 +219,23 @@ export function generarSalidaRest(){
 						let ObjetoWeaningMeses1 = {}; let ObjetoWeaningMeses2 = {};	let ObjetoWeaningMeses3 = {}; let ObjetoWeaningMeses4 = {};	let ObjetoWeaningMeses5 = {};
 
 						ObjetoMeses1 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].cropAllow[0][k];
+						delete ObjetoMeses1.mes;
 						arrayObjeto1.push(ObjetoMeses1);
 
 						ObjetoMeses2 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].grainAllow[0][k];
+						delete ObjetoMeses2.mes;
 						arrayObjeto2.push(ObjetoMeses2);
 
 						ObjetoMeses3 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].pastureAllow[0][k];
+						delete ObjetoMeses3.mes;
 						arrayObjeto3.push(ObjetoMeses3);
 
 						ObjetoMeses4 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].silageAllow[0][k];
+						delete ObjetoMeses4.mes;
 						arrayObjeto4.push(ObjetoMeses4);
 
 						ObjetoMeses5 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].stockAllow[0][k];
+						delete ObjetoMeses5.mes;
 						arrayObjeto5.push(ObjetoMeses5);
 
 						/*
@@ -194,18 +243,23 @@ export function generarSalidaRest(){
 						*/
 
 						ObjetoWeaningMeses1 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.cropAllow[0][k];
+						delete ObjetoWeaningMeses1.mes;
 						arrayWeaningObjeto1.push(ObjetoWeaningMeses1);
 
 						ObjetoWeaningMeses2 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.grainAllow[0][k];
+						delete ObjetoWeaningMeses2.mes;
 						arrayWeaningObjeto2.push(ObjetoWeaningMeses2);
 
 						ObjetoWeaningMeses3 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.pastureAllow[0][k];
+						delete ObjetoWeaningMeses3.mes;
 						arrayWeaningObjeto3.push(ObjetoWeaningMeses3);
 
 						ObjetoWeaningMeses4 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.silageAllow[0][k];
+						delete ObjetoWeaningMeses4.mes;
 						arrayWeaningObjeto4.push(ObjetoWeaningMeses4);
 
 						ObjetoWeaningMeses5 =	VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.stockAllow[0][k];
+						delete ObjetoWeaningMeses5.mes;
 						arrayWeaningObjeto5.push(ObjetoWeaningMeses5);
 					}
 
@@ -264,7 +318,67 @@ export function generarSalidaRest(){
 
 		 VariacionesReact.engorde = states.engorde;
 		// jsonString= JSON.stringify(VariacionesReact.engorde);
+		if(states.engorde.permitido){
+			let ObjetoVariacionEngorde = {};
+			ObjetoVariacionEngorde.PastoEngorde = {};
+			ObjetoVariacionEngorde.VariacionEngorde = {};
+			if(states.engorde.tipoEngorde == "pasto"){
+				ObjetoVariacionEngorde.PastoEngorde.pastureAllow     = states.engorde.arrayPastures;
+				ObjetoVariacionEngorde.PastoEngorde.grainAllow       = states.engorde.arrayGrain;
+				ObjetoVariacionEngorde.PastoEngorde.silageAllow      = states.engorde.arraySilage;
+				ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow = states.engorde.arrayStockPilled;
+				ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow = states.engorde.arrayCropStubble;
 
+				for(let i = 0; i< states.engorde.arrayPastures.length; i++){
+					let arrayObjeto6 = []; let arrayObjeto7 = []; let arrayObjeto8 = []; let arrayObjeto9 = []; let arrayObjeto10 = [];
+					for(let j = 0; j < 12; j++){
+						let ObjetoMes6 = {}; let ObjetoMes7 = {}; let ObjetoMes8 = {}; let ObjetoMes9 = {};	let ObjetoMes10 = {};
+						let mes = getMonth(j);
+						ObjetoMes6.valor = ObjetoVariacionEngorde.PastoEngorde.pastureAllow[i][j];
+						//ObjetoMes6.mes   = mes;
+						arrayObjeto6.push(ObjetoMes6);
+						
+						ObjetoMes7.valor = ObjetoVariacionEngorde.PastoEngorde.grainAllow[i][j];
+						//ObjetoMes7.mes   = mes;
+						arrayObjeto7.push(ObjetoMes7);
+						
+
+						ObjetoMes8.valor = ObjetoVariacionEngorde.PastoEngorde.silageAllow[i][j];
+						//ObjetoMes8.mes   = mes;
+						arrayObjeto8.push(ObjetoMes8);
+						
+
+						ObjetoMes9.valor = ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow[i][j];
+						//ObjetoMes9.mes   = mes;
+						arrayObjeto9.push(ObjetoMes9);
+						
+
+						ObjetoMes10.valor = ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow[i][j];
+						//ObjetoMes10.mes   = mes;
+						arrayObjeto10.push(ObjetoMes10);
+						
+					}
+
+					ObjetoVariacionEngorde.PastoEngorde.pastureAllow[i]     = arrayObjeto6 
+					ObjetoVariacionEngorde.PastoEngorde.grainAllow[i]       = arrayObjeto7
+					ObjetoVariacionEngorde.PastoEngorde.silageAllow[i]      = arrayObjeto8
+					ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow[i] = arrayObjeto9
+					ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow[i] = arrayObjeto10
+			}
+		}else{
+				ObjetoVariacionEngorde.VariacionEngorde.arrayCC           = states.engorde.arrayCC;
+				ObjetoVariacionEngorde.VariacionEngorde.arrayDRProtein    = states.engorde.arrayDRProtein;
+				ObjetoVariacionEngorde.VariacionEngorde.arrayDigest       = states.engorde.arrayDigest;
+				ObjetoVariacionEngorde.VariacionEngorde.arrayIntake       = states.engorde.arrayIntake;
+				ObjetoVariacionEngorde.VariacionEngorde.arrayPesoVivo     = states.engorde.arrayPesoVivo;
+				ObjetoVariacionEngorde.VariacionEngorde.arrayProtein      = states.engorde.arrayProtein;
+					
+			}
+		    VariacionesReact.engorde = ObjetoVariacionEngorde;
+		    console.log(JSON.stringify( VariacionesReact.engorde));
+			jsonString= JSON.stringify( VariacionesReact.engorde);
+
+		}
 
 
 		jsonString= JSON.stringify(VariacionesReact);		
