@@ -1,4 +1,6 @@
 import store from './index.js';
+import {xmlString} from './data/simulacioninicial.js';
+import $ from 'jquery';
 
 //Config Store
 
@@ -379,20 +381,63 @@ export function generarSalidaRest(){
 			jsonString= JSON.stringify( VariacionesReact.engorde);
 
 		}
+		VariacionesReact.xmloriginal = xmlString();
+		//console.log(xmlString());
+		jsonString= JSON.stringify(VariacionesReact);	
 
+		//Llamado al rest
+		let Url = "http://localhost:8080/simugan/create"
 
-		jsonString= JSON.stringify(VariacionesReact);		
-		console.log(jsonString);
-		console.log("Generacion exitosa "+jsonString);
+		$.ajax({
+            url: Url,
+            type: 'POST',
+            dataType: 'json',    
+            data: jsonString,
+            contentType: 'application/json',
+            xhrFields: {
+		        withCredentials: false
+		    },
+            success: function (data) {
+                console.log(data);
+                alert("EXITO");
+            },
+            error: function (data) {
+            	console.log(data);
+             	console.log('Error');
+            }
+        });
+
+        /*$.ajax({
+		    url: Url,
+		    type: 'post',
+		    crossDomain: true,	    
+            data: jsonString,
+		    success: function (response) {
+		        console.log(response);
+		    },
+		    error: function (xhr, status) {
+		        console.log(xhr);
+		        console.log(status);
+		    }
+		});*/
+
+      
+
+        /*fetch('http://localhost:8080/simugan/create', {
+		  method: 'POST',
+		  headers: {
+		    'Content-Type': 'application/json',
+		  },
+		  body: jsonString
+		}).then(function (response) {
+		    console.log(response);
+		  })
+		  .catch(function (error) {
+		    console.log(error);
+		  });*/
+		//console.log(jsonString);
 	}else{
 		console.log("Error de validacion de datos, verifique");
 	}
-	 
-	
-	/*states.forEach(function(element) {
-	  if((element.permitido == true) &&(element.cantVariaciones == 0)){
-	  		console.log("ERROR DE CARGA");
-	  }
-	});*/
-	console.log("aux");
+
 }
