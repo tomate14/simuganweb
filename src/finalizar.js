@@ -69,7 +69,7 @@ export function generarSalidaRest(){
 		VariacionesReact.rastrojos={};
 		VariacionesReact.invernada={};
 		VariacionesReact.feedlot={};
-		VariacionesReact.diferidos = {};
+		VariacionesReact.diferido = {};
 		VariacionesReact.destete = {};
 		VariacionesReact.mobs = {};
 
@@ -86,23 +86,27 @@ export function generarSalidaRest(){
 		           GENERO RECURSOSFORRAJEROS 
 		*/
 		if(states.recursosforrajeros.permitido){
-			VariacionesReact.recursosforrajeros.ForrajeroVariaciones = states.recursosforrajeros.pagvariaciones;
+			VariacionesReact.recursosforrajeros.ForrajeroPasturas = states.recursosforrajeros.pagvariaciones;
 			let ForrajeroPastura = {};
 			let ForrajeroVariacion = {};
-			for(let i = 0; i < VariacionesReact.recursosforrajeros.ForrajeroVariaciones.length; i++){
-				ForrajeroPastura = {};
-				ForrajeroPastura.ForrajeroPastura = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i];
-				VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i] = ForrajeroPastura;		
+			for(let i = 0; i < VariacionesReact.recursosforrajeros.ForrajeroPasturas.length; i++){
+				ForrajeroVariacion = {};
+				ForrajeroPastura.ForrajeroVariacion = VariacionesReact.recursosforrajeros.ForrajeroPasturas[i];
+				VariacionesReact.recursosforrajeros.ForrajeroPasturas[i] = ForrajeroPastura;		
 				
 				let ValorMes = {}
-				let ArrayForrajero = []
-				for(let k = 0; k < 12; k++){
-					ValorMes = {};
-					ValorMes = VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura[0][k];
-					delete ValorMes.mes;
-					ArrayForrajero.push(ValorMes);					
+				let ArrayForrajero = [];
+				for(let j = 0; j < VariacionesReact.recursosforrajeros.ForrajeroPasturas[i].ForrajeroVariacion.length; j++){
+					ArrayForrajero = [];
+					for(let k = 0; k < 12; k++){
+						ValorMes = {};
+						ValorMes = VariacionesReact.recursosforrajeros.ForrajeroPasturas[i].ForrajeroVariacion[j][k];
+						delete ValorMes.mes;
+						ArrayForrajero.push(ValorMes);					
+					}
+					VariacionesReact.recursosforrajeros.ForrajeroPasturas[i].ForrajeroVariacion[j] = ArrayForrajero;
+					
 				}
-				VariacionesReact.recursosforrajeros.ForrajeroVariaciones[i].ForrajeroPastura = ArrayForrajero;
 				
 			}
 			jsonString= JSON.stringify(VariacionesReact.recursosforrajeros);
@@ -143,17 +147,17 @@ export function generarSalidaRest(){
 			GENERO LOS DIFERIDOS
 		*/
 		if(states.diferidos.permitido){
-			VariacionesReact.diferidos.digestibilidadVariaciones = states.diferidos.digestibilidadVariaciones;
-			VariacionesReact.diferidos.rindeVariaciones = states.diferidos.rindeVariaciones;
-			for(let i = 0; i< VariacionesReact.diferidos.digestibilidadVariaciones.length; i++ ){
+			VariacionesReact.diferido.digestibilidadVariaciones = states.diferidos.digestibilidadVariaciones;
+			VariacionesReact.diferido.rindeVariaciones = states.diferidos.rindeVariaciones;
+			for(let i = 0; i< VariacionesReact.diferido.digestibilidadVariaciones.length; i++ ){
 				ObjetoPastura = {}
-				ObjetoPastura.pastura = VariacionesReact.diferidos.digestibilidadVariaciones[i];
-				VariacionesReact.diferidos.digestibilidadVariaciones[i] = ObjetoPastura;
-				ObjetoPastura.pastura = VariacionesReact.diferidos.rindeVariaciones[i];
-				VariacionesReact.diferidos.rindeVariaciones[i] = ObjetoPastura;
+				ObjetoPastura.pastura = VariacionesReact.diferido.digestibilidadVariaciones[i];
+				VariacionesReact.diferido.digestibilidadVariaciones[i] = ObjetoPastura;
+				ObjetoPastura.pastura = VariacionesReact.diferido.rindeVariaciones[i];
+				VariacionesReact.diferido.rindeVariaciones[i] = ObjetoPastura;
 			}
 
-			jsonString= JSON.stringify(VariacionesReact.diferidos);
+			jsonString= JSON.stringify(VariacionesReact.diferido);
 		}
 
 		/*
@@ -384,7 +388,7 @@ export function generarSalidaRest(){
 		VariacionesReact.xmloriginal = xmlString();
 		//console.log(xmlString());
 		jsonString= JSON.stringify(VariacionesReact);	
-
+		console.log(jsonString)
 		//Llamado al rest
 		let Url = "http://localhost:8080/simugan/create"
 
@@ -393,13 +397,12 @@ export function generarSalidaRest(){
             type: 'POST',
             dataType: 'json',    
             data: jsonString,
-            contentType: 'application/json',
+            contentType: 'application/jsonp',
             xhrFields: {
 		        withCredentials: false
 		    },
             success: function (data) {
                 console.log(data);
-                alert("EXITO");
             },
             error: function (data) {
             	console.log(data);
