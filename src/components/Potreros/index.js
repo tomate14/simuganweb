@@ -55,7 +55,7 @@ class Potreros extends Component {
 					        <FormGroup row>					        	
 					          	<Col sm="4" id="divPicker">
 						          	<Picker 
-										id="Pasturas"
+										id="Potreros"
 						                opciones         = {potreros.nombrePotreros}
 								        dropDownSelected = {potreros.dropDownSelected}
 								        funcSelected     = {this.props.modificarDropdownSelected}/>

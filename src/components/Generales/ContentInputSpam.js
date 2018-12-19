@@ -15,7 +15,7 @@ class ContentInputSpam extends Component{
 					                textos = {this.props.state.textoSalida} 
 					                funcInput = {this.props.funcSalida}
 					                pagina    = {this.props.pagina}
-					                titulo="Salida/Venta"/>
+					                titulo="Terminaciones"/>
 				</Col>
 				<Col md={6}>
 					<ChildInputSpam vector ={this.props.state.pagvariaciones[this.props.state.paginaActual-1].Fattening} 

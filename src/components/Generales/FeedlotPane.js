@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 //bootstrap
-import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
+import {Input,Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //components
@@ -22,12 +22,7 @@ class FeedlotPane extends Component {
 					</Row>
 					<Row id= "divPicker">
 						<Col>
-							<SingleInputArray funcModificar = {this.props.funcModificar}
-					   					 	  arrayVariaciones = {this.props.arrayVariaciones}
-					   					      cantVariaciones = {this.props.cantVariaciones}
-					   					      min = {this.props.min}
-					   					      max = {this.props.max} 
-					   		/>
+							<Input type="number" min={70} max={90} name="4" id = "4" onBlur = {this.chequearRango} onChange={this.props.funcModificar} value ={this.props.esquema} />
 						</Col>
 					</Row>
 				</Container>

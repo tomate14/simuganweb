@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 //bootstrap
-import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
+import {Input,Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //components
@@ -13,10 +13,19 @@ import SingleSelectArray from '../Generales/SingleSelectArray';
 
 class PesoVivoPane extends Component {
 
+	  	generarInput(parametro,funcOnChange){
+	  	let selectValues = [1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9];
+		let row = 	<Input type="select"  value = {1} onChange = {this.props.funcModificar}>
+						{selectValues.map((object,index) => {
+						return <option key ={index} value = {object} id = {index}> {object}</option>}
+						)}
+					</Input>; 
+		return row;
+	} 
 
 	generarCondCorporal() {
 		let array = [];
-		if(this.props.medida == "cc"){ // cambiar CC por el string correspondiente ( consultar a Mauri)
+		if(this.props.medida == "lwBcs"){ // cambiar CC por el string correspondiente ( consultar a Mauri)
 			array.push(	
 							<Col id = "simulationValues">
 								<h5> Valor de CC a partir del cual los animales se destinan a la venta </h5>
@@ -25,11 +34,9 @@ class PesoVivoPane extends Component {
 						);
 			array.push(
 							<Col>
-								<SingleSelectArray  selectValues = {[1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9]}
-												  	funcModificar = {this.props.funcModificarCC}
-						   					 	  	arrayVariaciones = {this.props.arrayVariacionesCC}
-						   					      	cantVariaciones = {this.props.cantVariaciones} 
-						   		/>
+								{this.generarInput(this.props.arrayVariaciones,this.props.funcModificar).map((object, i) => {
+               					return <p key={i}> Variación {i+1} :   {object} </p> ; 
+           						})} 
 							</Col>
 						);
 		}else
@@ -49,11 +56,7 @@ class PesoVivoPane extends Component {
 					</Row>
 					<Row id= "divPicker">
 						<Col>
-							<SingleInputArray funcModificar = {this.props.funcModificarPeso}
-					   					 	  arrayVariaciones = {this.props.arrayVariacionesPeso}
-					   					      cantVariaciones = {this.props.cantVariaciones}
-					   					      min = {300}
-					   					      max = {650} 
+						{this.generarInput(this.props.arrayVariaciones,this.props.funcModificar)}
 					   		/>
 						</Col>
 						{extraInputs[1]}

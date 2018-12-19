@@ -64,7 +64,7 @@ class Diferido extends Component {
 						        	
 						          	<Col id= "divPicker" sm="4">
 							          	<Picker 
-											id="Pasturas"
+											id="Diferidos"
 							                opciones         = {this.props.diferidos.nombrePasturas}
 									        dropDownSelected = {this.props.diferidos.dropdownSelected}
 									        funcSelected     = {this.props.modificarDropdownSelected}/>
