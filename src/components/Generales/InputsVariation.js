@@ -1,6 +1,6 @@
 import React, {Component} from 'react'; 
 import PropTypes from 'prop-types';
-import { Row, Col } from 'reactstrap';
+import { Row, Col,} from 'reactstrap';
 import { Glyphicon,Button} from 'reactstrap';
 
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
@@ -55,7 +55,8 @@ class InputsVariation extends Component{
 		if(this.props.state.cantVariaciones > 1){
 			return (
 					<Col xs={2} className="divFlechas">					
-						<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
+						<Button className="btn btn-outline-secondary" onClick={this.handleClickDown}>
+						<FaAngleLeft/></Button>
 					</Col>
 				);	
 		}
@@ -65,7 +66,9 @@ class InputsVariation extends Component{
 		if(this.props.state.cantVariaciones > 1){
 			return (
 					<Col xs={2}className="divFlechas">
-						<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
+						<Button className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}>
+							<FaAngleRight/>
+						</Button>
 					</Col>
 				);	
 		}
@@ -79,9 +82,9 @@ class InputsVariation extends Component{
 		return(
 		<div className="container-fluid">
 			<Row xs={12}>				
-				{this.mostrarFlechaAbajo()}
+				{this.mostrarFlechaArriba()}
 				<Col xs={4} className="divInputs">
-					<p className="labelPagina">Pagina:{this.props.state.paginaActual}</p>
+					<p className="labelPagina">Experimento:{this.props.state.paginaActual}</p>
 					<div id ="divInputs" className="divInputsVariation">
 						{inputs.map((input, key) => (
 				            <input
@@ -96,7 +99,7 @@ class InputsVariation extends Component{
 				        ))}
 					</div>
 				</Col>
-				{this.mostrarFlechaArriba()}
+				{this.mostrarFlechaAbajo()}
 				<Col >
 					
 				</Col>

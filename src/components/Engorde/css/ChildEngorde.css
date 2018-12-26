@@ -1,0 +1,23 @@
+
+#checkVariations{
+    border: solid 1px;
+    border-color: gainsboro;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color : gray;
+}
+
+#radios{
+    border: solid 1px;
+    border-color: gainsboro;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+#centerLabel{
+	margin: 0 auto; 	
+}
+
+

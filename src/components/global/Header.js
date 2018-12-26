@@ -25,7 +25,7 @@ class Header extends Component {
                 </Col>
                 <Col sm={8}>
                     <h1>Simulador Ganadero</h1>     
-                    <h2>Configuracion de simulaciones conjuntas</h2>
+                    <h2>Configuracion de simulaciones experimentales</h2>
                 </Col>
                 <Col sm={2}>
                     <img id="Logo" src={logo}/>

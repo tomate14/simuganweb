@@ -3,30 +3,13 @@ import Simulacion from '../data/simulacioninicial.js';
 const initialState = {
 	permitido : true,
 	cantVariaciones : 0,
-  tipoEngorde : Simulacion.escenario.fattening[0].$.fattMethod,
-  paginaActualPasture: 1,
-  paginaActualGrain: 1,
-  paginaActualSilage: 1,
-  paginaActualRastrojo: 1,
-  paginaActualDiferidos: 1,
-  cropStubbleEnable : (Simulacion.escenario.fattening[0].$.enableCrop_stubble === 'true'),
-  stockPilledEnable : (Simulacion.escenario.fattening[0].$.enableStockPilled === 'true'),
-  arrayPastures : [],
-  arraySilage : [],
-  arrayGrain : [],
-  arrayStockPilled : [],
-  arrayCropStubble : [],
+  pagVariaciones : [],
+  paginaActual : 0,
   pastureValues : inicializarArregloSimulacion(Simulacion.escenario.fattening[0].pastureAllow[0].$),
   grainValues : inicializarArregloSimulacion(Simulacion.escenario.fattening[0].grainAllow[0].$),
   silageValues : inicializarArregloSimulacion(Simulacion.escenario.fattening[0].silageAllow[0].$),
   stockPilledValues : inicializarArregloSimulacion(Simulacion.escenario.fattening[0].stockPilledAllow[0].$),
   cropStubbleValues :inicializarArregloSimulacion(Simulacion.escenario.fattening[0].crop_stubbleAllow[0].$),
-  arrayProtein : [],
-  arrayIntake : [],
-  arrayDigest : [],
-  arrayDRProtein : [],
-  arrayPesoVivo : [],
-  arrayCC : [],
   corralValues : {protein : Simulacion.escenario.fattening[0].diet[0].$.feedlotBProtein,
                   intake : Simulacion.escenario.fattening[0].diet[0].$.feedlotIntake, 
                   digest : Simulacion.escenario.fattening[0].diet[0].$.feedlotDigest,
@@ -129,7 +112,7 @@ function modificarArreglo(state,valor,arreglo){
 function iniciarArregloState(state=initialState,valor=1){
     
     let arrayGeneral = [];
-    if(valor > 0){
+/*    if(valor > 0){
         for(let index = 0; index< valor; index++){
             let arrayAux = [];
             for(let i = 0; i < 12; i++){
@@ -138,7 +121,49 @@ function iniciarArregloState(state=initialState,valor=1){
             }  
             arrayGeneral.push(arrayAux);
         }   
-    }    
+    }    */
+    for(let i = 0; i< valor; i++){
+      let tipoEngorde = "pasto";
+      let pasture = [];
+      let silage = [];
+      let grain = [];
+      let diferido = [];
+      let rastrojo = [];
+      let protein = 0;
+      let intake = 0;
+      let digest = 0;
+      let DRPRotein = 0;
+      let pesoVivo = 0;
+      let cc = 0;
+      let feedlotType = "lw";
+      for(let j= 0;j < 12;j++){
+          pasture.push(0);
+          silage.push(0);
+          grain.push(0);
+          diferido.push(0);
+          rastrojo.push(0);
+      }
+      let objectValue = { tipoEngorde : tipoEngorde,
+                          generalEnable : false,
+                          cutsEnable : false,
+                          vaciasEnable : false,
+                          diferidoEnable : false,
+                          rastrojoEnable : false,
+                          pasture : pasture,
+                          silage : silage,
+                          grain : grain,
+                          diferido : diferido,
+                          rastrojo : rastrojo,
+                          feedlotType : feedlotType,
+                          protein : protein,
+                          intake : intake,
+                          digest : digest,
+                          DRPRotein : DRPRotein,
+                          pesoVivo : pesoVivo,
+                          cc : cc
+                          };
+        arrayGeneral.push(objectValue);
+    }
     return arrayGeneral;
 }
 
@@ -188,6 +213,12 @@ export default function(state=initialState,action){
 				permitido : action.payload
 			}
 		break;
+    case "PAGINA_ENGORDE":
+            let pagina = action.payload;
+            return{
+                ...state,
+                paginaActual : pagina
+            }
 		case "CANTIDAD_ENGORDE" :
 			valor = parseInt(action.payload);
              if (isNaN(valor)){
@@ -198,146 +229,169 @@ export default function(state=initialState,action){
              }
 			return{...state,
 					cantVariaciones : valor,
-          arrayPastures : modificarArreglo(state,valor,state.arrayPastures),
-          arrayGrain : modificarArreglo(state,valor,state.arrayGrain),
-          arraySilage : modificarArreglo(state,valor,state.arraySilage),
-          arrayCropStubble : modificarArreglo(state,valor,state.arrayCropStubble),
-          arrayStockPilled : modificarArreglo(state,valor,state.arrayStockPilled),
-          arrayProtein : modificarArregloSimple(state,valor,state.arrayProtein),
-          arrayIntake : modificarArregloSimple(state,valor,state.arrayIntake),
-          arrayDigest : modificarArregloSimple(state,valor,state.arrayDigest),
-          arrayDRProtein : modificarArregloSimple(state,valor,state.arrayDRProtein),
-          arrayPesoVivo : modificarArregloSimple(state,valor,state.arrayPesoVivo),
-          arrayCC : modificarArregloSimple(state,valor,state.arrayCC),
-          paginaActualPasture: 1,
-          paginaActualGrain: 1,
-          paginaActualSilage: 1,
-          paginaActualRastrojo: 1,
-          paginaActualDiferidos: 1
+          pagVariaciones : iniciarArregloState(state,valor)
 
 					}
 		break;
-    case("PAGINA-PASTURE_ENGORDE"):
-          let pagina = action.payload;
-          return{
-              ...state,
-              paginaActualPasture : pagina
-          }
-            break;
-    case("PAGINA-GRAIN_ENGORDE"):
-          pagina = action.payload;
-          return{
-              ...state,
-              paginaActualGrain : pagina
-          }
-            break;
-    case("PAGINA-SILAGE_ENGORDE"):
-          pagina = action.payload;
-          return{
-              ...state,
-              paginaActualSilage : pagina
-          }
-            break;
-    case("PAGINA-RASTROJO_ENGORDE"):
-          pagina = action.payload;
-          return{
-              ...state,
-              paginaActualRastrojo : pagina
-          }
-            break;
-    case("PAGINA-DIFERIDOS_ENGORDE"):
-          pagina = action.payload;
-          return{
-              ...state,
-              paginaActualDiferidos : pagina
-          }
-            break;
+        case "UPDATE-VALUE-TRIGGER-TIPO_ENGORDE":                
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        tipoEngorde : action.valor}
+                                  : content
+                                  )
+    }
+    break;
     case "VALORVARIACION_PASTURE_ENGORDE":
     return {...state,
-    arrayPastures: state.arrayPastures.map(
-                                    (content, i) => i == action.pagina ?
-                                        state.arrayPastures[action.pagina].map(
+    pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ?{ ...content,
+                                        pasture : state.pagVariaciones[i].pasture.map(
                                           (content,j) => j == action.posicion ? action.valor
                                                     : content
-                                          )
+                                          )}
                                   : content
                                   )
     }
     break;
     case "VALORVARIACION_GRAIN_ENGORDE":
-        return {...state,
-        arrayGrain: state.arrayGrain.map(
-                                        (content, i) => i == action.pagina ?
-                                            state.arrayGrain[action.pagina].map(
-                                              (content,j) => j == action.posicion ? action.valor
-                                                        : content
-                                              )
-                                      : content
-                                      )
-        }
+         return {...state,
+    pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? {...content,
+                                        grain :state.pagVariaciones[i].grain.map(
+                                          (content,j) => j == action.posicion ? action.valor
+                                                    : content
+                                          )}
+                                  : content
+                                  )
+    }
         break;
     case "VALORVARIACION_SILAGE_ENGORDE":
         return {...state,
-        arraySilage: state.arraySilage.map(
-                                        (content, i) => i == action.pagina ?
-                                            state.arraySilage[action.pagina].map(
-                                              (content,j) => j == action.posicion ? action.valor
-                                                        : content
-                                              )
-                                      : content
-                                      )
-        }
+    pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? {...content,
+                                        silage :state.pagVariaciones[i].silage.map(
+                                          (content,j) => j == action.posicion ? action.valor
+                                                    : content
+                                          )}
+                                  : content
+                                  )
+    }
     case "VALORVARIACION_RASTROJO_ENGORDE":
         return {...state,
-        arrayCropStubble: state.arrayCropStubble.map(
-                                        (content, i) => i == action.pagina ?
-                                            state.arrayCropStubble[action.pagina].map(
-                                              (content,j) => j == action.posicion ? action.valor
-                                                        : content
-                                              )
-                                      : content
-                                      )
-        }
+    pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? {...content,
+                                        rastrojo :state.pagVariaciones[i].rastrojo.map(
+                                          (content,j) => j == action.posicion ? action.valor
+                                                    : content
+                                          )}
+                                  : content
+                                  )
+    }
         break;
     case "VALORVARIACION_DIFERIDOS_ENGORDE":
-        return {...state,
-        arrayStockPilled: state.arrayStockPilled.map(
-                                        (content, i) => i == action.pagina ?
-                                            state.arrayStockPilled[action.pagina].map(
-                                              (content,j) => j == action.posicion ? action.valor
-                                                        : content
-                                              )
-                                      : content
-                                      )
-        }
+         return {...state,
+    pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? {...content,
+                                        diferido :state.pagVariaciones[i].diferido.map(
+                                          (content,j) => j == action.posicion ? action.valor
+                                                    : content
+                                          )}
+                                  : content
+                                  )
+    }
         break;
+    case "UPDATE-VALUE-TRIGGER-CHECK-DIFERIDO_ENGORDE":                
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        diferidoEnable : action.valor}
+                                  : content
+                                  )
+    }
+    break;
+    case "UPDATE-VALUE-TRIGGER-CHECK-RASTROJO_ENGORDE":                
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        rastrojoEnable : action.valor}
+                                  : content
+                                  )
+    }
+    break;
+    case "UPDATE-VALUE-TRIGGER-CHECK-CUTS_ENGORDE":                
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        cutsEnable : action.valor}
+                                  : content
+                                  )
+    }
+    break;
+    case "UPDATE-VALUE-TRIGGER-CHECK-VACIAS_ENGORDE":                
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        vaciasEnable : action.valor}
+                                  : content
+                                  )
+    }
+    break;
+    case "UPDATE-VALUE-TRIGGER-CHECK-GENERAL_ENGORDE":                
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        generalEnable : action.valor}
+                                  : content
+                                  )
+    }
+    break;
+    case "UPDATE-VALUE-TRIGGER-FEEDLOT-TYPE_ENGORDE":                
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        feedlotType : action.valor}
+                                  : content
+                                  )
+    }
+    break;
+
     case "UPDATE-VALUE-TRIGGER-PROTEIN_ENGORDE":
            valor = parseInt(action.value);
                  if (isNaN(valor)){
                      valor = 0;
                  }
                 
-          return{
-          ...state,
-          arrayProtein : state.arrayProtein.map(
-                   (content, i) => i == action.index ? parseInt(valor)                             
-                   : content
-                   )
-          }
-        break;
+         return {...state,
+        pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        protein : valor}
+                                  : content
+                                  )
+    }
+      break;
      case "UPDATE-VALUE-TRIGGER-INTAKE_ENGORDE":
            valor = parseInt(action.value);
                  if (isNaN(valor)){
                      valor = 0;
                  }
                 
-          return{
-          ...state,
-          arrayIntake : state.arrayIntake.map(
-                   (content, i) => i == action.index ? parseInt(valor)                             
-                   : content
-                   )
-          }
+          return {...state,
+          pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        intake : valor}
+                                  : content
+                                  )
+    }
         break;
      case "UPDATE-VALUE-TRIGGER-DIGEST_ENGORDE":
            valor = parseInt(action.value);
@@ -345,13 +399,14 @@ export default function(state=initialState,action){
                      valor = 0;
                  }
                 
-          return{
-          ...state,
-          arrayDigest : state.arrayDigest.map(
-                   (content, i) => i == action.index ? parseInt(valor)                             
-                   : content
-                   )
-          }
+          return {...state,
+          pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        digest : valor}
+                                  : content
+                                  )
+    }
         break;
        case "UPDATE-VALUE-TRIGGER-DRPROTEIN_ENGORDE":
            valor = parseInt(action.value);
@@ -359,13 +414,14 @@ export default function(state=initialState,action){
                      valor = 0;
                  }
                 
-          return{
-          ...state,
-          arrayDRProtein : state.arrayDRProtein.map(
-                   (content, i) => i == action.index ? parseInt(valor)                             
-                   : content
-                   )
-          }
+         return {...state,
+          pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        DRPRotein : valor}
+                                  : content
+                                  )
+    }          
         break;
                case "UPDATE-VALUE-TRIGGER-PESOVIVO_ENGORDE":
            valor = parseInt(action.value);
@@ -373,13 +429,14 @@ export default function(state=initialState,action){
                      valor = 0;
                  }
                 
-          return{
-          ...state,
-          arrayPesoVivo : state.arrayPesoVivo.map(
-                   (content, i) => i == action.index ? parseInt(valor)                             
-                   : content
-                   )
-          }
+          return {...state,
+          pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        pesoVivo : valor}
+                                  : content
+                                  )
+    }          
         break;
                case "UPDATE-VALUE-TRIGGER-CC_ENGORDE":
            valor = parseFloat(action.value);
@@ -387,13 +444,14 @@ export default function(state=initialState,action){
                      valor = 0;
                  }
                 
-          return{
-          ...state,
-          arrayCC : state.arrayCC.map(
-                   (content, i) => i == action.index ? parseFloat(valor)                             
-                   : content
-                   )
-          }
+         return {...state,
+          pagVariaciones: state.pagVariaciones.map(
+                                    (content, i) => i == state.paginaActual ? 
+                                        {...content,
+                                        cc : valor}
+                                  : content
+                                  )
+    }          
         break;
 
 	}

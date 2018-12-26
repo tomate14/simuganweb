@@ -8,12 +8,11 @@ import Tabla from '../Generales/Tabla';
 //redux 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {permitirVariaciones,modificarVariaciones,InputVariacionPastureValor,InputVariacionGrainValor,InputVariacionSilageValor,InputVariacionRastrojoValor,InputVariacionDiferidosValor,
-	ModificarPaginaPasture, ModificarPaginaGrain, ModificarPaginaSilage, ModificarPaginaRastrojo, ModificarPaginaDiferidos,
-	ModificarInputValueTriggerProtein, ModificarInputValueTriggerIntake,ModificarInputValueTriggerDigest,ModificarInputValueTriggerDRProtein,ModificarInputValueTriggerPesoVivo,ModificarInputValueTriggerCC} from '../../actions/action-engorde.js';
+import {InputSelectValueFeedlot,InputCheckRastrojo,InputCheckDiferido,InputCheckVacias, InputCheckCuts, InputCheckGeneral,InputRadioEngorde,permitirVariaciones,modificarVariaciones,InputVariacionPastureValor,InputVariacionGrainValor,InputVariacionSilageValor,InputVariacionRastrojoValor,InputVariacionDiferidosValor,
+		ModificarInputValueTriggerProtein, ModificarInputValueTriggerIntake,ModificarInputValueTriggerDigest,ModificarInputValueTriggerDRProtein,ModificarInputValueTriggerPesoVivo,ModificarInputValueTriggerCC} from '../../actions/action-engorde.js';
 
 //bootstrap
-import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
+import {Button,Input,Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //components
@@ -22,6 +21,13 @@ import TabMenu from '../Generales/TabMenu';
 import PasturePane from '../Generales/PasturePane';
 import FeedlotPane from '../Generales/FeedlotPane';
 import PesoVivoPane from '../Generales/PesoVivoPane';
+import ChildEngorde from './ChildEngorde';
+
+//Imagenes
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+
+//css
+import './css/ChildEngorde.css';
 
 class Engorde extends Component {
 
@@ -30,139 +36,65 @@ class Engorde extends Component {
     super(props);
 
 		
-    this.loadTabs = this.loadTabs.bind(this);
-    this.loadTitles = this.loadTitles.bind(this);
+    //this.loadTabs = this.loadTabs.bind(this);
+    //this.loadTitles = this.loadTitles.bind(this);
   } 
 
-	loadTabs(){
-		const engorde = this.props.engorde;
-		let array = [];
-		if(engorde.tipoEngorde == "pasto"){
-			array = 		[<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActualPasture}
-											esEngorde    = {true}
-											arregloValores = {engorde.arrayPastures}
-											arregloSimulacion  = {engorde.pastureValues}
-											funcModifVariacion = {this.props.inputVariacionPastureValor}
-											funcModifPagina = {this.props.modificarPaginaPasture} 
-											min = {0}
-											max = {25}/>,
+	
+  handleClickDown(){
 
-							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActualGrain}
-											esEngorde    = {true}
-											arregloValores = {engorde.arrayGrain}
-											arregloSimulacion  = {engorde.grainValues}
-											funcModifVariacion = {this.props.inputVariacionGrainValor}
-											funcModifPagina = {this.props.modificarPaginaGrain} 
-											min = {0}
-											max = {2.5}/>,
+  }
 
-							<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActualSilage}
-											esEngorde    = {true}
-											arregloValores = {engorde.arraySilage}
-											arregloSimulacion  = {engorde.silageValues}
-											funcModifVariacion = {this.props.inputVariacionSilageValor}
-											funcModifPagina = {this.props.modificarPaginaSilage}
-											min = {0}
-											max = {2.5} /> ];
-			if(engorde.cropStubbleEnable){
-				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActualRastrojo}
-											esEngorde    = {true}
-											arregloValores = {engorde.arrayCropStubble}
-											arregloSimulacion  = {engorde.cropStubbleValues}
-											funcModifVariacion = {this.props.inputVariacionRastrojoValor}
-											funcModifPagina = {this.props.modificarPaginaRastrojo}
-											min = {0}
-											max = {2.5} /> );
-			}
-			if(engorde.stockPilledEnable){
-				array.push(<PasturePane 	cantVariaciones = {engorde.cantVariaciones}
-											paginaActual = {engorde.paginaActualDiferidos}
-											esEngorde    = {true}
-											arregloValores = {engorde.arrayStockPilled}
-											arregloSimulacion  = {engorde.stockPilledValues}
-											funcModifVariacion = {this.props.inputVariacionDiferidosValor}
-											funcModifPagina = {this.props.modificarPaginaDiferidos} 
-											min = {0}
-											max = {3}/> );
-			}
-		}
-		else {
-			  array = [		
-			  				<PesoVivoPane	medida = "cc" // engorde.corralValues.medida
-			  								simulationValueCC = {engorde.corralValues.cc}
-			  								simulationValuePeso = {engorde.corralValues.pesoVivo}
-			  								funcModificarPeso = {this.props.ModificarInputValueTriggerPesoVivo}
-			  								funcModificarCC = {this.props.ModificarInputValueTriggerCC}
-			  								arrayVariacionesPeso = {engorde.arrayPesoVivo}
-			  								arrayVariacionesCC = {engorde.arrayCC}
-			  								cantVariaciones = {engorde.cantVariaciones}/>,
-			  				<FeedlotPane	simulationValue = {engorde.corralValues.protein}
-			  								descripcion = "Proteina Bruta(PB) [10,20]% "
-			  								funcModificar = {this.props.ModificarInputValueTriggerProtein}
-			  								arrayVariaciones = {engorde.arrayProtein}
-			  								cantVariaciones = {engorde.cantVariaciones}
-			  								min = {10}
-			  								max = {20} />,
-			  				<FeedlotPane	simulationValue = {engorde.corralValues.intake}
-			  								descripcion = { "Consumo diario de los animales [1, 2.8]% del peso vivo " }
-			  								funcModificar = {this.props.ModificarInputValueTriggerIntake}
-			  								arrayVariaciones = {engorde.arrayIntake}
-			  								cantVariaciones = {engorde.cantVariaciones}
-			  								min= {1}
-			  								max = {2.8} />,
-			  				<FeedlotPane	simulationValue = {engorde.corralValues.digest}
-			  								descripcion = "Digestibilidad de la dieta [60,90]%"
-			  								funcModificar = {this.props.ModificarInputValueTriggerDigest}
-			  								arrayVariaciones = {engorde.arrayDigest}
-			  								cantVariaciones = {engorde.cantVariaciones}
-			  								min = {60}
-			  								max = {90} />,
-			  				<FeedlotPane	simulationValue = {engorde.corralValues.proteinDR}
-			  								descripcion = " Proteina de la dieta no degradable en rumen [2,12]%"
-			  								funcModificar = {this.props.ModificarInputValueTriggerDRProtein}
-			  								arrayVariaciones = {engorde.arrayDRProtein}
-			  								cantVariaciones = {engorde.cantVariaciones}
-			  								min = {2}
-			  								max = {12}/>];
-		}
-		return array;
-	}
+  handleClickUp(){
 
-	loadTitles(){
-			const engorde = this.props.engorde;
-		let array = [];
-		if(engorde.tipoEngorde == "pasto"){
-			array = 		["Configuracion de Pastura", "Configuracion de Grano","Configuracion de Ensilaje"];
-			if(engorde.cropStubbleEnable){
-				array.push("Configuracion de Rastrojo");
-			}
-			if(engorde.stockPilledEnable){
-				array.push("Configuracion de Diferidos");
-			}
-		}
-		else {
-			  array = ["Condición Corporal/ Peso vivo","Proteina bruta","Consumo Diario" ,"Digestibilidad", "Proteina no degradable"];
-		}
-		return array;
-	}
+  }
 
-	generarPantalla(engorde,tabPanes,navTexts){
+
+	generarPantalla(engorde){
 		if((engorde.permitido)&&(engorde.cantVariaciones>0)){
 			return(<Container>
-						<TabMenu panels = { tabPanes }
-						 		 navTexts = {navTexts} />
-		 	 	   </Container>);
+					<Row xs={12}>
+							<Col md={4}/>
+							<Col xs={1} className="divFlechas">					
+								<Button outline color="secondary" onClick={this.handleClickDown}>
+									<FaAngleLeft />
+								</Button>{' '}
+								
+							</Col>
+							<Col xs={2}>
+								<p className="labelPagina"><b><i><font size="3">Experimento: {engorde.paginaActual}</font></i></b></p>
+							</Col>
+							<Col xs={1}className="divFlechas">
+								<Button outline color="secondary" onClick={this.handleClickUp}>
+									<FaAngleRight />
+								</Button>{' '}
+								
+							</Col>
+							<Col md={4}/>
+					</Row>
+					<Row>
+						<Col md={2}/>
+						<Col md={8}><ChildEngorde esquema = {engorde}
+												  funcRadio = {this.props.InputRadioEngorde}
+												  funcCheckGeneral = {this.props.InputCheckGeneral}
+												  funcCheckCuts = {this.props.InputCheckCuts}
+												  funcCheckVacias = {this.props.InputCheckVacias}
+												  funcCheckRastrojo = {this.props.InputCheckRastrojo}
+												  funcCheckDiferido = {this.props.InputCheckDiferido}
+												  funcSelectTipoCorral = {this.props.InputSelectValueFeedlot}
+													/>
+													</Col>
+						<Col md={2}/>
+					</Row>
+					</Container>
+					);
 		}
 	}
   
 	render(){
 			const engorde = this.props.engorde;
-			var tabPanes = this.loadTabs();
-			var navTexts = this.loadTitles();
+			//var tabPanes = this.loadTabs();
+			//var navTexts = this.loadTitles();
 		return(
 			<div className = "container-fluid">
 				<Row>
@@ -175,7 +107,7 @@ class Engorde extends Component {
 										funcVariaciones = {this.props.modificarVariaciones}/>
 					</Col>
 				</Row>
-				{this.generarPantalla(engorde,tabPanes,navTexts)}
+				{this.generarPantalla(engorde)}
 			</div>
 
 		);
@@ -201,11 +133,13 @@ function matchDispatchToProps(dispatch){
     							ModificarInputValueTriggerDRProtein : ModificarInputValueTriggerDRProtein,
     							ModificarInputValueTriggerPesoVivo : ModificarInputValueTriggerPesoVivo,
     							ModificarInputValueTriggerCC :ModificarInputValueTriggerCC,
-    							modificarPaginaPasture : ModificarPaginaPasture,
-    							modificarPaginaGrain : ModificarPaginaGrain,
-    							modificarPaginaSilage : ModificarPaginaSilage,
-    							modificarPaginaRastrojo : ModificarPaginaRastrojo,
-    							modificarPaginaDiferidos : ModificarPaginaDiferidos,
+    							InputRadioEngorde : InputRadioEngorde,
+    							InputCheckVacias :InputCheckVacias,
+    							InputCheckGeneral :InputCheckGeneral,
+    							InputCheckCuts : InputCheckCuts,
+    							InputCheckRastrojo : InputCheckRastrojo,
+    							InputCheckDiferido : InputCheckDiferido,
+    							InputSelectValueFeedlot : InputSelectValueFeedlot
     						}, dispatch);
     
 }
