@@ -8,7 +8,7 @@ import Tabla from '../Generales/Tabla';
 //redux 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {InputSelectValueFeedlot,InputCheckRastrojo,InputCheckDiferido,InputCheckVacias, InputCheckCuts, InputCheckGeneral,InputRadioEngorde,permitirVariaciones,modificarVariaciones,InputVariacionPastureValor,InputVariacionGrainValor,InputVariacionSilageValor,InputVariacionRastrojoValor,InputVariacionDiferidosValor,
+import {modificarPagina,InputSelectValueFeedlot,InputCheckRastrojo,InputCheckDiferido,InputCheckVacias, InputCheckCuts, InputCheckGeneral,InputRadioEngorde,permitirVariaciones,modificarVariaciones,InputVariacionPastureValor,InputVariacionGrainValor,InputVariacionSilageValor,InputVariacionRastrojoValor,InputVariacionDiferidosValor,
 		ModificarInputValueTriggerProtein, ModificarInputValueTriggerIntake,ModificarInputValueTriggerDigest,ModificarInputValueTriggerDRProtein,ModificarInputValueTriggerPesoVivo,ModificarInputValueTriggerCC} from '../../actions/action-engorde.js';
 
 //bootstrap
@@ -35,18 +35,23 @@ class Engorde extends Component {
 		constructor(props) {
     super(props);
 
-		
+	this.handleClickDown = this.handleClickDown.bind(this);
+	this.handleClickUp = this.handleClickUp.bind(this);
     //this.loadTabs = this.loadTabs.bind(this);
     //this.loadTitles = this.loadTitles.bind(this);
   } 
 
 	
   handleClickDown(){
-
+  	if(this.props.engorde.paginaActual >= 1){
+		this.props.ModificarPagina(this.props.engorde.paginaActual-1);	
+	}
   }
 
   handleClickUp(){
-
+	if(this.props.engorde.paginaActual < this.props.engorde.cantVariaciones - 1){
+		this.props.ModificarPagina(this.props.engorde.paginaActual+1);
+		}	
   }
 
 
@@ -62,7 +67,7 @@ class Engorde extends Component {
 								
 							</Col>
 							<Col xs={2}>
-								<p className="labelPagina"><b><i><font size="3">Experimento: {engorde.paginaActual}</font></i></b></p>
+								<p className="labelPagina"><b><i><font size="3">Experimento: {engorde.paginaActual + 1}</font></i></b></p>
 							</Col>
 							<Col xs={1}className="divFlechas">
 								<Button outline color="secondary" onClick={this.handleClickUp}>
@@ -74,7 +79,7 @@ class Engorde extends Component {
 					</Row>
 					<Row>
 						<Col md={2}/>
-						<Col md={8}><ChildEngorde esquema = {engorde}
+						<Col md={8}><ChildEngorde esquema = {this.props.engorde}
 												  funcRadio = {this.props.InputRadioEngorde}
 												  funcCheckGeneral = {this.props.InputCheckGeneral}
 												  funcCheckCuts = {this.props.InputCheckCuts}
@@ -82,6 +87,11 @@ class Engorde extends Component {
 												  funcCheckRastrojo = {this.props.InputCheckRastrojo}
 												  funcCheckDiferido = {this.props.InputCheckDiferido}
 												  funcSelectTipoCorral = {this.props.InputSelectValueFeedlot}
+												  funcModifPasture = {this.props.InputVariacionPastureValor}
+												  funcModifSilage = {this.props.InputVariacionSilageValor}
+												  funcModifGrain = {this.props.InputVariacionGrainValor}
+												  funcModifRastrojo = {this.props.InputVariacionRastrojoValor}
+												  funcModifDiferido = {this.props.InputVariacionDiferidosValor}
 													/>
 													</Col>
 						<Col md={2}/>
@@ -92,9 +102,7 @@ class Engorde extends Component {
 	}
   
 	render(){
-			const engorde = this.props.engorde;
-			//var tabPanes = this.loadTabs();
-			//var navTexts = this.loadTitles();
+
 		return(
 			<div className = "container-fluid">
 				<Row>
@@ -102,12 +110,12 @@ class Engorde extends Component {
 				</Row>
 				<Row>
 					<Col>
-						<ContentOption  state = {engorde} 
+						<ContentOption  state = {this.props.engorde} 
 										funcPermitir = {this.props.permitirVariaciones}
 										funcVariaciones = {this.props.modificarVariaciones}/>
 					</Col>
 				</Row>
-				{this.generarPantalla(engorde)}
+				{this.generarPantalla(this.props.engorde)}
 			</div>
 
 		);
@@ -122,11 +130,11 @@ function mapStateToProps(state){
 
 function matchDispatchToProps(dispatch){
     return bindActionCreators({permitirVariaciones: permitirVariaciones,modificarVariaciones : modificarVariaciones,
-    							inputVariacionPastureValor:InputVariacionPastureValor,
-    							inputVariacionGrainValor:InputVariacionGrainValor,
-    							inputVariacionSilageValor:InputVariacionSilageValor,
-    							inputVariacionRastrojoValor:InputVariacionRastrojoValor,
-    							inputVariacionDiferidosValor:InputVariacionDiferidosValor,
+    							InputVariacionPastureValor:InputVariacionPastureValor,
+    							InputVariacionGrainValor:InputVariacionGrainValor,
+    							InputVariacionSilageValor:InputVariacionSilageValor,
+    							InputVariacionRastrojoValor:InputVariacionRastrojoValor,
+    							InputVariacionDiferidosValor:InputVariacionDiferidosValor,
     							ModificarInputValueTriggerProtein : ModificarInputValueTriggerProtein,
     							ModificarInputValueTriggerIntake : ModificarInputValueTriggerIntake,
     							ModificarInputValueTriggerDigest : ModificarInputValueTriggerDigest,
@@ -139,7 +147,8 @@ function matchDispatchToProps(dispatch){
     							InputCheckCuts : InputCheckCuts,
     							InputCheckRastrojo : InputCheckRastrojo,
     							InputCheckDiferido : InputCheckDiferido,
-    							InputSelectValueFeedlot : InputSelectValueFeedlot
+    							InputSelectValueFeedlot : InputSelectValueFeedlot,
+    							ModificarPagina : modificarPagina
     						}, dispatch);
     
 }

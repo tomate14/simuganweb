@@ -35,8 +35,8 @@ class MobsInputVariations extends Component {
 		return(
 			<Container>
 				<Row md={12}>
-					<Col md={3}> </Col>
-					<Col md={6}>
+					<Col md={2}> </Col>
+					<Col md={8}>
 						{
 							this.props.array.map((input, key) => (
 								<InputGroup>
@@ -52,7 +52,7 @@ class MobsInputVariations extends Component {
 						}						
 						
 					</Col>
-					<Col md={3}> </Col>
+					<Col md={2}> </Col>
 				</Row>
 			</Container>
 		);

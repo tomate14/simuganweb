@@ -244,6 +244,7 @@ export default function(state=initialState,action){
     }
     break;
     case "VALORVARIACION_PASTURE_ENGORDE":
+    console.log(action.posicion + " " + action.valor)
     return {...state,
     pagVariaciones: state.pagVariaciones.map(
                                     (content, i) => i == state.paginaActual ?{ ...content,

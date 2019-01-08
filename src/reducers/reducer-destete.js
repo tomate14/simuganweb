@@ -13,7 +13,7 @@ const initialState = {
 	nombreMobs : iniciarMobs(),
 	nombresPicker:["Invernada","Cria"],
 	valoresSimulacion : iniciarValoresSimulacion(),
-	textos: ["Umbral","Habilitar regla según el peso del ternero","calfDestiny","calfDietBProtein","calfDietIntake", "calfDietDigest", "calfDietDRProtein","umbralBcs","Habilitar regla según CC de la vaca"]
+	textos: ["Umbral peso","Habilitar regla según el peso del ternero","Destino de los terneros","Proteina NDER","Asignacion de dieta", "Digestibilidad de la dieta", "Proteina DER","Umbral BCC","Habilitar regla según CC de la vaca"]
 }
 
 function iniciarMobs(){

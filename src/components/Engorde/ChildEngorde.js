@@ -35,8 +35,7 @@ class ChildEngorde extends Component {
 											esEngorde    = {true}
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].pasture}
 											arregloSimulacion  = {engorde.pastureValues}
-											funcModifVariacion = {this.props.inputVariacionPastureValor}
-											funcModifPagina = {this.props.modificarPaginaPasture} 
+											funcModifVariacion = {this.props.funcModifPasture} 
 											min = {0}
 											max = {25}/>,
 
@@ -45,8 +44,7 @@ class ChildEngorde extends Component {
 											esEngorde    = {true}
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].grain}
 											arregloSimulacion  = {engorde.grainValues}
-											funcModifVariacion = {this.props.inputVariacionGrainValor}
-											funcModifPagina = {this.props.modificarPaginaGrain} 
+											funcModifVariacion = {this.props.funcModifGrain}
 											min = {0}
 											max = {2.5}/>,
 
@@ -55,8 +53,7 @@ class ChildEngorde extends Component {
 											esEngorde    = {true}
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].silage}
 											arregloSimulacion  = {engorde.silageValues}
-											funcModifVariacion = {this.props.inputVariacionSilageValor}
-											funcModifPagina = {this.props.modificarPaginaSilage}
+											funcModifVariacion = {this.props.funcModifSilage}
 											min = {0}
 											max = {2.5} /> ];
 			if(engorde.pagVariaciones[engorde.paginaActual].rastrojoEnable){
@@ -65,8 +62,7 @@ class ChildEngorde extends Component {
 											esEngorde    = {true}
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].rastrojo}
 											arregloSimulacion  = {engorde.cropStubbleValues}
-											funcModifVariacion = {this.props.inputVariacionRastrojoValor}
-											funcModifPagina = {this.props.modificarPaginaRastrojo}
+											funcModifVariacion = {this.props.funcModifRastrojo}
 											min = {0}
 											max = {2.5} /> );
 			}
@@ -76,8 +72,7 @@ class ChildEngorde extends Component {
 											esEngorde    = {true}
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].diferido}
 											arregloSimulacion  = {engorde.stockPilledValues}
-											funcModifVariacion = {this.props.inputVariacionDiferidosValor}
-											funcModifPagina = {this.props.modificarPaginaDiferidos} 
+											funcModifVariacion = {this.props.funcModifDiferido}
 											min = {0}
 											max = {3}/> );
 			}
@@ -89,8 +84,8 @@ class ChildEngorde extends Component {
 			  								simulationValuePeso = {engorde.corralValues.pesoVivo}
 			  								funcModificarPeso = {this.props.ModificarInputValueTriggerPesoVivo}
 			  								funcModificarCC = {this.props.ModificarInputValueTriggerCC}
-			  								arrayVariacionesPeso = {engorde.arrayPesoVivo}
-			  								arrayVariacionesCC = {engorde.arrayCC}
+			  								arrayVariacionesPeso = {engorde.pagVariaciones[engorde.paginaActual].pesovivo}
+			  								arrayVariacionesCC = {engorde.pagVariaciones[engorde.paginaActual].cc}
 			  								cantVariaciones = {engorde.cantVariaciones}/>,
 			  				<FeedlotPane	simulationValue = {engorde.corralValues.protein}
 			  								descripcion = "Proteina Bruta(PB) [10,20]% "
@@ -157,7 +152,7 @@ class ChildEngorde extends Component {
 
     	handleCheckboxChange(e){
     		let seleccion = e.target.id;
-    		let valor = e.target.value == "false";
+    		let valor = e.target.defaultChecked == "false";
     		switch(seleccion){
     			case "generalCheck":
     				this.props.funcCheckGeneral(valor);
@@ -288,7 +283,7 @@ render() {
 					          <Label check>
 					            <Input type="checkbox" id = "generalCheck" 
 					             onChange = {this.handleCheckboxChange}
-					             value = {engorde.pagVariaciones[paginaActual].generalEnable}/>{' '}
+					             value = {true}/>{' '}
 					            Habilitar regla de engorde para vacias y/o cuts
 					          </Label>
 					        </FormGroup>
@@ -300,7 +295,7 @@ render() {
 					          <Label check>
 					            <Input type="checkbox" id= "vaciasCheck"
 					            onChange = {this.handleCheckboxChange}
-					            value = {engorde.pagVariaciones[paginaActual].vaciasEnable}/>{' '}
+					            defaultChecked = {this.props.esquema.pagVariaciones[this.props.esquema.paginaActual].vaciasEnable == true}/>{' '}
 					            Habilitar engorde de vacas vacias
 					          </Label>
 					        </FormGroup>
@@ -310,7 +305,7 @@ render() {
 					          <Label check>
 					            <Input type="checkbox" id="cutsCheck" 
 					            onChange = {this.handleCheckboxChange}
-					            value = {engorde.pagVariaciones[paginaActual].cutsEnable}/>{' '}
+					            defaultChecked = {this.props.esquema.pagVariaciones[this.props.esquema.paginaActual].cutsEnable == true}/>{' '}
 					            Habilitar engorde de CUTs
 					          </Label>
 					        </FormGroup>
