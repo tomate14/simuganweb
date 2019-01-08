@@ -49,7 +49,7 @@ class Rastrojo extends Component {
 						        	
 						          	<Col id = "divPicker" sm="4">
 							          	<Picker 
-											id="Pasturas"
+											id="Rastrojos"
 							                opciones         = {this.props.rastrojos.nombreRastrojos}
 									        dropDownSelected = {this.props.rastrojos.dropdownSelected}
 									        funcSelected     = {this.props.modificarDropdownSelected}/>

@@ -25,7 +25,6 @@ class PasturePane extends Component {
 								 pagvariaciones = {this.props.arregloValores}
 								 esEngorde    = {this.props.esEngorde}
 								 paginaActual = {this.props.paginaActual}
-			                     funcModiPagina = {this.props.funcModifPagina}
 		                         funcModiValorInput = {this.props.funcModifVariacion}
 		                         min = {this.props.min}
 		                         max = {this.props.max}/>

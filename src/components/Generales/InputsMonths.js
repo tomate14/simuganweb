@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
 import { Glyphicon,Button} from 'reactstrap';
-
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 //Estilos del componente
@@ -60,7 +59,7 @@ class InputsMonths extends Component{
 				              min = "0"
 				              id = {i}
 				              key = {i}
-				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i]}
+				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[i]}
 				              onChange={this.handleInputValueChange}
 				              onBlur ={this.chequearRango}
 				            />);
@@ -95,10 +94,8 @@ class InputsMonths extends Component{
 
 	mostrarFlechaArriba(){
 		if(this.props.cantVariaciones > 1){
-			return (
-					<Col xs={2} className="divFlechas">					
-						<button type="button" className="btn btn-outline-secondary" onClick={this.handleClickDown}/>
-					</Col>
+			return (				
+						<Button className="btn btn-outline-secondary" onClick={this.handleClickDown}><FaAngleRight/></Button>
 				);	
 		}
 	}
@@ -106,9 +103,7 @@ class InputsMonths extends Component{
 	mostrarFlechaAbajo(){
 		if(this.props.cantVariaciones > 1){
 			return (
-					<Col xs={2}className="divFlechas">
-						<button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}/>
-					</Col>
+						<Button type="button" className="btn btn-outline-secondary glyphicon glyphicon-chevron-right" onClick={this.handleClickUp}><FaAngleRight/></Button>
 				);	
 		}
 	}
@@ -128,17 +123,21 @@ class InputsMonths extends Component{
 			input = this.setInputsVariationsEngorde();
 			return(
 			<div className="container-fluid">
-				<Row xs={12}>				
-					{this.mostrarFlechaAbajo()}
-					<Col xs={4} className="divInputs">
+				<Row>
+					<Col>				
+					{this.mostrarFlechaArriba()}
+					</Col>
+					<Col  className="divInputs">
 						{this.mostrarTitulo()}
 						<div id = "divInputs" className="divInputsVariation">
 							{this.setInputsVariationsEngorde().map((input, key) => {
 					            return(input);
 							}
 					        )}        
-						</div>
-					{this.mostrarFlechaArriba()}					
+						</div>					
+					</Col>
+					<Col>
+					{this.mostrarFlechaAbajo()}
 					</Col>
 				</Row>
 			</div>
@@ -147,17 +146,21 @@ class InputsMonths extends Component{
 			input = this.setInputsVariations();
 			return(
 			<div className="container-fluid">
-				<Row xs={12}>				
-					{this.mostrarFlechaAbajo()}
-					<Col xs={4} className="divInputs">
+				<Row xs={12}>
+					<Col>				
+					{this.mostrarFlechaArriba()}
+					</Col>
+					<Col  className="divInputs">
 						{this.mostrarTitulo()}
 						<div id = "divInputs" className="divInputsVariation">
 							{this.setInputsVariations().map((input, key) => {
 					            return(input);
 							}
 					        )}        
-						</div>
-					{this.mostrarFlechaArriba()}					
+						</div>				
+					</Col>
+					<Col>
+					{this.mostrarFlechaAbajo()}
 					</Col>
 				</Row>
 			</div>

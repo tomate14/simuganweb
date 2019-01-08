@@ -54,7 +54,6 @@ class ChildDestete extends Component{
 				<Row md={12}>
 					<h5><b>{this.props.titulo}</b></h5>
 				</Row>
-
 			    <Row className="rowRadio">		
 				    <FormGroup tag="fieldset">
 			          <FormGroup check>

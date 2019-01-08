@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 //bootstrap
-import {Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
+import {Input,Dropdown, Table, DropdownToggle,DropdownItem,DropdownMenu,Container,Col, Row, Form, FormGroup,Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //components
@@ -13,50 +13,59 @@ import SingleSelectArray from '../Generales/SingleSelectArray';
 
 class PesoVivoPane extends Component {
 
-
-	generarCondCorporal() {
+	 generarCC(){
+	  	let selectValues = [1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9];
+	  	let array = [];
+	  	if(this.props.medida == "bcs" || this.props.medida == "lwBcs"){
+		  	array.push(	
+								<Col id = "simulationValues">
+									<h5> Valor de CC a partir del cual los animales se destinan a la venta </h5>
+									<h5><b>Carga simulación inicial: [ {this.props.simulationValueCC} ]</b> </h5>
+								</Col>
+							);
+			array.push(<Col>
+						<Input type="select"  value = {1} onChange = {this.props.funcModificar}>
+							{selectValues.map((object,index) => {
+							return <option key ={index} value = {object} id = {index}> {object}</option>}
+							)}
+						</Input>
+					   </Col>);
+			}
+		else{
+			array = ["",""];
+		}
+		return array;
+	} 
+	generarPV(){
 		let array = [];
-		if(this.props.medida == "cc"){ // cambiar CC por el string correspondiente ( consultar a Mauri)
-			array.push(	
-							<Col id = "simulationValues">
-								<h5> Valor de CC a partir del cual los animales se destinan a la venta </h5>
-								<h5><b>Carga simulación inicial: [ {this.props.simulationValueCC} ]</b> </h5>
-							</Col>
-						);
-			array.push(
-							<Col>
-								<SingleSelectArray  selectValues = {[1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9]}
-												  	funcModificar = {this.props.funcModificarCC}
-						   					 	  	arrayVariaciones = {this.props.arrayVariacionesCC}
-						   					      	cantVariaciones = {this.props.cantVariaciones} 
-						   		/>
-							</Col>
-						);
-		}else
-			 array = ["",""]
+		if(this.props.medida == "lw" || this.props.medida == "lwBcs"){
+			array.push(	<Col id = "simulationValues">
+							<h5> Valor de peso vivo a partir del cual los animales se destinan a la venta [300,650]kg </h5>
+							<h5><b>Carga simulación inicial: [ {this.props.simulationValuePeso} ]</b> </h5>
+						</Col>);
+			array.push(<Col>
+						<Input type= "number" value = {1} onChange = {this.props.funcModificar}/>
+					   </Col>
+				);
+		}
+		else {
+			array = ["",""];
+		}
 		return array;
 	}
 
+
 	render(){
-		let extraInputs = this.generarCondCorporal();
+		let CC = this.generarCC();
+		let PV = this.generarPV();
 		return(<Container>
 					<Row>
-						<Col id = "simulationValues">
-							<h5> Valor de peso vivo a partir del cual los animales se destinan a la venta [300,650]kg </h5>
-							<h5><b>Carga simulación inicial: [ {this.props.simulationValuePeso} ]</b> </h5>
-						</Col>
-						{extraInputs[0]}
+						{PV[0]}
+						{CC[0]}
 					</Row>
 					<Row id= "divPicker">
-						<Col>
-							<SingleInputArray funcModificar = {this.props.funcModificarPeso}
-					   					 	  arrayVariaciones = {this.props.arrayVariacionesPeso}
-					   					      cantVariaciones = {this.props.cantVariaciones}
-					   					      min = {300}
-					   					      max = {650} 
-					   		/>
-						</Col>
-						{extraInputs[1]}
+						{PV[1]}
+						{CC[1]}
 					</Row>
 				</Container>
 			);

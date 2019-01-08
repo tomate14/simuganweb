@@ -38,7 +38,7 @@ class RecursosForrajeros extends Component {
 					        <FormGroup row>					        	
 					          	<Col sm={3} id="divPicker">
 						          	<Picker 
-										id="Pasturas"
+										id="Recursos Forrajeros"
 						                opciones         = {recursos.nombrePasturas}
 								        dropDownSelected = {recursos.dropDownSelected}
 								        funcSelected     = {this.props.modificarDropdownSelected}/>

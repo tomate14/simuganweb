@@ -261,7 +261,7 @@ function generarSubMobs(state,index){
   for(let indexSubMobs = 0; indexSubMobs < state.valoresSimulacion[index].submobs[0].submob.length; indexSubMobs++){
     ObjetoSubMob = {};
     ObjetoSubMob.nombre = state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobName;
-    ObjetoSubMob.variables = ["weaning","startCountAnimals","submobSwMax","submobSwMean","submobSwMin","vaquillona1ano","vaquillona2ano"]; 
+    ObjetoSubMob.variables = ["Meses de Destete","Cantidad de animales iniciales","Peso estandar máximo","Peso estandar medio","Peso estandar minimo","Cantidad de vaquillonas de un año","Cantidad de vaquillonas de dos años"]; 
     ObjetoSubMob.valores   = [ 
                                 parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
                                 parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
