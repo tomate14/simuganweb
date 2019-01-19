@@ -117,8 +117,13 @@ class Destete extends Component {
 
 			<Container>
 					<div>
-						<Row>
-							<h1 className="titulo">Configuracion de destete precoz </h1>
+						<Row className="parameterTitle">
+							<Col sm={6}>
+								<div className="lineTitle"></div>
+							</Col>
+							<Col sm={6}>
+								<h1 className="titulo">Configuración de destete precoz</h1>
+							</Col>
 						</Row>
 						<Row>
 							 <ContentOption state = {destete} 

@@ -13,53 +13,59 @@ import SingleSelectArray from '../Generales/SingleSelectArray';
 
 class PesoVivoPane extends Component {
 
-	  	generarInput(parametro,funcOnChange){
+	 generarCC(){
 	  	let selectValues = [1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9];
-		let row = 	<Input type="select"  value = {1} onChange = {this.props.funcModificar}>
-						{selectValues.map((object,index) => {
-						return <option key ={index} value = {object} id = {index}> {object}</option>}
-						)}
-					</Input>; 
-		return row;
+	  	let array = [];
+	  	if(this.props.medida == "bcs" || this.props.medida == "lwBcs"){
+		  	array.push(	
+								<Col id = "simulationValues">
+									<h5> Valor de CC a partir del cual los animales se destinan a la venta </h5>
+									<h5><b>Carga simulación inicial: [ {this.props.simulationValueCC} ]</b> </h5>
+								</Col>
+							);
+			array.push(<Col>
+						<Input id="ccEngorde" type="select"  value = {this.props.esquemaCC} onChange = {this.props.funcModificarCC}>
+							{selectValues.map((object,index) => {
+							return <option key ={index} value = {object} id = {index}> {object}</option>}
+							)}
+						</Input>
+					   </Col>);
+			}
+		else{
+			array = ["",""];
+		}
+		return array;
 	} 
-
-	generarCondCorporal() {
+	generarPV(){
 		let array = [];
-		if(this.props.medida == "lwBcs"){ // cambiar CC por el string correspondiente ( consultar a Mauri)
-			array.push(	
-							<Col id = "simulationValues">
-								<h5> Valor de CC a partir del cual los animales se destinan a la venta </h5>
-								<h5><b>Carga simulación inicial: [ {this.props.simulationValueCC} ]</b> </h5>
-							</Col>
-						);
-			array.push(
-							<Col>
-								{this.generarInput(this.props.arrayVariaciones,this.props.funcModificar).map((object, i) => {
-               					return <p key={i}> Variación {i+1} :   {object} </p> ; 
-           						})} 
-							</Col>
-						);
-		}else
-			 array = ["",""]
+		if(this.props.medida == "lw" || this.props.medida == "lwBcs"){
+			array.push(	<Col id = "simulationValues">
+							<h5> Valor de peso vivo a partir del cual los animales se destinan a la venta [300,650]kg </h5>
+							<h5><b>Carga simulación inicial: [ {this.props.simulationValuePeso} ]</b> </h5>
+						</Col>);
+			array.push(<Col>
+						<Input id = "pesoVivoEngorde" type= "number" value = {this.props.esquemaPeso} onChange = {this.props.funcModificarPeso}/>
+					   </Col>
+				);
+		}
+		else {
+			array = ["",""];
+		}
 		return array;
 	}
 
+
 	render(){
-		let extraInputs = this.generarCondCorporal();
+		let CC = this.generarCC();
+		let PV = this.generarPV();
 		return(<Container>
 					<Row>
-						<Col id = "simulationValues">
-							<h5> Valor de peso vivo a partir del cual los animales se destinan a la venta [300,650]kg </h5>
-							<h5><b>Carga simulación inicial: [ {this.props.simulationValuePeso} ]</b> </h5>
-						</Col>
-						{extraInputs[0]}
+						{PV[0]}
+						{CC[0]}
 					</Row>
 					<Row id= "divPicker">
-						<Col>
-						{this.generarInput(this.props.arrayVariaciones,this.props.funcModificar)}
-					   		/>
-						</Col>
-						{extraInputs[1]}
+						{PV[1]}
+						{CC[1]}
 					</Row>
 				</Container>
 			);

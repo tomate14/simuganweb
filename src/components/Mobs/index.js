@@ -396,8 +396,13 @@ class Mobs extends Component {
         
 		return(
 			<Container>
-				<Row>
-					<h1 className="titulo">Configuraciones de los Mobs </h1>
+				<Row className="parameterTitle">
+					<Col sm={6}>
+						<div className="lineTitle"></div>
+					</Col>
+					<Col sm={6}>
+						<h1 className="titulo">Configuraciones de los Mobs </h1>
+					</Col>
 				</Row>
 				<Row>
 				<ContentOption state = {mobs} 

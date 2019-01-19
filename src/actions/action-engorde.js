@@ -69,7 +69,7 @@ export function InputSelectValueFeedlot(valor){
 }
 
 
-export function InputVariacionPastureValor(id, valor) {    
+export function InputVariacionPastureValor(id, pagina ,valor) {    
     return {
         type: "VALORVARIACION_PASTURE_ENGORDE",
         posicion:id,
@@ -78,7 +78,7 @@ export function InputVariacionPastureValor(id, valor) {
 }
 
 
-export function InputVariacionGrainValor(id, valor) {    
+export function InputVariacionGrainValor(id, pagina, valor) {    
     return {
         type: "VALORVARIACION_GRAIN_ENGORDE",
         posicion:id,
@@ -86,7 +86,7 @@ export function InputVariacionGrainValor(id, valor) {
     }    
 }
 
-export function InputVariacionSilageValor(id, valor) {    
+export function InputVariacionSilageValor(id, pagina, valor) {    
     return {
         type: "VALORVARIACION_SILAGE_ENGORDE",
         posicion:id,
@@ -94,7 +94,7 @@ export function InputVariacionSilageValor(id, valor) {
     }    
 }
 
-export function InputVariacionRastrojoValor(id, valor) {    
+export function InputVariacionRastrojoValor(id, pagina, valor) {    
     return {
         type: "VALORVARIACION_RASTROJO_ENGORDE",
         posicion:id,
@@ -102,7 +102,7 @@ export function InputVariacionRastrojoValor(id, valor) {
     }    
 }
 
-export function InputVariacionDiferidosValor(id, valor) {    
+export function InputVariacionDiferidosValor(id, pagina, valor) {    
     return {
         type: "VALORVARIACION_DIFERIDOS_ENGORDE",
         posicion:id,

@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { Row, Col,Container } from 'reactstrap'
 
 // Assets
-import logo from './images/logo.svg';
-import unicen from './images/unicen.jpg';
+import logo from './images/LOGO2.png';
+import unicen from './images/Logo.png';
 import './css/Header.css';
 
 class Header extends Component {
@@ -18,17 +18,17 @@ class Header extends Component {
   render() {
     //const { title, items } = this.props;
     return (
-        <Container>
-            <Row sm={12}>
+        <Container className= "Header">
+            <Row>
                 <Col sm={2}>
-                    <img id="Unicen" src={unicen}/>
+                    <img id="Unicen" src={logo}/>
                 </Col>
-                <Col sm={8}>
+                <Col className="tituloHeader" sm={8}>
                     <h1>Simulador Ganadero</h1>     
-                    <h2>Configuracion de simulaciones experimentales</h2>
+                    <h6>Configuración de simulaciones experimentales</h6>
                 </Col>
                 <Col sm={2}>
-                    <img id="Logo" src={logo}/>
+                    <img id="Logo" src={unicen}/>
                 </Col>
             </Row>
         </Container>

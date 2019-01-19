@@ -95,8 +95,13 @@ class Potreros extends Component {
 		return(
 
 			<Container>
-				<Row>
-					<h1 className="titulo">Has de cada potrero </h1>
+				<Row className="parameterTitle">
+					<Col sm={6}>
+						<div className="lineTitle"></div>
+					</Col>
+					<Col sm={6}>
+						<h1 className="titulo">Has de cada potrero </h1>
+					</Col>
 				</Row>
 				<Row>
 					<Col><ContentOption state = {potreros} 

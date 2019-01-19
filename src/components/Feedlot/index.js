@@ -85,8 +85,13 @@ class Feedlot extends Component {
 		const feedlot = this.props.feedlot;
 		return(
 			<Container>
-				<Row>
-					<h1 className="titulo">Configuraciones de Feedlot </h1>
+				<Row className="parameterTitle">
+					<Col sm={6}>
+						<div className="lineTitle"></div>
+					</Col>
+					<Col sm={6}>
+						<h1 className="titulo">Configuraciones de Feedlot</h1>
+					</Col>
 				</Row>
 				<Row>
 					<Col><ContentOption state = {feedlot} 
