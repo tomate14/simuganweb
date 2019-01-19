@@ -1,36 +1,33 @@
-/*.Header {
-  background-color: #222;
-  height: 10%;
-  width: 100%;
-  color: white;
-}
 
-.Logo img, .Logo2 img{
-  
-
+img {
+  margin : 30px;
 }
 
 
 
-.Logo, .Logo2{
-  vertical-align: middle; 
+.Header {
+  margin: auto;
+  background-color: #00cba0;
+  min-width: 100%;
 }
 
-.Titulo{
-  width: 70%;
+.tituloHeader {
+  text-align: right;
+  margin-top: 60px;
+  color : white;
+}
+.tituloHeader h1{
+  font-size: 50px
 }
 
-.Logo2{
-  width: 15%;
-}*/
+.tituloHeader h6{
+  font-size: 21px
+}
+
 #Unicen{
-  height: 140px;
+  height: 180px;
+  margin-right: 20px
 }
 #Logo{
-  height: 80px;
-  animation: App-logo-spin infinite 20s linear;
-}
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  height: 180px;
 }

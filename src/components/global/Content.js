@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
+import { Container,Row, Col } from 'reactstrap';
 import {  Collapse,  Navbar,  NavbarToggler,  NavbarBrand,  Nav,  NavItem,  NavLink,  UncontrolledDropdown, DropdownToggle,  DropdownMenu,  DropdownItem } from 'reactstrap';
 import Simulacion from '../../data/simulacioninicial.js';
 // Assets
@@ -27,7 +27,7 @@ class Content extends Component {
     const { body } =  this.props;
 
     return (
-                    <div className="container-fluid">
+                    <Container className="listMenu">
                         <Row sm={12}>
                             <Col sm={4} className="menu">
                               {
@@ -38,7 +38,7 @@ class Content extends Component {
                                             case "/Destete":
                                               if(Simulacion.escenario.earlyWeaning != ""){
                                                 if(Simulacion.escenario.earlyWeaning[0].earlyWeaningMob.length > 0){
-                                                    return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                    return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                                 }                                              
                                               }
                                               break;
@@ -47,7 +47,7 @@ class Content extends Component {
                                               
                                               if(Simulacion.escenario.pastureType[0] != ""){
                                                 if(Simulacion.escenario.pastureType[0].pasture.length > 0){
-                                                    return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                    return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                                 }                                              
                                               }
                                               break;
@@ -56,7 +56,7 @@ class Content extends Component {
                                               let aux3 = Simulacion.escenario.stockPilledType[0];
                                               if(Simulacion.escenario.stockPilledType[0] != ""){
                                                 if(Simulacion.escenario.stockPilledType[0].stockPilled.length > 0){
-                                                    return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                    return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                                 }                                              
                                               }
                                               break;
@@ -64,7 +64,7 @@ class Content extends Component {
                                             case "/Rastrojo":
                                               if(Simulacion.escenario.crop_stubbles[0] != ""){
                                                 if(Simulacion.escenario.crop_stubbles[0].crop_stubble.length > 0){
-                                                    return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                    return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                                 }                                              
                                               }
                                             break;
@@ -72,42 +72,42 @@ class Content extends Component {
                                             case "/Potreros":
                                               if(Simulacion.escenario.paddocks[0] != ""){
                                                 if(Simulacion.escenario.paddocks[0].paddock.length > 0){
-                                                    return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                    return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                                 }                                              
                                               }
                                             break;
 
                                             case "/Ensilaje":
                                               if(Simulacion.escenario.makeSilage[0] != ""){
-                                                    return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                    return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                               }
                                             break;
 
                                             case "/Invernada":                                              
                                               if(Simulacion.escenario.sellRule[0] != ""){
-                                                  return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                  return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                               }
                                             break;
 
                                             case "/Engorde":                                              
                                               if(Simulacion.escenario.fattening[0] != ""){
-                                                  return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                                  return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                               }
                                             break;
 
                                             case "/Feedlot":
                                               //let aux6 = Simulacion.escenario.pastureType[0];
-                                              return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                              return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                             break;
 
                                             case "/Mobs":
                                               //let aux7 = Simulacion.escenario.pastureType[0];
-                                              return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                              return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                             break;
 
                                             case "/BuyRules":
                                              // let aux8 = Simulacion.escenario.pastureType[0];
-                                             return <ul className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></ul>;
+                                             return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                                             break;
 
                                         }
@@ -122,7 +122,7 @@ class Content extends Component {
                                 { body }
                             </Col>
                         </Row>
-                    </div>
+                    </Container>
 
     );
   }

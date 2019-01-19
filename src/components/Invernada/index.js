@@ -63,8 +63,13 @@ class Invernada extends Component {
 		const invernada = this.props.invernada;
 		return(
 			<Container>
-					<Row>
-						<h1 className="titulo">Venta de Invernada </h1>
+					<Row className="parameterTitle">
+						<Col sm={6}>
+							<div className="lineTitle"></div>
+						</Col>
+						<Col sm={6}>
+						<h1 className="titulo">Venta de Invernada</h1>
+						</Col>
 					</Row>
 					<Row>
 						<Col><ContentOption state = {invernada} 

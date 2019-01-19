@@ -24,7 +24,7 @@ class PesoVivoPane extends Component {
 								</Col>
 							);
 			array.push(<Col>
-						<Input type="select"  value = {1} onChange = {this.props.funcModificar}>
+						<Input id="ccEngorde" type="select"  value = {this.props.esquemaCC} onChange = {this.props.funcModificarCC}>
 							{selectValues.map((object,index) => {
 							return <option key ={index} value = {object} id = {index}> {object}</option>}
 							)}
@@ -44,7 +44,7 @@ class PesoVivoPane extends Component {
 							<h5><b>Carga simulación inicial: [ {this.props.simulationValuePeso} ]</b> </h5>
 						</Col>);
 			array.push(<Col>
-						<Input type= "number" value = {1} onChange = {this.props.funcModificar}/>
+						<Input id = "pesoVivoEngorde" type= "number" value = {this.props.esquemaPeso} onChange = {this.props.funcModificarPeso}/>
 					   </Col>
 				);
 		}

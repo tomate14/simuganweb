@@ -92,6 +92,12 @@ class Engorde extends Component {
 												  funcModifGrain = {this.props.InputVariacionGrainValor}
 												  funcModifRastrojo = {this.props.InputVariacionRastrojoValor}
 												  funcModifDiferido = {this.props.InputVariacionDiferidosValor}
+												  funcModifProtein = {this.props.ModificarInputValueTriggerProtein}
+												  funcModifIntake = {this.props.ModificarInputValueTriggerIntake}
+												  funcModifDigest = {this.props.ModificarInputValueTriggerDigest}
+												  funcModifDRProtein = {this.props.ModificarInputValueTriggerDRProtein}
+												  funcModifPesoVivo = {this.props.ModificarInputValueTriggerPesoVivo}
+												  funcModifCC = {this.props.ModificarInputValueTriggerCC}
 													/>
 													</Col>
 						<Col md={2}/>
@@ -105,8 +111,13 @@ class Engorde extends Component {
 
 		return(
 			<div className = "container-fluid">
-				<Row>
-					<h1 className="titulo">Configuracion de reglas de engorde</h1>
+				<Row className="parameterTitle">
+					<Col sm={6}>
+						<div className="lineTitle"></div>
+					</Col>
+					<Col sm={6}>
+						<h1 className="titulo">Reglas de engorde</h1>
+					</Col>
 				</Row>
 				<Row>
 					<Col>

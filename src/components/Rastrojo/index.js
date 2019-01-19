@@ -95,8 +95,13 @@ class Rastrojo extends Component {
 		const rastrojos = this.props.rastrojos;
 		return(
 			<div className = "container-fluid">
-			    <Row>
-					<h1 className="titulo">Digestibilidad y Rinde de cada Rastrojo</h1>
+				<Row className="parameterTitle">
+					<Col sm={6}>
+						<div className="lineTitle"></div>
+					</Col>
+					<Col sm={6}>
+						<h1 className="titulo">Digestibilidad y Rinde de cada Rastrojo </h1>
+					</Col>
 				</Row>
 				<Row>
 					<Col><ContentOption state = {rastrojos} 
