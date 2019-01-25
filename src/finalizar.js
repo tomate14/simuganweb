@@ -1,6 +1,7 @@
 import store from './index.js';
+import Simulacion from './data/simulacioninicial.js';
 import {xmlString} from './data/simulacioninicial.js';
-import $ from 'jquery';
+//import $ from 'jquery';
 
 //Config Store
 
@@ -62,21 +63,15 @@ export function generarSalidaRest(){
 	if(validarCargaDatos(states)){
 		let jsonString = null;
 		let VariacionesReact = {};
-		let ObjetoPastura = {};
-		VariacionesReact.ensilaje = {};
-		VariacionesReact.recursosforrajeros={};
-		VariacionesReact.potreros={};
-		VariacionesReact.rastrojos={};
-		VariacionesReact.invernada={};
-		VariacionesReact.feedlot={};
-		VariacionesReact.diferido = {};
-		VariacionesReact.destete = {};
-		VariacionesReact.mobs = {};
+		let ObjetoPastura = {};	
+		
 
 		/* 
 		           GENERO ENSILAJE 
+		           Generacion hecha en Backend
 		*/
 		if(states.ensilaje.permitido){
+			VariacionesReact.ensilaje = {};
 			VariacionesReact.ensilaje.leftoverMass = states.ensilaje.leftoverVariaciones;
 			VariacionesReact.ensilaje.triggerMass = states.ensilaje.triggerVariaciones;
 			let jsonString= JSON.stringify(VariacionesReact.ensilaje);
@@ -84,8 +79,10 @@ export function generarSalidaRest(){
 
 		/* 
 		           GENERO RECURSOSFORRAJEROS 
+		           Generacion hecha en Backend
 		*/
 		if(states.recursosforrajeros.permitido){
+			VariacionesReact.recursosforrajeros={};
 			VariacionesReact.recursosforrajeros.ForrajeroPasturas = states.recursosforrajeros.pagvariaciones;
 			let ForrajeroPastura = {};
 			let ForrajeroVariacion = {};
@@ -115,8 +112,10 @@ export function generarSalidaRest(){
 
 		/* 
 		           GENERO LOS POTREROS 
+		           Generacion hecha en Backend
 		*/
 		if(states.potreros.permitido){
+			VariacionesReact.potreros={};
 			VariacionesReact.potreros.pasturas = states.potreros.digestibilidadVariaciones;
 			
 			for(let i = 0; i< VariacionesReact.potreros.pasturas.length; i++ ){
@@ -129,8 +128,10 @@ export function generarSalidaRest(){
 
 		/* 
 		           GENERO LOS RASTROJOS 
+		           Generacion hecha en BackEnd
 		*/
 		if(states.rastrojos.permitido){
+			VariacionesReact.rastrojos={};
 			VariacionesReact.rastrojos.digestibilidadVariaciones = states.rastrojos.digestibilidadVariaciones;
 			VariacionesReact.rastrojos.rindeVariaciones          = states.rastrojos.rindeVariaciones;
 			for(let i = 0; i< VariacionesReact.rastrojos.digestibilidadVariaciones.length; i++ ){
@@ -145,8 +146,10 @@ export function generarSalidaRest(){
 
 		/*
 			GENERO LOS DIFERIDOS
+			Generacion hecha en Backend
 		*/
 		if(states.diferidos.permitido){
+			VariacionesReact.diferido = {};
 			VariacionesReact.diferido.digestibilidadVariaciones = states.diferidos.digestibilidadVariaciones;
 			VariacionesReact.diferido.rindeVariaciones = states.diferidos.rindeVariaciones;
 			for(let i = 0; i< VariacionesReact.diferido.digestibilidadVariaciones.length; i++ ){
@@ -162,8 +165,10 @@ export function generarSalidaRest(){
 
 		/*
 			GENERO INVERNADA
+			Generacion hecha en Backend
 		*/
 		if(states.invernada.permitido){
+			VariacionesReact.invernada={};
 			VariacionesReact.invernada.VaquillonaVariaciones = states.invernada.VaquillonaVariaciones;
 			VariacionesReact.invernada.nobillosVariaciones  = states.invernada.nobillosVariaciones;
 			jsonString= JSON.stringify(VariacionesReact.invernada);
@@ -171,8 +176,10 @@ export function generarSalidaRest(){
 
 		/*
 			GENERO LOS FEEDLOT
+			Generacion hecha en Backend
 		*/
 		if(states.feedlot.permitido){
+			VariacionesReact.feedlot={};
 			VariacionesReact.feedlot.VariacionFeedLot = states.feedlot.pagvariaciones;
 
 			let ObjetoCompletion = {};
@@ -207,6 +214,7 @@ export function generarSalidaRest(){
 			GENERACION DE MOBS
 		*/
 		if(states.mobs.permitido){
+			VariacionesReact.mobs = {};
 			VariacionesReact.mobs.Variaciones = states.mobs.arrayMobs;
 			let ObjetoVariacion = {};
 			for(let i = 0; i < VariacionesReact.mobs.Variaciones.length; i++){
@@ -294,6 +302,7 @@ export function generarSalidaRest(){
 
 
 		if(states.destete.permitido){
+			VariacionesReact.destete = {};
 			VariacionesReact.destete.variaciones = states.destete.pagvariaciones;
 			let ObjetoVariacionDestete = {};
 			for(let index = 0; index < VariacionesReact.destete.variaciones.length; index++){
@@ -322,11 +331,17 @@ export function generarSalidaRest(){
 
 		}
 
-		 VariacionesReact.engorde = states.engorde;
 		// jsonString= JSON.stringify(VariacionesReact.engorde);
 		if(states.engorde.permitido){
+			VariacionesReact.engorde = {};
+		 	VariacionesReact.engorde.variaciones = [];
 			let ObjetoVariacionEngorde = {};
-			ObjetoVariacionEngorde.PastoEngorde = {};
+			for(let i = 0; i< states.engorde.pagVariaciones.length; i++){
+				ObjetoVariacionEngorde = states.engorde.pagVariaciones[i];
+				VariacionesReact.engorde.variaciones.push(ObjetoVariacionEngorde);
+			}
+
+			/*ObjetoVariacionEngorde.PastoEngorde = {};
 			ObjetoVariacionEngorde.VariacionEngorde = {};
 			if(states.engorde.tipoEngorde == "pasto"){
 				ObjetoVariacionEngorde.PastoEngorde.pastureAllow     = states.engorde.arrayPastures;
@@ -380,19 +395,24 @@ export function generarSalidaRest(){
 				ObjetoVariacionEngorde.VariacionEngorde.arrayProtein      = states.engorde.arrayProtein;
 					
 			}
-		    VariacionesReact.engorde = ObjetoVariacionEngorde;
-		    console.log(JSON.stringify( VariacionesReact.engorde));
-			jsonString= JSON.stringify( VariacionesReact.engorde);
+		  */  
+		  //VariacionesReact.engorde = ObjetoVariacionEngorde;
+		   // console.log(JSON.stringify( VariacionesReact.engorde));
+			//jsonString= JSON.stringify( VariacionesReact.engorde);
 
 		}
 		VariacionesReact.xmloriginal = xmlString();
-		//console.log(xmlString());
+		VariacionesReact.usuario = {};
+		VariacionesReact.usuario.idUser = Simulacion.escenario.$.userId;
+		VariacionesReact.usuario.name   = Simulacion.escenario.$.name;
+		//jsonString= JSON.stringify(VariacionesReact.usuario);	
+		//console.log(VariacionesReact.usuario);
 		jsonString= JSON.stringify(VariacionesReact);	
 		console.log(jsonString)
 		//Llamado al rest
 		let Url = "http://localhost:8080/simugan/create"
 
-		$.ajax({
+		/*$.ajax({
             url: Url,
             type: 'POST',
             dataType: 'json',    
@@ -408,37 +428,7 @@ export function generarSalidaRest(){
             	console.log(data);
              	console.log('Error');
             }
-        });
-
-        /*$.ajax({
-		    url: Url,
-		    type: 'post',
-		    crossDomain: true,	    
-            data: jsonString,
-		    success: function (response) {
-		        console.log(response);
-		    },
-		    error: function (xhr, status) {
-		        console.log(xhr);
-		        console.log(status);
-		    }
-		});*/
-
-      
-
-        /*fetch('http://localhost:8080/simugan/create', {
-		  method: 'POST',
-		  headers: {
-		    'Content-Type': 'application/json',
-		  },
-		  body: jsonString
-		}).then(function (response) {
-		    console.log(response);
-		  })
-		  .catch(function (error) {
-		    console.log(error);
-		  });*/
-		//console.log(jsonString);
+        });*/
 	}else{
 		console.log("Error de validacion de datos, verifique");
 	}
