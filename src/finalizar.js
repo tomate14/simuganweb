@@ -1,7 +1,7 @@
 import store from './index.js';
 import Simulacion from './data/simulacioninicial.js';
 import {xmlString} from './data/simulacioninicial.js';
-//import $ from 'jquery';
+import $ from 'jquery';
 
 //Config Store
 
@@ -49,9 +49,32 @@ function getMonth(numeroMes){
 function validarCargaDatos(states){
 	for (let prop in states) {
         // skip loop if the property is from prototype
-        if((states[prop].permitido ==true) && (states[prop].cantVariaciones == 0)){
-        	console.log("asd");
-        	return false;
+        /****************************
+			LIMITACION PARA ENGORDE
+        *****************************/
+        if((states[prop].permitido ==true) && (states[prop].cantVariaciones != 0) && (prop == "engorde")){
+        	for(let i = 0; i < states[prop].pagVariaciones.length; i++){
+        		if((states[prop].pagVariaciones[i].generalEnable === true)&&((states[prop].pagVariaciones[i].vaciasEnable === false) && (states[prop].pagVariaciones[i].cutsEnable === false)))
+        		{
+					let aux = i + 1;
+        			alert("Error en Engorde, falta la pagina numero: "+i);
+        			return false;
+        		}else{
+        			if(states[prop].pagVariaciones[i].generalEnable == false){
+        				alert("Error, debe destildar Generar Variaciones en Engorde o tildar los checks siguientes.");
+        				return false;
+        			}
+        		}
+        	}
+        }else{
+        	/*
+				RESTO DE LOS ESTADOS
+        	*/
+	        if((states[prop].permitido ==true) && (states[prop].cantVariaciones == 0)){
+	        	console.log("Falta informacion en: "+prop);
+	        	return false;
+	        }
+        	
         }
 
        
@@ -331,7 +354,6 @@ export function generarSalidaRest(){
 
 		}
 
-		// jsonString= JSON.stringify(VariacionesReact.engorde);
 		if(states.engorde.permitido){
 			VariacionesReact.engorde = {};
 		 	VariacionesReact.engorde.variaciones = [];
@@ -340,66 +362,7 @@ export function generarSalidaRest(){
 				ObjetoVariacionEngorde = states.engorde.pagVariaciones[i];
 				VariacionesReact.engorde.variaciones.push(ObjetoVariacionEngorde);
 			}
-
-			/*ObjetoVariacionEngorde.PastoEngorde = {};
-			ObjetoVariacionEngorde.VariacionEngorde = {};
-			if(states.engorde.tipoEngorde == "pasto"){
-				ObjetoVariacionEngorde.PastoEngorde.pastureAllow     = states.engorde.arrayPastures;
-				ObjetoVariacionEngorde.PastoEngorde.grainAllow       = states.engorde.arrayGrain;
-				ObjetoVariacionEngorde.PastoEngorde.silageAllow      = states.engorde.arraySilage;
-				ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow = states.engorde.arrayStockPilled;
-				ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow = states.engorde.arrayCropStubble;
-
-				for(let i = 0; i< states.engorde.arrayPastures.length; i++){
-					let arrayObjeto6 = []; let arrayObjeto7 = []; let arrayObjeto8 = []; let arrayObjeto9 = []; let arrayObjeto10 = [];
-					for(let j = 0; j < 12; j++){
-						let ObjetoMes6 = {}; let ObjetoMes7 = {}; let ObjetoMes8 = {}; let ObjetoMes9 = {};	let ObjetoMes10 = {};
-						let mes = getMonth(j);
-						ObjetoMes6.valor = ObjetoVariacionEngorde.PastoEngorde.pastureAllow[i][j];
-						//ObjetoMes6.mes   = mes;
-						arrayObjeto6.push(ObjetoMes6);
-						
-						ObjetoMes7.valor = ObjetoVariacionEngorde.PastoEngorde.grainAllow[i][j];
-						//ObjetoMes7.mes   = mes;
-						arrayObjeto7.push(ObjetoMes7);
-						
-
-						ObjetoMes8.valor = ObjetoVariacionEngorde.PastoEngorde.silageAllow[i][j];
-						//ObjetoMes8.mes   = mes;
-						arrayObjeto8.push(ObjetoMes8);
-						
-
-						ObjetoMes9.valor = ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow[i][j];
-						//ObjetoMes9.mes   = mes;
-						arrayObjeto9.push(ObjetoMes9);
-						
-
-						ObjetoMes10.valor = ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow[i][j];
-						//ObjetoMes10.mes   = mes;
-						arrayObjeto10.push(ObjetoMes10);
-						
-					}
-
-					ObjetoVariacionEngorde.PastoEngorde.pastureAllow[i]     = arrayObjeto6 
-					ObjetoVariacionEngorde.PastoEngorde.grainAllow[i]       = arrayObjeto7
-					ObjetoVariacionEngorde.PastoEngorde.silageAllow[i]      = arrayObjeto8
-					ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow[i] = arrayObjeto9
-					ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow[i] = arrayObjeto10
-			}
-		}else{
-				ObjetoVariacionEngorde.VariacionEngorde.arrayCC           = states.engorde.arrayCC;
-				ObjetoVariacionEngorde.VariacionEngorde.arrayDRProtein    = states.engorde.arrayDRProtein;
-				ObjetoVariacionEngorde.VariacionEngorde.arrayDigest       = states.engorde.arrayDigest;
-				ObjetoVariacionEngorde.VariacionEngorde.arrayIntake       = states.engorde.arrayIntake;
-				ObjetoVariacionEngorde.VariacionEngorde.arrayPesoVivo     = states.engorde.arrayPesoVivo;
-				ObjetoVariacionEngorde.VariacionEngorde.arrayProtein      = states.engorde.arrayProtein;
-					
-			}
-		  */  
-		  //VariacionesReact.engorde = ObjetoVariacionEngorde;
-		   // console.log(JSON.stringify( VariacionesReact.engorde));
-			//jsonString= JSON.stringify( VariacionesReact.engorde);
-
+			console.log(JSON.stringify( VariacionesReact.engorde));
 		}
 		VariacionesReact.xmloriginal = xmlString();
 		VariacionesReact.usuario = {};
@@ -412,7 +375,7 @@ export function generarSalidaRest(){
 		//Llamado al rest
 		let Url = "http://localhost:8080/simugan/create"
 
-		/*$.ajax({
+		$.ajax({
             url: Url,
             type: 'POST',
             dataType: 'json',    
@@ -428,7 +391,7 @@ export function generarSalidaRest(){
             	console.log(data);
              	console.log('Error');
             }
-        });*/
+        });
 	}else{
 		console.log("Error de validacion de datos, verifique");
 	}
