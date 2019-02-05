@@ -14,6 +14,7 @@ import Picker from '../Generales/Picker';
 import TabMenu from '../Generales/TabMenu';
 import PasturePane from '../Generales/PasturePane';
 import MobsInputVariations from './MobsInputVariations';
+import ChildWeaning from './ChildWeaning';
 
 //redux
 import {bindActionCreators} from 'redux';
@@ -30,7 +31,11 @@ import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,
         modificarWeaningEnsilaje,
         modificarWeaningRastrojo,
     	modificarWeaningDiferido,
-    	modificarSubMobs} from '../../actions/action-mob.js';
+    	modificarSubMobs,
+    	permitirDiferidos,
+    	permitirRastrojo,
+    	permitirDiferidosWeaning,
+    	permitirRastrojoWeaning} from '../../actions/action-mob.js';
 
 
 
@@ -46,6 +51,8 @@ class Mobs extends Component {
 		this.handleClickUp = this.handleClickUp.bind(this);
 	  	this.loadTabs = this.loadTabs.bind(this);
    		this.loadTitles = this.loadTitles.bind(this);
+   		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+   		this.uncheck = this.uncheck.bind(this);
 	}
  
 
@@ -315,10 +322,14 @@ class Mobs extends Component {
 
 			let TabPanes2 = this.loadTabsWeaning();
 			let navTexts2 = this.loadTitlesWeaning(pagina);
-			array.push(<TabMenu panels = { TabPanes2 }
-						 		 navTexts = {navTexts2}
-						 		 clase    = "claSecundaria"
-					   />);
+			array.push(<ChildWeaning
+							permitirDiferidosWeaning = {this.props.permitirDiferidosWeaning}
+							permitirRastrojoWeaning = {this.props.permitirRastrojoWeaning}
+							panels = { TabPanes2 }
+						 	navTexts = {navTexts2}
+						 	clase    = "claSecundaria"
+						 	mobs = {this.props.mobs}
+						/>);
 		}
 		return array;
 	}
@@ -340,6 +351,41 @@ class Mobs extends Component {
 		return array;
 	}
 
+	uncheck(e){
+		    let seleccion = e.target.id;
+    		let valor = e.target.checked;
+    		switch(seleccion){
+    			case "diferidoCheck":
+    				this.props.permitirDiferidos(valor);
+    			break;
+    			case "rastrojosCheck":
+    				this.props.permitirRastrojo(valor);
+    			break;
+
+		}
+	}
+
+	
+    	handleCheckboxChange(e){
+    		let seleccion = e.target.id;
+    		let valor = false;
+    		let mob;
+    		let pagina;
+    		switch(seleccion){
+    			case "diferidosCheck":
+    				mob = this.props.mobs.dropDownSelected;
+    				pagina = this.props.mobs.arrayMobs[mob].pagActual - 1;
+    				valor =  this.props.mobs.arrayMobs[mob].pagvariaciones[pagina].diferidosEnable == false;
+    				this.props.permitirDiferidos(valor);
+    			break;
+    			case "rastrojosCheck":
+    				mob = this.props.mobs.dropDownSelected;
+    				pagina = this.props.mobs.arrayMobs[mob].pagActual - 1;
+    				valor =  this.props.mobs.arrayMobs[mob].pagvariaciones[pagina].rastrojoEnable == false;
+    				this.props.permitirRastrojo(valor);
+    			break;
+    		}
+    	}
     generarTabs(mobs){
     	if(mobs.permitido){
 			if(mobs.cantVariaciones > 0){
@@ -377,6 +423,31 @@ class Mobs extends Component {
 							</Col>
 							<Col md={4}/>
 						</Row>
+							<Row>
+							<Col>
+								<FormGroup check>
+									<Label check>
+										<Input type="checkbox" id="diferidosCheck" 
+							            onChange = {(e)=>this.handleCheckboxChange(e)}
+							            onClick = {(e) => this.uncheck(e)}
+							            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].diferidosEnable}/>{' '}
+							            Habilitar Diferidos	
+									</Label>
+								</FormGroup>
+							</Col>
+							<Col>
+							<FormGroup check>
+								<Label check>
+									<Input type="checkbox" id="rastrojosCheck" 
+						            onChange = {(e)=>this.handleCheckboxChange(e)}
+						            onClick = {(e) => this.uncheck(e)}
+						            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].rastrojoEnable}/>{' '}
+						            Habilitar Rastrojo
+								</Label>
+							</FormGroup>
+							</Col>	
+						</Row>
+
 						<TabMenu panels = { TabPanes }
 						 		 navTexts = {navTexts}
 						 		 clase    = "claPrincipal"
@@ -437,7 +508,11 @@ function matchDispatchToProps(dispatch){
     	                       modificarWeaningEnsilaje:modificarWeaningEnsilaje,
     	                       modificarWeaningRastrojo:modificarWeaningRastrojo,
     	                       modificarWeaningDiferido:modificarWeaningDiferido,
-    	                       modificarSubMobs:modificarSubMobs }, dispatch);
+    	                       modificarSubMobs:modificarSubMobs,
+    	                       permitirDiferidos: permitirDiferidos,
+    	                       permitirRastrojo: permitirRastrojo,
+    	                       permitirDiferidosWeaning: permitirDiferidosWeaning,
+    	                       permitirRastrojoWeaning: permitirRastrojoWeaning }, dispatch);
     
 }
 

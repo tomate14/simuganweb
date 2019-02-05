@@ -197,3 +197,41 @@ export function modificarSubMobs(e){
 
     }
 }
+
+export function permitirDiferidos(valor){
+    return {
+        type:"DIFERIDO-ENABLE_MOB",
+        payload: "diferidosEnable",
+        valor: valor
+
+    }
+    
+}
+
+export function permitirRastrojo(valor){
+    return {
+        type:"RASTROJO-ENABLE_MOB",
+        payload: "rastrojoEnable",
+        valor: valor
+
+    }
+}
+
+export function permitirDiferidosWeaning(valor){ 
+    return {
+        type:"DIFERIDO-WEANING-ENABLE_MOB",
+        payload: "diferidosWeaningEnable",
+        valor: valor
+
+    }
+
+}
+
+export function permitirRastrojoWeaning(valor){ 
+    return {
+        type:"RASTROJO-WEANING-ENABLE_MOB",
+        payload: "rastrojoWeaningEnable",
+        valor: valor
+
+    }
+}
