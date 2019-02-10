@@ -293,7 +293,7 @@ class Mobs extends Component {
 										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
 										/>);
 
-		if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
+		if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].rastrojoEnable){
 			const arrayValoresCropStubble  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].crop_stubbleAllow[0].$);		
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
@@ -305,7 +305,7 @@ class Mobs extends Component {
 										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
 		}
-		if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
+		if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].diferidosEnable){
 			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].stockPilledAllow[0].$);
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
@@ -338,10 +338,10 @@ class Mobs extends Component {
 			let mobs = this.props.mobs;
 			let pagina = mobs.arrayMobs[mobs.dropDownSelected].pagActual-1;
 			let array = ["Configuracion General","SubMobs","Configuracion de Pastura", "Configuracion de Ensilaje","Configuracion de Grano"];	
-			if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
+			if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].rastrojoEnable){
 				array.push("Configuracion de Rastrojo");
 			}
-			if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
+			if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].diferidosEnable){
 				array.push("Configuracion de Diferidos");
 			}
 			if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs != " "){
@@ -350,21 +350,6 @@ class Mobs extends Component {
 
 		return array;
 	}
-
-	uncheck(e){
-		    let seleccion = e.target.id;
-    		let valor = e.target.checked;
-    		switch(seleccion){
-    			case "diferidoCheck":
-    				this.props.permitirDiferidos(valor);
-    			break;
-    			case "rastrojosCheck":
-    				this.props.permitirRastrojo(valor);
-    			break;
-
-		}
-	}
-
 	
     	handleCheckboxChange(e){
     		let seleccion = e.target.id;
@@ -373,19 +358,41 @@ class Mobs extends Component {
     		let pagina;
     		switch(seleccion){
     			case "diferidosCheck":
+    				console.log("diferido check");
     				mob = this.props.mobs.dropDownSelected;
     				pagina = this.props.mobs.arrayMobs[mob].pagActual - 1;
     				valor =  this.props.mobs.arrayMobs[mob].pagvariaciones[pagina].diferidosEnable == false;
     				this.props.permitirDiferidos(valor);
+    				this.render();
     			break;
     			case "rastrojosCheck":
     				mob = this.props.mobs.dropDownSelected;
     				pagina = this.props.mobs.arrayMobs[mob].pagActual - 1;
     				valor =  this.props.mobs.arrayMobs[mob].pagvariaciones[pagina].rastrojoEnable == false;
+    				console.log("handler-rastrojo "+ valor );
     				this.props.permitirRastrojo(valor);
+    				this.render();
     			break;
     		}
     	}
+
+	uncheck(e){
+		    let seleccion = e.target.id;
+    		let valor = e.target.checked;
+    		switch(seleccion){
+    			case "diferidosCheck":
+    				this.props.permitirDiferidos(valor);
+    				this.render();
+    			break;
+    			case "rastrojosCheck":
+    				console.log("uncheck-rastrojo "+ valor);
+    				this.props.permitirRastrojo(valor);
+    				this.render();
+    			break;
+
+		}
+	}
+
     generarTabs(mobs){
     	if(mobs.permitido){
 			if(mobs.cantVariaciones > 0){
@@ -428,8 +435,8 @@ class Mobs extends Component {
 								<FormGroup check>
 									<Label check>
 										<Input type="checkbox" id="diferidosCheck" 
-							            onChange = {(e)=>this.handleCheckboxChange(e)}
-							            onClick = {(e) => this.uncheck(e)}
+							            onClick = {(e)=>this.handleCheckboxChange(e)}
+							            onChange = {(e) => this.uncheck(e)}
 							            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].diferidosEnable}/>{' '}
 							            Habilitar Diferidos	
 									</Label>
@@ -439,8 +446,8 @@ class Mobs extends Component {
 							<FormGroup check>
 								<Label check>
 									<Input type="checkbox" id="rastrojosCheck" 
-						            onChange = {(e)=>this.handleCheckboxChange(e)}
-						            onClick = {(e) => this.uncheck(e)}
+						            onClick = {(e)=>this.handleCheckboxChange(e)}
+						            onChange = {(e) => this.uncheck(e)}
 						            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].rastrojoEnable}/>{' '}
 						            Habilitar Rastrojo
 								</Label>

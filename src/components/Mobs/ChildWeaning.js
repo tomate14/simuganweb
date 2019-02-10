@@ -23,7 +23,7 @@ class ChildWeaning extends Component {
 		    let seleccion = e.target.id;
     		let valor = e.target.checked;
     		switch(seleccion){
-    			case "diferidoWeaningCheck":
+    			case "diferidosWeaningCheck":
     				this.props.permitirDiferidosWeaning(valor);
     			break;
     			case "rastrojosWeaningCheck":
@@ -62,8 +62,8 @@ class ChildWeaning extends Component {
 						<FormGroup check>
 					          <Label check>
 								<Input type="checkbox" id="diferidosWeaningCheck" 
-					            onChange = {(e)=>this.handleCheckboxChange(e)}
-					            onClick = {(e) => this.uncheck(e)}
+					            onClick = {(e)=>this.handleCheckboxChange(e)}
+					            onChange = {(e) => this.uncheck(e)}
 					            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].weaningMobs.stockPilledEnable}/>{' '}
 					            Habilitar Diferidos		
 					            </Label>
@@ -73,8 +73,8 @@ class ChildWeaning extends Component {
 						<FormGroup check>
 					          <Label check>
 								<Input type="checkbox" id="rastrojosWeaningCheck" 
-					            onChange = {(e)=>this.handleCheckboxChange(e)}
-					            onClick = {(e) => this.uncheck(e)}
+					            onClick = {(e)=>this.handleCheckboxChange(e)}
+					            onChange = {(e) => this.uncheck(e)}
 					            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].weaningMobs.cropStubbleEnable}/>{' '}
 					            Habilitar Rastrojo
 					          </Label>
