@@ -68,7 +68,7 @@ class RecursosForrajeros extends Component {
 	render(){
 		const recursos = this.props.recursosforrajeros;
 		return(
-			<div className="container-fluid">
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>

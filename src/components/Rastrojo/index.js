@@ -94,7 +94,7 @@ class Rastrojo extends Component {
 	render(){
 		const rastrojos = this.props.rastrojos;
 		return(
-			<div className = "container-fluid">
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>

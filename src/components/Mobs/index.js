@@ -430,7 +430,7 @@ class Mobs extends Component {
 							</Col>
 							<Col md={4}/>
 						</Row>
-							<Row>
+							<Row id="checkboxesMobs">
 							<Col>
 								<FormGroup check>
 									<Label check>
@@ -473,7 +473,7 @@ class Mobs extends Component {
         let mobs = this.props.mobs;
         
 		return(
-			<Container>
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>
@@ -490,7 +490,7 @@ class Mobs extends Component {
 				{this.generarTabs(mobs)}
 				
 				
-			</Container>
+			</div>
 		);
 	}
 }

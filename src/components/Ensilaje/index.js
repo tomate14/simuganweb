@@ -78,7 +78,7 @@ class Ensilaje extends Component {
 	render(){
 		const ensilaje = this.props.ensilaje;
 		return(
-			<div className = "container-fluid">
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>

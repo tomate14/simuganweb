@@ -84,7 +84,7 @@ class Feedlot extends Component {
 	render(){
 		const feedlot = this.props.feedlot;
 		return(
-			<Container>
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>
@@ -100,7 +100,7 @@ class Feedlot extends Component {
 				</Row> 
 				
 			    {this.generarContenido(feedlot)}
-		  	</Container>
+		  	</div>
 		);
 	}
 }

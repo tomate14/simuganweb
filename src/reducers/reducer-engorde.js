@@ -129,19 +129,19 @@ function iniciarArregloState(state=initialState,valor=1){
       let grain = [];
       let diferido = [];
       let rastrojo = [];
-      let protein = 0;
-      let intake = 0;
-      let digest = 0;
-      let DRPRotein = 0;
-      let pesoVivo = 0;
-      let cc = 0;
+      let protein = state.corralValues.protein;
+      let intake = state.corralValues.intake;
+      let digest = state.corralValues.digest;
+      let DRPRotein = state.corralValues.proteinDR;
+      let pesoVivo = state.corralValues.pesoVivo;
+      let cc = state.corralValues.cc;
       let feedlotType = "lw";
       for(let j= 0;j < 12;j++){
-          pasture.push(0);
-          silage.push(0);
-          grain.push(0);
-          diferido.push(0);
-          rastrojo.push(0);
+          pasture.push(state.pastureValues[j]);
+          silage.push(state.silageValues[j]);
+          grain.push(state.grainValues[j]);
+          diferido.push(state.stockPilledValues[j]);
+          rastrojo.push(state.cropStubbleValues[j]);
       }
       let objectValue = { tipoEngorde : tipoEngorde,
                           generalEnable : false,

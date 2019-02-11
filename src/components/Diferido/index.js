@@ -112,7 +112,7 @@ class Diferido extends Component {
 	render(){
 		const diferidos = this.props.diferidos;
 		return(
-			<Container>
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>
@@ -127,7 +127,7 @@ class Diferido extends Component {
 										funcVariaciones = {this.props.modificarVariaciones}/></Col>
 				</Row> 
 				{this.generarPantalla(diferidos)}
-			</Container>
+			</div>
 		);
 	}
 }

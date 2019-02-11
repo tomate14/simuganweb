@@ -57,7 +57,7 @@ class ChildWeaning extends Component {
 	render(){
 		return(
 			<Container>
-				<Row>
+				<Row id="checkboxesMobs">
 					<Col>
 						<FormGroup check>
 					          <Label check>
