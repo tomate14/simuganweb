@@ -117,7 +117,7 @@ class Diferido extends Component {
 					<Col sm={6}>
 						<div className="lineTitle"></div>
 					</Col>
-					<Col sm={6}>
+					<Col sm={12}>
 					<h1 className="titulo">Digestibilidad y Rinde de cada Diferido</h1>
 					</Col>
 				</Row>
