@@ -118,10 +118,7 @@ class Destete extends Component {
 			<div>
 					<div>
 						<Row className="parameterTitle">
-							<Col sm={6}>
-								<div className="lineTitle"></div>
-							</Col>
-							<Col sm={6}>
+							<Col sm={12}>
 								<h1 className="titulo">Configuración de destete precoz</h1>
 							</Col>
 						</Row>

@@ -118,7 +118,7 @@ class Content extends Component {
                                  
                                 }
                             </Col>
-                            <Col sm = {8}>
+                            <Col sm = {7} className="contentMenu">
                                 { body }
                             </Col>
                         </Row>

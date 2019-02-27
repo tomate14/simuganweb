@@ -6,9 +6,12 @@ img {
 
 
 .Header {
-  margin: auto;
-  background-color: #00cba0;
-  min-width: 100%;
+    margin: auto;
+    background-color: #00cba0;
+    min-width: 97.4%;
+    height: 23%;
+    position: initial;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 30px, rgba(0, 0, 0, 0.23) 0px 6px 10px;
 }
 
 .tituloHeader {

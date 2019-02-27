@@ -96,10 +96,7 @@ class Potreros extends Component {
 
 			<div>
 				<Row className="parameterTitle">
-					<Col sm={6}>
-						<div className="lineTitle"></div>
-					</Col>
-					<Col sm={6}>
+					<Col sm={12}>
 						<h1 className="titulo">Has de cada potrero </h1>
 					</Col>
 				</Row>

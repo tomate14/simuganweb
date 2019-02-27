@@ -19,7 +19,7 @@ class Footer extends Component {
 
     return (
       <div className="Footer">
-        <div className="">
+        <div className="footer">
            <h6> Simulador Ganadero| Facultad Cs Veterinarias | UNICEN Universidad Nacional del Centro de la Provincia de Bs As. Tel (0249) 4439850 int 223 e-mail. simugan@gmail.com </h6>
         </div>
       </div>

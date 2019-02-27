@@ -96,10 +96,7 @@ class Rastrojo extends Component {
 		return(
 			<div>
 				<Row className="parameterTitle">
-					<Col sm={6}>
-						<div className="lineTitle"></div>
-					</Col>
-					<Col sm={6}>
+					<Col sm={12}>
 						<h1 className="titulo">Digestibilidad y Rinde de cada Rastrojo </h1>
 					</Col>
 				</Row>

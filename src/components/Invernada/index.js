@@ -64,10 +64,7 @@ class Invernada extends Component {
 		return(
 			<div>
 					<Row className="parameterTitle">
-						<Col sm={6}>
-							<div className="lineTitle"></div>
-						</Col>
-						<Col sm={6}>
+						<Col sm={12}>
 						<h1 className="titulo">Venta de Invernada</h1>
 						</Col>
 					</Row>

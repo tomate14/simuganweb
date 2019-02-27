@@ -86,10 +86,7 @@ class Feedlot extends Component {
 		return(
 			<div>
 				<Row className="parameterTitle">
-					<Col sm={6}>
-						<div className="lineTitle"></div>
-					</Col>
-					<Col sm={6}>
+					<Col sm={12}>
 						<h1 className="titulo">Configuraciones de Feedlot</h1>
 					</Col>
 				</Row>
