@@ -265,13 +265,13 @@ function generarSubMobs(state,index){
     ObjetoSubMob.nombre = state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobName;
     ObjetoSubMob.variables = ["Meses de Destete","Cantidad de animales iniciales","Peso estandar máximo","Peso estandar medio","Peso estandar minimo","Cantidad de vaquillonas de un año","Cantidad de vaquillonas de dos años"]; 
     ObjetoSubMob.valores   = [ 
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
                               ]
 
     SubMobArray.push(ObjetoSubMob);              

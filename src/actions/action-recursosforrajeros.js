@@ -25,7 +25,7 @@ export function InputVariacionValor(id, pagina, valor,seleccion) {
         posicion:id,
         pagina:pagina,
         dropdownSeleccion:seleccion,
-        valor:parseInt(valor)
+        valor:parseFloat(valor)
     }    
     
 }

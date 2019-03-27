@@ -24,8 +24,8 @@ function iniciarValoresSimulacion(){
 	let pasturas = Simulacion.escenario.stockPilledType[0].stockPilled;
 	let arrayValoresPastura = [];
 	for(let i = 0 ; i< pasturas.length; i++){
-		let digestValue = parseInt(pasturas[i].$.stockPilledDigest);
-		let yieldValue = parseInt(pasturas[i].$.yield);
+		let digestValue = parseFloat(pasturas[i].$.stockPilledDigest);
+		let yieldValue = parseFloat(pasturas[i].$.yield);
 		let objectValue = {
 			digestValue : digestValue,
 			yieldValue : yieldValue
@@ -117,7 +117,7 @@ export default function(state=initialState,action){
 			}
 		break;
 		case "UPDATE-VALUE-DIGEST_DIFERIDO":
-			 valor = parseInt(action.value);
+			 valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -125,7 +125,7 @@ export default function(state=initialState,action){
 			...state,
 			digestibilidadVariaciones : state.digestibilidadVariaciones.map(
                (content, i) => i == state.dropdownSelected ? state.digestibilidadVariaciones[state.dropdownSelected].map(
-                   (content,j) => j == action.index ? parseInt(valor)
+                   (content,j) => j == action.index ? parseFloat(valor)
                    : content
                    )                             
 
@@ -134,7 +134,7 @@ export default function(state=initialState,action){
 			}
 		break;
 		case "UPDATE-VALUE-RINDE_DIFERIDO":
-			valor = parseInt(action.value);
+			valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -143,7 +143,7 @@ export default function(state=initialState,action){
 			...state,
 			rindeVariaciones : state.rindeVariaciones.map(
                (content, i) => i == state.dropdownSelected ? state.rindeVariaciones[state.dropdownSelected].map(
-                   (content,j) => j == action.index ? parseInt(action.value)
+                   (content,j) => j == action.index ? parseFloat(action.value)
                    : content
                    )                             
 

@@ -29,7 +29,7 @@ class SingleInputArray extends Component {
 
 
 	chequearRango(e){
-		let valor = parseInt(e.target.value);
+		let valor = parseFloat(e.target.value);
 		switch(this.props.max){
 			case -1: 
 			if(valor < this.props.min){
@@ -59,7 +59,8 @@ class SingleInputArray extends Component {
 			rows.push(<input onChange = {funcOnChange}
 							 onBlur = {this.chequearRango}
 							 value = {this.ponerValor(parametro[i])} 
-							 id = {i} 
+							 id = {i}
+							 step = "any"
 							 type="number"/>); 
 		}
 		return rows;

@@ -24,8 +24,8 @@ function iniciarValoresSimulacion(){
 	let rastrojos = Simulacion.escenario.crop_stubbles[0].crop_stubble;
 	let arrayValoresRastrojos = [];
 	for(let i = 0 ; i< rastrojos.length; i++){
-		let digestValue = parseInt(rastrojos[i].$.crop_stubbleDigest);
-		let yieldValue  = parseInt(rastrojos[i].$.yield);
+		let digestValue = parseFloat(rastrojos[i].$.crop_stubbleDigest);
+		let yieldValue  = parseFloat(rastrojos[i].$.yield);
 		let objectValue = {
 			digestValue : digestValue,
 			yieldValue  : yieldValue
@@ -117,7 +117,7 @@ export default function(state=initialState,action){
   			}
   		break;
 		case "UPDATE-VALUE-DIGEST_RASTROJOS":
-			 valor = parseInt(action.value);
+			 valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -126,7 +126,7 @@ export default function(state=initialState,action){
 			...state,
 			digestibilidadVariaciones : state.digestibilidadVariaciones.map(
                (content, i) => i == state.dropdownSelected ? state.digestibilidadVariaciones[state.dropdownSelected].map(
-                   (content,j) => j == action.index ? parseInt(valor)
+                   (content,j) => j == action.index ? parseFloat(valor)
                    : content
                    )                             
 
@@ -135,7 +135,7 @@ export default function(state=initialState,action){
 			}
 		break;
 		case "UPDATE-VALUE-RINDE_RASTROJOS":
-			valor = parseInt(action.value);
+			valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -144,7 +144,7 @@ export default function(state=initialState,action){
 			...state,
 			rindeVariaciones : state.rindeVariaciones.map(
                (content, i) => i == state.dropdownSelected ? state.rindeVariaciones[state.dropdownSelected].map(
-                   (content,j) => j == action.index ? parseInt(action.value)
+                   (content,j) => j == action.index ? parseFloat(action.value)
                    : content
                    )                             
 

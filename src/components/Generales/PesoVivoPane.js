@@ -44,7 +44,7 @@ class PesoVivoPane extends Component {
 							<h5><b>Carga simulación inicial: [ {this.props.simulationValuePeso} ]</b> </h5>
 						</Col>);
 			array.push(<Col>
-						<Input id = "pesoVivoEngorde" type= "number" value = {this.props.esquemaPeso} onChange = {this.props.funcModificarPeso}/>
+						<Input id = "pesoVivoEngorde" type= "number" step="any" value = {this.props.esquemaPeso} onChange = {this.props.funcModificarPeso}/>
 					   </Col>
 				);
 		}

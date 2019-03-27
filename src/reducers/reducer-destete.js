@@ -103,18 +103,18 @@ function iniciarArregloState(state=initialState,valor=1){
             for(let i = 0; i < valor; i++){
 
 
-            	let calfUmbralLw      = parseInt(state.valoresSimulacion[index][0]);
+            	let calfUmbralLw      = parseFloat(state.valoresSimulacion[index][0]);
 
             	let isTrueSet         = (state.valoresSimulacion[index][1] == 'true');
 				let enable            = isTrueSet;
 
 				let enableCalf        = enable;
 				let calfDestiny       = state.valoresSimulacion[index][2];
-				let calfDietBProtein  = parseInt(state.valoresSimulacion[index][3]);
-				let calfDietIntake    = parseInt(state.valoresSimulacion[index][4]);
-				let calfDietDigest    = parseInt(state.valoresSimulacion[index][5]);
-				let calfDietDRProtein = parseInt(state.valoresSimulacion[index][6]);
-				let umbralBcs         = parseInt(state.valoresSimulacion[index][7]);
+				let calfDietBProtein  = parseFloat(state.valoresSimulacion[index][3]);
+				let calfDietIntake    = parseFloat(state.valoresSimulacion[index][4]);
+				let calfDietDigest    = parseFloat(state.valoresSimulacion[index][5]);
+				let calfDietDRProtein = parseFloat(state.valoresSimulacion[index][6]);
+				let umbralBcs         = parseFloat(state.valoresSimulacion[index][7]);
 
 				isTrueSet             = (state.valoresSimulacion[index][8] == 'true');
 				enable                = isTrueSet;
@@ -209,7 +209,7 @@ export default function(state=initialState,action){
 
 
 		case "UPDATE-VALUE-DESTETE":
-			 valor = parseInt(action.value);
+			 valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }

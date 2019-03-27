@@ -68,7 +68,7 @@ function inicializarArregloSimulacion(arreglo){
       let ObjetoMes = {};
       let month = getMonth(i);
       ObjetoMes.month = month;
-      let valorMes = parseInt(arreglo[month]);
+      let valorMes = parseFloat(arreglo[month]);
       ObjetoMes.value = valorMes;
       arrayValores.push(ObjetoMes);
     }
@@ -137,11 +137,11 @@ function iniciarArregloState(state=initialState,valor=1){
       let cc = state.corralValues.cc;
       let feedlotType = "lw";
       for(let j= 0;j < 12;j++){
-          pasture.push(state.pastureValues[j]);
-          silage.push(state.silageValues[j]);
-          grain.push(state.grainValues[j]);
-          diferido.push(state.stockPilledValues[j]);
-          rastrojo.push(state.cropStubbleValues[j]);
+          pasture.push(state.pastureValues[j].value);
+          silage.push(state.silageValues[j].value);
+          grain.push(state.grainValues[j].value);
+          diferido.push(state.stockPilledValues[j].value);
+          rastrojo.push(state.cropStubbleValues[j].value);
       }
       let objectValue = { tipoEngorde : tipoEngorde,
                           generalEnable : false,
@@ -365,7 +365,7 @@ export default function(state=initialState,action){
     break;
 
     case "UPDATE-VALUE-TRIGGER-PROTEIN_ENGORDE":
-           valor = parseInt(action.value);
+           valor = parseFloat(action.value);
                  if (isNaN(valor)){
                      valor = 0;
                  }
@@ -380,7 +380,7 @@ export default function(state=initialState,action){
     }
       break;
      case "UPDATE-VALUE-TRIGGER-INTAKE_ENGORDE":
-           valor = parseInt(action.value);
+           valor = parseFloat(action.value);
                  if (isNaN(valor)){
                      valor = 0;
                  }
@@ -395,7 +395,7 @@ export default function(state=initialState,action){
     }
         break;
      case "UPDATE-VALUE-TRIGGER-DIGEST_ENGORDE":
-           valor = parseInt(action.value);
+           valor = parseFloat(action.value);
                  if (isNaN(valor)){
                      valor = 0;
                  }
@@ -410,7 +410,7 @@ export default function(state=initialState,action){
     }
         break;
        case "UPDATE-VALUE-TRIGGER-DRPROTEIN_ENGORDE":
-           valor = parseInt(action.value);
+           valor = parseFloat(action.value);
                  if (isNaN(valor)){
                      valor = 0;
                  }
@@ -425,7 +425,7 @@ export default function(state=initialState,action){
     }          
         break;
                case "UPDATE-VALUE-TRIGGER-PESOVIVO_ENGORDE":
-           valor = parseInt(action.value);
+           valor = parseFloat(action.value);
                  if (isNaN(valor)){
                      valor = 0;
                  }

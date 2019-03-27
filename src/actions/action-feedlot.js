@@ -15,7 +15,7 @@ export function InputVariacionEngorde(pagina, atributo, valor) {
         type: "VALORENGORDE_FEEDLOT",
         pagina:pagina,
         atributo:parseInt(atributo),
-        valor:parseInt(valor)
+        valor:parseFloat(valor)
     }    
 }
 
@@ -27,7 +27,7 @@ export function InputVariacionSalida(pagina, atributo, valor) {
         type: "VALORSALIDA_FEEDLOT",
         pagina:pagina,
         atributo:atributo,
-        valor:parseInt(valor)
+        valor:parseFloat(valor)
     }    
 }
 

@@ -12,8 +12,8 @@ const initialState = {
 function iniciarValoresSimulacion(){
 	let ensilaje = Simulacion.escenario.makeSilage[0];
 	let objectValue = {
-			digestValue : parseInt(ensilaje.$.triggerMass),
-			yieldValue  : parseInt(ensilaje.$.leftoverMass)
+			digestValue : parseFloat(ensilaje.$.triggerMass),
+			yieldValue  : parseFloat(ensilaje.$.leftoverMass)
 	}
 	return objectValue;
 	}
@@ -82,7 +82,7 @@ export default function(state=initialState,action){
 			}
 		break;
 		case "UPDATE-VALUE-TRIGGER_ENSILAJE":
-			 valor = parseInt(action.value);
+			 valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -90,13 +90,13 @@ export default function(state=initialState,action){
 			return{
 			...state,
 			triggerVariaciones : state.triggerVariaciones.map(
-               (content, i) => i == action.index ? parseInt(valor)                             
+               (content, i) => i == action.index ? parseFloat(valor)                             
                : content
                )
 			}
 		break;
 		case "UPDATE-VALUE-LEFTOVER_ENSILAJE":
-			valor = parseInt(action.value);
+			valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -104,7 +104,7 @@ export default function(state=initialState,action){
 			return{
 			...state,
 			leftoverVariaciones : state.leftoverVariaciones.map(
-               (content, i) => i == action.index ? parseInt(valor)                             
+               (content, i) => i == action.index ? parseFloat(valor)                             
                : content
                )
 			}
