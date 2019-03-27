@@ -41,7 +41,7 @@ class ChildDestete extends Component{
     }
 
     chequearRango(e){
-		let valor = parseInt(e.target.value);
+		let valor = parseFloat(e.target.value);
 		if(valor < e.target.min || valor > e.target.max){
 			e.target.value = 0;
 			this.handleInputValueChange(e);
@@ -49,6 +49,15 @@ class ChildDestete extends Component{
 	}
 
 	render(){
+		let umbral = this.props.vector[1] ? <InputGroup>
+					    <InputGroupAddon addonType="append">{this.props.textos[0]}</InputGroupAddon>
+					    <Input type="number" step="any" min={40} max={180} name="0" id = "0" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value =  {this.props.vector[0]}     />				    
+					</InputGroup> : "";
+
+		let umbralBcs = this.props.vector[8] ? <InputGroup>
+					    <InputGroupAddon addonType="append">{this.props.textos[7]}</InputGroupAddon>
+					    <Input type="number" step="any" min={2} max={12} name="7" id = "7" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[7]}   />
+					</InputGroup> : "";
 		return(
 			<Container>
 				<Row md={12}>
@@ -75,10 +84,7 @@ class ChildDestete extends Component{
 			        </FormGroup>
 			    </Row>
 			    <Row>
-					<InputGroup>
-					    <InputGroupAddon addonType="append">{this.props.textos[0]}</InputGroupAddon>
-					    <Input type="number" min={40} max={180} name="0" id = "0" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value =  {this.props.vector[0]}     />				    
-					</InputGroup>
+					{umbral}
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[2]}</InputGroupAddon>
 					    <Col className="DropInput">
@@ -92,24 +98,21 @@ class ChildDestete extends Component{
 
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[3]}</InputGroupAddon>
-					    <Input type="number" min={10} max={20} name="3" id = "3" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[3]}    />
+					    <Input type="number" step="any" min={10} max={20} name="3" id = "3" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[3]}    />
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[4]}</InputGroupAddon>
-					    <Input type="number" min={70} max={90} name="4" id = "4" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[4]}/>
+					    <Input type="number" step="any" min={70} max={90} name="4" id = "4" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[4]}/>
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[5]}</InputGroupAddon>
-					    <Input type="number" min={8} max={18} name="5" id = "5" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[5]}   />
+					    <Input type="number" step="any" min={8} max={18} name="5" id = "5" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[5]}   />
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[6]}</InputGroupAddon>
-					    <Input type="number" min={1} max={2.8} name="6" id = "6" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[6]}   />
+					    <Input type="number" step="any" min={1} max={2.8} name="6" id = "6" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[6]}   />
 					</InputGroup>
-					<InputGroup>
-					    <InputGroupAddon addonType="append">{this.props.textos[7]}</InputGroupAddon>
-					    <Input type="number" min={2} max={12} name="7" id = "7" onBlur = {this.chequearRango} onChange={this.handleInputValueChange} value = {this.props.vector[7]}   />
-					</InputGroup>
+					{umbralBcs}
 				</Row>
 
 			</Container>

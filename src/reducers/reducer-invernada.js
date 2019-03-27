@@ -83,7 +83,7 @@ function iniciarArregloState(state=initialState,valor=1,tipo=""){
             
             for(let i = 0; i < valor; i++){     
 
-                arrayAux.push(parseInt(value));
+                arrayAux.push(parseFloat(value));
             }  
             //arrayGeneral.push(arrayAux);
         }   
@@ -120,7 +120,7 @@ export default function(state=initialState,action){
 			}
 		break;
 		case "UPDATE-VALUE-NOBILLO_INVERNADA":
-			 valor = parseInt(action.value);
+			 valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -128,14 +128,14 @@ export default function(state=initialState,action){
 			return{
 			...state,
 			nobillosVariaciones : state.nobillosVariaciones.map(               
-                   (content,j) => j == action.index ? parseInt(valor)
+                   (content,j) => j == action.index ? parseFloat(valor)
                    : content
                    )                             
 
 			}
 		break;
 		case "UPDATE-VALUE-VAQUILLONA_INVERNADA":
-			valor = parseInt(action.value);
+			valor = parseFloat(action.value);
              if (isNaN(valor)){
                  valor = 0;
              }
@@ -143,7 +143,7 @@ export default function(state=initialState,action){
 			return{
 			...state,
 			VaquillonaVariaciones : state.VaquillonaVariaciones.map(               
-                   (content,j) => j == action.index ? parseInt(action.value)
+                   (content,j) => j == action.index ? parseFloat(action.value)
                    : content
                    )                             
 			}

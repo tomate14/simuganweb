@@ -52,7 +52,7 @@ function generarValoresPasturaSeleccionada(dropdownSelected){
       let ObjetoMes = {};
       let month = getMonth(i);
       ObjetoMes.month = month;
-      let valorMes = parseInt(Simulacion.escenario.pastureType[0].pasture[dropdownSelected].pastureAccumRateMean[0].$[month]);
+      let valorMes = parseFloat(Simulacion.escenario.pastureType[0].pasture[dropdownSelected].pastureAccumRateMean[0].$[month]);
       ObjetoMes.value = valorMes;
       arrayValores.push(ObjetoMes);
     }
@@ -80,7 +80,7 @@ function iniciarArregloState(state,valor = 1,cantInputs=12){
                   ObjetoMes.valor = value;  
                 }else{
                   let month = getMonth(i);
-                  ObjetoMes.valor = parseInt(Simulacion.escenario.pastureType[0].pasture[state.dropDownSelected].pastureAccumRateMean[0].$[month]); 
+                  ObjetoMes.valor = parseFloat(Simulacion.escenario.pastureType[0].pasture[state.dropDownSelected].pastureAccumRateMean[0].$[month]); 
                 }               
                 
                 ObjetoMes.mes   = nombre;
@@ -197,7 +197,7 @@ export default function (state=getEstado(), action) {
             break;
         case("VALORVARIACION_RECURSOSFORRAJEROS"):
 
-             if (isNaN(parseInt(action.valor))){
+             if (isNaN(parseFloat(action.valor))){
                  action.valor = 0;
              }
             return{
@@ -207,7 +207,7 @@ export default function (state=getEstado(), action) {
                                   state.pagvariaciones[action.dropdownSeleccion].map(
                                     (content, i) => i == action.pagina ?
                                         state.pagvariaciones[action.dropdownSeleccion][action.pagina].map(
-                                          (content,j) => j == action.posicion ? {...content, valor: action.valor}
+                                          (content,j) => j == action.posicion ? {...content, valor: parseFloat(action.valor)}
                                                     : content
                                           )
                                   : content

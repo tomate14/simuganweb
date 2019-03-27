@@ -115,7 +115,7 @@ class Destete extends Component {
 	
 		return(
 
-			<Container>
+			<div>
 					<div>
 						<Row className="parameterTitle">
 							<Col sm={6}>
@@ -133,7 +133,7 @@ class Destete extends Component {
 					</div>
 	 
 			    {this.generarContenido(destete)}
-			  </Container>
+			  </div>
 		);
 		
 		

@@ -9,6 +9,7 @@
     background-color: #43244e; 
     color: white; 
     display: block;
+    padding-left: 20px; 
     padding-top: 12px;
     padding-bottom: 12px;  
     text-align: left;
@@ -23,7 +24,7 @@
 
 
 
-li{
+.filaMenu{
     text-align: left;
     color:blue;
     display: block;

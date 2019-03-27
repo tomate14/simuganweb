@@ -1,5 +1,4 @@
 export function permitirVariaciones(e){
-    console.log("permitirVariaciones-mob");
     return{
         type : "PERMITIDO_MOB",
         payload: e.target.checked
@@ -7,7 +6,6 @@ export function permitirVariaciones(e){
 }
 
 export function modificarVariaciones(e){
-    console.log("modificarVariaciones-mob");
     return{
         type: "CANTIDAD_MOB",
         payload: e.target.value
@@ -15,7 +13,6 @@ export function modificarVariaciones(e){
 }
 
 export function modificarDropdownSelected(e){
-    console.log("modificarDropdownSelected-diferido");
     return{
         type: "MODIFYDROPDOWN_MOB",
         payload: e.target.id
@@ -32,7 +29,7 @@ export function modificarPagina(pagina) {
 
 export function modificarConfGenerales(e){
     let index    = parseInt(e.target.name);
-    let valor    = parseInt(e.target.value);
+    let valor    = parseFloat(e.target.value);
     let payload  = e.target.id 
     return {
         type:"CONF-GENERALES_MOB",
@@ -187,13 +184,51 @@ export function modificarSubMobs(e){
     //let index    = e.target.name;
     let indexSubMob = parseInt(e.target.id);
     let index = parseInt(e.target.name);
-    let valor = parseInt(e.target.value);
+    let valor = parseFloat(e.target.value);
     return {
         type:"SUBMOBS_MOB",
         payload: "SubMobs",
         valor: valor,
         index : index,
         indexSubMob : indexSubMob,
+
+    }
+}
+
+export function permitirDiferidos(valor){
+    return {
+        type:"DIFERIDO-ENABLE_MOB",
+        payload: "diferidosEnable",
+        valor: valor
+
+    }
+    
+}
+
+export function permitirRastrojo(valor){
+    return {
+        type:"RASTROJO-ENABLE_MOB",
+        payload: "rastrojoEnable",
+        valor: valor
+
+    }
+}
+
+export function permitirDiferidosWeaning(valor){ 
+    return {
+        type:"DIFERIDO-WEANING-ENABLE_MOB",
+        payload: "diferidosWeaningEnable",
+        valor: valor
+
+    }
+
+}
+
+export function permitirRastrojoWeaning(valor){ 
+    return {
+        type:"RASTROJO-WEANING-ENABLE_MOB",
+        payload: "rastrojoWeaningEnable",
+        valor: valor
 
     }
 }

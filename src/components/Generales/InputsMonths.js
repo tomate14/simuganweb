@@ -39,9 +39,10 @@ class InputsMonths extends Component{
 				              min = "0"
 				              id = {i}
 				              key = {i}
-				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[this.props.paginaActual-1][i].valor}
+				              value={this.props.pagvariaciones[this.props.paginaActual-1][i].valor}
 				              onChange={this.handleInputValueChange}
 				              onBlur ={this.chequearRango}
+				              step="any"
 				            />);
 			};
 			return inputs;	
@@ -59,9 +60,10 @@ class InputsMonths extends Component{
 				              min = "0"
 				              id = {i}
 				              key = {i}
-				              value={this.props.pagvariaciones.length == 0  ? 0 : this.props.pagvariaciones[i]}
+				              value={this.props.pagvariaciones[i]}
 				              onChange={this.handleInputValueChange}
 				              onBlur ={this.chequearRango}
+				              step="any"
 				            />);
 			};
 			return inputs;	
@@ -70,7 +72,7 @@ class InputsMonths extends Component{
 	}
 
 	handleInputValueChange(e){
-		let valor = parseInt(e.target.value);
+		let valor = parseFloat(e.target.value);
 		let id = parseInt(e.target.id);
 		let pagina = this.props.paginaActual - 1;
 		this.props.funcModiValorInput(id,pagina,valor);

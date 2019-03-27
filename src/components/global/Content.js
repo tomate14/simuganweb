@@ -27,8 +27,8 @@ class Content extends Component {
     const { body } =  this.props;
 
     return (
-                    <Container className="listMenu">
-                        <Row sm={12}>
+                    <div className="listMenu">
+                        <Row>
                             <Col sm={4} className="menu">
                               {
                                   //Si tengo algo dentro de los tags, muestro la opcion para cargar
@@ -122,7 +122,7 @@ class Content extends Component {
                                 { body }
                             </Col>
                         </Row>
-                    </Container>
+                    </div>
 
     );
   }

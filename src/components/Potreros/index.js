@@ -94,7 +94,7 @@ class Potreros extends Component {
 	
 		return(
 
-			<Container>
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>
@@ -112,7 +112,7 @@ class Potreros extends Component {
 			    {this.generarContenido(potreros)}
 
 			    <Button color="primary" onClick={generarSalidaRest}>Finalizar</Button>
-			  </Container>
+			  </div>
 		);
 		
 		

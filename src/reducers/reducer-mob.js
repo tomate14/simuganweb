@@ -103,6 +103,8 @@ function ModificarArreglo(state,valor,arreglo){
 function CrearObjetoMob(state,SubMobArray,index){
     //Todo lo que contiene una variacion de Mob
     let ObjetoMobs = {}
+    ObjetoMobs.diferidosEnable = false;
+    ObjetoMobs.rastrojoEnable = false;
     ObjetoMobs.paramGenerales = []; 
     ObjetoMobs.pastureAllow   = [];
     ObjetoMobs.silageAllow    = [];
@@ -175,8 +177,8 @@ function CrearObjetoMob(state,SubMobArray,index){
 
     let ObjetoVariacionWeaning = {}
     if(Simulacion.escenario.mobs[0].mob[index].weaning_mob != " "){
-      ObjetoVariacionWeaning.cropStubbleEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableCrop_stubble === "true");
-      ObjetoVariacionWeaning.stockPilledEnable = (Simulacion.escenario.mobs[0].mob[index].weaning_mob[0].$.enableStockPilled === "true");
+      ObjetoVariacionWeaning.cropStubbleEnable = true;
+      ObjetoVariacionWeaning.stockPilledEnable = true;
       ObjetoVariacionWeaning.pastureAllow   = [];
       ObjetoVariacionWeaning.silageAllow    = [];
       ObjetoVariacionWeaning.grainAllow     = [];
@@ -263,13 +265,13 @@ function generarSubMobs(state,index){
     ObjetoSubMob.nombre = state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobName;
     ObjetoSubMob.variables = ["Meses de Destete","Cantidad de animales iniciales","Peso estandar máximo","Peso estandar medio","Peso estandar minimo","Cantidad de vaquillonas de un año","Cantidad de vaquillonas de dos años"]; 
     ObjetoSubMob.valores   = [ 
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
-                                parseInt(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.weaning),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.startCountAnimals),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMax),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMean),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].$.submobSwMin),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas1ano[0].$.amount),
+                                parseFloat(state.valoresSimulacion[index].submobs[0].submob[indexSubMobs].weanerSubMob[0].vaquillonas2ano[0].$.amount) 
                               ]
 
     SubMobArray.push(ObjetoSubMob);              
@@ -311,6 +313,22 @@ function modificarArreglo(action, mob,pagina){
     let ObjetoMes = {}
     switch(action.payload){
         //Modificar el objeto de la primera tab de mobs
+        case "diferidosEnable":
+            variaciones.pagvariaciones[pagina].diferidosEnable = action.valor;
+            return variaciones.pagvariaciones;
+        break;
+        case "rastrojoEnable":
+            variaciones.pagvariaciones[pagina].rastrojoEnable = action.valor;
+            return variaciones.pagvariaciones;
+        break;
+        case "diferidosWeaningEnable":
+            variaciones.pagvariaciones[pagina].weaningMobs.stockPilledEnable = action.valor;
+            return variaciones.pagvariaciones;
+        break;
+        case "rastrojoWeaningEnable":
+            variaciones.pagvariaciones[pagina].weaningMobs.cropStubbleEnable = action.valor;
+            return variaciones.pagvariaciones;
+        break;
         case "ConfGenerales":
             for (let i = 0; i< variaciones.pagvariaciones[pagina].paramGenerales.length; i++){
                 if(i == action.index){
@@ -557,6 +575,56 @@ export default function(state=initialState,action){
                 )
             }
             break;
+    case("DIFERIDO-ENABLE_MOB"):
+      action.objeto  = "diferidosEnable";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+    break;
+    case ("RASTROJO-ENABLE_MOB"):
+      action.objeto  = "rastrojoEnable";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+    break;
+
+    case ("DIFERIDO-WEANING-ENABLE_MOB"):
+      action.objeto  = "diferidosWeaningEnable";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+
+    break;
+    case ("RASTROJO-WEANING-ENABLE_MOB"):
+      action.objeto  = "rastrojoWeaningEnable";
+      return{...state,
+        arrayMobs : state.arrayMobs.map(
+                        (content, i) => state.dropDownSelected == i ?                  
+                               {...content, 
+                                  pagvariaciones: modificarArreglo(action,content,content.pagActual-1)
+                               }                        
+                        : content
+                )
+        }
+    break;
 	}
 	return state;
 } 

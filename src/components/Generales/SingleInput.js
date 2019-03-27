@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 
-import { Popover, PopoverHeader, PopoverBody} from 'reactstrap';
+import {Input, Popover, PopoverHeader, PopoverBody} from 'reactstrap';
 
 
 class SingleInput extends Component {
@@ -44,7 +44,7 @@ class SingleInput extends Component {
 
 
 	chequearRango(e){
-		let valor = parseInt(e.target.value);
+		let valor = parseFloat(e.target.value);
 		if(valor < this.props.min || valor > this.props.max){
 			e.target.value = 0;
 			this.props.funcModificar(e);
@@ -58,6 +58,7 @@ class SingleInput extends Component {
 			rows.push(<input 
 						onChange = {funcOnChange}
 						onBlur = {this.chequearRango}
+						step = "any"
 						value = {this.ponerValor(parametro[this.props.seccionElegida][i])}
 						id = {i}
 						type="number"/>); 

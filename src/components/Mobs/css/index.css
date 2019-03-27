@@ -1,3 +1,11 @@
+#checkboxesMobs{
+	border: solid 1px;
+    border-color: gainsboro;
+    border-radius: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
 #contentoption{
     border: solid 1px;
     border-color: gainsboro;

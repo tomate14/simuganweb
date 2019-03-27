@@ -27,7 +27,10 @@ class ChildEngorde extends Component {
 		const engorde = this.props.esquema;
 		let paginaActual = this.props.esquema.paginaActual;
 		let array = [];
-
+		let arrayValues = [];
+		for(let i; i < 12; i++){
+			arrayValues[i] = engorde.pastureValues[i].value;
+		}
 
 		if(engorde.pagVariaciones[engorde.paginaActual].tipoEngorde == "pasto"){
 			array = 		[

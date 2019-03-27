@@ -28,7 +28,7 @@ class InputsVariation extends Component{
 	}
 
 	handleInputValueChange(e){
-		let valor = parseInt(e.target.value);
+		let valor = parseFloat(e.target.value);
 		let id = parseInt(e.target.id);
 		let pagina = this.props.state.paginaActual - 1;
 		let seleccion = this.props.state.dropDownSelected;
@@ -90,10 +90,11 @@ class InputsVariation extends Component{
 				            <input
 				              type="number"
 				              className="InputVariables"
+				              step="any"
 				              min = "0"
 				              id = {key}
 				              key = {key}
-				              value={this.props.state.pagvariaciones.length == 0  ? 0 : this.props.state.pagvariaciones[dropdownSelected][paginaActual-1][key].valor}
+				              value={this.props.state.pagvariaciones[dropdownSelected][paginaActual-1][key].valor}
 				              onChange={this.handleInputValueChange}
 				            />
 				        ))}

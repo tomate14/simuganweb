@@ -62,7 +62,7 @@ class Invernada extends Component {
 	render(){
 		const invernada = this.props.invernada;
 		return(
-			<Container>
+			<div>
 					<Row className="parameterTitle">
 						<Col sm={6}>
 							<div className="lineTitle"></div>
@@ -77,7 +77,7 @@ class Invernada extends Component {
 											funcVariaciones = {this.props.modificarVariaciones}/></Col>
 					</Row> 
 					{this.generarVariaciones(invernada)}
-		    </Container>
+		    </div>
 
 		);
 	}

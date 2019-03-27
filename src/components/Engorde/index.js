@@ -110,7 +110,7 @@ class Engorde extends Component {
 	render(){
 
 		return(
-			<div className = "container-fluid">
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>

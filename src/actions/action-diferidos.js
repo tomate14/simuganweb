@@ -28,7 +28,7 @@ export function modificarInputValueDigestibilidad(e){
 	return{
 		type: "UPDATE-VALUE-DIGEST_DIFERIDO",
 		index: e.target.id,
-		value : parseInt(e.target.value)
+		value : parseFloat(e.target.value)
 	}
 }
 

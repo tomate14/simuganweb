@@ -22,7 +22,7 @@ class FeedlotPane extends Component {
 					</Row>
 					<Row id= "divPicker">
 						<Col>
-							<Input type="number" min={70} max={90} name="4" id = "4" onBlur = {this.chequearRango} onChange={this.props.funcModificar} value ={this.props.esquema} />
+							<Input type="number" step="any" min={70} max={90} name="4" id = "4" onBlur = {this.chequearRango} onChange={this.props.funcModificar} value ={this.props.esquema} />
 						</Col>
 					</Row>
 				</Container>

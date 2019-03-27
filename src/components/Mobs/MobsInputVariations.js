@@ -14,7 +14,7 @@ class MobsInputVariations extends Component {
 		this.chequearRango = this.chequearRango.bind(this);
 	}
 		chequearRango(e){
-		let valor = parseInt(e.target.value);
+		let valor = parseFloat(e.target.value);
 		let idx = parseInt(e.target.name);
 		switch (this.props.maxArray[idx]){
 			case -1:
@@ -22,6 +22,7 @@ class MobsInputVariations extends Component {
 						e.target.value = 0;
 						this.props.funcion(e);
 					}
+					break;
 			default:
 					if(valor < this.props.minArray[idx] || valor > this.props.maxArray[idx]){
 						e.target.value = 0;

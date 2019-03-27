@@ -1,5 +1,4 @@
 export function permitirVariaciones(e){
-	console.log("permitirVariaciones-diferido");
 	return{
 		type : "PERMITIDO_INVERNADA",
 		payload: e.target.checked
@@ -7,7 +6,6 @@ export function permitirVariaciones(e){
 }
 
 export function modificarVariaciones(e){
-	console.log("modificarVariaciones-diferido");
 	return{
 		type: "CANTIDAD_INVERNADA",
 		payload: e.target.value
@@ -15,7 +13,6 @@ export function modificarVariaciones(e){
 }
 
 export function modificarDropdownSelected(e){
-	console.log("modificarDropdownSelected-diferido");
 	return{
 		type: "MODIFYDROPDOWN_INVERNADA",
 		payload: e.target.id
@@ -23,7 +20,6 @@ export function modificarDropdownSelected(e){
 }
 
 export function modificarInputValueVacasEngorde(e){
-	console.log("modificarInputValueVacasEngorde-diferido");
 	return{
 		type: "UPDATE-VALUE-NOBILLO_INVERNADA",
 		index: e.target.id,
@@ -33,7 +29,6 @@ export function modificarInputValueVacasEngorde(e){
 
 
 export function modificarInputValueVaquillona(e){
-	console.log("modificarInputValueVaquillona-invernada");
 	return{
 		type: "UPDATE-VALUE-VAQUILLONA_INVERNADA",
 		index: e.target.id,

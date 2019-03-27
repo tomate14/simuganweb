@@ -14,6 +14,7 @@ import Picker from '../Generales/Picker';
 import TabMenu from '../Generales/TabMenu';
 import PasturePane from '../Generales/PasturePane';
 import MobsInputVariations from './MobsInputVariations';
+import ChildWeaning from './ChildWeaning';
 
 //redux
 import {bindActionCreators} from 'redux';
@@ -30,7 +31,11 @@ import {permitirVariaciones,modificarVariaciones,modificarDropdownSelected,
         modificarWeaningEnsilaje,
         modificarWeaningRastrojo,
     	modificarWeaningDiferido,
-    	modificarSubMobs} from '../../actions/action-mob.js';
+    	modificarSubMobs,
+    	permitirDiferidos,
+    	permitirRastrojo,
+    	permitirDiferidosWeaning,
+    	permitirRastrojoWeaning} from '../../actions/action-mob.js';
 
 
 
@@ -46,6 +51,8 @@ class Mobs extends Component {
 		this.handleClickUp = this.handleClickUp.bind(this);
 	  	this.loadTabs = this.loadTabs.bind(this);
    		this.loadTitles = this.loadTitles.bind(this);
+   		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+   		this.uncheck = this.uncheck.bind(this);
 	}
  
 
@@ -286,7 +293,7 @@ class Mobs extends Component {
 										/*funcModifPagina    = {this.props.modificarPaginaSilage} */
 										/>);
 
-		if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
+		if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].rastrojoEnable){
 			const arrayValoresCropStubble  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].crop_stubbleAllow[0].$);		
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
@@ -298,7 +305,7 @@ class Mobs extends Component {
 										max = {2.5}
 										/*funcModifPagina    = {this.props.modificarPaginaRastrojo} *//> );
 		}
-		if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
+		if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].diferidosEnable){
 			const arrayValoresStockPilled  = this.generarArraySimulacion(mobs.valoresSimulacion[mobs.dropDownSelected].stockPilledAllow[0].$);
 			array.push(<PasturePane 	cantVariaciones    = {1}
 										paginaActual       = {1}
@@ -315,10 +322,14 @@ class Mobs extends Component {
 
 			let TabPanes2 = this.loadTabsWeaning();
 			let navTexts2 = this.loadTitlesWeaning(pagina);
-			array.push(<TabMenu panels = { TabPanes2 }
-						 		 navTexts = {navTexts2}
-						 		 clase    = "claSecundaria"
-					   />);
+			array.push(<ChildWeaning
+							permitirDiferidosWeaning = {this.props.permitirDiferidosWeaning}
+							permitirRastrojoWeaning = {this.props.permitirRastrojoWeaning}
+							panels = { TabPanes2 }
+						 	navTexts = {navTexts2}
+						 	clase    = "claSecundaria"
+						 	mobs = {this.props.mobs}
+						/>);
 		}
 		return array;
 	}
@@ -327,10 +338,10 @@ class Mobs extends Component {
 			let mobs = this.props.mobs;
 			let pagina = mobs.arrayMobs[mobs.dropDownSelected].pagActual-1;
 			let array = ["Configuracion General","SubMobs","Configuracion de Pastura", "Configuracion de Ensilaje","Configuracion de Grano"];	
-			if(mobs.arrayMobs[mobs.dropDownSelected].cropStubbleEnable){
+			if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].rastrojoEnable){
 				array.push("Configuracion de Rastrojo");
 			}
-			if(mobs.arrayMobs[mobs.dropDownSelected].stockPilledEnable){
+			if(this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].diferidosEnable){
 				array.push("Configuracion de Diferidos");
 			}
 			if(mobs.arrayMobs[mobs.dropDownSelected].pagvariaciones[pagina].weaningMobs != " "){
@@ -338,6 +349,48 @@ class Mobs extends Component {
 			}
 
 		return array;
+	}
+	
+    	handleCheckboxChange(e){
+    		let seleccion = e.target.id;
+    		let valor = false;
+    		let mob;
+    		let pagina;
+    		switch(seleccion){
+    			case "diferidosCheck":
+    				console.log("diferido check");
+    				mob = this.props.mobs.dropDownSelected;
+    				pagina = this.props.mobs.arrayMobs[mob].pagActual - 1;
+    				valor =  this.props.mobs.arrayMobs[mob].pagvariaciones[pagina].diferidosEnable == false;
+    				this.props.permitirDiferidos(valor);
+    				this.render();
+    			break;
+    			case "rastrojosCheck":
+    				mob = this.props.mobs.dropDownSelected;
+    				pagina = this.props.mobs.arrayMobs[mob].pagActual - 1;
+    				valor =  this.props.mobs.arrayMobs[mob].pagvariaciones[pagina].rastrojoEnable == false;
+    				console.log("handler-rastrojo "+ valor );
+    				this.props.permitirRastrojo(valor);
+    				this.render();
+    			break;
+    		}
+    	}
+
+	uncheck(e){
+		    let seleccion = e.target.id;
+    		let valor = e.target.checked;
+    		switch(seleccion){
+    			case "diferidosCheck":
+    				this.props.permitirDiferidos(valor);
+    				this.render();
+    			break;
+    			case "rastrojosCheck":
+    				console.log("uncheck-rastrojo "+ valor);
+    				this.props.permitirRastrojo(valor);
+    				this.render();
+    			break;
+
+		}
 	}
 
     generarTabs(mobs){
@@ -377,6 +430,31 @@ class Mobs extends Component {
 							</Col>
 							<Col md={4}/>
 						</Row>
+							<Row id="checkboxesMobs">
+							<Col>
+								<FormGroup check>
+									<Label check>
+										<Input type="checkbox" id="diferidosCheck" 
+							            onClick = {(e)=>this.handleCheckboxChange(e)}
+							            onChange = {(e) => this.uncheck(e)}
+							            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].diferidosEnable}/>{' '}
+							            Habilitar Diferidos	
+									</Label>
+								</FormGroup>
+							</Col>
+							<Col>
+							<FormGroup check>
+								<Label check>
+									<Input type="checkbox" id="rastrojosCheck" 
+						            onClick = {(e)=>this.handleCheckboxChange(e)}
+						            onChange = {(e) => this.uncheck(e)}
+						            checked = {this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagvariaciones[this.props.mobs.arrayMobs[this.props.mobs.dropDownSelected].pagActual - 1].rastrojoEnable}/>{' '}
+						            Habilitar Rastrojo
+								</Label>
+							</FormGroup>
+							</Col>	
+						</Row>
+
 						<TabMenu panels = { TabPanes }
 						 		 navTexts = {navTexts}
 						 		 clase    = "claPrincipal"
@@ -395,7 +473,7 @@ class Mobs extends Component {
         let mobs = this.props.mobs;
         
 		return(
-			<Container>
+			<div>
 				<Row className="parameterTitle">
 					<Col sm={6}>
 						<div className="lineTitle"></div>
@@ -412,7 +490,7 @@ class Mobs extends Component {
 				{this.generarTabs(mobs)}
 				
 				
-			</Container>
+			</div>
 		);
 	}
 }
@@ -437,7 +515,11 @@ function matchDispatchToProps(dispatch){
     	                       modificarWeaningEnsilaje:modificarWeaningEnsilaje,
     	                       modificarWeaningRastrojo:modificarWeaningRastrojo,
     	                       modificarWeaningDiferido:modificarWeaningDiferido,
-    	                       modificarSubMobs:modificarSubMobs }, dispatch);
+    	                       modificarSubMobs:modificarSubMobs,
+    	                       permitirDiferidos: permitirDiferidos,
+    	                       permitirRastrojo: permitirRastrojo,
+    	                       permitirDiferidosWeaning: permitirDiferidosWeaning,
+    	                       permitirRastrojoWeaning: permitirRastrojoWeaning }, dispatch);
     
 }
 

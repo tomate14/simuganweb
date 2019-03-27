@@ -99,7 +99,7 @@ function iniciarArregloState(state,valor=1,tipo=""){
 }
 function modificarObjeto(action, objeto){
     let Objeto = objeto;
-    Objeto[action.atributo] = parseInt(action.valor);
+    Objeto[action.atributo] = parseFloat(action.valor);
     return Objeto;
 
 }
@@ -110,7 +110,6 @@ export default function (state=getEstado(), action) {
   
      switch (action.type){
         case("PERMITIDO_FEEDLOT"):
-            console.log("Permitido"+action.payload);
             return {
                 ...state,
                 permitido : action.payload
