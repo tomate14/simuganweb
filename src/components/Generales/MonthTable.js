@@ -12,7 +12,6 @@ class MonthTable extends Component {
 		super(props);
 		//Arreglo de informacion a mostrar
 		this.months = props.state;
-		console.log(this.months);
 	}
 
 	render(){

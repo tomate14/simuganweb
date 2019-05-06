@@ -46,15 +46,15 @@ function getMonth(numeroMes){
 }
 
 function validarCargaDatos(states){
-	for (let prop in states) {
-        // skip loop if the property is from prototype
-        if((states[prop].permitido ==true) && (states[prop].cantVariaciones == 0)){
-        	console.log("asd");
-        	return false;
-        }
+	// for (let prop in states) {
+ //        // skip loop if the property is from prototype
+ //        if((states[prop].permitido ==true) && (states[prop].cantVariaciones == 0)){
+ //        	console.log("asd");
+ //        	return false;
+ //        }
 
        
-    }
+ //    }
     return true;
 }
 export function generarSalidaRest(){
@@ -76,7 +76,7 @@ export function generarSalidaRest(){
 		/* 
 		           GENERO ENSILAJE 
 		*/
-		if(states.ensilaje.permitido){
+		if(states.ensilaje.permitido && states.ensilaje.cantVariaciones > 0){
 			VariacionesReact.ensilaje.leftoverMass = states.ensilaje.leftoverVariaciones;
 			VariacionesReact.ensilaje.triggerMass = states.ensilaje.triggerVariaciones;
 			let jsonString= JSON.stringify(VariacionesReact.ensilaje);
@@ -85,7 +85,7 @@ export function generarSalidaRest(){
 		/* 
 		           GENERO RECURSOSFORRAJEROS 
 		*/
-		if(states.recursosforrajeros.permitido){
+		if(states.recursosforrajeros.permitido && states.recursosforrajeros.cantVariaciones > 0){
 			VariacionesReact.recursosforrajeros.ForrajeroPasturas = states.recursosforrajeros.pagvariaciones;
 			let ForrajeroPastura = {};
 			let ForrajeroVariacion = {};
@@ -116,7 +116,7 @@ export function generarSalidaRest(){
 		/* 
 		           GENERO LOS POTREROS 
 		*/
-		if(states.potreros.permitido){
+		if(states.potreros.permitido && states.potreros.cantVariaciones > 0){
 			VariacionesReact.potreros.pasturas = states.potreros.digestibilidadVariaciones;
 			
 			for(let i = 0; i< VariacionesReact.potreros.pasturas.length; i++ ){
@@ -130,7 +130,7 @@ export function generarSalidaRest(){
 		/* 
 		           GENERO LOS RASTROJOS 
 		*/
-		if(states.rastrojos.permitido){
+		if(states.rastrojos.permitido && states.rastrojos.cantVariaciones > 0){
 			VariacionesReact.rastrojos.digestibilidadVariaciones = states.rastrojos.digestibilidadVariaciones;
 			VariacionesReact.rastrojos.rindeVariaciones          = states.rastrojos.rindeVariaciones;
 			for(let i = 0; i< VariacionesReact.rastrojos.digestibilidadVariaciones.length; i++ ){
@@ -146,7 +146,7 @@ export function generarSalidaRest(){
 		/*
 			GENERO LOS DIFERIDOS
 		*/
-		if(states.diferidos.permitido){
+		if(states.diferidos.permitido && states.diferidos.cantVariaciones > 0){
 			VariacionesReact.diferido.digestibilidadVariaciones = states.diferidos.digestibilidadVariaciones;
 			VariacionesReact.diferido.rindeVariaciones = states.diferidos.rindeVariaciones;
 			for(let i = 0; i< VariacionesReact.diferido.digestibilidadVariaciones.length; i++ ){
@@ -163,7 +163,7 @@ export function generarSalidaRest(){
 		/*
 			GENERO INVERNADA
 		*/
-		if(states.invernada.permitido){
+		if(states.invernada.permitido && states.invernada.cantVariaciones > 0){
 			VariacionesReact.invernada.VaquillonaVariaciones = states.invernada.VaquillonaVariaciones;
 			VariacionesReact.invernada.nobillosVariaciones  = states.invernada.nobillosVariaciones;
 			jsonString= JSON.stringify(VariacionesReact.invernada);
@@ -172,7 +172,7 @@ export function generarSalidaRest(){
 		/*
 			GENERO LOS FEEDLOT
 		*/
-		if(states.feedlot.permitido){
+		if(states.feedlot.permitido && states.ensilaje.cantVariaciones > 0){
 			VariacionesReact.feedlot.VariacionFeedLot = states.feedlot.pagvariaciones;
 
 			let ObjetoCompletion = {};
@@ -206,7 +206,7 @@ export function generarSalidaRest(){
 		/*
 			GENERACION DE MOBS
 		*/
-		if(states.mobs.permitido){
+		if(states.mobs.permitido && states.mobs.cantVariaciones > 0){
 			VariacionesReact.mobs.Variaciones = states.mobs.arrayMobs;
 			let ObjetoVariacion = {};
 			for(let i = 0; i < VariacionesReact.mobs.Variaciones.length; i++){
@@ -215,10 +215,10 @@ export function generarSalidaRest(){
 				VariacionesReact.mobs.Variaciones[i] = ObjetoVariacion;
 
 				for(let j = 0; j < VariacionesReact.mobs.Variaciones[i].Variacion.length; j++){
-
 					let arrayObjeto1 = []; let arrayObjeto2 = []; let arrayObjeto3 = []; let arrayObjeto4 = []; let arrayObjeto5 = [];
 					let arrayWeaningObjeto1 = []; let arrayWeaningObjeto2 = []; let arrayWeaningObjeto3 = []; let arrayWeaningObjeto4 = []; let arrayWeaningObjeto5 = [];
-
+					let diferidosEnable = states.mobs.arrayMobs[i].Variacion[j].weaningMobs.stockPilledEnable;
+					let rastrojoEnable = states.mobs.arrayMobs[i].Variacion[j].weaningMobs.cropStubbleEnable;
 					for(let k = 0; k < 12; k++){
 						let ObjetoMeses1 = {}; let ObjetoMeses2 = {}; let ObjetoMeses3 = {}; let ObjetoMeses4 = {};	let ObjetoMeses5 = {};
 
@@ -244,6 +244,8 @@ export function generarSalidaRest(){
 						delete ObjetoMeses5.mes;
 						arrayObjeto5.push(ObjetoMeses5);
 
+
+
 						/*
 							PREPARO WEANING
 						*/
@@ -268,13 +270,17 @@ export function generarSalidaRest(){
 						delete ObjetoWeaningMeses5.mes;
 						arrayWeaningObjeto5.push(ObjetoWeaningMeses5);
 					}
-
+					//console.log(VariacionesReact.mobs);
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].cropAllow    = arrayObjeto1;
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].grainAllow   = arrayObjeto2;
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].pastureAllow = arrayObjeto3;
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].silageAllow  = arrayObjeto4;
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].stockAllow   = arrayObjeto5;
-
+					VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.diferidosEnable = diferidosEnable;
+					VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.rastrojoEnable = rastrojoEnable;
+					console.log(VariacionesReact.mobs);
+					// VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.diferidosEnable = states.mobs.arrayMobs[i].pagvariaciones[j].weaningMobs.stockPilledEnable;
+					// VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.rastrojoEnable = states.mobs.arrayMobs[i].pagvariaciones[j].weaningMobs.cropStubbleEnable;
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.cropAllow    = arrayWeaningObjeto1;
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.grainAllow   = arrayWeaningObjeto2;
 					VariacionesReact.mobs.Variaciones[i].Variacion[j].weaningMobs.pastureAllow = arrayWeaningObjeto3;
@@ -293,7 +299,7 @@ export function generarSalidaRest(){
 		}
 
 
-		if(states.destete.permitido){
+		if(states.destete.permitido && states.destete.cantVariaciones > 0){
 			VariacionesReact.destete.variaciones = states.destete.pagvariaciones;
 			let ObjetoVariacionDestete = {};
 			for(let index = 0; index < VariacionesReact.destete.variaciones.length; index++){
@@ -321,19 +327,24 @@ export function generarSalidaRest(){
 			jsonString= JSON.stringify(VariacionesReact.destete);
 
 		}
-
-		 VariacionesReact.engorde = states.engorde;
+		//----------------------------------------Engorde-----------------------------------
+		 //VariacionesReact.engorde = states.engorde;
+		 VariacionesReact.engorde = {};
 		// jsonString= JSON.stringify(VariacionesReact.engorde);
-		if(states.engorde.permitido){
-			let ObjetoVariacionEngorde = {};
-			ObjetoVariacionEngorde.PastoEngorde = {};
+		if(states.engorde.permitido && states.engorde.cantVariaciones > 0){
+
+			let ObjetoVariacionEngorde = [];
+			ObjetoVariacionEngorde = states.engorde.pagVariaciones;
+
+			console.log(ObjetoVariacionEngorde);
+
+/*			ObjetoVariacionEngorde.PastoEngorde = {};
 			ObjetoVariacionEngorde.VariacionEngorde = {};
-			if(states.engorde.tipoEngorde == "pasto"){
-				ObjetoVariacionEngorde.PastoEngorde.pastureAllow     = states.engorde.arrayPastures;
-				ObjetoVariacionEngorde.PastoEngorde.grainAllow       = states.engorde.arrayGrain;
-				ObjetoVariacionEngorde.PastoEngorde.silageAllow      = states.engorde.arraySilage;
-				ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow = states.engorde.arrayStockPilled;
-				ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow = states.engorde.arrayCropStubble;
+			ObjetoVariacionEngorde.PastoEngorde.pastureAllow     = states.engorde.arrayPastures;
+			ObjetoVariacionEngorde.PastoEngorde.grainAllow       = states.engorde.arrayGrain;
+			ObjetoVariacionEngorde.PastoEngorde.silageAllow      = states.engorde.arraySilage;
+			ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow = states.engorde.arrayStockPilled;
+			ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow = states.engorde.arrayCropStubble;
 
 				for(let i = 0; i< states.engorde.arrayPastures.length; i++){
 					let arrayObjeto6 = []; let arrayObjeto7 = []; let arrayObjeto8 = []; let arrayObjeto9 = []; let arrayObjeto10 = [];
@@ -371,16 +382,14 @@ export function generarSalidaRest(){
 					ObjetoVariacionEngorde.PastoEngorde.stockPilledAllow[i] = arrayObjeto9
 					ObjetoVariacionEngorde.PastoEngorde.cropStubbleAllow[i] = arrayObjeto10
 			}
-		}else{
 				ObjetoVariacionEngorde.VariacionEngorde.arrayCC           = states.engorde.arrayCC;
 				ObjetoVariacionEngorde.VariacionEngorde.arrayDRProtein    = states.engorde.arrayDRProtein;
 				ObjetoVariacionEngorde.VariacionEngorde.arrayDigest       = states.engorde.arrayDigest;
 				ObjetoVariacionEngorde.VariacionEngorde.arrayIntake       = states.engorde.arrayIntake;
 				ObjetoVariacionEngorde.VariacionEngorde.arrayPesoVivo     = states.engorde.arrayPesoVivo;
 				ObjetoVariacionEngorde.VariacionEngorde.arrayProtein      = states.engorde.arrayProtein;
-					
-			}
-		    VariacionesReact.engorde = ObjetoVariacionEngorde;
+				*/	
+		    VariacionesReact.engorde.Variaciones = ObjetoVariacionEngorde;
 		    console.log(JSON.stringify( VariacionesReact.engorde));
 			jsonString= JSON.stringify( VariacionesReact.engorde);
 
@@ -397,7 +406,7 @@ export function generarSalidaRest(){
             type: 'POST',
             dataType: 'json',    
             data: jsonString,
-            contentType: 'application/jsonp',
+            contentType: 'application/json',
             xhrFields: {
 		        withCredentials: false
 		    },
