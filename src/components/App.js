@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import Header from './global/Header';
+import User from './global/User.js';
 import Content from './global/Content.js';
 import Footer from './global/Footer.js';
 
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <div className="App">
           <Header />
+          <User />
           <Content body={children}/>
           <Footer />
       </div>

@@ -1,0 +1,33 @@
+
+img {
+    margin : 30px;
+  }
+  
+  
+  
+  .UserInfo {
+    margin: auto;
+    background-color: #00cba0;
+    min-width: 100%;
+  }
+  .UserInfoRow{
+      height: 40px;
+  }
+  .UserInfoPanel {
+    text-align: center;
+    color : white;
+  }
+  .User h1{
+    font-size: 50px
+  }
+  button.btnFinalizar.h-100.btn.btn-secondary {
+    background: #43234E;
+}
+
+.UserNameContainer{
+    background: #43234E;
+    border-radius: 5px;
+}
+.Username{
+    size: 70%;
+}
