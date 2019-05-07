@@ -58,7 +58,9 @@ function validarCargaDatos(states){
     return true;
 }
 export function generarSalidaRest(){
-	let states = store.getState();
+	//Clonamos el objeto inicial
+	let states = JSON.parse(JSON.stringify(store.getState()));
+
 	if(validarCargaDatos(states)){
 		let jsonString = null;
 		let VariacionesReact = {};
@@ -419,35 +421,6 @@ export function generarSalidaRest(){
             }
         });
 
-        /*$.ajax({
-		    url: Url,
-		    type: 'post',
-		    crossDomain: true,	    
-            data: jsonString,
-		    success: function (response) {
-		        console.log(response);
-		    },
-		    error: function (xhr, status) {
-		        console.log(xhr);
-		        console.log(status);
-		    }
-		});*/
-
-      
-
-        /*fetch('http://localhost:8080/simugan/create', {
-		  method: 'POST',
-		  headers: {
-		    'Content-Type': 'application/json',
-		  },
-		  body: jsonString
-		}).then(function (response) {
-		    console.log(response);
-		  })
-		  .catch(function (error) {
-		    console.log(error);
-		  });*/
-		//console.log(jsonString);
 	}else{
 		console.log("Error de validacion de datos, verifique");
 	}

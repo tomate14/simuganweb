@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Simulacion from '../data/simulacioninicial.js';
 
 // Components
 import Header from './global/Header';
@@ -21,7 +22,7 @@ class App extends Component {
     return (
       <div className="App">
           <Header />
-          <User />
+          <User username={Simulacion.escenario.$.name}/>
           <Content body={children}/>
           <Footer />
       </div>

@@ -1,6 +1,6 @@
 // Dependencies
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+
 import {generarSalidaRest} from '../../finalizar.js';
 import { Row, Col,Container, Button, Label } from 'reactstrap';
 import { FaDrupal } from 'react-icons/fa';
@@ -8,6 +8,11 @@ import { FaDrupal } from 'react-icons/fa';
 import './css/User.css';
 
 class User extends Component {
+    constructor(props){
+        super(props);
+        //console.log(props.username);
+        this.username = props.username;
+    }
 
 
     render() {
@@ -25,7 +30,7 @@ class User extends Component {
                                     <FaDrupal></FaDrupal>
                                 </Col>
                                 <Col sm={9}>
-                                    <Label className="Username">Pancho Gato</Label>
+                                    <Label className="Username">{this.username}</Label>
                                 </Col>
                             </Row>
                         </Col>

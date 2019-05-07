@@ -9,6 +9,7 @@ import feedlot from './reducer-feedlot';
 import mobs from './reducer-mob';
 import engorde from './reducer-engorde';
 import destete from './reducer-destete';
+import logout from './reducer-estadologin';
 
 
 
@@ -23,7 +24,8 @@ const allReducers = combineReducers({
     feedlot            : feedlot,
     mobs               : mobs,
     engorde 		   : engorde,
-    destete            : destete
+    destete            : destete,
+    logout             : logout
 });
 
 export default allReducers;

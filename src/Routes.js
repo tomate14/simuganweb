@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 
 
@@ -16,6 +16,8 @@ import RecursosForrajeros from './components/RecursosForrajeros'
 import Mobs				  from './components/Mobs'
 import Engorde			  from './components/Engorde'
 import Destete			  from './components/Destete'
+import PantallaInicio	  from './components/PantallaInicio'
+import PantallaFin	      from './components/PantallaFin'
 
 
 
@@ -23,7 +25,12 @@ import Destete			  from './components/Destete'
 const AppRoutes = () => 
 	
 		<App>
-			<Switch>
+			<Redirect
+            	from="/"
+            	to="/Inicio" />
+			<Switch>				
+				<Route path ="/Inicio"            component={PantallaInicio} />
+				<Route path="/LogOut"             component={PantallaFin} />
 				<Route path="/Diferido"           component={Diferido} />
 				<Route path="/Ensilaje"           component={Ensilaje} />
 				<Route path="/Feedlot"            component={Feedlot} />
