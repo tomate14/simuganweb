@@ -1,13 +1,29 @@
 .listMenu{
     min-width: 100%;
 }
+.filaMenu, .filaFinalizar{
+    display: block;
+}
+
+li.filaMenu a {
+    color: white;
+}
+
+li.filaFinalizar a {
+    color: white;
+}
 
 .menu{
     background-color: #43244e;
 }
+.menu li.filaFinalizar {
+    background-color: black;
+}
+.menu.col-sm-4 {
+    padding-right: 0px;
+}
+
 .menu a {
-    background-color: #43244e; 
-    color: white; 
     display: block;
     padding-left: 20px; 
     padding-top: 12px;
@@ -24,9 +40,3 @@
 
 
 
-.filaMenu{
-    text-align: left;
-    color:blue;
-    display: block;
-
-}

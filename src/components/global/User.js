@@ -1,7 +1,5 @@
 // Dependencies
 import React, { Component } from 'react';
-
-import {generarSalidaRest} from '../../finalizar.js';
 import { Row, Col,Container, Button, Label } from 'reactstrap';
 import { FaDrupal } from 'react-icons/fa';
 // Assets
@@ -10,9 +8,9 @@ import './css/User.css';
 class User extends Component {
     constructor(props){
         super(props);
-        //console.log(props.username);
         this.username = props.username;
     }
+
 
 
     render() {
@@ -24,7 +22,7 @@ class User extends Component {
                   </Col>
                   <Col className="UserInfoPanel h-100" sm={2}>
                     <Row>
-                        <Col sm={8} className="UserNameContainer pt-1">
+                        <Col sm={12} className="UserNameContainer pt-1">
                             <Row className="h-100 w-100">
                                 <Col sm={3}>
                                     <FaDrupal></FaDrupal>
@@ -34,9 +32,6 @@ class User extends Component {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col sm={4} className="PanelBtnFinalizar pl-0 pr-0">
-                            <Button className="btnFinalizar h-100 w-100" onClick={generarSalidaRest}>Finalizar</Button>
-                        </Col>
                     </Row>                    
                   </Col>
               </Row>
@@ -44,5 +39,5 @@ class User extends Component {
       );
     }
   }
-  
-  export default User;
+
+export default User;

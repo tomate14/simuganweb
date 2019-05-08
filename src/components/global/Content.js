@@ -10,11 +10,12 @@ import Simulacion from '../../data/simulacioninicial.js';
 import {finalizarOperacion} from '../../actions/action-logout.js';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
+//import PantallaFin from '../global/PantallaFin'; 
 // Assets
 import logo from './images/logo.svg';
 import opcionesMenu from '../../data/menu.js';
 import './css/Content.css';
+import PantallaFin from '../PantallaFin/index.js';
 
 class Content extends Component {
   static propTypes = {
@@ -111,6 +112,11 @@ class Content extends Component {
                               // let aux8 = Simulacion.escenario.pastureType[0];
                               return <li className="filaMenu" key={key}><Link to={item.url}>{item.title}</Link></li>;
                             break;
+                            case "/LogOut":
+                              // let aux8 = Simulacion.escenario.pastureType[0];
+                              return <li className="filaFinalizar" key={key}><Link to={item.url}>{item.title}</Link></li>;
+                            break;
+                            
 
                         }
                     }
@@ -126,11 +132,11 @@ class Content extends Component {
         </Row>
       );
     }else{
-      <Row>
-          <Col lg = {12}>
+        return(
+        <Row sm = {12}>
                 { body }
-          </Col>
-      </Row>
+        </Row>
+        );
     }
   }
 

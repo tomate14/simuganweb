@@ -42,5 +42,9 @@ export default [
   {
     title : 'Destete Precoz',
     url: '/Destete'
+  },
+  {
+    title : 'Finalizar',
+    url: '/LogOut'
   }
 ];
