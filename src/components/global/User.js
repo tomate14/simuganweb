@@ -15,7 +15,7 @@ class User extends Component {
 
     render() {
       return (
-          <Container className="UserInfo">
+          <Container id="UserInfo" className="UserInfo">
               <Row className="UserInfoRow">
                   <Col className="h-100" sm={10}>  
 

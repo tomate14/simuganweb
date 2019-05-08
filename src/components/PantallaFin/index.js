@@ -12,13 +12,28 @@ import './css/PantallaFin.css';
 
 class PantallaFin extends Component {
 
+
+  calcularTamañoContenido(){
+    let heightTotal = document.documentElement.clientHeight;
+    let heightHeader = document.getElementById('Header').clientHeight;
+    let heightUser = document.getElementById('UserInfo').clientHeight;
+    let heightFooter = document.getElementById('Footer').clientHeight;
+    let diferencia = heightTotal - heightFooter - heightHeader - heightUser +20;
+
+    return diferencia;
+  }
+
   finalizarGeneracion(logout){
-    console.log(this.props);
     if(logout.logueado){
       this.props.finalizarOperacion();
     }
+   
+    let style = {
+      height : this.calcularTamañoContenido()
+    }
+    
     return(
-        <Container className = "90vh">
+        <Container className ="" style={style}>
             <h1>Gracias por usar Simugan 2</h1>
         </Container> 
       );

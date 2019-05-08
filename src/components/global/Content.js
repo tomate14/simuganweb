@@ -133,7 +133,7 @@ class Content extends Component {
       );
     }else{
         return(
-        <Row sm = {12}>
+        <Row sm = {11}>
                 { body }
         </Row>
         );
