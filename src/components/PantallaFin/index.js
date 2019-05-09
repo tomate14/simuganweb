@@ -7,6 +7,7 @@ import { Container,Row } from 'reactstrap';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {finalizarOperacion} from '../../actions/action-logout.js';
+import {generarSalidaRest} from '../../finalizar.js';
 
 import './css/PantallaFin.css';
 
@@ -26,6 +27,7 @@ class PantallaFin extends Component {
   finalizarGeneracion(logout){
     if(logout.logueado){
       this.props.finalizarOperacion();
+      generarSalidaRest();
     }
    
     let style = {

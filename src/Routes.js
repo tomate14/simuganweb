@@ -24,9 +24,9 @@ import PantallaFin	      from './components/PantallaFin'
 
 const AppRoutes = () => 
 	
-		<App>
-			<Redirect from='/' to='/Inicio'/>			
+		<App>					
 			<Switch>	
+				<Route exact path="/" render={() => (<Redirect to="/Inicio" />)} />	
 				<Route path ="/Inicio"            component={PantallaInicio} />
 				<Route path="/LogOut"             component={PantallaFin} />
 				<Route path="/Diferido"           component={Diferido} />
