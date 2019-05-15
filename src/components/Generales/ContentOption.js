@@ -7,15 +7,17 @@ import './css/ContentOption.css';
 
 
 class ContentOption extends Component {
-	ponerValor(numero){
-		if(numero == 0){
-			return "";
-		}else
-			return numero
+
+	componentDidMount(){
+		console.log("Componente Montado");
+		let aux = document.getElementById("inputVariation");
+		aux.value = this.props.state.cantVariaciones;
+		//document.getElementById("inputVariation").value(this.props.state.cantVariaciones);
 	}
 
+
 	render(){
-		
+
 		return (	<Container id = "contentoption">
 						 <Form >
 					        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -32,10 +34,10 @@ class ContentOption extends Component {
 					        		</Col>
 					          		<Col sm={4}>
 							          	<Input   placeholder="Cantidad Variaciones"
-									           id="cantVariation" 
-									           type="number"
-									           onChange={this.props.funcVariaciones}
-									           value={ this.ponerValor(this.props.state.cantVariaciones)}  />
+									           id="inputVariation" 
+									           type="number" 
+														 onBlur={	this.props.funcVariaciones}
+														 />
 									</Col>
 									<Col sm={4}>
 					        		</Col>
