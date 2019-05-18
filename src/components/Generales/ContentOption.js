@@ -9,10 +9,8 @@ import './css/ContentOption.css';
 class ContentOption extends Component {
 
 	componentDidMount(){
-		console.log("Componente Montado");
-		let aux = document.getElementById("inputVariation");
-		aux.value = this.props.state.cantVariaciones;
-		//document.getElementById("inputVariation").value(this.props.state.cantVariaciones);
+		let input = document.getElementById("inputVariation");
+		input.value = this.props.state.cantVariaciones;
 	}
 
 
