@@ -33,7 +33,13 @@ class InputsVariation extends Component{
 		let id = parseInt(mes.split("-")[2]);
 		let pagina = this.props.state.paginaActual - 1;
 		let seleccion = this.props.state.dropDownSelected;
-		this.props.funcModiValorInput(id,pagina,valor,seleccion);
+		if(valor >= 0){
+			this.props.funcModiValorInput(id,pagina,valor,seleccion);
+		}
+		else{
+			this.props.funcModiValorInput(id,pagina,e.target.min,seleccion);
+		}
+		
 		
 	}
 	/*

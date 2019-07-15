@@ -90,6 +90,7 @@ class Diferido extends Component {
 				   					 arrayVariaciones = {this.props.diferidos.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
 				   					 seccionElegida = {this.props.diferidos.dropdownSelected}
+				   					 titulo = "DigesDiferido"
 				   					 min = {50}
 				   					 max = {90}
 				   					 />
@@ -100,6 +101,7 @@ class Diferido extends Component {
 				   					 arrayVariaciones = {this.props.diferidos.rindeVariaciones}
 				   					 cantVariaciones = {this.props.diferidos.cantVariaciones} 
 				   					 seccionElegida = {this.props.diferidos.dropdownSelected}
+				   					 titulo="RindeDiferido"
 				   					 min = {15}
 				   					 max = {200}
 				   					 />

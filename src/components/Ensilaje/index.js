@@ -57,6 +57,7 @@ class Ensilaje extends Component {
 				   		<SingleInputArray funcModificar = {this.props.modificarInputValueTrigger}
 				   					 arrayVariaciones = {this.props.ensilaje.triggerVariaciones}
 				   					 cantVariaciones = {this.props.ensilaje.cantVariaciones}
+				   					 titulo = "MasaEnsilaje"
 				   					 min = {700}
 				   					 max = {-1}
 				   					 />
@@ -65,6 +66,7 @@ class Ensilaje extends Component {
 				   		<SingleInputArray funcModificar = {this.props.modificarInputValueLeftover}
 				   					 arrayVariaciones = {this.props.ensilaje.leftoverVariaciones}
 				   					 cantVariaciones = {this.props.ensilaje.cantVariaciones}
+				   					 titulo = "RemanenteEnsilaje"
 				   					 min = {400}
 				   					 max = {-2}
 				   					 maxArray = {this.props.ensilaje.triggerVariaciones}

@@ -41,6 +41,7 @@ class Invernada extends Component {
 					   		<SingleInputArray funcModificar = {this.props.modificarInputValueVaquillona}
 					   					      arrayVariaciones = {this.props.invernada.VaquillonaVariaciones}
 					   					      cantVariaciones = {this.props.invernada.cantVariaciones}
+					   					      titulo = "VaqInvernada"
 					   					      min = {150}
 					   					      max = {650}
 					   					      />
@@ -49,6 +50,7 @@ class Invernada extends Component {
 					   		<SingleInputArray funcModificar = {this.props.modificarInputValueVacasEngorde}
 					   					      arrayVariaciones = {this.props.invernada.nobillosVariaciones}
 					   					      cantVariaciones = {this.props.invernada.cantVariaciones}
+					   					      titulo = "NobilloInvernada"
 					   					      min = {150}
 					   					      max = {650}
 					   					      />

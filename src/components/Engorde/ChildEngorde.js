@@ -39,7 +39,8 @@ class ChildEngorde extends Component {
 											esEngorde    = {true}
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].pasture}
 											arregloSimulacion  = {engorde.pastureValues}
-											funcModifVariacion = {this.props.funcModifPasture} 
+											funcModifVariacion = {this.props.funcModifPasture}
+											titulo = "pasturaEngorde" 
 											min = {0}
 											max = {25}/>,
 
@@ -49,6 +50,7 @@ class ChildEngorde extends Component {
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].grain}
 											arregloSimulacion  = {engorde.grainValues}
 											funcModifVariacion = {this.props.funcModifGrain}
+											titulo = "granoEngorde"
 											min = {0}
 											max = {2.5}/>,
 
@@ -58,6 +60,7 @@ class ChildEngorde extends Component {
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].silage}
 											arregloSimulacion  = {engorde.silageValues}
 											funcModifVariacion = {this.props.funcModifSilage}
+											titulo = "siloEngorde"
 											min = {0}
 											max = {2.5} /> ];
 			if(engorde.pagVariaciones[engorde.paginaActual].rastrojoEnable){
@@ -67,6 +70,7 @@ class ChildEngorde extends Component {
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].rastrojo}
 											arregloSimulacion  = {engorde.cropStubbleValues}
 											funcModifVariacion = {this.props.funcModifRastrojo}
+											titulo = "rastrojoEngorde"
 											min = {0}
 											max = {2.5} /> );
 			}
@@ -77,6 +81,7 @@ class ChildEngorde extends Component {
 											arregloValores = {engorde.pagVariaciones[engorde.paginaActual].diferido}
 											arregloSimulacion  = {engorde.stockPilledValues}
 											funcModifVariacion = {this.props.funcModifDiferido}
+											titulo = "diferidoEngorde"
 											min = {0}
 											max = {3}/> );
 			}

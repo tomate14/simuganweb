@@ -11,42 +11,77 @@ class ChildInputSpam extends Component{
 	constructor(){
 		super();
 		this.handleInputValueChange = this.handleInputValueChange.bind(this);	
-		this.chequearRango = this.chequearRango.bind(this);	
+		this.funcModif = this.funcModif.bind(this);	
 	}
 	handleInputValueChange(e){
-		let pagina   = parseInt(e.target.id);
-		let atributo = e.target.name;
+		let pagina   = parseInt(this.props.pagina);
+		let atributo = e.target.id;
 		let valor    = parseFloat(e.target.value);
 		this.props.funcInput(pagina,atributo,valor);
 	}
 
 
-	chequearRango(e){
+	funcModif(e){
+		let id = parseInt(e.target.id.split("-")[0]);
+		e.target.id= id;
 		let valor = parseFloat(e.target.value);
-		if(valor < e.target.min || valor > e.target.max){
-			e.target.value = 0;
-			this.handleInputValueChange(e);
+		e.target.value=valor;
+		if(e.target.max == ""){
+			if(valor < e.target.min){
+				e.target.value= e.target.min;
+			}
 		}
+		else {
+			if(valor < e.target.min || valor > e.target.max){
+				e.target.value = e.target.min;
+			}
+		}
+		this.handleInputValueChange(e);
 	}
 
 	componentDidMount(){
-		let input = document.getElementById("input0Child");
+		let titulo = this.props.titulo;
+		let input = document.getElementById("0-"+ titulo +"-inputChild");
+		if(input != null){
 		input.value = this.props.vector[0];
-		input = document.getElementById("input1Child");
+		input = document.getElementById("1-"+ titulo +"-inputChild");
 		input.value = this.props.vector[1];
-		input = document.getElementById("input2Child");
+		input = document.getElementById("2-"+ titulo +"-inputChild");
 		input.value = this.props.vector[2];
-		input = document.getElementById("input3Child");
+		input = document.getElementById("3-"+ titulo +"-inputChild");
 		input.value = this.props.vector[3];
-		input = document.getElementById("input4Child");
+		input = document.getElementById("4-"+ titulo +"-inputChild");
 		input.value = this.props.vector[4];
-		input = document.getElementById("input5Child");
+		input = document.getElementById("5-"+ titulo +"-inputChild");
 		input.value = this.props.vector[5];
-		input = document.getElementById("input6Child");
+		input = document.getElementById("6-"+ titulo +"-inputChild");
 		input.value = this.props.vector[6];
+		}
+	}
+
+		componentDidUpdate(){
+		let titulo = this.props.titulo;
+		console.log(titulo)
+		let input = document.getElementById("0-"+ titulo +"-inputChild");
+		if(input != null){
+		input.value = this.props.vector[0];
+		input = document.getElementById("1-"+ titulo +"-inputChild");
+		input.value = this.props.vector[1];
+		input = document.getElementById("2-"+ titulo +"-inputChild");
+		input.value = this.props.vector[2];
+		input = document.getElementById("3-"+ titulo +"-inputChild");
+		input.value = this.props.vector[3];
+		input = document.getElementById("4-"+ titulo +"-inputChild");
+		input.value = this.props.vector[4];
+		input = document.getElementById("5-"+ titulo +"-inputChild");
+		input.value = this.props.vector[5];
+		input = document.getElementById("6-"+ titulo +"-inputChild");
+		input.value = this.props.vector[6];
+		}
 	}
 
 	render(){
+		let titulo = this.props.titulo;
 		return(
 			<Container>
 				<Row>
@@ -58,32 +93,32 @@ class ChildInputSpam extends Component{
 				<Row>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[0]}</InputGroupAddon>
-					    <Input min = {0} type="number" step="any" name="0" id = {"input0Child"}  onBlur={this.handleInputValueChange}/>				    
+					    <Input min = {0} type="number" step="any" name="0" id = {"0-"+ titulo +"-inputChild"}  onBlur={this.funcModif}/>				    
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[1]}</InputGroupAddon>
-					    <Input min = {0} type="number"step="any" name="1" id = {"input1Child"} onBlur={this.handleInputValueChange}/>
+					    <Input min = {0} type="number"step="any" name="1" id = {"1-"+ titulo +"-inputChild"} onBlur={this.funcModif}/>
 					</InputGroup>
 
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[2]}</InputGroupAddon>
-					    <Input min ={300} max = {650} type="number" step="any" name="2" id = {"input2Child"} onBlur={this.handleInputValueChange}/>
+					    <Input min ={300} max = {650} type="number" step="any" name="2" id = {"2-"+ titulo +"-inputChild"} onBlur={this.funcModif}/>
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[3]}</InputGroupAddon>
-					    <Input min = {10} max = {20} type="number" step="any" name="3" id = {"input3Child"} onBlur={this.handleInputValueChange}/>
+					    <Input min = {10} max = {20} type="number" step="any" name="3" id = {"3-"+ titulo +"-inputChild"} onBlur={this.funcModif}/>
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[4]}</InputGroupAddon>
-					    <Input min = {60} max= {90} type="number" step="any" name="4" id = {"input4Child"} onblur={this.handleInputValueChange}/>
+					    <Input min = {60} max= {90} type="number" step="any" name="4" id = {"4-"+ titulo +"-inputChild"} onBlur={this.funcModif}/>
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[5]}</InputGroupAddon>
-					    <Input min = {1} max = {2.8} type="number" step="any"  name="5" id = {"input5Child"} onBlur={this.handleInputValueChange}/>
+					    <Input min = {1} max = {2.8} type="number" step="any"  name="5" id = {"5-"+ titulo +"-inputChild"} onBlur={this.funcModif}/>
 					</InputGroup>
 					<InputGroup>
 					    <InputGroupAddon addonType="append">{this.props.textos[6]}</InputGroupAddon>
-					    <Input min = {0} max = {10} type="number" step="any" name="6" id = {"input6Child"} onBlur={this.handleInputValueChange}/>
+					    <Input min = {0} max = {10} type="number" step="any" name="6" id = {"6-"+ titulo +"-inputChild"} onBlur={this.funcModif}/>
 					</InputGroup>
 				</Row>
 			</Container>

@@ -76,6 +76,7 @@ class Potreros extends Component {
 						   					 arrayVariaciones = {this.props.potreros.digestibilidadVariaciones}
 						   					 cantVariaciones = {this.props.potreros.cantVariaciones} 
 						   					 seccionElegida = {this.props.potreros.dropDownSelected}
+						   					 titulo = "Potreros"
 						   					 min = {60}
 						   					 max = {100}
 						   					 />

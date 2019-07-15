@@ -76,9 +76,11 @@ function iniciarArregloState(state=initialState,valor=1,tipo=""){
               let value = 0;
               switch(tipo){
                 case "rinde":
-                    value  = state.valoresSimulacion[state.dropdownSelected].yieldValue;
+                    value  = state.valoresSimulacion[index].yieldValue;
+                break;
                 case "digestibilidad":
-                    value  = state.valoresSimulacion[state.dropdownSelected].digestValue;
+                    value  = state.valoresSimulacion[index].digestValue;
+                break;
               }
               arrayAux.push(value);
             }  

@@ -73,6 +73,7 @@ class Rastrojo extends Component {
 				   					 arrayVariaciones = {this.props.rastrojos.digestibilidadVariaciones}
 				   					 cantVariaciones = {this.props.rastrojos.cantVariaciones} 
 				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}
+				   					 titulo = "DigesRastrojo"
 				   					 min = {50}
 				   					 max = {90}
 				   					 />
@@ -82,6 +83,7 @@ class Rastrojo extends Component {
 				   					 arrayVariaciones = {this.props.rastrojos.rindeVariaciones}
 				   					 cantVariaciones = {this.props.rastrojos.cantVariaciones} 
 				   					 seccionElegida = {this.props.rastrojos.dropdownSelected}
+				   					 titulo = "RindeRastrojo"
 				   					 min = {0}
 				   					 max = {90}
 				   					 />

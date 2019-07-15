@@ -11,7 +11,7 @@ class SingleInput extends Component {
 		this.generarInputs = this.generarInputs.bind(this);
 		this.ponerValor = this.ponerValor.bind(this);
 		//this.initPopover = this.initPopover.bind(this);
-		this.chequearRango = this.chequearRango.bind(this);
+		this.funcModif = this.funcModif.bind(this);
 		// this.toggle = this.toggle.bind(this);
 		// this.state = {
   //     popoverOpen: this.initPopover()
@@ -43,24 +43,46 @@ class SingleInput extends Component {
 	}
 
 
-	chequearRango(e){
+	funcModif(e){
+		let id = parseInt(e.target.id.split("-")[0]);
 		let valor = parseFloat(e.target.value);
+		e.target.value = valor;
+		e.target.id= id;
 		if(valor < this.props.min || valor > this.props.max){
-			e.target.value = 0;
-			this.props.funcModificar(e);
+			e.target.value = this.props.min;
 		}
+		this.props.funcModificar(e);
 	}
 
 
-  	generarInputs(parametro,funcOnChange){
+	componentDidMount(){
+		for(let i=0;i<this.props.cantVariaciones;i++){
+			let id = i +"-"+ this.props.titulo +"-SingleInput";
+			let input = document.getElementById(id);
+			if(input !== null){
+				input.value = this.props.arrayVariaciones[this.props.seccionElegida][i];
+			}
+		}	
+	}
+
+	componentDidUpdate(){
+		for(let i=0;i<this.props.cantVariaciones;i++){
+			let id = i +"-"+ this.props.titulo +"-SingleInput";
+			let input = document.getElementById(id);
+			if(input !== null){
+				input.value = this.props.arrayVariaciones[this.props.seccionElegida][i];
+			}
+		}	
+	}
+
+
+  	generarInputs(){
 	  	var rows = [];
 	  	for(var i = 0; i< this.props.cantVariaciones;i++){ // la cantidad de iteraciones depende de la cantidad de variaciones que el usuario quiera
 			rows.push(<input 
-						onChange = {funcOnChange}
-						onBlur = {this.chequearRango}
+						onBlur = {this.funcModif}
 						step = "any"
-						value = {this.ponerValor(parametro[this.props.seccionElegida][i])}
-						id = {i}
+						id = {i +"-" + this.props.titulo + "-SingleInput"}
 						type="number"/>); 
 		}
 		return rows;
@@ -73,7 +95,7 @@ class SingleInput extends Component {
   }*/
 
 	render(){
-		return (this.generarInputs(this.props.arrayVariaciones,this.props.funcModificar).map((object, i) => {
+		return (this.generarInputs().map((object, i) => {
                return <p key={i}> Variación {i+1} :   {object} 
                			               			</p> ; 
            }))

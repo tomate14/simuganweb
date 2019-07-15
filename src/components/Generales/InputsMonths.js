@@ -13,20 +13,45 @@ class InputsMonths extends Component{
 		this.handleInputValueChange = this.handleInputValueChange.bind(this);
 		this.handleClickDown = this.handleClickDown.bind(this);
 		this.handleClickUp = this.handleClickUp.bind(this);
-		this.chequearRango = this.chequearRango.bind(this);
+		this.funcModif = this.funcModif.bind(this);
 	}
 
-	chequearRango(e){
+	funcModif(e){
 		let valor = parseFloat(e.target.value);
 		if(valor < this.props.min || valor > this.props.max){
 			if(valor < this.props.min){
 				e.target.value = this.props.min;
 				this.handleInputValueChange(e);
+				return;
 			}else{
 				e.target.value = this.props.max;
 				this.handleInputValueChange(e);
+				return;
 			}
 		}
+		this.handleInputValueChange(e);
+	}
+
+	componentDidMount(){
+
+		for(let k=0;k<12;k++){
+				let id = this.props.paginaActual + "-" + k +  "-" + this.props.titulo + "-InputMonths";
+				let input = document.getElementById(id);
+				if(input !== null){
+					input.value = this.props.pagvariaciones[k];
+				}
+			}
+	}
+	
+	componentDidUpdate(){
+
+			for(let k=0;k<12;k++){
+				let id = this.props.paginaActual + "-" + k +  "-" + this.props.titulo + "-InputMonths";
+				let input = document.getElementById(id);
+				if(input !== null){
+					input.value = this.props.pagvariaciones[k];
+				}
+			}
 	}
 
 	setInputsVariations(){
@@ -37,11 +62,9 @@ class InputsMonths extends Component{
 				              type="number"
 				              className="InputVariables"
 				              min = "0"
-				              id = {i}
+				              id = {i + "-" + this.props.titulo + "-InputMonths"}
 				              key = {i}
-				              value={this.props.pagvariaciones[this.props.paginaActual-1][i].valor}
-				              onChange={this.handleInputValueChange}
-				              onBlur ={this.chequearRango}
+				              onBlur ={this.funcModif}
 				              step="any"
 				            />);
 			};
@@ -58,11 +81,9 @@ class InputsMonths extends Component{
 				              type="number"
 				              className="InputVariables"
 				              min = "0"
-				              id = {i}
+				              id = {this.props.paginaActual + "-" + i + "-" + this.props.titulo + "-InputMonths"}
 				              key = {i}
-				              value={this.props.pagvariaciones[i]}
-				              onChange={this.handleInputValueChange}
-				              onBlur ={this.chequearRango}
+				              onBlur ={this.funcModif}
 				              step="any"
 				            />);
 			};
@@ -73,7 +94,8 @@ class InputsMonths extends Component{
 
 	handleInputValueChange(e){
 		let valor = parseFloat(e.target.value);
-		let id = parseInt(e.target.id);
+		let id = e.target.id;
+		id = parseInt(id.split("-")[1]);
 		let pagina = this.props.paginaActual - 1;
 		this.props.funcModiValorInput(id,pagina,valor);
 		

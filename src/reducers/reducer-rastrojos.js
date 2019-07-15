@@ -77,8 +77,10 @@ function iniciarArregloState(state=initialState,valor=1,tipo =""){
                 switch(tipo){
                   case "rinde":
                       value  = state.valoresSimulacion[index].yieldValue;
+                  break;
                   case "digestibilidad":
                       value  = state.valoresSimulacion[index].digestValue;
+                  break;
                 }
               arrayAux.push(value);
             }  
