@@ -1,5 +1,6 @@
 import store from './index.js';
 import {xmlString} from './data/simulacioninicial.js';
+import Simulacion  from './data/simulacioninicial.js';
 import $ from 'jquery';
 
 //Config Store
@@ -396,6 +397,10 @@ export function generarSalidaRest(){
 			jsonString= JSON.stringify( VariacionesReact.engorde);
 
 		}
+		VariacionesReact.usuario = {};
+		VariacionesReact.usuario.idUser = Simulacion.escenario.$.userId;
+		VariacionesReact.usuario.name = Simulacion.escenario.$.name;
+		
 		VariacionesReact.xmloriginal = xmlString();
 		//console.log(xmlString());
 		jsonString= JSON.stringify(VariacionesReact);	
