@@ -66,20 +66,22 @@ export function generarSalidaRest(){
 		let jsonString = null;
 		let VariacionesReact = {};
 		let ObjetoPastura = {};
-		VariacionesReact.ensilaje = {};
-		VariacionesReact.recursosforrajeros={};
-		VariacionesReact.potreros={};
-		VariacionesReact.rastrojos={};
-		VariacionesReact.invernada={};
-		VariacionesReact.feedlot={};
-		VariacionesReact.diferido = {};
-		VariacionesReact.destete = {};
-		VariacionesReact.mobs = {};
+		VariacionesReact.ensilaje = null;
+		VariacionesReact.recursosforrajeros=null;
+		VariacionesReact.potreros=null;
+		VariacionesReact.rastrojos=null;
+		VariacionesReact.invernada=null;
+		VariacionesReact.feedlot=null;
+		VariacionesReact.diferido = null;
+		VariacionesReact.destete = null;
+		VariacionesReact.mobs = null;
+		VariacionesReact.engorde = null;
 
 		/* 
 		           GENERO ENSILAJE 
 		*/
 		if(states.ensilaje.permitido && states.ensilaje.cantVariaciones > 0){
+			VariacionesReact.ensilaje = {};
 			VariacionesReact.ensilaje.leftoverMass = states.ensilaje.leftoverVariaciones;
 			VariacionesReact.ensilaje.triggerMass = states.ensilaje.triggerVariaciones;
 			let jsonString= JSON.stringify(VariacionesReact.ensilaje);
@@ -89,6 +91,7 @@ export function generarSalidaRest(){
 		           GENERO RECURSOSFORRAJEROS 
 		*/
 		if(states.recursosforrajeros.permitido && states.recursosforrajeros.cantVariaciones > 0){
+			VariacionesReact.recursosforrajeros={};
 			VariacionesReact.recursosforrajeros.ForrajeroPasturas = states.recursosforrajeros.pagvariaciones;
 			let ForrajeroPastura = {};
 			let ForrajeroVariacion = {};
@@ -120,6 +123,7 @@ export function generarSalidaRest(){
 		           GENERO LOS POTREROS 
 		*/
 		if(states.potreros.permitido && states.potreros.cantVariaciones > 0){
+			VariacionesReact.potreros={};
 			VariacionesReact.potreros.pasturas = states.potreros.digestibilidadVariaciones;
 			
 			for(let i = 0; i< VariacionesReact.potreros.pasturas.length; i++ ){
@@ -134,6 +138,7 @@ export function generarSalidaRest(){
 		           GENERO LOS RASTROJOS 
 		*/
 		if(states.rastrojos.permitido && states.rastrojos.cantVariaciones > 0){
+			VariacionesReact.rastrojos={};
 			VariacionesReact.rastrojos.digestibilidadVariaciones = states.rastrojos.digestibilidadVariaciones;
 			VariacionesReact.rastrojos.rindeVariaciones          = states.rastrojos.rindeVariaciones;
 			for(let i = 0; i< VariacionesReact.rastrojos.digestibilidadVariaciones.length; i++ ){
@@ -150,6 +155,7 @@ export function generarSalidaRest(){
 			GENERO LOS DIFERIDOS
 		*/
 		if(states.diferidos.permitido && states.diferidos.cantVariaciones > 0){
+			VariacionesReact.diferido = {};
 			VariacionesReact.diferido.digestibilidadVariaciones = states.diferidos.digestibilidadVariaciones;
 			VariacionesReact.diferido.rindeVariaciones = states.diferidos.rindeVariaciones;
 			for(let i = 0; i< VariacionesReact.diferido.digestibilidadVariaciones.length; i++ ){
@@ -167,6 +173,7 @@ export function generarSalidaRest(){
 			GENERO INVERNADA
 		*/
 		if(states.invernada.permitido && states.invernada.cantVariaciones > 0){
+			VariacionesReact.invernada={};
 			VariacionesReact.invernada.VaquillonaVariaciones = states.invernada.VaquillonaVariaciones;
 			VariacionesReact.invernada.nobillosVariaciones  = states.invernada.nobillosVariaciones;
 			jsonString= JSON.stringify(VariacionesReact.invernada);
@@ -176,6 +183,7 @@ export function generarSalidaRest(){
 			GENERO LOS FEEDLOT
 		*/
 		if(states.feedlot.permitido && states.ensilaje.cantVariaciones > 0){
+			VariacionesReact.feedlot={};
 			VariacionesReact.feedlot.VariacionFeedLot = states.feedlot.pagvariaciones;
 
 			let ObjetoCompletion = {};
@@ -210,6 +218,7 @@ export function generarSalidaRest(){
 			GENERACION DE MOBS
 		*/
 		if(states.mobs.permitido && states.mobs.cantVariaciones > 0){
+			VariacionesReact.mobs = {};
 			VariacionesReact.mobs.Variaciones = states.mobs.arrayMobs;
 			let ObjetoVariacion = {};
 			for(let i = 0; i < VariacionesReact.mobs.Variaciones.length; i++){
@@ -303,6 +312,7 @@ export function generarSalidaRest(){
 
 
 		if(states.destete.permitido && states.destete.cantVariaciones > 0){
+			VariacionesReact.destete = {};
 			VariacionesReact.destete.variaciones = states.destete.pagvariaciones;
 			let ObjetoVariacionDestete = {};
 			for(let index = 0; index < VariacionesReact.destete.variaciones.length; index++){
@@ -332,9 +342,9 @@ export function generarSalidaRest(){
 		}
 		//----------------------------------------Engorde-----------------------------------
 		 //VariacionesReact.engorde = states.engorde;
-		 VariacionesReact.engorde = {};
-		// jsonString= JSON.stringify(VariacionesReact.engorde);
-		if(states.engorde.permitido && states.engorde.cantVariaciones > 0){
+		 // jsonString= JSON.stringify(VariacionesReact.engorde);
+		 if(states.engorde.permitido && states.engorde.cantVariaciones > 0){
+			VariacionesReact.engorde = {};
 
 			let ObjetoVariacionEngorde = [];
 			ObjetoVariacionEngorde = states.engorde.pagVariaciones;
