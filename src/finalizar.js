@@ -410,6 +410,7 @@ export function generarSalidaRest(){
 		VariacionesReact.usuario = {};
 		VariacionesReact.usuario.idUser = Simulacion.escenario.$.userId;
 		VariacionesReact.usuario.name = Simulacion.escenario.$.name;
+		VariacionesReact.usuario.experimental = Simulacion.escenario.$.experimental;
 		
 		VariacionesReact.xmloriginal = xmlString();
 		//console.log(xmlString());

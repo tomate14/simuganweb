@@ -1,4 +1,4 @@
-let xml = ' <escenario id="temp" userId="0" name="r7xMauri" private="false"> '+
+let xml = ' <escenario id="temp" userId="0" name="r7xMauri" private="false" experimental="true"> '+
     ' <earlyWeaning enable="false" suministro="5"> '+
         '<earlyWeaningMob calfUmbralLw="60" enableCalf="false" calfDestiny="beef_finishing" calfDietBProtein="10" calfDietIntake="2" calfDietDigest="85" calfDietDRProtein="8" umbralBcs="4" enable="false" mobId="1"/>'+
         '<earlyWeaningMob calfUmbralLw="60" enableCalf="false" calfDestiny="beef_finishing" calfDietBProtein="10" calfDietIntake="2" calfDietDigest="85" calfDietDRProtein="8" umbralBcs="4" enable="false" mobId="2"/>'+
